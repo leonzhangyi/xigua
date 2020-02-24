@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/download_edit_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/size_dp_15"
+    android:paddingTop="@dimen/size_dp_10"
+    android:paddingRight="@dimen/size_dp_15"
+    android:paddingBottom="@dimen/size_dp_10"
+    android:visibility="gone">
+
+    <Button
+        android:id="@+id/edit_stop_all_btn"
+        style="@style/download_edit_style"
+        android:layout_marginRight="@dimen/size_dp_15"
+        android:stateListAnimator="@null"
+        android:text="@string/download_edit_stop_all"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/edit_select_all_btn"
+        style="@style/download_edit_style"
+        android:stateListAnimator="@null"
+        android:text="@string/download_edit_select_all"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/edit_delete_btn"
+        style="@style/download_edit_style"
+        android:layout_marginLeft="@dimen/size_dp_10"
+        android:layout_marginRight="@dimen/size_dp_10"
+        android:stateListAnimator="@null"
+        android:text="@string/download_edit_delete"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/edit_btn"
+        style="@style/download_edit_style"
+        android:stateListAnimator="@null"
+        android:text="@string/download_edit" />
+</LinearLayout>

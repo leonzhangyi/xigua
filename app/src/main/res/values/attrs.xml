@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--TabLayout 的属性-->
+    <declare-styleable name="TabLayout">
+        <attr name="tabIndicatorColor" format="color" />
+        <attr name="tabIndicatorHeight" format="dimension" />
+        <attr name="tabIndicatorWidth" format="dimension" /><!--底部滑动栏的宽度-->
+        <attr name="tabContentStart" format="dimension" />
+        <attr name="tabBackground" format="reference" />
+        <attr name="tabMode">
+            <enum name="scrollable" value="0" />
+            <enum name="fixed" value="1" />
+        </attr>
+        <attr name="tabGravity">
+            <enum name="fill" value="0" />
+            <enum name="center" value="1" />
+        </attr>
+        <attr name="tabMinWidth" format="dimension" />
+        <attr name="tabMaxWidth" format="dimension" />
+        <attr name="tabTextAppearance" format="reference" />
+        <attr name="tabTextColor" format="color" />
+        <attr name="tabSelectedTextColor" format="color" />
+        <attr name="tabPaddingStart" format="dimension" />
+        <attr name="tabPaddingTop" format="dimension" />
+        <attr name="tabPaddingEnd" format="dimension" />
+        <attr name="tabPaddingBottom" format="dimension" />
+        <attr name="tabPadding" format="dimension" />
+
+        <attr name="bottomLineColor" format="color" /><!--底部分隔栏颜色-->
+        <attr name="dividerColor" format="color" /><!--竖直分割线颜色-->
+        <attr name="bottomLineHeight" format="dimension" /><!--底部分隔栏高度-->
+        <attr name="dividerHeight" format="dimension" /><!--竖直分割线高度-->
+        <attr name="dividerWidth" format="dimension" /><!--竖直分割线宽度-->
+        <attr name="bottomLineMode">
+            <enum name="none" value="0" /><!--不显示底部分隔栏-->
+            <enum name="outer" value="1" /><!--显示在滑动栏外面-->
+            <enum name="inner" value="2" /><!--显示在滑动栏里面-->
+        </attr>
+    </declare-styleable>
+    <!--TabLayout 的属性 End-->
+</resources>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?attr/selectableItemBackground">
+
+    <ImageView
+        android:id="@+id/item_net_resource_image"
+        android:layout_width="match_parent"
+        android:layout_height="155dp"
+        android:scaleType="centerCrop" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@id/item_net_resource_image"
+        android:background="@drawable/dangban_up" />
+
+    <TextView
+        android:id="@+id/item_net_resource_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/item_net_resource_image"
+        android:layout_marginLeft="@dimen/size_dp_10"
+        android:layout_marginRight="@dimen/size_dp_10"
+        android:maxLines="1"
+        android:paddingBottom="@dimen/size_dp_5"
+        android:textColor="@color/gray_FD"
+        android:textSize="@dimen/size_sp_12" />
+
+    <TextView
+        android:id="@+id/item_net_resource_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_net_resource_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/size_dp_10"
+        android:layout_marginTop="@dimen/size_dp_5"
+        android:layout_marginRight="@dimen/size_dp_10"
+        android:text="电影名称"
+        android:textColor="@color/black_80"
+        android:textSize="@dimen/size_sp_13"
+        android:textStyle="bold" />
+
+</RelativeLayout>

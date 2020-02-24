@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/reminddialog_main_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <!-- 提示标题 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/reminddialog_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="提示"
+                android:textColor="@color/color_text"
+                android:textSize="16sp" />
+            <!-- 标题分割线 -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_common_title" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:orientation="vertical">
+
+                <!-- 信息栏：可以添加一些文字或者view展示的 -->
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent">
+
+                    <LinearLayout
+                        android:id="@+id/reminddialog_view_ll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="15dp"
+                        android:visibility="invisible"></LinearLayout>
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:id="@+id/reminddialog_message_rl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="100dp"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:id="@+id/reminddialog_message_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:lineSpacingExtra="3dp"
+                                android:text="信息梳理"
+                                android:textColor="@android:color/black"
+                                android:textSize="17sp" />
+                        </RelativeLayout>
+                    </ScrollView>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 底部按钮栏 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:background="@color/color_divider"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:gravity="right"
+                android:orientation="horizontal"
+
+                >
+
+                <!-- 取消    android:background="@drawable/bg_dialog_btn"-->
+                <Button
+                    android:id="@+id/dialog_btn_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:background="@drawable/bg_dialog_btn"
+
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/color_text"
+                    android:textSize="16sp" />
+
+
+
+                <!--         <View
+                             android:visibility="gone"
+                             android:id="@+id/reminddialog_main_btndivider"
+                             android:layout_width="0.3dp"
+                             android:layout_height="match_parent"
+                             android:background="@color/color_divider" />-->
+                <!-- 确定 -->
+
+                <!--LS:
+                    android:background="@drawable/bg_dialog_btn"
+                    -->
+                <Button
+                    android:background="@drawable/bg_dialog_btn"
+                    android:id="@+id/dialog_btn_sure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:text="取消"
+                    android:textColor="@color/color_common_title"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

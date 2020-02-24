@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_me_page_rl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/size_dp_16"
+    android:paddingTop="@dimen/size_dp_11"
+    android:layout_marginRight="@dimen/size_sp_16"
+    android:paddingBottom="@dimen/size_dp_11"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/layout_me_page_right_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="观看历史"
+        android:layout_marginBottom="@dimen/size_dp_11"
+        android:textColor="@color/black_D9"
+        android:textSize="@dimen/size_sp_16" />
+
+    <ImageView
+        android:id="@+id/layout_me_page_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/gray_back_right" />
+
+    <TextView
+        android:id="@+id/layout_me_page_right_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/size_dp_10"
+        android:layout_toLeftOf="@+id/layout_me_page_right"
+        android:text="好片继续看"
+        android:textColor="@color/black_40"
+        android:textSize="@dimen/size_sp_12" />
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_dp_1"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black_40"/>
+
+</RelativeLayout>

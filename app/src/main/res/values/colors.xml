@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+<!--    基本色-->
+    <color name="transparent">#0000</color><!-- 透明 -->
+    <color name="black_ff">#FF000000</color>
+    <color name="black">#000000</color>
+    <color name="black_80">#80000000</color>
+    <color name="black_D9">#D9000000</color>
+    <color name="black_1A">#1A000000</color>
+    <color name="black_40">#40000000</color>
+    <color name="black_33">#333333</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="white_1">#FFFFFF</color>
+    <color name="main_black">#111112</color>
+
+
+    <color name="toolbar_status_bg">#00FFFFFF</color>
+
+    <color name="gray_99">#999999</color>
+    <color name="gray_F0">#F0F0F0</color>
+    <color name="gray_EE">#EEEEEE</color>
+    <color name="gray_FD">#FDFDFE</color>
+    <color name="gray_66">#666666</color>
+    <color name="gray_B0">#B0B0B0</color>
+
+    <!-- 首页 -->
+    <color name="main_botton_tv_sel">#FA6400</color>
+    <color name="main_botton_tv_unsel">#999999</color>
+    <color name="main_botton_bac">#F9F9F9</color>
+    <color name="main_search_hint">#D8D8D8</color>
+    <color name="main_item_tv">#FF4A4A4A</color>
+
+<!--    视频下载-->
+    <color name="net_resource_item_tv">#FFFA6400</color>
+    <color name="video_download_top_bac">#f0f9f9f9</color>
+    <color name="download_text_color">#818181</color>
+    <color name="color_text">#666666</color><!-- 文字颜色 -->
+    <color name="color_common_title">#27B350</color><!-- 公共的标题栏背景颜色 -->
+    <color name="color_divider">#dfdfdf</color><!-- 分割线颜色 -->
+    <color name="color_point_normal">#dedede</color><!-- point被选中之前的背景颜色 -->
+
+</resources>

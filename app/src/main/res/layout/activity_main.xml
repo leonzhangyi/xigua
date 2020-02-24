@@ -1,0 +1,51 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:id="@+id/bottom_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/main_botton_bac"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/bottom_radio_1"
+            style="@style/navigation_bottom_radio"
+            android:drawableTop="@drawable/btn_main_menu1"
+            android:text="@string/home_tv"
+             />
+
+        <RadioButton
+            android:id="@+id/bottom_radio_2"
+            style="@style/navigation_bottom_radio"
+            android:drawableTop="@drawable/btn_main_menu2"
+            android:text="@string/source_tv"
+         />
+
+        <RadioButton
+            android:id="@+id/bottom_radio_3"
+            style="@style/navigation_bottom_radio"
+            android:drawableTop="@drawable/btn_main_menu3"
+            android:text="@string/welf_tv" />
+
+        <RadioButton
+            android:id="@+id/bottom_radio_4"
+            style="@style/navigation_bottom_radio"
+            android:drawableTop="@drawable/btn_main_menu4"
+            android:text="@string/me_tv"/>
+    </RadioGroup>
+
+
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottom_group"
+        android:layout_alignParentTop="true" />
+
+
+</RelativeLayout>

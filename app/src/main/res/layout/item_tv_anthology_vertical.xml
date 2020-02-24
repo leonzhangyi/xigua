@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_tv_anthology_tx"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:gravity="center"
+    android:minEms="4"
+    android:paddingTop="@dimen/size_dp_10"
+    android:paddingBottom="@dimen/size_dp_10"
+    android:text="第几集"
+    android:textColor="@color/colorPrimary"
+    android:textStyle="bold">
+
+</TextView>

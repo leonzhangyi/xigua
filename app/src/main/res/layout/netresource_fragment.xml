@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_dp_30">
+
+        <com.water.melon.views.tablayou.TabLayout
+            android:id="@+id/net_resource_tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_dp_25"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/net_resource_top_search"
+            android:background="@color/white"
+            app:tabIndicatorColor="@color/net_resource_item_tv"
+            app:tabIndicatorWidth="@dimen/size_dp_50" />
+
+        <ImageView
+            android:id="@+id/net_resource_top_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/size_dp_10"
+            android:layout_marginRight="@dimen/size_dp_13"
+            android:padding="@dimen/size_dp_10"
+            android:src="@mipmap/icon_search" />
+
+    </RelativeLayout>
+
+
+    <com.bigkoo.convenientbanner.ConvenientBanner
+        android:id="@+id/netConvenientBanner"
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        android:layout_below="@+id/top_view"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/size_dp_12"
+        android:layout_marginRight="@dimen/size_dp_16"
+        android:layout_marginBottom="@dimen/size_dp_5"
+        app:canLoop="true" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/net_resource_viewPage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/netConvenientBanner"
+        android:background="@color/white"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+</RelativeLayout>

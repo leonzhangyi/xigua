@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/size_dp_30"
+        android:layout_marginRight="@dimen/size_dp_16">
+
+        <ImageView
+            android:id="@+id/main_vip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/btn_vip" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_dp_30"
+            android:layout_marginRight="@dimen/size_dp_16"
+            android:layout_toLeftOf="@+id/main_vip"
+            android:background="@drawable/home_search">
+
+            <ImageView
+                android:id="@+id/fragment_main_search_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/size_dp_10"
+                android:src="@mipmap/icon_search" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/fragment_main_search_icon"
+                android:background="@null"
+                android:hint="清输入影片名"
+                android:maxLines="1"
+                android:padding="@dimen/size_dp_6"
+                android:textColor="@color/black"
+                android:textColorHint="@color/main_search_hint"
+                android:textCursorDrawable="@null"
+                android:textSize="@dimen/size_sp_13" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <com.bigkoo.convenientbanner.ConvenientBanner
+        android:id="@+id/welfare_banner"
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/size_dp_10"
+        android:layout_marginRight="@dimen/size_dp_16"
+        app:canLoop="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/size_dp_10"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:text="@string/welfare_vip_tv1"
+            android:textSize="@dimen/size_sp_16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:text="@string/welfare_vip_tv2"
+            android:textSize="@dimen/size_sp_13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black" />
+
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/size_dp_10"
+            android:src="@mipmap/gray_back_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/fragment_wef_sf"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginRight="@dimen/size_dp_16">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragment_wef_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</LinearLayout>

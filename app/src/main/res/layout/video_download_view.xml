@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--    <include layout="@layout/include_status_bg" />-->
+    <include layout="@layout/include_toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.water.melon.views.tablayou.TabLayout
+            android:id="@+id/fragment_download_manage_tabLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorHeight="1dp"
+            app:tabIndicatorWidth="@dimen/size_dp_35" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <include layout="@layout/include_loading_layout" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/fragment_download_manage_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimens_divider_height"
+        android:background="#3B3B3B" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp">
+
+        <ProgressBar
+            android:id="@+id/fragment_download_manage_progress_free"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/fragment_download_manage_space_available_text"
+            android:max="1000"
+            android:progressDrawable="@drawable/progressbar_drawable" />
+
+        <TextView
+            android:id="@+id/fragment_download_manage_space_available_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/fragment_download_manage_space_available"
+            android:text="@string/str_avail"
+            android:textColor="#A4A4A4"
+            android:textSize="@dimen/size_sp_12" />
+
+        <TextView
+            android:id="@+id/fragment_download_manage_space_available"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="15dp"
+            android:text="@string/str_avail_gb"
+            android:textColor="#A4A4A4"
+            android:textSize="@dimen/size_sp_12" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/splash_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/bg_welcome" />
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/help_rl"
+        android:layout_width="210dip"
+        android:layout_height="120dip"
+        android:layout_centerInParent="true"
+        android:background="@drawable/wel_load_bac" >
+
+        <ImageView
+            android:id="@+id/help_iv"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dip"
+            android:background="@drawable/frame_anim" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="16dip"
+            android:gravity="center_horizontal"
+            android:text="正在選擇加速通道，請稍後..."
+            android:textColor="@color/white"
+            android:textSize="13sp" />
+    </RelativeLayout>
+</RelativeLayout>

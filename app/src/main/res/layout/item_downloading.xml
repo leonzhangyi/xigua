@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_offline_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="0dp"
+    android:paddingTop="10dp"
+    android:paddingRight="15dp"
+    android:paddingBottom="10dp">
+
+    <CheckBox
+        android:id="@+id/item_offline_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/size_dp_15"
+        android:button="@drawable/check_select"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_15"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/item_offline_image_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="@dimen/size_dp_15">
+
+            <ImageView
+                android:id="@+id/item_offline_image"
+                android:layout_width="@dimen/size_dp_90"
+                android:layout_height="@dimen/size_dp_70"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/bg_video_plact_horizontal" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@mipmap/icon_play_offline" />
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/item_offline_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/size_dp_5"
+            android:paddingRight="@dimen/size_dp_5"
+            android:paddingBottom="@dimen/size_dp_5"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/icon_delete"/>
+
+        <TextView
+            android:id="@+id/item_offline_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/item_offline_image_layout"
+            android:layout_marginLeft="@dimen/size_dp_15"
+            android:layout_toLeftOf="@id/item_offline_delete"
+            android:layout_marginRight="5dp"
+            android:layout_toRightOf="@id/item_offline_image_layout"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="战狼BD1280国语高清中字.rmvb"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
+
+        <ProgressBar
+            android:id="@+id/item_offline_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_dp_6"
+            android:layout_below="@id/item_offline_name"
+            android:layout_alignLeft="@id/item_offline_name"
+            android:layout_marginTop="@dimen/size_dp_13"
+            android:max="1000"
+            android:progressDrawable="@drawable/progressbar_drawable" />
+
+        <TextView
+            android:id="@+id/item_offline_speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/item_offline_progress"
+            android:layout_alignBottom="@id/item_offline_image_layout"
+            android:text="@string/str_avail_gb"
+            android:textColor="@color/download_text_color"
+            android:textSize="@dimen/size_sp_12" />
+
+        <TextView
+            android:id="@+id/item_offline_free"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/item_offline_speed"
+            android:layout_alignRight="@id/item_offline_progress"
+            android:text="@string/str_avail"
+            android:textColor="@color/download_text_color"
+            android:textSize="@dimen/size_sp_12" />
+
+    </RelativeLayout>
+</LinearLayout>

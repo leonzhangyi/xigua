@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!--        android:background="@drawable/me_fragment_top_bac"-->
+<!--    android:background="#ffeaeaea"-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/me_fragment_top_bac"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_dp_16"
+            android:layout_marginTop="@dimen/size_dp_30">
+
+            <ImageView
+                android:id="@+id/me_fragment_icon"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_toLeftOf="@+id/me_fragment_logout"
+                android:layout_toRightOf="@+id/me_fragment_icon"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="13877674429"
+                    android:textColor="@color/black_ff"
+                    android:textSize="@dimen/size_sp_18" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_dp_5"
+                    android:text="月卡会员"
+                    android:textColor="@color/black_ff"
+                    android:textSize="@dimen/size_sp_14" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/me_fragment_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/size_dp_6"
+                android:padding="@dimen/dp_10"
+                android:text="@string/me_logout"
+                android:textColor="@color/black_80"
+                android:textSize="@dimen/sp_14" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_dp_16">
+
+            <RelativeLayout
+                android:layout_width="@dimen/size_dp_105"
+                android:layout_height="73dp"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="VIP会员"
+                        android:textColor="@color/black_D9"
+                        android:textSize="@dimen/size_sp_16" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/size_dp_5"
+                        android:text="VIP首月10元"
+                        android:textColor="@color/net_resource_item_tv"
+                        android:textSize="@dimen/size_sp_12" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="@dimen/size_dp_105"
+                android:layout_height="73dp"
+                android:layout_centerHorizontal="true"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="分享得会员"
+                        android:textColor="@color/black_D9"
+                        android:textSize="@dimen/size_sp_16" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/size_dp_5"
+                        android:text="分享好友赢会员"
+                        android:textColor="@color/black_80"
+                        android:textSize="@dimen/size_sp_12" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="@dimen/size_dp_105"
+                android:layout_height="73dp"
+                android:layout_alignParentRight="true"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="VIP会员"
+                        android:textColor="@color/black_D9"
+                        android:textSize="@dimen/size_sp_16" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/size_dp_5"
+                        android:text="万元收入等你拿"
+                        android:textColor="@color/black_80"
+                        android:textSize="@dimen/size_sp_12" />
+                </LinearLayout>
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/me_recy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
