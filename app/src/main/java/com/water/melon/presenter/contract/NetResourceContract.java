@@ -10,10 +10,14 @@ public interface NetResourceContract {
     interface Present extends BasePresenter {
 
         void getBigTab();
+
+        void getSmallTab(List<TabBean.Sub> data);
     }
 
     interface View extends BaseView<Present> {
         void setBigTab(List<TabBean> data);
+
+        void setSmallTab(List<TabBean.Sub> data);
     }
 
 }

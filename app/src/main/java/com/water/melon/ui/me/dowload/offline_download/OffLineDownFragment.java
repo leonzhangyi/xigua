@@ -20,6 +20,7 @@ import com.water.melon.utils.NetworkUtils;
 import com.water.melon.utils.SpacesItemDecoration;
 import com.water.melon.utils.ToastUtil;
 import com.water.melon.utils.XGUtil;
+import com.water.melon.views.MessageButtonDialog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -36,6 +37,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -179,7 +182,7 @@ public class OffLineDownFragment extends BaseFragment implements OffLineDownAdap
                 @Override
                 public void run() {
                     if (mAdapter.getDatas().size() > 0 && null != downloadEditLayout) {
-                        editStopAllBtn.setVisibility(View.VISIBLE);
+                        editStopAllBtn.setVisibility(View.GONE);
                         downloadEditLayout.setVisibility(View.VISIBLE);
                     }
                     if (null != loadingLay) {
@@ -204,7 +207,8 @@ public class OffLineDownFragment extends BaseFragment implements OffLineDownAdap
             editSelectAllBtn.setText(MyApplication.getStringByResId(R.string.download_edit_select_all));
             editSelectAllBtn.setVisibility(View.GONE);
             editDeleteBtn.setVisibility(View.GONE);
-            editStopAllBtn.setVisibility(View.VISIBLE);
+//            editStopAllBtn.setVisibility(View.VISIBLE);
+            editStopAllBtn.setVisibility(View.GONE);
         }
     }
 
@@ -571,6 +575,53 @@ public class OffLineDownFragment extends BaseFragment implements OffLineDownAdap
                     }
                 }
                 break;
+        }
+    }
+
+    public void delteAllDialog() {
+        new MessageButtonDialog(context, context.getString(R.string.message_dialog_title),
+                context.getString(R.string.message_dialog_delete_all_video), false, new MessageButtonDialog.MyDialogOnClick() {
+            @Override
+            public void btnOk(MessageButtonDialog dialog) {
+                delteAll();
+            }
+
+            @Override
+            public void btnNo(MessageButtonDialog dialog) {
+
+            }
+        }).show();
+
+    }
+
+    public void delteAll() {
+        int size = mAdapter.getDatas().size();
+        if (size > 0) {
+            List<LocalVideoInfo> newData = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                //删除选中的本地下载文件
+                try {
+                    // 暂停当前影片的下载
+                    MyApplication.getp2p().P2Pdoxpause(mAdapter.getDatas().get(i).getUrl().getBytes("GBK"));
+                    // 删除影片
+                    MyApplication.getp2p().P2Pdoxdel(mAdapter.getDatas().get(i).getUrl().getBytes("GBK"));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            }
+//            mAdapter.getCheckPosition().clear();
+            mAdapter.setDatas(newData);
+            //重新保存历史记录信息
+            XGUtil.saveList(mAdapter.getDatas());
+            if (newData.size() == 0) {
+                downloadEditLayout.setVisibility(View.GONE);
+                editStopAllBtn.setVisibility(View.GONE);
+            }
+            mAdapter.setEditMoudle(false);
+            mAdapter.setClickSelectAll(false);
+            XGConstant.showSDSizeByUserClear = true;//通知更新手机内存大小
+        } else {
+            ToastUtil.showToastShort(MyApplication.getStringByResId(R.string.download_edit_delete_empty_1));
         }
     }
 

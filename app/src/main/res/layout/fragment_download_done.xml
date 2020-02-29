@@ -11,6 +11,7 @@
         android:layout_centerInParent="true" />
 
     <include
+        android:visibility="gone"
         android:id="@+id/download_edit_layout"
         layout="@layout/include_download_edit_layout"
         android:layout_width="match_parent"

@@ -46,7 +46,8 @@
     <string name="video_tv_dialog_title" formatted="true">选集</string>
     <string name="video_tv_count" formatted="true">共%s集</string>
     <string name="video_detail_play_resour_empty">暂无播放资源，去看看别的吧</string>
-    <string name="download_manage_stop">已暂停，点击继续下载</string>
+<!--    <string name="download_manage_stop">已暂停，点击继续下载</string>-->
+    <string name="download_manage_stop">已暂停</string>
     <string name="video_detail_play_error">加载视频失败，请稍后重试</string>
     <string name="video_detail_buffinfo_load">加载:</string>
     <string name="video_detail_play_old_position">已为您跳转到上次播放的位置</string>
@@ -78,7 +79,9 @@
     <string name="download_edit_select_all_cancle">全部取消</string>
     <string name="download_edit_delete">删除</string>
     <string name="download_edit_delete_empty">请选择要删除的选项</string>
+    <string name="download_edit_delete_empty_1">当前无可删除内容</string>
     <string name="message_dialog_delete_video" formatted="true">确定删除 %s 吗?</string>
+    <string name="message_dialog_delete_all_video" formatted="true">确定清空全部视频吗?</string>
     <string name="waring">警告</string>
     <string name="sd_no_more">你的手机存储空间不足500MB,会影响影片的观看，请先清除内存空间,退出后重新进入</string>
     <string name="do_error">操作失败，发生异常，请退出重新进入</string>

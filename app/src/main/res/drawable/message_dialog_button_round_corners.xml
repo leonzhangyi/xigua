@@ -9,6 +9,6 @@
         android:color="@color/white" />
 
     <!-- 矩形的圆角半径 -->
-    <corners android:radius="@dimen/size_dp_5" />
+    <corners android:radius="@dimen/size_dp_10" />
 
 </shape>

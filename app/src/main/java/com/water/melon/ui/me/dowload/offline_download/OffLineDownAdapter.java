@@ -131,6 +131,7 @@ public class OffLineDownAdapter extends BaseRVListAdapter<LocalVideoInfo> implem
         mHolder.itemView.setTag(R.id.tag_id2, position);
         mHolder.itemView.setTag(R.id.tag_id3, mHolder.itemOfflineSpeed);
         mHolder.itemView.setTag(R.id.tag_id4, mHolder);
+        mHolder.itemView.setTag(R.id.tag_id5, mHolder.itemOfflinePause);
         mHolder.itemView.setOnClickListener(this);
 
         // 删除
@@ -205,6 +206,8 @@ public class OffLineDownAdapter extends BaseRVListAdapter<LocalVideoInfo> implem
         }
         switch (view.getId()) {
             case R.id.item_offline_layout:
+                ImageView view1 = (ImageView) view.getTag(R.id.tag_id5);
+                view1.setSelected(view1.isSelected());
                 //开始/暂停下载
                 starOrStopDownLoad(mapData, position, (TextView) view.getTag(R.id.tag_id3));
                 break;
@@ -459,6 +462,9 @@ public class OffLineDownAdapter extends BaseRVListAdapter<LocalVideoInfo> implem
         @BindView(R.id.item_offline_delete)
         ImageView itemOfflineDelete;
 
+        @BindView(R.id.item_offline_pause)
+        ImageView itemOfflinePause;
+
         public MyHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -473,12 +479,15 @@ public class OffLineDownAdapter extends BaseRVListAdapter<LocalVideoInfo> implem
             if (runState.equals(LocalVideoInfo.running_Stop)) {
                 if (mapData.getSpeed_info().contains("失败")) {
                     itemOfflineSpeed.setText(mapData.getSpeed_info());
+                    itemOfflinePause.setSelected(false);
                 } else {
                     itemOfflineSpeed.setText(MyApplication.getStringByResId(R.string.download_manage_stop));
+                    itemOfflinePause.setSelected(true);
                 }
 
             } else if (runState.equals(LocalVideoInfo.running_Star)) {
                 itemOfflineSpeed.setText(mapData.getSpeed_info());
+                itemOfflinePause.setSelected(false);
             }
 
             String image = mapData.getVideoImage();

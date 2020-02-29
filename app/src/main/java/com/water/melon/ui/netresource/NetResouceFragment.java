@@ -2,8 +2,11 @@ package com.water.melon.ui.netresource;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
@@ -26,10 +29,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import androidx.annotation.Nullable;
+import androidx.core.view.GravityCompat;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 
-public class NetResouceFragment extends BaseFragment implements NetResourceContract.View, OnItemClickListener {
+public class NetResouceFragment extends BaseFragment implements NetResourceContract.View, OnItemClickListener, RadioGroup.OnCheckedChangeListener {
     public static final String TAG = "NetResouceFragment";
     @BindView(R.id.netConvenientBanner) //bannel
             ConvenientBanner netConvenientBanner;
@@ -40,6 +44,8 @@ public class NetResouceFragment extends BaseFragment implements NetResourceContr
     @BindView(R.id.net_resource_viewPage)
     ViewPager netResourceViewPage;
 
+    @BindView(R.id.net_resource_left_tab)
+    RadioGroup netResourceLeftTab;
 
     private List<String> netImages = new ArrayList<>();
 
@@ -79,6 +85,8 @@ public class NetResouceFragment extends BaseFragment implements NetResourceContr
     public void initView() {
         netRes();
 
+        netResourceLeftTab.setOnCheckedChangeListener(this);
+
         netResourceTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -88,7 +96,7 @@ public class NetResouceFragment extends BaseFragment implements NetResourceContr
                 }
                 holder.mTabItem.setSelected(true);
                 //设置选中后的字体大小
-                holder.mTabItem.setTextSize(21);
+                holder.mTabItem.setTextSize(16);
                 holder.mTabItem.setTextColor(MyApplication.getColorByResId(R.color.net_resource_item_tv));
                 holder.mTabItem.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
                 //关联Viewpager
@@ -168,27 +176,25 @@ public class NetResouceFragment extends BaseFragment implements NetResourceContr
     @Override
     public void setBigTab(List<TabBean> data) {
         if (null != data && data.size() > 0) {
+            if (netResourceLeftTab.getChildCount() > 0) {
+                netResourceLeftTab.removeAllViews();
+            }
             RadioButton radioButton;
             for (TabBean datum : data) {
-                //TODO 次数操作电影电视剧大分类
-//                radioButton = (RadioButton) LayoutInflater.from(netResourceLeftTab.getContext()).inflate(R.layout.item_net_resouce_big_tab, netResourceLeftTab, false);
-//                radioButton.setText("     " + datum.getName());
-//                radioButton.setId(Integer.parseInt(datum.getId()));
-//                radioButton.setTag(datum.getSub());
-//                netResourceLeftTab.addView(radioButton);
-//            }
-//            First_Big_Tab_Id = data.get(0).getId();
-//            netResourceLeftTab.getChildAt(0).performClick();
+                radioButton = (RadioButton) LayoutInflater.from(netResourceLeftTab.getContext()).inflate(R.layout.item_net_resouce_big_tab, netResourceLeftTab, false);
+                radioButton.setText("     " + datum.getName());
+                radioButton.setId(Integer.parseInt(datum.getId()));
+                radioButton.setTag(datum.getSub());
+                netResourceLeftTab.addView(radioButton);
             }
             First_Big_Tab_Id = data.get(0).getId();
-            List<TabBean.Sub> subs = data.get(0).getSub();
-            setSmallTab(subs);
+            netResourceLeftTab.getChildAt(0).performClick();
         } else {
             ToastUtil.showToastLong("获取失败,请稍后重试");
         }
-
     }
 
+    @Override
     public void setSmallTab(List<TabBean.Sub> data) {
         netResourceTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         NetResouceAdapter netResouceAdapter = new NetResouceAdapter(getChildFragmentManager(), data);
@@ -220,7 +226,7 @@ public class NetResouceFragment extends BaseFragment implements NetResourceContr
             //默认选择第一项
             if (i == 0) {
                 holder.mTabItem.setSelected(true);
-                holder.mTabItem.setTextSize(21);
+                holder.mTabItem.setTextSize(16);
                 holder.mTabItem.setTextColor(MyApplication.getColorByResId(R.color.net_resource_item_tv));
                 holder.mTabItem.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
             } else {
@@ -232,6 +238,16 @@ public class NetResouceFragment extends BaseFragment implements NetResourceContr
             }
         }
     }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        RadioButton item = group.findViewById(checkedId);
+        if (item != null) {
+            present.getSmallTab((List<TabBean.Sub>) item.getTag());
+        }
+
+    }
+
 
     static class MyTabLayoutItem {
         //TabLayout的Item

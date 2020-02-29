@@ -16,6 +16,7 @@ import com.water.melon.utils.LogUtil;
 import com.water.melon.utils.SpacesItemDecoration;
 import com.water.melon.utils.ToastUtil;
 import com.water.melon.utils.XGUtil;
+import com.water.melon.views.MessageButtonDialog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -95,7 +96,7 @@ public class DownloadDoneFragment extends BaseFragment {
 
     @Override
     protected void lazyLoad() {
-        if (isVisible && null == mAdapter) {
+        if (isVisible && fragmentDownloadDoneLv != null && null == mAdapter) {
             mData = XGUtil.loadCacheList();
             mAdapter = new DownloadDoneAdapter(mData);
             fragmentDownloadDoneLv.setAdapter(mAdapter);
@@ -213,5 +214,50 @@ public class DownloadDoneFragment extends BaseFragment {
                 }
                 break;
         }
+    }
+
+
+    private void deleteAll() {
+        int size = mAdapter.getDatas().size();
+        if (size > 0) {
+            List<LocalVideoInfo> newData = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                //删除选中的本地下载文件
+                try {
+                    MyApplication.getp2p().P2Pdoxdel(mAdapter.getDatas().get(i).getUrl().getBytes("GBK"));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            }
+//            mAdapter.getCheckPosition().clear();
+            mAdapter.setDatas(newData);
+            //重新保存历史记录信息
+            XGUtil.saveCacheList(mAdapter.getDatas());
+            if (newData.size() == 0) {
+                downloadEditLayout.setVisibility(View.GONE);
+            }
+            mAdapter.setEditMoudle(false);
+            mAdapter.setClickSelectAll(false);
+            XGConstant.showSDSizeByUserClear = true;//通知更新手机内存大小
+        } else {
+            ToastUtil.showToastShort(MyApplication.getStringByResId(R.string.download_edit_delete_empty_1));
+        }
+    }
+
+
+    public void delteAllDialog() {
+        new MessageButtonDialog(context, context.getString(R.string.message_dialog_title),
+                context.getString(R.string.message_dialog_delete_all_video), false, new MessageButtonDialog.MyDialogOnClick() {
+            @Override
+            public void btnOk(MessageButtonDialog dialog) {
+                deleteAll();
+            }
+
+            @Override
+            public void btnNo(MessageButtonDialog dialog) {
+
+            }
+        }).show();
+
     }
 }

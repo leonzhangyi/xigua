@@ -8,6 +8,7 @@ import android.os.Message;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.water.melon.R;
@@ -15,8 +16,10 @@ import com.water.melon.application.MyApplication;
 import com.water.melon.base.ui.BaseActivity;
 import com.water.melon.constant.XGConstant;
 import com.water.melon.evenbus.EvenBusEven;
+import com.water.melon.ui.me.dowload.download_down.DownloadDoneFragment;
 import com.water.melon.ui.me.dowload.offline_download.OffLineDownFragment;
 import com.water.melon.utils.FileUtil;
+import com.water.melon.utils.LogUtil;
 import com.water.melon.utils.SDUtils;
 import com.water.melon.utils.XGUtil;
 import com.water.melon.views.RemindDialog;
@@ -28,8 +31,10 @@ import java.util.Objects;
 
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class DownLoadActivity extends BaseActivity {
+    public static final String TAG = "DownLoadActivity";
 
     @BindView(R.id.fragment_download_manage_tabLayout)
     TabLayout fragmentDownloadManageTabLayout;
@@ -44,12 +49,23 @@ public class DownLoadActivity extends BaseActivity {
     @BindView(R.id.loading_lay)
     LinearLayout loadingLay;
 
+    @BindView(R.id.video_download_page_downloadend)
+    RelativeLayout dwonloadEnd;
+    @BindView(R.id.video_download_page_downloading)
+    RelativeLayout dwonloading;
+    @BindView(R.id.video_download_page_downloadend_tv)
+    TextView dwonloadEndTv;
+    @BindView(R.id.video_download_page_downloading_tv)
+    TextView dwonloadingTv;
+
 
     private long totalSize = 0;
     private long oldFree = 0;
     private boolean isloop = true;
     private MyHandler mHandler;
     private DownLoadManagerAdapter downLoadManagerAdapter;
+
+    private int currentPage = 0;
 
     @Override
     public int getContentViewByBase(Bundle savedInstanceState) {
@@ -74,9 +90,26 @@ public class DownLoadActivity extends BaseActivity {
         mHandler = new MyHandler();
         downLoadManagerAdapter = new DownLoadManagerAdapter(getSupportFragmentManager());
         fragmentDownloadManageViewpager.setAdapter(downLoadManagerAdapter);
+        fragmentDownloadManageViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                doPageSelect(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         // 设置viewpager保留界面不重新加载的页面数量
         fragmentDownloadManageViewpager.setOffscreenPageLimit(2);
         fragmentDownloadManageTabLayout.setupWithViewPager(fragmentDownloadManageViewpager);
+
         initTabLayout(downLoadManagerAdapter, downLoadManagerAdapter.getTitles().length);
 
         totalSize = SDUtils.getSDTotalSize(this);
@@ -86,7 +119,7 @@ public class DownLoadActivity extends BaseActivity {
     }
 
     private void initToolBar() {
-        setToolBarLeftView(R.mipmap.icon_back);
+        setToolBarLeftView(R.drawable.back_left);
         setToolLine(true);
         setTitleName(MyApplication.getStringByResId(R.string.video_download));
         setTitleNameColor(R.color.black_ff);
@@ -127,10 +160,57 @@ public class DownLoadActivity extends BaseActivity {
         }.start();
     }
 
+    @OnClick({R.id.toolbar_left_tv, R.id.video_download_page_downloadend, R.id.video_download_page_downloading,R.id.toolbar_right_tv})
+    public void onViewClick(View view) {
+        switch (view.getId()) {
+            case R.id.toolbar_left_tv:
+                onClickTitleBack();
+                break;
+            case R.id.video_download_page_downloadend:
+                currentPage = 0;
+                fragmentDownloadManageViewpager.setCurrentItem(currentPage);
+                doPageSelect(currentPage);
+                break;
+            case R.id.video_download_page_downloading:
+                currentPage = 1;
+                fragmentDownloadManageViewpager.setCurrentItem(currentPage);
+                doPageSelect(currentPage);
+                break;
+            case R.id.toolbar_right_tv:
+                if (null != downLoadManagerAdapter ) {
+                    if (currentPage == 0) {
+                        ((OffLineDownFragment) downLoadManagerAdapter.getItem(0)).delteAllDialog();
+                    } else if (currentPage == 1) {
+                        ((DownloadDoneFragment) downLoadManagerAdapter.getItem(1)).delteAllDialog();
+                    }
+                   }
+                break;
+        }
+    }
+
+    private void doPageSelect(int position) {
+        switch (position) {
+            case 0:
+                dwonloadEnd.setBackground(MyApplication.getDrawableByResId(R.drawable.video_download_main_page_back_press));
+                dwonloading.setBackground(MyApplication.getDrawableByResId(R.drawable.video_download_main_page_back));
+                dwonloadEndTv.setTextColor(MyApplication.getColorByResId(R.color.white));
+                dwonloadingTv.setTextColor(MyApplication.getColorByResId(R.color.black_D9));
+                break;
+            case 1:
+                dwonloadEnd.setBackground(MyApplication.getDrawableByResId(R.drawable.video_download_main_page_back));
+                dwonloading.setBackground(MyApplication.getDrawableByResId(R.drawable.video_download_main_page_back_press));
+                dwonloadEndTv.setTextColor(MyApplication.getColorByResId(R.color.black_D9));
+                dwonloadingTv.setTextColor(MyApplication.getColorByResId(R.color.white));
+                break;
+        }
+    }
+
     @Override
     protected void onClickTitleBack() {
+        LogUtil.e(TAG, "onClickTitleBack click");
         this.finish();
     }
+
 
     @Override
     protected void onClickTitleRight() {
@@ -148,7 +228,7 @@ public class DownLoadActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (null != downLoadManagerAdapter) {
+        if (null != downLoadManagerAdapter ) {
             ((OffLineDownFragment) downLoadManagerAdapter.getItem(0)).starOrStopNotifinDownLoadSpeed(false);
         }
         MyApplication.flag = false;

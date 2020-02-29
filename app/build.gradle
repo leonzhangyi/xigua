@@ -69,5 +69,8 @@ dependencies {
     implementation 'com.bigkoo:convenientbanner:2.1.5'
     //事件订阅总线
     implementation 'org.greenrobot:eventbus:3.1.1'
+    //webview
+    implementation 'com.just.agentweb:agentweb:4.1.2'
+    implementation'com.download.library:Downloader:4.1.2'
 
 }

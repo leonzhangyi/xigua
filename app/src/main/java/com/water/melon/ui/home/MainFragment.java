@@ -13,6 +13,7 @@ import com.water.melon.R;
 import com.water.melon.base.ui.BaseFragment;
 import com.water.melon.presenter.HomePresent;
 import com.water.melon.presenter.contract.HomeContract;
+import com.water.melon.ui.home.h5.H5VideoActivity;
 import com.water.melon.ui.in.HomeAdapterItemClick;
 import com.water.melon.utils.LogUtil;
 import com.water.melon.utils.bannel.NetImageHolderView;
@@ -92,7 +93,7 @@ public class MainFragment extends BaseFragment implements OnItemClickListener, H
         adapter.setOnItemMusicListener(new HomeAdapterItemClick() {
             @Override
             public void onItemClick(HomeBean position) {
-
+                redirectActivity(H5VideoActivity.class);
             }
         });
 

@@ -11,7 +11,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <com.water.melon.views.tablayou.TabLayout
             android:id="@+id/fragment_download_manage_tabLayout"
@@ -24,6 +25,59 @@
             app:tabIndicatorWidth="@dimen/size_dp_35" />
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/size_sp_10">
+
+        <ImageView
+            android:id="@+id/video_download_div_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true" />
+
+
+        <RelativeLayout
+            android:id="@+id/video_download_page_downloadend"
+            android:layout_width="100dp"
+            android:layout_height="@dimen/size_dp_30"
+            android:layout_marginRight="@dimen/size_sp_5"
+            android:layout_toLeftOf="@+id/video_download_div_center"
+            android:background="@drawable/video_download_main_page_back_press">
+
+            <TextView
+                android:id="@+id/video_download_page_downloadend_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/download_manage_tab_1"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_sp_14" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/video_download_page_downloading"
+            android:layout_width="100dp"
+            android:layout_height="@dimen/size_dp_30"
+            android:layout_marginLeft="@dimen/size_sp_5"
+            android:layout_toRightOf="@+id/video_download_div_center"
+            android:background="@drawable/video_download_main_page_back">
+
+            <TextView
+                android:id="@+id/video_download_page_downloading_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/download_manage_tab_2"
+                android:textColor="@color/black_D9"
+                android:textSize="@dimen/size_sp_14" />
+
+        </RelativeLayout>
+    </RelativeLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -38,47 +92,55 @@
             android:layout_height="match_parent" />
     </FrameLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimens_divider_height"
-        android:background="#3B3B3B" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="32dp">
+        android:layout_height="@dimen/size_dp_50">
 
         <ProgressBar
             android:id="@+id/fragment_download_manage_progress_free"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="8dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@+id/fragment_download_manage_space_available_text"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:max="1000"
+            android:progress="200"
             android:progressDrawable="@drawable/progressbar_drawable" />
 
-        <TextView
-            android:id="@+id/fragment_download_manage_space_available_text"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_marginTop="@dimen/size_dp_5"
+            android:id="@+id/fragment_download_manage_space_available_rl"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/fragment_download_manage_space_available"
-            android:text="@string/str_avail"
-            android:textColor="#A4A4A4"
-            android:textSize="@dimen/size_sp_12" />
+            android:layout_below="@+id/fragment_download_manage_progress_free">
 
-        <TextView
-            android:id="@+id/fragment_download_manage_space_available"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:paddingRight="15dp"
-            android:text="@string/str_avail_gb"
-            android:textColor="#A4A4A4"
-            android:textSize="@dimen/size_sp_12" />
+            <TextView
+                android:id="@+id/fragment_download_manage_space_available_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/str_avail"
+                android:textColor="@color/black_80"
+                android:textSize="@dimen/size_sp_14" />
+
+
+            <TextView
+
+                android:id="@+id/fragment_download_manage_space_available"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="15dp"
+                android:text="@string/str_avail_gb"
+                android:textColor="@color/black_80"
+                android:textSize="@dimen/size_sp_14" />
+        </RelativeLayout>
+
+
     </RelativeLayout>
 
 </LinearLayout>

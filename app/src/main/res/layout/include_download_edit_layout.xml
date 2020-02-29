@@ -35,6 +35,7 @@
         android:visibility="gone" />
 
     <Button
+        android:visibility="gone"
         android:id="@+id/edit_btn"
         style="@style/download_edit_style"
         android:stateListAnimator="@null"

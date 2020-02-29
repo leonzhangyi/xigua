@@ -5,10 +5,52 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:id="@+id/top_view"
+        android:id="@+id/netresuor_fragment_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_dp_30">
+
+        <RadioGroup
+            android:id="@+id/net_resource_left_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-6dp"
+            android:orientation="horizontal" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_dp_20"
+            android:layout_marginRight="@dimen/size_dp_16"
+            android:layout_toRightOf="@+id/net_resource_left_tab"
+            android:background="@drawable/netresource_fragment_search_bac">
+
+            <ImageView
+                android:id="@+id/netresuor_search_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/size_dp_7"
+                android:src="@mipmap/icon_search" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/netresuor_search_iv"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="最新大片搜索大V [推荐]"
+                android:textColor="@color/black_40"
+                android:textSize="@dimen/size_sp_12" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/size_dp_6"
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/netresuor_fragment_top">
 
         <com.water.melon.views.tablayou.TabLayout
             android:id="@+id/net_resource_tabLayout"
@@ -29,7 +71,8 @@
             android:layout_marginLeft="@dimen/size_dp_10"
             android:layout_marginRight="@dimen/size_dp_13"
             android:padding="@dimen/size_dp_10"
-            android:src="@mipmap/icon_search" />
+            android:src="@mipmap/icon_search"
+            android:visibility="gone" />
 
     </RelativeLayout>
 

@@ -17,6 +17,7 @@ import com.water.melon.utils.GsonUtil;
 import com.water.melon.utils.SharedPreferencesUtil;
 import com.water.melon.utils.ToastUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NetResourcePresent extends BasePresenterParent implements NetResourceContract.Present {
@@ -69,5 +70,13 @@ public class NetResourcePresent extends BasePresenterParent implements NetResour
             }
         });
 
+    }
+
+    @Override
+    public void getSmallTab(List<TabBean.Sub> data) {
+        if (data == null) {
+            data = new ArrayList<>();
+        }
+        mView.setSmallTab(data);
     }
 }
