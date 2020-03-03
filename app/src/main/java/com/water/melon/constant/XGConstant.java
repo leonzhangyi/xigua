@@ -27,4 +27,7 @@ public class XGConstant {
     //    视频下载模块
 //是否清除缓存，通知下载管理更新内存大小
     public static boolean showSDSizeByUserClear = false;
+
+    //是否有新的版本
+    public static boolean HasNewVersion;
 }

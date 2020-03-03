@@ -1,6 +1,7 @@
 package com.water.melon.ui.main;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
@@ -15,6 +16,7 @@ import com.water.melon.presenter.MainPresent;
 import com.water.melon.presenter.contract.MainContract;
 import com.water.melon.utils.HandleBackUtil;
 import com.water.melon.utils.ToastUtil;
+import com.water.melon.utils.update.CheckAppVersionUtil;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -82,6 +84,12 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @Override
     public void initView() {
         bottomGroup.getChildAt(position).performClick();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                CheckAppVersionUtil.checkApp(true);
+            }
+        }, 1500);
     }
 
     @Override

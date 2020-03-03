@@ -1,7 +1,9 @@
 package com.water.melon.ui.me;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.water.melon.R;
 import com.water.melon.base.ui.BaseFragment;
@@ -9,6 +11,7 @@ import com.water.melon.presenter.MePresenter;
 import com.water.melon.presenter.contract.MeContract;
 import com.water.melon.ui.in.AdapterItemClick;
 import com.water.melon.ui.me.dowload.DownLoadActivity;
+import com.water.melon.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +27,9 @@ public class MeFragment extends BaseFragment implements MeContract.View, Adapter
     private MePresenter mePresenter;
 
     private MePageAdapter mePageAdapter;
+
+    @BindView(R.id.app_versions_right_progress)
+    ProgressBar appVersionProgress;
 
     protected int getLayoutId() {
         return R.layout.me_fragment;
@@ -58,6 +64,17 @@ public class MeFragment extends BaseFragment implements MeContract.View, Adapter
     }
 
     @Override
+    public void checkAppVersion(boolean has, String msg) {
+        appVersionProgress.setVisibility(View.GONE);
+        if (!TextUtils.isEmpty(msg)) {
+            ToastUtil.showToastShort(msg);
+        }
+        if (has) {
+//            appVersion.setText(getStringByRes(R.string.up_app_new));
+        }
+    }
+
+    @Override
     public void onItemClick(int position) {
         switch (position) {
             case 0: //观看历史
@@ -66,8 +83,16 @@ public class MeFragment extends BaseFragment implements MeContract.View, Adapter
             case 1://视频下载
                 redirectActivity(DownLoadActivity.class);
                 break;
+
+            case 3: //检查更新
+                appVersionProgress.setVisibility(View.VISIBLE);
+                mePresenter.checkAppVersion();
+                break;
         }
     }
+
+
+
 
     private List<PageBean> pageBeans = new ArrayList<>();
 

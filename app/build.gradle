@@ -9,7 +9,7 @@ android {
         targetSdkVersion 29
         multiDexEnabled true
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         ndk {
             //支持的abi
@@ -72,5 +72,6 @@ dependencies {
     //webview
     implementation 'com.just.agentweb:agentweb:4.1.2'
     implementation'com.download.library:Downloader:4.1.2'
-
+    //app更新组件
+    implementation 'com.github.yjfnypeu:UpdatePlugin:3.1.2'
 }

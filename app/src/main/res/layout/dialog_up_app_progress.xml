@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/size_dp_15"
+    android:paddingTop="@dimen/size_dp_25"
+    android:paddingRight="@dimen/size_dp_15"
+    android:paddingBottom="@dimen/size_dp_25">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="下载进度"
+        android:textColor="@color/red_ff66666"
+        android:textSize="@dimen/size_sp_18"
+        android:textStyle="bold" />
+
+    <ProgressBar
+        android:id="@+id/up_app_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_dp_8"
+        android:layout_marginTop="@dimen/size_dp_15"
+        android:max="100"
+        android:progressDrawable="@drawable/progressbar_up_app" />
+
+    <TextView
+        android:id="@+id/up_app_progress_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_dp_5"
+        android:text="0%"
+        android:textColor="@color/red_ff66666"
+        android:textSize="@dimen/size_sp_18"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_dp_5"
+        android:text="（不要关掉app，否则下载不了最新版本哦~）"
+        android:textColor="@color/gray_66"
+        android:textSize="@dimen/size_sp_12" />
+
+    <TextView
+        android:id="@+id/up_app_progress_joke"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_dp_6"
+        android:text="熊把爪子都剪掉了变成了什么？"
+        android:textColor="@color/red_ff66666" />
+</LinearLayout>

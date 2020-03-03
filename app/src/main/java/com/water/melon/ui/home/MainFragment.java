@@ -11,6 +11,7 @@ import com.bigkoo.convenientbanner.holder.Holder;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.water.melon.R;
 import com.water.melon.base.ui.BaseFragment;
+import com.water.melon.net.bean.AdvBean;
 import com.water.melon.presenter.HomePresent;
 import com.water.melon.presenter.contract.HomeContract;
 import com.water.melon.ui.home.h5.H5VideoActivity;
@@ -92,7 +93,7 @@ public class MainFragment extends BaseFragment implements OnItemClickListener, H
 
         adapter.setOnItemMusicListener(new HomeAdapterItemClick() {
             @Override
-            public void onItemClick(HomeBean position) {
+            public void onItemClick(AdvBean position) {
                 redirectActivity(H5VideoActivity.class);
             }
         });
@@ -100,8 +101,10 @@ public class MainFragment extends BaseFragment implements OnItemClickListener, H
 
         recyclerView.setAdapter(adapter);
 
-        netRes();
+//        netRes();
         present.getHomeBean();
+        present.getHomeAdv();
+        present.getAppNotice();
     }
 
     @Override
@@ -121,17 +124,18 @@ public class MainFragment extends BaseFragment implements OnItemClickListener, H
      */
     private void netRes() {
         loadNetTestDatas();
-        netConvenientBanner.setPages(new CBViewHolderCreator() {
-            @Override
-            public Holder createHolder(View itemView) {
-                return new NetImageHolderView(itemView, context);
-            }
+        netConvenientBanner
+                .setPages(new CBViewHolderCreator() {
+                    @Override
+                    public Holder createHolder(View itemView) {
+                        return new NetImageHolderView(itemView, context);
+                    }
 
-            @Override
-            public int getLayoutId() {
-                return R.layout.bannel_item;
-            }
-        }, netImages)
+                    @Override
+                    public int getLayoutId() {
+                        return R.layout.bannel_item;
+                    }
+                }, netImages)
                 //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器，不需要圆点指示器可以不设
                 .setPageIndicator(new int[]{R.mipmap.bannel_spoit, R.mipmap.bannel_spoit_sel})
                 //设置指示器的方向
@@ -158,8 +162,52 @@ public class MainFragment extends BaseFragment implements OnItemClickListener, H
     }
 
     @Override
-    public void setHomeBean(ArrayList<HomeBean> homeBeans) {
-        LogUtil.e(TAG,"homeBeans.size = "+homeBeans.size());
-        adapter.setNewData(homeBeans);
+    public void setHomeBean(List<AdvBean> advBeans) {
+//        LogUtil.e(TAG, "homeBeans.size = " + homeBeans.size());
+        adapter.setNewData(advBeans);
+    }
+
+    @Override
+    public void setHomeAdv(List<AdvBean> advBeans) {
+        if (advBeans != null && advBeans.size() > 0) {
+            netImages.clear();
+            for (int i = 0; i < advBeans.size(); i++) {
+                netImages.add(advBeans.get(i).getUrl());
+            }
+            netConvenientBanner.setPages(new CBViewHolderCreator() {
+                @Override
+                public Holder createHolder(View itemView) {
+                    return new NetImageHolderView(itemView, context);
+                }
+
+                @Override
+                public int getLayoutId() {
+                    return R.layout.bannel_item;
+                }
+            }, netImages).setPageIndicator(new int[]{R.mipmap.bannel_spoit, R.mipmap.bannel_spoit_sel})
+                    //设置指示器的方向
+                    .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
+                    //设置指示器是否可见
+                    .setPointViewVisible(true)
+                    //监听单击事件
+                    .setOnItemClickListener(this)
+                    .startTurning(2000);    //设置自动切换（同时设置了切换时间间隔）;
+        }
+
+    }
+
+    @Override
+    public void getAppNotice(List<AdvBean> advBeans) {
+        if (advBeans != null && advBeans.size() > 0) {
+            for (int i = 0; i < advBeans.size(); i++) {
+                AdvBean bean = advBeans.get(i);
+                if (bean.getType() == 1) { //走马灯
+                    tvGg.setText(bean.getMessage());
+                } else if (bean.getType() == 2) {//弹框
+
+
+                }
+            }
+        }
     }
 }

@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-<!--    基本色-->
+    <!--    基本色-->
     <color name="transparent">#0000</color><!-- 透明 -->
     <color name="black_ff">#FF000000</color>
     <color name="black">#000000</color>
@@ -26,6 +26,10 @@
     <color name="gray_FD">#FDFDFE</color>
     <color name="gray_66">#666666</color>
     <color name="gray_B0">#B0B0B0</color>
+    <color name="gray_CC">#CCCCCC</color>
+
+
+    <color name="red">#E4FD6356</color>
 
     <!-- 首页 -->
     <color name="main_botton_tv_sel">#FA6400</color>
@@ -34,7 +38,7 @@
     <color name="main_search_hint">#D8D8D8</color>
     <color name="main_item_tv">#FF4A4A4A</color>
 
-<!--    视频下载-->
+    <!--    视频下载-->
     <color name="net_resource_item_tv">#FFFA6400</color>
     <color name="video_download_top_bac">#f0f9f9f9</color>
     <color name="download_text_color">#818181</color>
@@ -43,4 +47,6 @@
     <color name="color_divider">#dfdfdf</color><!-- 分割线颜色 -->
     <color name="color_point_normal">#dedede</color><!-- point被选中之前的背景颜色 -->
 
+    <!--    app更新-->
+    <color name="red_ff66666">#FF6666</color>
 </resources>

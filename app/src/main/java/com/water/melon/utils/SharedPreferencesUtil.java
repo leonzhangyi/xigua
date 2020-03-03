@@ -71,7 +71,16 @@ public class SharedPreferencesUtil {
     public static final String KEY_Play_Record= "KEY_Play_Record";
 
 
+    /**
+     * 版本检查更新一天一次提醒
+     */
+    public static final String KEY_CHECK_APP_VERSION = "KEY_CHECK_APP_VERSION";
 
+    /**
+     * 是否有强制版本
+     */
+    public static final String KEY_CHECK_APP_VERSION_FORCS = "KEY_CHECK_APP_VERSION_FORCS";
+    
 
     private static SharedPreferencesUtil instance = new SharedPreferencesUtil();
 

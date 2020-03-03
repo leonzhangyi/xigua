@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/size_dp_12"
+    android:orientation="vertical">
+
+    <com.sunfusheng.GlideImageView
+        android:id="@+id/welf_btn_item_iv"
+        android:layout_width="50dp"
+        android:layout_height="@dimen/size_dp_50" />
+
+    <RelativeLayout
+        android:id="@+id/welf_btn_item_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/layout_welf_botton_item_bac">
+
+        <TextView
+            android:layout_toRightOf="@+id/welf_btn_item_btn_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_dp_3"
+            android:layout_marginRight="@dimen/size_dp_8"
+            android:layout_marginBottom="@dimen/size_dp_3"
+            android:text="下载"
+            android:textColor="#FF32C5FF"
+            android:textSize="@dimen/size_sp_13" />
+
+        <ImageView
+            android:layout_marginRight="@dimen/size_dp_2"
+            android:layout_marginLeft="@dimen/size_dp_8"
+            android:layout_centerVertical="true"
+            android:id="@+id/welf_btn_item_btn_iv"
+            android:src="@mipmap/welf_download_icon2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_toLeftOf="@+id/welf_btn_item_btn"
+        android:layout_toRightOf="@+id/welf_btn_item_iv">
+
+        <TextView
+            android:id="@+id/welf_btn_item_btn_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_dp_5"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="爱奇艺"
+            android:textColor="@color/main_item_tv"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/welf_btn_item_btn_dec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="@dimen/size_dp_5"
+            android:layout_marginBottom="@dimen/size_dp_5"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="这是一段文字介绍这是一段文字介绍"
+            android:textColor="@color/black_80"
+            android:textSize="@dimen/size_sp_11" />
+    </RelativeLayout>
+</RelativeLayout>

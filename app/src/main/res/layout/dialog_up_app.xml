@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingLeft="@dimen/size_dp_15"
+    android:paddingRight="@dimen/size_dp_15"
+    android:paddingTop="@dimen/size_dp_25"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/up_app_title"
+        android:textColor="@color/red_ff66666"
+        android:textStyle="bold"
+        android:textSize="@dimen/size_sp_18" />
+<View
+    android:layout_width="@dimen/size_dp_180"
+    android:layout_marginTop="@dimen/size_dp_10"
+    android:layout_height="@dimen/size_dp_3"
+    android:background="@color/red_ff66666"/>
+    <TextView
+        android:id="@+id/up_app_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_dp_20"
+        android:text="内容"
+        android:textColor="@color/main_black" />
+
+    <TextView
+        android:id="@+id/up_app_igone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_dp_15"
+        android:text="忽略此版本"
+        android:textColor="@color/colorPrimaryDark"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_dp_25"
+        android:layout_marginBottom="@dimen/size_dp_20"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/up_app_cancle"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_dp_40"
+            android:layout_marginBottom="@dimen/size_dp_10"
+            android:layout_marginRight="@dimen/size_dp_6"
+            android:layout_weight="1"
+            android:background="@drawable/btn_grayfo_color_2"
+            android:text="@string/button_cancel"
+            android:textColor="@color/gray_66" />
+
+        <Button
+            android:id="@+id/up_app_ok"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_dp_40"
+            android:layout_marginLeft="@dimen/size_dp_6"
+            android:layout_weight="1"
+            android:background="@drawable/btn_main_red_color_2"
+            android:layout_marginBottom="@dimen/size_dp_10"
+            android:text="@string/up_app_ok"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</LinearLayout>

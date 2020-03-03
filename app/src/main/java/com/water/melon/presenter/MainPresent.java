@@ -3,14 +3,30 @@ package com.water.melon.presenter;
 import android.util.SparseArray;
 import android.widget.RadioGroup;
 
+import com.google.gson.reflect.TypeToken;
 import com.trello.rxlifecycle3.LifecycleProvider;
 import com.water.melon.base.mvp.BasePresenterParent;
 import com.water.melon.base.mvp.BaseView;
+import com.water.melon.net.ApiImp;
+import com.water.melon.net.BaseApiResultData;
+import com.water.melon.net.NetConstant;
+import com.water.melon.net.utils.AESCipherforJiaMi;
 import com.water.melon.presenter.contract.MainContract;
 import com.water.melon.ui.home.MainFragment;
 import com.water.melon.ui.me.MeFragment;
 import com.water.melon.ui.netresource.NetResouceFragment;
 import com.water.melon.ui.welfare.WelfareFragment;
+import com.water.melon.utils.GsonUtil;
+import com.water.melon.utils.LogUtil;
+import com.water.melon.utils.SharedPreferencesUtil;
+import com.water.melon.utils.update.AppVersionInfo;
+import com.water.melon.utils.update.MyApkFileDownloadPath;
+import com.water.melon.utils.update.MyDownloadNotifier;
+import com.water.melon.utils.update.MyUpdateNotifier;
+
+import org.lzh.framework.updatepluginlib.UpdateConfig;
+import org.lzh.framework.updatepluginlib.base.UpdateParser;
+import org.lzh.framework.updatepluginlib.model.Update;
 
 import androidx.fragment.app.Fragment;
 
@@ -28,6 +44,51 @@ public class MainPresent extends BasePresenterParent implements MainContract.Pre
 
     @Override
     public void start() {
+        String updateUrl = SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_WEL_UPDATE + ApiImp.getEcond(ApiImp.getDefMap());
+        LogUtil.e("update", "updateUrl ===" + updateUrl);
+        //初始化更新组件
+        UpdateConfig.getConfig()
+                .setUrl(updateUrl)// 配置检查更新的API接口
+                .setUpdateParser(new UpdateParser() {
+                    @Override
+                    public Update parse(String response) throws Exception {
+//                        LogUtil.e("update", "response === " + response);
+                        BaseApiResultData data = (BaseApiResultData) GsonUtil.toClass(response, BaseApiResultData.class);
+                        String result = data.getResult();
+//                        LogUtil.e("update", "result === " + result);
+                        Update update = new Update();
+                        if (result != null && !result.equals("") && !result.equals("[]")) {
+                            AppVersionInfo info = (AppVersionInfo) GsonUtil.toClass(result, AppVersionInfo.class);
+                            if (null == info) {
+                                return update;
+                            }
+                            LogUtil.e("update", info.toString() + "===");
+//                            AppVersionInfo info = baseInfo.getData();
+                            if (null == info) {
+                                return update;
+                            }
+                            // 此apk包的下载地址
+//                            update.setUpdateUrl(info.getDownload());
+                            update.setUpdateUrl("http://gdown.baidu.com/data/wisegame/cfdb6ba461b2c8ad/baidu_97519360.apk");
+                            // 此apk包的版本号
+                            update.setVersionCode(1);
+                            // 此apk包的版本名称
+                            update.setVersionName(info.getVersion());
+                            // 此apk包的版本大小
+//                        update.setAppSize(info.getAndroid_app_size());
+                            // 此apk包的更新内容
+                            update.setUpdateContent(info.getDesc());
+                            // 此apk包是否为强制更新
+                            update.setForced("1".equals(info.getForce()));//"is_up": 1//0:不强制；1：强制升级
+                            // 是否显示忽略此次版本更新按钮
+                            update.setIgnore(false);
+
+                        }
+                        return update;
+                    }
+                }).setCheckNotifier(new MyUpdateNotifier())
+                .setDownloadNotifier(new MyDownloadNotifier())
+                .setFileCreator(new MyApkFileDownloadPath());
         mView.initView();
     }
 
@@ -39,22 +100,22 @@ public class MainPresent extends BasePresenterParent implements MainContract.Pre
         switch (position) {
             case 0:
                 if (fragments.get(position) == null) {
-                    fragments.put(position,new MainFragment());
+                    fragments.put(position, new MainFragment());
                 }
                 break;
             case 1:
                 if (fragments.get(position) == null) {
-                    fragments.put(position,new NetResouceFragment());
+                    fragments.put(position, new NetResouceFragment());
                 }
                 break;
             case 2:
                 if (fragments.get(position) == null) {
-                    fragments.put(position,new WelfareFragment());
+                    fragments.put(position, new WelfareFragment());
                 }
                 break;
             case 3:
                 if (fragments.get(position) == null) {
-                    fragments.put(position,new MeFragment());
+                    fragments.put(position, new MeFragment());
                 }
                 break;
         }

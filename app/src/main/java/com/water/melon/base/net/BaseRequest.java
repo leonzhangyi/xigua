@@ -10,6 +10,15 @@ public class BaseRequest<T> implements Serializable {
     public Integer page;//当前页面 number @mock=1
     public Integer limit;//条数 number @mock=10
     private T parameter;//多对象参数包裹对象
+    public Integer rows;
+
+    public BaseRequest() {
+    }
+
+    public BaseRequest(int page, int rows) {
+        this.page = page;
+        this.rows = rows;
+    }
 
     public Integer getPage() {
         return page;
@@ -33,6 +42,14 @@ public class BaseRequest<T> implements Serializable {
 
     public void setParameter(T parameter) {
         this.parameter = parameter;
+    }
+
+    public Integer getRows() {
+        return rows;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
     }
 
     @NonNull
