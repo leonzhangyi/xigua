@@ -52,7 +52,7 @@ public class HomePresent extends BasePresenterParent implements HomeContract.Pre
             @Override
             public void onError(ErrorResponse error) {
 //                if (error.getCode() != 2) {
-//                    ToastUtil.showToastLong(error.getMessage());
+//                    ToastUtil.showToastLong(error.getErr());
 //                }
             }
 
@@ -81,7 +81,7 @@ public class HomePresent extends BasePresenterParent implements HomeContract.Pre
             @Override
             public void onError(ErrorResponse error) {
 //                if (error.getCode() != 2) {
-//                    ToastUtil.showToastLong(error.getMessage());
+//                    ToastUtil.showToastLong(error.getErr());
 //                }
             }
 
@@ -111,7 +111,7 @@ public class HomePresent extends BasePresenterParent implements HomeContract.Pre
             @Override
             public void onError(ErrorResponse error) {
 //                if (error.getCode() != 2) {
-//                    ToastUtil.showToastLong(error.getMessage());
+//                    ToastUtil.showToastLong(error.getErr());
 //                }
             }
 

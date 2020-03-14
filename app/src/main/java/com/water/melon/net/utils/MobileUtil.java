@@ -16,6 +16,7 @@ import android.telephony.gsm.GsmCellLocation;
 import com.water.melon.R;
 import com.water.melon.net.bean.SystemInfo;
 import com.water.melon.utils.LogUtil;
+import com.water.melon.utils.SharedPreferencesUtil;
 
 
 public class MobileUtil {
@@ -27,9 +28,18 @@ public class MobileUtil {
         final SystemInfo info = new SystemInfo();
         final TelephonyManager mTm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         if (mTm != null) {
-            info.imei = mTm.getDeviceId() == null ? getAndroidId(context) : mTm.getDeviceId();
-            info.imsi = mTm.getSubscriberId() == null ? "" : mTm.getSubscriberId();
-            info.iccid = mTm.getSimSerialNumber() == null ? "" : mTm.getSimSerialNumber();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                info.imei = getAndroidId(context);
+                info.imsi = getAndroidId(context);
+                info.iccid = getAndroidId(context);
+            } else {
+                info.imei = mTm.getDeviceId() == null ? getAndroidId(context) : mTm.getDeviceId();
+                info.imsi = mTm.getSubscriberId() == null ? "" : mTm.getSubscriberId();
+            }
+
+//            info.imei = SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.KEY_WATER_TEST_IME,"");
+//            info.imsi = mTm.getSubscriberId() == null ? "" : mTm.getSubscriberId();
+//            info.iccid = mTm.getSimSerialNumber() == null ? "" : mTm.getSimSerialNumber();
         }
 
         info.net = GetNetworkType(context);

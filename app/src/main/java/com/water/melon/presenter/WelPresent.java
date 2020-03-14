@@ -64,7 +64,7 @@ public class WelPresent extends BasePresenterParent implements WelfContract.pres
             @Override
             public void onError(ErrorResponse error) {
 //                if (error.getCode() != 2) {
-//                    ToastUtil.showToastLong(error.getMessage());
+//                    ToastUtil.showToastLong(error.getErr());
 //                }
             }
 
@@ -96,7 +96,7 @@ public class WelPresent extends BasePresenterParent implements WelfContract.pres
             @Override
             public void onError(ErrorResponse error) {
 //                if (error.getCode() != 2) {
-//                    ToastUtil.showToastLong(error.getMessage());
+//                    ToastUtil.showToastLong(error.getErr());
 //                }
             }
 
@@ -125,7 +125,7 @@ public class WelPresent extends BasePresenterParent implements WelfContract.pres
             @Override
             public void onError(ErrorResponse error) {
 //                if (error.getCode() != 2) {
-//                    ToastUtil.showToastLong(error.getMessage());
+//                    ToastUtil.showToastLong(error.getErr());
 //                }
             }
 
@@ -154,7 +154,7 @@ public class WelPresent extends BasePresenterParent implements WelfContract.pres
             @Override
             public void onError(ErrorResponse error) {
 //                if (error.getCode() != 2) {
-//                    ToastUtil.showToastLong(error.getMessage());
+//                    ToastUtil.showToastLong(error.getErr());
 //                }
                 if (page > 1) {
                     mView.setBtnBeans(null, 1);

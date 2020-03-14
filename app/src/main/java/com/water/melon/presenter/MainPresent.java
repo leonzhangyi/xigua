@@ -9,10 +9,14 @@ import com.water.melon.base.mvp.BasePresenterParent;
 import com.water.melon.base.mvp.BaseView;
 import com.water.melon.net.ApiImp;
 import com.water.melon.net.BaseApiResultData;
+import com.water.melon.net.ErrorResponse;
+import com.water.melon.net.IApiSubscriberCallBack;
 import com.water.melon.net.NetConstant;
+import com.water.melon.net.bean.InitResultBean;
 import com.water.melon.net.utils.AESCipherforJiaMi;
 import com.water.melon.presenter.contract.MainContract;
 import com.water.melon.ui.home.MainFragment;
+import com.water.melon.ui.main.MainActivity;
 import com.water.melon.ui.me.MeFragment;
 import com.water.melon.ui.netresource.NetResouceFragment;
 import com.water.melon.ui.welfare.WelfareFragment;
@@ -31,6 +35,7 @@ import org.lzh.framework.updatepluginlib.model.Update;
 import androidx.fragment.app.Fragment;
 
 public class MainPresent extends BasePresenterParent implements MainContract.Present {
+    public static final String TAG = "MainPresent";
     private MainContract.View mView;
     private SparseArray<Fragment> fragments;
     private int oldPositon = -1;
@@ -55,7 +60,7 @@ public class MainPresent extends BasePresenterParent implements MainContract.Pre
 //                        LogUtil.e("update", "response === " + response);
                         BaseApiResultData data = (BaseApiResultData) GsonUtil.toClass(response, BaseApiResultData.class);
                         String result = data.getResult();
-//                        LogUtil.e("update", "result === " + result);
+                        LogUtil.e("update", "result === " + result);
                         Update update = new Update();
                         if (result != null && !result.equals("") && !result.equals("[]")) {
                             AppVersionInfo info = (AppVersionInfo) GsonUtil.toClass(result, AppVersionInfo.class);
@@ -71,7 +76,7 @@ public class MainPresent extends BasePresenterParent implements MainContract.Pre
 //                            update.setUpdateUrl(info.getDownload());
                             update.setUpdateUrl("http://gdown.baidu.com/data/wisegame/cfdb6ba461b2c8ad/baidu_97519360.apk");
                             // 此apk包的版本号
-                            update.setVersionCode(1);
+                            update.setVersionCode(Integer.parseInt(info.getVersionCode().trim()));
                             // 此apk包的版本名称
                             update.setVersionName(info.getVersion());
                             // 此apk包的版本大小
@@ -123,6 +128,35 @@ public class MainPresent extends BasePresenterParent implements MainContract.Pre
 
         switchFragment(position);
         oldPositon = position;
+    }
+
+    @Override
+    public void getUserInfo() {
+        ApiImp.getInstance().getUserNo(null, getLifecycleTransformerByStopToActivity(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(ErrorResponse error) {
+                LogUtil.e(TAG, "getUserInfo er:" + error.toString());
+            }
+
+            @Override
+            public void onNext(BaseApiResultData listBaseApiResultData) {
+                String result = listBaseApiResultData.getResult();
+                LogUtil.e(TAG, "getUserInfo :" + result);
+                if (result != null && !result.trim().equals("") && !result.trim().equals("[]")) {
+//                    InitResultBean bean = (InitResultBean) GsonUtil.toClass(result, InitResultBean.class);
+                    SharedPreferencesUtil.getInstance().putString(SharedPreferencesUtil.KEY_WATER_USER_INFO, result);
+
+
+                  }
+
+            }
+        });
+
     }
 
     private void switchFragment(int selectPosition) {

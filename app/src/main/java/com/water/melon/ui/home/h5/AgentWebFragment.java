@@ -51,6 +51,8 @@ import com.water.melon.ui.home.h5.utils.FragmentKeyDown;
 import com.water.melon.ui.home.h5.utils.MiddlewareChromeClient;
 import com.water.melon.ui.home.h5.utils.MiddlewareWebViewClient;
 import com.water.melon.ui.home.h5.utils.UIController;
+import com.water.melon.utils.LogUtil;
+import com.water.melon.utils.XGUtil;
 
 import java.util.HashMap;
 
@@ -104,7 +106,6 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
 
         mAgentWeb = AgentWeb.with(this)//
                 .setAgentWebParent((LinearLayout) view, -1, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))//传入AgentWeb的父控件。
@@ -248,6 +249,7 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
 
         @Override
         public void onReceivedTitle(WebView view, String title) {
+            LogUtil.e("webview","title = "+title);
             super.onReceivedTitle(view, title);
             if (mTitleTextView != null && !TextUtils.isEmpty(title)) {
                 if (title.length() > 10) {
@@ -378,8 +380,10 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
 
 
     private void pageNavigator(int tag) {
+        //TODO  隐藏返回按钮
+//        mBackImageView.setVisibility(tag);
 
-        mBackImageView.setVisibility(tag);
+
 //        mLineView.setVisibility(tag);
     }
 
@@ -408,11 +412,16 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
                     break;
                 case R.id.h5_play:
                     //TODO 处理播放
-                    if (mAgentWeb != null) {
-                        String url = "https://www.8090g.cn/jiexi/?url=" + mAgentWeb.getWebCreator().getWebView().getUrl();
-                        mAgentWeb.getUrlLoader().loadUrl(url);
-//                        mAgentWeb.getUrlLoader().loadUrl("http://www.unkownwebsiteblog.me");
-                    }
+//                    if (mAgentWeb != null) {
+//                        String url = "https://www.8090g.cn/jiexi/?url=" + mAgentWeb.getWebCreator().getWebView().getUrl();
+//                        mAgentWeb.getUrlLoader().loadUrl(url);
+////                        mAgentWeb.getUrlLoader().loadUrl("http://www.unkownwebsiteblog.me");
+//                    }
+
+                    Intent intent = new Intent(getContext(),WebPlayActivity.class);
+                    intent.putExtra(AgentWebFragment.URL_KEY, XGUtil.getCurrentRoad(0)+mAgentWeb.getWebCreator().getWebView().getUrl());
+                    startActivity(intent);
+
                     break;
                 default:
                     break;

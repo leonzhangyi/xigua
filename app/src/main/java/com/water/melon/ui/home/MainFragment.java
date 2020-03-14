@@ -14,8 +14,10 @@ import com.water.melon.base.ui.BaseFragment;
 import com.water.melon.net.bean.AdvBean;
 import com.water.melon.presenter.HomePresent;
 import com.water.melon.presenter.contract.HomeContract;
+import com.water.melon.ui.home.h5.AgentWebFragment;
 import com.water.melon.ui.home.h5.H5VideoActivity;
 import com.water.melon.ui.in.HomeAdapterItemClick;
+import com.water.melon.ui.search.SearchActivity;
 import com.water.melon.utils.LogUtil;
 import com.water.melon.utils.bannel.NetImageHolderView;
 
@@ -27,6 +29,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class MainFragment extends BaseFragment implements OnItemClickListener, HomeContract.View {
     public static final String TAG = "MainFragment";
@@ -45,13 +48,6 @@ public class MainFragment extends BaseFragment implements OnItemClickListener, H
 
     private List<String> netImages = new ArrayList<>();
 
-
-    //网络图片  TODO 测试使用
-    public static String[] imagesString = new String[]{
-            "https://img2.woyaogexing.com/2018/08/14/9dc2bb4e96604f6993e46b05ed17915c!600x600.jpeg",
-            "https://img2.woyaogexing.com/2018/08/14/f1472844169f4c059c0add35b10ecda9!600x600.jpeg",
-            "https://img2.woyaogexing.com/2018/08/14/c47a1c92bc8449178f966a90285e1f88!600x600.jpeg"
-    };
 
     @Override
     protected int getLayoutId() {
@@ -94,7 +90,10 @@ public class MainFragment extends BaseFragment implements OnItemClickListener, H
         adapter.setOnItemMusicListener(new HomeAdapterItemClick() {
             @Override
             public void onItemClick(AdvBean position) {
-                redirectActivity(H5VideoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(AgentWebFragment.URL_KEY, position.getTarget());
+                redirectActivity(H5VideoActivity.class, bundle);
+//                redirectActivity(H5VideoActivity.class);
             }
         });
 
@@ -112,43 +111,6 @@ public class MainFragment extends BaseFragment implements OnItemClickListener, H
         this.present = (HomePresent) presenter;
     }
 
-    /**
-     * 加载网络图片资源
-     */
-    private void loadNetTestDatas() {
-        netImages = Arrays.asList(imagesString);
-    }
-
-    /**
-     * 广告栏播放网络图片资源
-     */
-    private void netRes() {
-        loadNetTestDatas();
-        netConvenientBanner
-                .setPages(new CBViewHolderCreator() {
-                    @Override
-                    public Holder createHolder(View itemView) {
-                        return new NetImageHolderView(itemView, context);
-                    }
-
-                    @Override
-                    public int getLayoutId() {
-                        return R.layout.bannel_item;
-                    }
-                }, netImages)
-                //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器，不需要圆点指示器可以不设
-                .setPageIndicator(new int[]{R.mipmap.bannel_spoit, R.mipmap.bannel_spoit_sel})
-                //设置指示器的方向
-                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
-                //设置指示器是否可见
-                .setPointViewVisible(true)
-                //监听单击事件
-                .setOnItemClickListener(this)
-                .startTurning(2000)     //设置自动切换（同时设置了切换时间间隔）
-        //监听翻页事件
-//                .setOnPageChangeListener(this)
-        ;
-    }
 
     @Override
     public void onItemClick(int position) {
@@ -208,6 +170,16 @@ public class MainFragment extends BaseFragment implements OnItemClickListener, H
 
                 }
             }
+        }
+    }
+
+
+    @OnClick({R.id.fragment_main_search})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.fragment_main_search:
+                redirectActivity(SearchActivity.class);
+                break;
         }
     }
 }

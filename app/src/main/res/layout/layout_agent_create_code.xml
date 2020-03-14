@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:text="使用步骤："
+        android:textColor="@color/black_D9"
+        android:textSize="@dimen/sp_14" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_11"
+        android:layout_marginRight="@dimen/size_dp_11"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_dp_72"
+            android:layout_marginLeft="@dimen/size_dp_5"
+            android:layout_marginRight="@dimen/size_dp_5"
+            android:layout_weight="1"
+            android:background="@drawable/layout_agent_create_code_bac_1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/size_dp_18"
+                android:text="第一步"
+                android:textColor="@color/black_D9"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="选择激活码类型"
+                android:textColor="@color/black_D9"
+                android:textSize="@dimen/sp_14" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_dp_72"
+            android:layout_marginLeft="@dimen/size_dp_5"
+            android:layout_marginRight="@dimen/size_dp_5"
+            android:layout_weight="1"
+            android:background="@drawable/layout_agent_create_code_bac_1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/size_dp_18"
+                android:text="第二步"
+                android:textColor="@color/black_D9"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="填写激活码数量"
+                android:textColor="@color/black_D9"
+                android:textSize="@dimen/sp_14" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_dp_72"
+            android:layout_marginLeft="@dimen/size_dp_5"
+            android:layout_marginRight="@dimen/size_dp_5"
+            android:layout_weight="1"
+            android:background="@drawable/layout_agent_create_code_bac_1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/size_dp_18"
+                android:text="第三步"
+                android:textColor="@color/black_D9"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="生成激活码"
+                android:textColor="@color/black_D9"
+                android:textSize="@dimen/sp_14" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10"
+        android:layout_marginTop="@dimen/size_dp_20"
+        android:background="#fff1f2f5" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size_dp_20"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="选择激活码类型："
+            android:textColor="@color/black_D9"
+            android:textSize="@dimen/sp_14" />
+
+        <RelativeLayout
+            android:id="@+id/layout_agent_create_code_code_rl"
+            android:layout_width="@dimen/size_dp_130"
+            android:layout_height="@dimen/size_dp_30"
+            android:background="@drawable/layout_agent_create_code_bac_1">
+
+            <TextView
+                android:id="@+id/layout_agent_create_code_code_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:text="临时卡"
+                android:textColor="@color/black_D9"
+                android:textSize="@dimen/size_sp_12" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/select_create_code" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size_dp_20"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="生成激活码数量："
+            android:textColor="@color/black_D9"
+            android:textSize="@dimen/sp_14" />
+
+        <RelativeLayout
+            android:layout_width="@dimen/size_dp_130"
+            android:layout_height="@dimen/size_dp_30"
+            android:background="@drawable/layout_agent_create_code_bac_1">
+
+            <EditText
+                android:layout_marginLeft="@dimen/size_dp_10"
+                android:id="@+id/create_code_count"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:maxLength="4"
+                android:numeric="integer"
+                android:textColor="@color/black_D9"
+                android:textSize="@dimen/sp_14" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/layout_agent_create_code_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size_dp_20"
+        android:background="@drawable/layout_agent_pay_back"
+        android:paddingLeft="@dimen/size_dp_20"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingRight="@dimen/size_dp_20"
+        android:paddingBottom="@dimen/dp_10"
+        android:text="生成激活码"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_sp_18" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10"
+        android:layout_marginTop="@dimen/size_dp_20"
+        android:background="#fff1f2f5" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16">
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="使用步骤"
+            android:textColor="@color/black_D9"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/dp_10"
+            android:text="批量导出"
+            android:textColor="#FFFA6400"
+            android:textSize="@dimen/size_dp_14" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_dp_30">
+
+        <TextView
+            android:gravity="center"
+            android:textSize="@dimen/size_sp_10"
+            android:text="激活码"
+            android:background="#ffe5e5e5"
+            android:textColor="@color/black_D9"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.8"/>
+
+        <TextView
+            android:background="#fff1f2f5"
+            android:gravity="center"
+            android:textSize="@dimen/size_sp_10"
+            android:text="类型"
+            android:textColor="@color/black_D9"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+        <TextView
+            android:gravity="center"
+            android:textSize="@dimen/size_sp_10"
+            android:text="有效期"
+            android:background="#ffe5e5e5"
+            android:textColor="@color/black_D9"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.4"/>
+        <TextView
+            android:background="#fff1f2f5"
+            android:gravity="center"
+            android:textSize="@dimen/size_sp_10"
+            android:text="操作"
+            android:textColor="@color/black_D9"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/agent_create_code_rec"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

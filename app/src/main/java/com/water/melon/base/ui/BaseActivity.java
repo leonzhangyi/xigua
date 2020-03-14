@@ -439,7 +439,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseAc
         if (error.getCode() == HttpURLConnection.HTTP_UNAUTHORIZED && !goLogin) {
             //goLogin 防止多个请求跳转
             goLogin = true;
-            ToastUtil.showToastShort(error.getMessage());
+            ToastUtil.showToastShort(error.getErr());
             //Token失效
         }
     }

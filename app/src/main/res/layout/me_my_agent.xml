@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_dp_30">
+
+        <TextView
+            android:gravity="center"
+            android:textSize="@dimen/size_sp_10"
+            android:text="代理人"
+            android:background="#ffe5e5e5"
+            android:textColor="@color/black_D9"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"/>
+
+        <TextView
+            android:background="#fff1f2f5"
+            android:gravity="center"
+            android:textSize="@dimen/size_sp_10"
+            android:text="联系方式"
+            android:textColor="@color/black_D9"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="9"/>
+        <TextView
+            android:gravity="center"
+            android:textSize="@dimen/size_sp_10"
+            android:text="加入时间"
+            android:background="#ffe5e5e5"
+            android:textColor="@color/black_D9"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="9"/>
+        <TextView
+            android:background="#fff1f2f5"
+            android:gravity="center"
+            android:textSize="@dimen/size_sp_10"
+            android:text="名下用户数"
+            android:textColor="@color/black_D9"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8"/>
+
+        <TextView
+            android:gravity="center"
+            android:textSize="@dimen/size_sp_10"
+            android:text="操作"
+            android:background="#ffe5e5e5"
+            android:textColor="@color/black_D9"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/my_agent_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

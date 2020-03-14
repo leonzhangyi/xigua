@@ -2,16 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff1f2f5"
     android:orientation="vertical">
     <!--        android:background="@drawable/me_fragment_top_bac"-->
-<!--    android:background="#ffeaeaea"-->
+    <!--    android:background="#ffeaeaea"-->
     <LinearLayout
         android:id="@+id/me_fragment_top_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/me_fragment_top_bac"
+       android:background="@color/white"
         android:orientation="vertical">
-
+<!--        android:background="@drawable/me_fragment_top_bac"-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,154 +23,211 @@
                 android:id="@+id/me_fragment_icon"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/def_icon" />
 
             <LinearLayout
+                android:id="@+id/me_go_to_login"
+                android:paddingRight="@dimen/size_dp_20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_10"
-                android:layout_toLeftOf="@+id/me_fragment_logout"
                 android:layout_toRightOf="@+id/me_fragment_icon"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/me_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="13877674429"
+                    android:text="还未登录"
                     android:textColor="@color/black_ff"
                     android:textSize="@dimen/size_sp_18" />
 
                 <TextView
+                    android:id="@+id/me_vip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size_dp_5"
-                    android:text="月卡会员"
+                    android:text="游客用户"
                     android:textColor="@color/black_ff"
                     android:textSize="@dimen/size_sp_14" />
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/me_fragment_logout"
+
+            <LinearLayout
+                android:id="@+id/login_out_ll"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/size_dp_6"
-                android:padding="@dimen/dp_10"
-                android:text="@string/me_logout"
-                android:textColor="@color/black_80"
-                android:textSize="@dimen/sp_14" />
+                android:layout_marginRight="@dimen/size_dp_16"
+                android:background="@drawable/me_fragment_logout_bac"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:src="@mipmap/me_login" />
+
+                <TextView
+                    android:id="@+id/me_fragment_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:text="切换账号"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_14" />
+
+            </LinearLayout>
+
         </RelativeLayout>
 
-        <RelativeLayout
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/size_dp_16">
 
-            <RelativeLayout
-                android:layout_width="@dimen/size_dp_105"
-                android:layout_height="73dp"
-                android:background="@color/white">
+            <LinearLayout
+                android:background="@drawable/me_agent_bac_1"
+                android:layout_width="0dp"
+                android:layout_height="81dp"
+                android:layout_marginRight="@dimen/size_dp_7"
+                android:layout_weight="2"
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+                    android:id="@+id/me_fragment_vip"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <ImageView
+                        android:layout_width="@dimen/size_dp_30"
+                        android:layout_height="@dimen/size_dp_30"
+                        android:layout_centerHorizontal="true"
                         android:layout_gravity="center_horizontal"
-                        android:text="VIP会员"
-                        android:textColor="@color/black_D9"
-                        android:textSize="@dimen/size_sp_16" />
+                        android:layout_marginTop="@dimen/size_dp_7"
+                        android:src="@mipmap/me_agent" />
+
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/size_dp_5"
+                        android:layout_marginTop="@dimen/size_dp_6"
+                        android:text="VIP会员"
+                        android:textColor="#FF7C4724"
+                        android:textSize="@dimen/size_sp_12" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         android:text="VIP首月10元"
-                        android:textColor="@color/net_resource_item_tv"
-                        android:textSize="@dimen/size_sp_12" />
+                        android:textColor="#FF7C4724"
+                        android:textSize="@dimen/size_sp_10" />
+
                 </LinearLayout>
 
-            </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="@dimen/size_dp_105"
-                android:layout_height="73dp"
-                android:layout_centerHorizontal="true"
-                android:background="@color/white">
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_width="@dimen/size_dp_1"
+                    android:layout_height="@dimen/size_dp_30"
+                    android:background="#FFB89985"/>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+                    android:id="@+id/me_fragment_share"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/size_dp_30"
+                        android:layout_height="@dimen/size_dp_30"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/size_dp_7"
+                        android:src="@mipmap/me_agent" />
+
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/size_dp_6"
                         android:text="分享得会员"
-                        android:textColor="@color/black_D9"
-                        android:textSize="@dimen/size_sp_16" />
+                        android:textColor="#FF7C4724"
+                        android:textSize="@dimen/size_sp_12" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/size_dp_5"
                         android:text="分享好友赢会员"
-                        android:textColor="@color/black_80"
-                        android:textSize="@dimen/size_sp_12" />
+                        android:textColor="#FF7C4724"
+                        android:textSize="@dimen/size_sp_10" />
                 </LinearLayout>
+            </LinearLayout>
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="@dimen/size_dp_105"
-                android:layout_height="73dp"
+            <LinearLayout
+                android:layout_marginLeft="@dimen/size_dp_7"
+                android:id="@+id/me_fragment_agent"
+                android:layout_width="0dp"
+                android:layout_height="81dp"
+                android:layout_weight="1"
                 android:layout_alignParentRight="true"
-                android:background="@color/white">
+                android:background="@drawable/me_agent_bac"
+                android:orientation="vertical">
 
-                <LinearLayout
+                <ImageView
+                    android:layout_width="@dimen/size_dp_30"
+                    android:layout_height="@dimen/size_dp_30"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/size_dp_7"
+                    android:src="@mipmap/me_agent" />
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:orientation="vertical">
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/size_dp_6"
+                    android:text="代理专区"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_sp_12" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="VIP会员"
-                        android:textColor="@color/black_D9"
-                        android:textSize="@dimen/size_sp_16" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="万元收入等你拿"
+                    android:textColor="#80FFFFFF"
+                    android:textSize="@dimen/size_sp_10" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/size_dp_5"
-                        android:text="万元收入等你拿"
-                        android:textColor="@color/black_80"
-                        android:textSize="@dimen/size_sp_12" />
-                </LinearLayout>
-
-            </RelativeLayout>
-        </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
+
+
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@+id/me_fragment_top_ll"
+        android:layout_marginTop="@dimen/size_dp_14"
         android:id="@+id/me_recy"
+        android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/me_fragment_top_ll" />
 
 
     <ProgressBar

@@ -59,6 +59,7 @@
             android:textSize="@dimen/sp_14" />
 
         <TextView
+            android:layout_below="@+id/welf_btn_item_btn_name"
             android:id="@+id/welf_btn_item_btn_dec"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

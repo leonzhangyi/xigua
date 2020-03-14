@@ -11,7 +11,10 @@ import com.water.melon.ui.home.h5.utils.FragmentKeyDown;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-public class H5VideoActivity extends BaseActivity {
+public class H5VideoActivity extends BaseActivity implements H5VideoConstract.View {
+
+    private H5VideoPresent present;
+
     @Override
     public int getContentViewByBase(Bundle savedInstanceState) {
         return R.layout.layout_h5_activity;
@@ -21,16 +24,19 @@ public class H5VideoActivity extends BaseActivity {
 
     @Override
     public void createdViewByBase(Bundle savedInstanceState) {
-        mFragmentManager = this.getSupportFragmentManager();
-        openFragment();
+        new H5VideoPresent(this, this);
+        present.start();
+
     }
 
     private AgentWebFragment mAgentWebFragment;
+
     private void openFragment() {
         FragmentTransaction ft = mFragmentManager.beginTransaction();
         Bundle mBundle = null;
         ft.add(R.id.container_framelayout, mAgentWebFragment = AgentWebFragment.getInstance(mBundle = new Bundle()), AgentWebFragment.class.getName());
-        mBundle.putString(AgentWebFragment.URL_KEY, "https://www.iqiyi.com");
+//        mBundle.putString(AgentWebFragment.URL_KEY, "https://www.iqiyi.com");
+        mBundle.putString(AgentWebFragment.URL_KEY, getIntent().getStringExtra(AgentWebFragment.URL_KEY));
         ft.commit();
     }
 
@@ -69,11 +75,21 @@ public class H5VideoActivity extends BaseActivity {
     }
 
 
-
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
+    }
+
+    @Override
+    public void initView() {
+        mFragmentManager = this.getSupportFragmentManager();
+        openFragment();
+        present.getRoads();
+    }
+
+    @Override
+    public void setPresenter(H5VideoConstract.Present presenter) {
+        present = (H5VideoPresent) presenter;
     }
 }

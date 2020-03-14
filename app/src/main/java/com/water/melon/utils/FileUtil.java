@@ -1,12 +1,17 @@
 package com.water.melon.utils;
 
 import android.content.ContentResolver;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.view.View;
 
 import com.water.melon.application.MyApplication;
 
@@ -14,6 +19,7 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -178,5 +184,78 @@ public class FileUtil {
                 file.delete();
             }
         }
+    }
+
+
+    public static void viewSaveToImage(View view, Context context) {
+        view.setDrawingCacheEnabled(true);
+        view.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+        view.setDrawingCacheBackgroundColor(Color.WHITE);
+
+        // 把一个View转换成图片
+        Bitmap cachebmp = loadBitmapFromView(view);
+
+        FileOutputStream fos;
+        String imagePath = "";
+        File file = null;
+        try {
+            // 判断手机设备是否有SD卡
+            boolean isHasSDCard = Environment.getExternalStorageState().equals(
+                    android.os.Environment.MEDIA_MOUNTED);
+            if (isHasSDCard) {
+                // SD卡根目录
+                File sdRoot = Environment.getExternalStorageDirectory();
+//                File file = new File(sdRoot, Calendar.getInstance().getTimeInMillis()+".png");
+                file = new File(getAppDir1(), "/vipxg.jpg");
+                fos = new FileOutputStream(file);
+                imagePath = file.getAbsolutePath();
+            } else {
+//                Logger.t("ShareActivity").e("创建文件失败!");
+                throw new Exception("创建文件失败!");
+            }
+            cachebmp.compress(Bitmap.CompressFormat.PNG, 90, fos);
+
+            fos.flush();
+            fos.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        Logger.t("ShareActivity").e("imagePath="+imagePath);
+
+        view.destroyDrawingCache();
+        ToastUtil.showToastLong("保存成功");
+        // 其次把文件插入到系统图库
+        try {
+            MediaStore.Images.Media.insertImage(context.getContentResolver(),
+                    file.getAbsolutePath(), "/vipxg.jpg", null);
+//            MyToastUtils.showShortToast(context, "保存成功");
+        } catch (FileNotFoundException e) {
+//            MyToastUtils.showShortToast(context, "保存失败");
+            e.printStackTrace();
+        }
+        // 最后通知图库更新
+        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                Uri.fromFile(new File(file.getPath()))));
+    }
+
+    private static Bitmap loadBitmapFromView(View v) {
+        int w = v.getWidth();
+        int h = v.getHeight();
+
+        Bitmap bmp = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(bmp);
+
+        c.drawColor(Color.WHITE);
+        /** 如果不设置canvas画布为白色，则生成透明 */
+
+        v.layout(0, 0, w, h);
+        v.draw(c);
+
+        return bmp;
+    }
+
+    public static String getAppDir1() {
+        return Environment.getExternalStorageDirectory().getAbsolutePath() + "/DCIM";
     }
 }

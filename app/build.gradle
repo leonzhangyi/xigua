@@ -8,8 +8,8 @@ android {
         minSdkVersion 19
         targetSdkVersion 29
         multiDexEnabled true
-        versionCode 1
-        versionName "1.0.0"
+        versionCode 4
+        versionName "1.0.4"
 
         ndk {
             //支持的abi
@@ -45,6 +45,8 @@ dependencies {
     implementation 'com.android.support:design:29.0.0'
     implementation project(path: ':lib_tcsuperplayer')
     implementation project(path: ':ijkplayer-java')
+    implementation project(':pickerview')
+    implementation project(':wheelview')
     implementation 'com.android.support:multidex:1.0.3'
     //图片框架
     implementation project(':glideimageview')
@@ -74,4 +76,6 @@ dependencies {
     implementation'com.download.library:Downloader:4.1.2'
     //app更新组件
     implementation 'com.github.yjfnypeu:UpdatePlugin:3.1.2'
+    //二维码
+    implementation 'com.google.zxing:core:3.3.0'
 }

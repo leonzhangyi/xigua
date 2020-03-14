@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/size_dp_30">
+
+        <TextView
+
+            android:id="@+id/main_vip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/size_dp_16"
+            android:paddingRight="@dimen/size_dp_16"
+            android:text="搜索"
+            android:textColor="#FFFA6400"
+            android:textSize="@dimen/size_sp_16" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_dp_30"
+            android:layout_toLeftOf="@+id/main_vip"
+            android:background="@drawable/home_search">
+
+            <ImageView
+                android:id="@+id/fragment_main_search_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/size_dp_10"
+                android:src="@mipmap/icon_search" />
+
+            <EditText
+                android:id="@+id/search_edit_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/fragment_main_search_icon"
+                android:background="@null"
+                android:hint="最新大片搜索大V[推荐]"
+                android:maxLines="1"
+                android:padding="@dimen/size_dp_6"
+                android:textColor="@color/black"
+                android:textColorHint="@color/main_search_hint"
+                android:textCursorDrawable="@null"
+                android:textSize="@dimen/size_sp_13" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/net_resource_item_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/size_dp_16"
+            android:layout_marginRight="@dimen/size_dp_16"
+            android:visibility="visible" />
+
+        <include
+            android:id="@+id/loading_lay"
+            layout="@layout/include_loading_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/size_dp_100" />
+
+        <RelativeLayout
+            android:id="@+id/activity_serch_no_video"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_centerHorizontal="true"
+                android:layout_above="@+id/activity_serch_no_video_tv"
+                android:src="@mipmap/no_video"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginTop="@dimen/size_dp_20"
+                android:id="@+id/activity_serch_no_video_tv"
+                android:layout_centerInParent="true"
+                android:text="未搜索到该影片"
+                android:textColor="@color/black_40"
+                android:textSize="@dimen/sp_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </FrameLayout>
+</LinearLayout>

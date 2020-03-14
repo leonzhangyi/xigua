@@ -4,6 +4,7 @@ package com.water.melon.presenter.contract;
 import com.water.melon.base.mvp.BasePresenter;
 import com.water.melon.base.mvp.BaseView;
 import com.water.melon.ui.netresource.SearchVideoInfoBean;
+import com.water.melon.ui.netresource.VideoPlayBean;
 import com.water.melon.ui.player.VlcVideoBean;
 
 public interface VideoInfoContract {
@@ -16,6 +17,6 @@ public interface VideoInfoContract {
     }
 
     interface View extends BaseView<Presenter> {
-        void getVideoInfo(SearchVideoInfoBean videoInfo);
+        void getVideoInfo(VideoPlayBean videoInfo);
     }
 }

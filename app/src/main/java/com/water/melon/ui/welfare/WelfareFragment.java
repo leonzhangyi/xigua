@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
@@ -21,8 +22,10 @@ import com.water.melon.presenter.contract.WelfContract;
 import com.water.melon.ui.home.MainHomeAdapter;
 import com.water.melon.ui.home.HomeBean;
 import com.water.melon.ui.home.MainFragment;
+import com.water.melon.ui.home.h5.AgentWebFragment;
 import com.water.melon.ui.home.h5.H5VideoActivity;
 import com.water.melon.ui.in.HomeAdapterItemClick;
+import com.water.melon.ui.search.SearchActivity;
 import com.water.melon.utils.LogUtil;
 import com.water.melon.utils.ToastUtil;
 import com.water.melon.utils.bannel.NetImageHolderView;
@@ -67,6 +70,8 @@ public class WelfareFragment extends BaseFragment implements WelfContract.View, 
     RecyclerView recyclerView;
     GlideImageView fragment_wef_mid_adv;
 
+    private RelativeLayout welf_search;
+
     @Override
     public void initView() {
         View header = LayoutInflater.from(context).inflate(R.layout.welfare_fragment, null);
@@ -74,7 +79,13 @@ public class WelfareFragment extends BaseFragment implements WelfContract.View, 
         welfBanner = header.findViewById(R.id.welfare_banner);
         recyclerView = header.findViewById(R.id.fragment_wef_rv);
         fragment_wef_mid_adv = header.findViewById(R.id.fragment_wef_mid_adv);
-
+        welf_search = header.findViewById(R.id.welf_search);
+        welf_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectActivity(SearchActivity.class);
+            }
+        });
 
         adapter = new MainHomeAdapter();
         adapter.setEnableLoadMore(true);//这里的作用是防止下拉刷新的时候还可以上拉加载
@@ -84,7 +95,9 @@ public class WelfareFragment extends BaseFragment implements WelfContract.View, 
         adapter.setOnItemMusicListener(new HomeAdapterItemClick() {
             @Override
             public void onItemClick(AdvBean position) {
-                redirectActivity(H5VideoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(AgentWebFragment.URL_KEY, position.getTarget());
+                redirectActivity(H5VideoActivity.class, bundle);
             }
         });
 
@@ -99,9 +112,10 @@ public class WelfareFragment extends BaseFragment implements WelfContract.View, 
             @Override
             public void onItemClick(AdvBean position) {
 //                redirectActivity(H5VideoActivity.class);
-                String name = "百度";
-                ToastUtil.showToastLong("正在下载"+name);
-                present.downloadAPK("http://gdown.baidu.com/data/wisegame/cfdb6ba461b2c8ad/baidu_97519360.apk", context, name);
+                String name = position.getTitle();
+                ToastUtil.showToastLong("正在下载" + name);
+//                present.downloadAPK("http://gdown.baidu.com/data/wisegame/cfdb6ba461b2c8ad/baidu_97519360.apk", context, name);
+                present.downloadAPK(position.getTarget(), context, name);
             }
         });
         btnAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
@@ -134,42 +148,6 @@ public class WelfareFragment extends BaseFragment implements WelfContract.View, 
         return false;
     }
 
-    /**
-     * 广告栏播放网络图片资源
-     */
-    private void netRes() {
-        loadNetTestDatas();
-        welfBanner.setPages(new CBViewHolderCreator() {
-            @Override
-            public Holder createHolder(View itemView) {
-                return new NetImageHolderView(itemView, context);
-            }
-
-            @Override
-            public int getLayoutId() {
-                return R.layout.bannel_item;
-            }
-        }, netImages)
-                //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器，不需要圆点指示器可以不设
-                .setPageIndicator(new int[]{R.mipmap.bannel_spoit, R.mipmap.bannel_spoit_sel})
-                //设置指示器的方向
-                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
-                //设置指示器是否可见
-                .setPointViewVisible(true)
-                //监听单击事件
-                .setOnItemClickListener(this)
-                .startTurning(2000)     //设置自动切换（同时设置了切换时间间隔）
-        //监听翻页事件
-//                .setOnPageChangeListener(this)
-        ;
-    }
-
-    /**
-     * 加载网络图片资源
-     */
-    private void loadNetTestDatas() {
-        netImages = Arrays.asList(MainFragment.imagesString);
-    }
 
     @Override
     public void getwelfBeans(List<AdvBean> advs) {

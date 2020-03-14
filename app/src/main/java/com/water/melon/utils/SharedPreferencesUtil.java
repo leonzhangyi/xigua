@@ -80,7 +80,18 @@ public class SharedPreferencesUtil {
      * 是否有强制版本
      */
     public static final String KEY_CHECK_APP_VERSION_FORCS = "KEY_CHECK_APP_VERSION_FORCS";
-    
+
+
+    public static final String KEY_WATER_USER_INFO = "KEY_WATER_USER_INFO";  //所有个人中心数据
+    public static final String KEY_WATER_ALL_ROADS = "KEY_WATER_ALL_ROADS";//所有可切换路线
+    public static final String KEY_WATER_WEIXIN = "KEY_WATER_WEIXIN";//微信
+    public static final String KEY_WATER_QQ = "KEY_WATER_QQ";//QQ
+    public static final String KEY_WATER_HELP = "KEY_WATER_HELP";//帮助中心
+
+
+
+
+    public static final String KEY_WATER_TEST_IME = "KEY_WATER_TEXT_IMEI";
 
     private static SharedPreferencesUtil instance = new SharedPreferencesUtil();
 

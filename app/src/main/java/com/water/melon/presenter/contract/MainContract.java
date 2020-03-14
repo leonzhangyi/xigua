@@ -10,10 +10,13 @@ import androidx.fragment.app.Fragment;
 public interface MainContract {
     interface Present extends BasePresenter {
         void selectTab(int position, RadioGroup tablayout);
+
+        void getUserInfo();
     }
 
     interface View extends BaseView<Present> {
         void selectTab(Fragment newFragment, Fragment oldFragment);
+
     }
 
 }

@@ -16,10 +16,12 @@ import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.water.melon.R;
 import com.water.melon.application.MyApplication;
 import com.water.melon.base.ui.BaseFragment;
+import com.water.melon.net.bean.AdvBean;
 import com.water.melon.net.bean.TabBean;
 import com.water.melon.presenter.NetResourcePresent;
 import com.water.melon.presenter.contract.NetResourceContract;
 import com.water.melon.ui.home.MainFragment;
+import com.water.melon.ui.search.SearchActivity;
 import com.water.melon.utils.ToastUtil;
 import com.water.melon.utils.bannel.NetImageHolderView;
 import com.water.melon.views.tablayou.TabLayout;
@@ -32,6 +34,7 @@ import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class NetResouceFragment extends BaseFragment implements NetResourceContract.View, OnItemClickListener, RadioGroup.OnCheckedChangeListener {
     public static final String TAG = "NetResouceFragment";
@@ -83,7 +86,7 @@ public class NetResouceFragment extends BaseFragment implements NetResourceContr
 
     @Override
     public void initView() {
-        netRes();
+//        netRes();
 
         netResourceLeftTab.setOnCheckedChangeListener(this);
 
@@ -119,6 +122,7 @@ public class NetResouceFragment extends BaseFragment implements NetResourceContr
         });
 
         present.getBigTab();
+        present.getAdv();
     }
 
     @Override
@@ -131,42 +135,7 @@ public class NetResouceFragment extends BaseFragment implements NetResourceContr
         return false;
     }
 
-    /**
-     * 广告栏播放网络图片资源
-     */
-    private void netRes() {
-        loadNetTestDatas();
-        netConvenientBanner.setPages(new CBViewHolderCreator() {
-            @Override
-            public Holder createHolder(View itemView) {
-                return new NetImageHolderView(itemView, context);
-            }
 
-            @Override
-            public int getLayoutId() {
-                return R.layout.bannel_item;
-            }
-        }, netImages)
-                //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器，不需要圆点指示器可以不设
-                .setPageIndicator(new int[]{R.mipmap.bannel_spoit, R.mipmap.bannel_spoit_sel})
-                //设置指示器的方向
-                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
-                //设置指示器是否可见
-                .setPointViewVisible(true)
-                //监听单击事件
-                .setOnItemClickListener(this)
-                .startTurning(2000)     //设置自动切换（同时设置了切换时间间隔）
-        //监听翻页事件
-//                .setOnPageChangeListener(this)
-        ;
-    }
-
-    /**
-     * 加载网络图片资源
-     */
-    private void loadNetTestDatas() {
-        netImages = Arrays.asList(MainFragment.imagesString);
-    }
 
     @Override
     public void onItemClick(int position) {
@@ -248,6 +217,38 @@ public class NetResouceFragment extends BaseFragment implements NetResourceContr
 
     }
 
+    @Override
+    public void setAdv(List<AdvBean> advBeans) {
+        if (advBeans != null && advBeans.size() > 0) {
+            netImages.clear();
+            for (int i = 0; i < advBeans.size(); i++) {
+                netImages.add(advBeans.get(i).getUrl());
+            }
+            netConvenientBanner.setPages(new CBViewHolderCreator() {
+                @Override
+                public Holder createHolder(View itemView) {
+                    return new NetImageHolderView(itemView, context);
+                }
+
+                @Override
+                public int getLayoutId() {
+                    return R.layout.bannel_item;
+                }
+            }, netImages)
+                    //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器，不需要圆点指示器可以不设
+                    .setPageIndicator(new int[]{R.mipmap.bannel_spoit, R.mipmap.bannel_spoit_sel})
+                    //设置指示器的方向
+                    .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
+                    //设置指示器是否可见
+                    .setPointViewVisible(true)
+                    //监听单击事件
+                    .setOnItemClickListener(this)
+                    .startTurning(2000)     //设置自动切换（同时设置了切换时间间隔）
+            //监听翻页事件
+//                .setOnPageChangeListener(this)
+            ;
+        }
+    }
 
     static class MyTabLayoutItem {
         //TabLayout的Item
@@ -255,6 +256,16 @@ public class NetResouceFragment extends BaseFragment implements NetResourceContr
 
         MyTabLayoutItem(View tabView) {
             mTabItem = (TextView) tabView;
+        }
+    }
+
+
+    @OnClick({R.id.netresource_search})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.netresource_search:
+                    redirectActivity(SearchActivity.class);
+                break;
         }
     }
 }

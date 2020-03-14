@@ -14,6 +14,7 @@ import com.water.melon.base.ui.BaseRVListAdapter;
 import com.water.melon.constant.XGConstant;
 import com.water.melon.ui.netresource.NetResoutVideoInfo;
 import com.water.melon.utils.ClickTooQucik;
+import com.water.melon.utils.LogUtil;
 
 import java.util.List;
 
@@ -87,22 +88,35 @@ public class ItemNetResouceItemAdapter extends BaseRVListAdapter<NetResoutVideoI
             int width = (int) ((XGConstant.Screen_Width) * 0.495);
             params.width = width;
 //            params.height = (int) (width * 1.5);
-            params.height = (int) (width );
+            params.height = (int) (width);
             itemNetResourceImage.requestLayout();
         }
 
         private void setData(NetResoutVideoInfo data) {
-            itemNetResourceName.setText(data.getTitle());
-            if (null != data.getTorrents().getZh() && data.getTorrents().getZh().size() > 0) {
-                itemNetResourceTime.setText(data.getTorrents().getZh().get(data.getTorrents().getZh().size() - 1).getTitle());
-            }
+            itemNetResourceName.setText(data.getTitle().trim());
+//            if (null != data.getTorrents().getZh() && data.getTorrents().getZh().size() > 0) {
+//                itemNetResourceTime.setText(data.getTorrents().getZh().get(data.getTorrents().getZh().size() - 1).getTitle());
+//            }
+            itemNetResourceTime.setText(GetTail(data.getSynopsis().trim()));
+            LogUtil.e("testjianjie", "data.getSynopsis().trim() = " + data.getSynopsis().trim());
             GlideApp.with(itemNetResourceImage.getContext())
                     .asBitmap()
-                    .load(data.getImages().getPoster())
+                    .load(data.getPoster())
                     .placeholder(R.mipmap.bg_video_plact_vertical)
                     .override(200, 300)
                     .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                     .into(itemNetResourceImage);
+        }
+
+        String GetTail(String str) {
+            int i;
+            for (i = 0; i < str.length(); ++i) {
+                if (str.charAt(i) > 0x20) {
+                    break;
+                }
+            }
+
+            return str.substring(i);
         }
     }
 }

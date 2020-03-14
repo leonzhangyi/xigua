@@ -2,6 +2,7 @@ package com.water.melon.presenter;
 
 import android.text.TextUtils;
 
+import com.google.gson.reflect.TypeToken;
 import com.trello.rxlifecycle3.LifecycleProvider;
 import com.water.melon.application.MyApplication;
 import com.water.melon.base.mvp.BasePresenterParent;
@@ -13,17 +14,23 @@ import com.water.melon.net.ErrorResponse;
 import com.water.melon.net.IApiSubscriberCallBack;
 import com.water.melon.net.bean.GetVideosRequest;
 import com.water.melon.presenter.contract.VideoInfoContract;
+import com.water.melon.ui.netresource.NetResoutVideoInfo;
 import com.water.melon.ui.netresource.SearchVideoInfoBean;
+import com.water.melon.ui.netresource.VideoPlayBean;
 import com.water.melon.ui.player.LocalVideoInfo;
 import com.water.melon.ui.player.VlcVideoBean;
 import com.water.melon.utils.FileUtil;
+import com.water.melon.utils.GsonUtil;
 import com.water.melon.utils.LogUtil;
+import com.water.melon.utils.SharedPreferencesUtil;
 import com.water.melon.utils.ToastUtil;
 import com.water.melon.utils.XGUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VideoInfoPresenter extends BasePresenterParent implements VideoInfoContract.Presenter {
+    public static final String TAG = "VideoInfoPresenter";
     private VideoInfoContract.View mView;
 
     public VideoInfoPresenter(BaseView mBaseView, LifecycleProvider lifecycleProvider) {
@@ -37,12 +44,42 @@ public class VideoInfoPresenter extends BasePresenterParent implements VideoInfo
         mView.initView();
     }
 
+//    @Override
+//    public void getVideoInfo(String videoId) {
+//        mView.showLoadingDialog(true);
+//        GetVideosRequest request = new GetVideosRequest();
+//        request.setVideoId(videoId);
+//        ApiImp.getInstance().getNetVideoInfo(request, getLifecycleTransformerByStopToActivity(), mView, new IApiSubscriberCallBack<BaseApiResultData<SearchVideoInfoBean>>() {
+//            @Override
+//            public void onCompleted() {
+//                mView.showLoadingDialog(false);
+//            }
+//
+//            @Override
+//            public void onError(ErrorResponse error) {
+//                mView.getVideoInfo(null);
+//                if (error.getCode() != 2) {
+//                    ToastUtil.showToastLong(error.getErr());
+//                }
+//            }
+//
+//            @Override
+//            public void onNext(BaseApiResultData<SearchVideoInfoBean> data) {
+//                if (null == data.getData() || TextUtils.isEmpty(data.getData().getId())) {
+//                    ToastUtil.showToastLong(data.getMessage());
+//                }
+//                mView.getVideoInfo(data.getData());
+//            }
+//        });
+//    }
+
     @Override
     public void getVideoInfo(String videoId) {
         mView.showLoadingDialog(true);
         GetVideosRequest request = new GetVideosRequest();
         request.setVideoId(videoId);
-        ApiImp.getInstance().getNetVideoInfo(request, getLifecycleTransformerByStopToActivity(), mView, new IApiSubscriberCallBack<BaseApiResultData<SearchVideoInfoBean>>() {
+        LogUtil.e("testvideo", "videoID = " + videoId);
+        ApiImp.getInstance().getNetVideoWatch(request, getLifecycleTransformerByStopToActivity(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
             @Override
             public void onCompleted() {
                 mView.showLoadingDialog(false);
@@ -52,18 +89,25 @@ public class VideoInfoPresenter extends BasePresenterParent implements VideoInfo
             public void onError(ErrorResponse error) {
                 mView.getVideoInfo(null);
                 if (error.getCode() != 2) {
-                    ToastUtil.showToastLong(error.getMessage());
+                    ToastUtil.showToastLong(error.getErr());
                 }
             }
 
             @Override
-            public void onNext(BaseApiResultData<SearchVideoInfoBean> data) {
-                if (null == data.getData() || TextUtils.isEmpty(data.getData().getId())) {
-                    ToastUtil.showToastLong(data.getMessage());
+            public void onNext(BaseApiResultData result) {
+                LogUtil.e(TAG, "getNetVideoWatch.getResult() = " + result.getResult());
+                String data = result.getResult();
+                if (result != null && !result.equals("") && !result.equals("[]")) {
+                    VideoPlayBean tabBeans = (VideoPlayBean) GsonUtil.toClass(data, VideoPlayBean.class);
+                    mView.getVideoInfo(tabBeans);
+                } else {
+                    if (result.getErr() != null && !result.getErr().trim().equals("")) {
+                        ToastUtil.showToastLong(result.getErr());
+                    }
                 }
-                mView.getVideoInfo(data.getData());
             }
         });
+
     }
 
     @Override

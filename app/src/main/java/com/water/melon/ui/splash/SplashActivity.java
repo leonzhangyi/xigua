@@ -35,6 +35,7 @@ public class SplashActivity extends BaseActivity implements WelcomeContract.View
 
     @Override
     public int getContentViewByBase(Bundle savedInstanceState) {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         return R.layout.activity_splash;
     }
 

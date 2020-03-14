@@ -24,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * 网络资源下的各个分类模块
@@ -86,6 +87,7 @@ public class NetResouceItemFragment extends BaseFragment implements NetResouceIt
         } else {
             if (newData) {
                 netResouceItemAdapter.setDatas(datas);
+
             } else {
                 netResouceItemAdapter.addDatas(datas);
             }
@@ -160,11 +162,10 @@ public class NetResouceItemFragment extends BaseFragment implements NetResouceIt
     public void videoItemClickListen(NetResoutVideoInfo item) {
         //列表单个电影点击
         Bundle bundle = new Bundle();
-        SearchVideoInfoBean videoInfoBean = new SearchVideoInfoBean();
+        VideoPlayBean videoInfoBean = new VideoPlayBean();
         videoInfoBean.setId(item.get_id());
         bundle.putSerializable(XGConstant.KEY_DATA, videoInfoBean);
         redirectActivity(VideoInfoActivity.class, bundle);
     }
-
 
 }

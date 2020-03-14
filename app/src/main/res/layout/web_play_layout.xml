@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_dp_20">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="@dimen/size_dp_6"
+            android:padding="@dimen/dp_10"
+            android:src="@mipmap/back_left_white" />
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="正在播放"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_sp_18" />
+
+
+        <RelativeLayout
+            android:id="@+id/iv_more"
+            android:layout_width="78dp"
+            android:layout_height="@dimen/size_dp_25"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/size_dp_16"
+            android:background="@drawable/vip_roads_bac">
+
+
+            <TextView
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/size_dp_5"
+                android:text="更换线路"
+                android:textSize="@dimen/size_sp_12"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

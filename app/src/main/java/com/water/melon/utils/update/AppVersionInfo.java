@@ -9,7 +9,7 @@ public class AppVersionInfo extends BaseResponse {
     private String md5;//完整校验
     private String desc;//跟新内容
     private int force;//是否强制更新 1强制 0不强制
-
+    private String versionCode;//版本号
 //    {
 //        "client": "android",
 //            "version":"1.0.1",
@@ -18,6 +18,15 @@ public class AppVersionInfo extends BaseResponse {
 //            "force": 1,
 //            "desc": "1.更新测试"
 //    }
+
+
+    public String getVersionCode() {
+        return versionCode;
+    }
+
+    public void setVersionCode(String versionCode) {
+        this.versionCode = versionCode;
+    }
 
     public String getClient() {
         return client;

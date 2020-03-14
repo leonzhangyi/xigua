@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/size_dp_11"
+    android:layout_marginTop="@dimen/dp_10"
+    android:layout_marginRight="@dimen/size_dp_11"
+    android:background="@drawable/layout_vip_item_bac"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/layout_vip_item_nanme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/size_dp_16"
+        android:layout_marginBottom="@dimen/size_dp_16"
+        android:text="临时卡"
+        android:layout_marginRight="@dimen/dp_10"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_sp_18" />
+
+    <TextView
+        android:id="@+id/layout_vip_item_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/layout_vip_item_nanme"
+        android:text="有效期1天"
+        android:textColor="@color/black_80"
+        android:textSize="@dimen/sp_14" />
+
+    <RelativeLayout
+        android:id="@+id/layout_vip_item_pay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="@drawable/h5_webview_play_bac">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_dp_14"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_marginRight="@dimen/size_dp_14"
+            android:layout_marginBottom="@dimen/dp_4"
+            android:text="购买"
+            android:textSize="@dimen/size_sp_12"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/layout_vip_item_price"
+        android:textColor="@color/net_resource_item_tv"
+        android:layout_toLeftOf="@+id/layout_vip_item_pay"
+        android:layout_centerVertical="true"
+        android:text="1.00"
+        android:layout_marginRight="@dimen/dp_10"
+        android:textSize="@dimen/size_sp_18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

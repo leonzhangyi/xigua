@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginRight="@dimen/size_dp_50"
+    android:layout_marginLeft="@dimen/size_dp_50"
+    android:background="@drawable/vip_pay_dialog_bac"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="关于我们"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_14" />
+
+    <TextView
+        android:layout_marginBottom="@dimen/size_dp_20"
+        android:layout_marginRight="@dimen/size_dp_16"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="VIP你妹为您提供专属影视服务，更多热门影片随时更新，如有建议欢迎反馈，感谢您的支持！"/>
+</LinearLayout>

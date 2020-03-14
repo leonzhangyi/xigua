@@ -39,7 +39,8 @@ import com.water.melon.constant.XGConstant;
 import com.water.melon.evenbus.EvenBusEven;
 import com.water.melon.presenter.VideoInfoPresenter;
 import com.water.melon.presenter.contract.VideoInfoContract;
-import com.water.melon.ui.netresource.SearchVideoInfoBean;
+import com.water.melon.ui.netresource.VideoPlayBean;
+import com.water.melon.ui.netresource.VideoPlayBean;
 import com.water.melon.ui.player.MyOrientationEventListener;
 import com.water.melon.ui.player.VlcVideoBean;
 import com.water.melon.ui.player.adapter.TvAnthologyCountAdapter;
@@ -133,7 +134,7 @@ public class VideoInfoActivity extends BaseActivity implements VideoInfoAdapter.
     TextView moreResoursPlayPosition;
 
     private VideoInfoPresenter mPresenter;
-    private SearchVideoInfoBean searchVideoInfoBean;
+    private VideoPlayBean VideoPlayBean;
     private VideoInfoAdapter mAdapter;
     private ToupingView mToupingView;
     //停止Rx循环
@@ -177,12 +178,12 @@ public class VideoInfoActivity extends BaseActivity implements VideoInfoAdapter.
     @Override
     public void createdViewByBase(Bundle savedInstanceState) {
         setFullQiLiuHai();
-        if (getBundle().getSerializable(XGConstant.KEY_DATA) instanceof SearchVideoInfoBean) {
-            searchVideoInfoBean = (SearchVideoInfoBean) getBundle().getSerializable(XGConstant.KEY_DATA);
+        if (getBundle().getSerializable(XGConstant.KEY_DATA) instanceof VideoPlayBean) {
+            VideoPlayBean = (VideoPlayBean) getBundle().getSerializable(XGConstant.KEY_DATA);
         } else if (getBundle().getSerializable(XGConstant.KEY_DATA) instanceof VlcVideoBean) {
             vlcVideoBean = (VlcVideoBean) getBundle().getSerializable(XGConstant.KEY_DATA);
         }
-        if (searchVideoInfoBean == null && null == vlcVideoBean) {
+        if (VideoPlayBean == null && null == vlcVideoBean) {
             return;
         }
         new VideoInfoPresenter(this, this);
@@ -222,8 +223,8 @@ public class VideoInfoActivity extends BaseActivity implements VideoInfoAdapter.
             }
         });
         myOrientationEventListener.enable();
-        if (null != searchVideoInfoBean) {
-            mPresenter.getVideoInfo(searchVideoInfoBean.getId());
+        if (null != VideoPlayBean) {
+            mPresenter.getVideoInfo(VideoPlayBean.getId());
         } else {
             if (TextUtils.isEmpty(vlcVideoBean.getVideoId())) {
                 getLastPlayRedord(vlcVideoBean.getVideoHttpUrl());
@@ -240,14 +241,14 @@ public class VideoInfoActivity extends BaseActivity implements VideoInfoAdapter.
     }
 
     @Override
-    public void itemClick(SearchVideoInfoBean.Torrents item, int position) {
+    public void itemClick(VideoPlayBean.Zh item, int position) {
         //剧集点击
         tvPlayPositon = position;
         bufferInfoLayout.setVisibility(View.VISIBLE);
         if (!TextUtils.isEmpty(item.getUrl())) {
-            vlcVideoBean.setVideoImageUrl(searchVideoInfoBean.getThumbnail());
+            vlcVideoBean.setVideoImageUrl(VideoPlayBean.getPoster());
             vlcVideoBean.setVideoHttpUrl(item.getUrl());
-            vlcVideoBean.setVideoId(searchVideoInfoBean.getId());
+            vlcVideoBean.setVideoId(VideoPlayBean.getId());
             playVideo();
         } else {
             ToastUtil.showToastLong("暂无播放源");
@@ -279,19 +280,19 @@ public class VideoInfoActivity extends BaseActivity implements VideoInfoAdapter.
                 break;
             case R.id.video_info_check_more_inof:
                 new AlertDialog.Builder(this)
-                        .setMessage(searchVideoInfoBean.getDescription())
+                        .setMessage(VideoPlayBean.getSynopsis())
                         .setPositiveButton("确定", null)
                         .show();
                 break;
             case R.id.video_info_download:
-                // 获取系统剪贴板
-                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                // 创建一个剪贴数据集，包含一个普通文本数据条目（需要复制的数据）
-                ClipData clipData = ClipData.newPlainText(null, searchVideoInfoBean.getBtbo_downlist().get(0).getUrl());
-                // 把数据集设置（复制）到剪贴板
-                clipboard.setPrimaryClip(clipData);
-                new MessageButtonDialog<String>(view.getContext(), getStringByResId(R.string.message_dialog_title),
-                        getStringByResId(R.string.video_detail_Pc_download), true, null).show();
+//                // 获取系统剪贴板
+//                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+//                // 创建一个剪贴数据集，包含一个普通文本数据条目（需要复制的数据）
+//                ClipData clipData = ClipData.newPlainText(null, VideoPlayBean.getBtbo_downlist().get(0).getUrl());
+//                // 把数据集设置（复制）到剪贴板
+//                clipboard.setPrimaryClip(clipData);
+//                new MessageButtonDialog<String>(view.getContext(), getStringByResId(R.string.message_dialog_title),
+//                        getStringByResId(R.string.video_detail_Pc_download), true, null).show();
                 break;
             case R.id.video_info_about_tab:
                 videoInfoAboutTab.setTextColor(MyApplication.getColorByResId(R.color.colorPrimaryDark));
@@ -415,7 +416,7 @@ public class VideoInfoActivity extends BaseActivity implements VideoInfoAdapter.
     }
 
     @Override
-    public void getVideoInfo(SearchVideoInfoBean data) {
+    public void getVideoInfo(VideoPlayBean data) {
         if (null == data) {
             findViewById(R.id.more_resours_play).setVisibility(View.GONE);
             bufferInfoLayout.setVisibility(View.GONE);
@@ -424,20 +425,20 @@ public class VideoInfoActivity extends BaseActivity implements VideoInfoAdapter.
             }
             return;
         }
-        searchVideoInfoBean = data;
+        VideoPlayBean = data;
         showLoadingDialog(false);
         videoInfoName.setText(data.getTitle());
         StringBuilder stringBuilder = new StringBuilder();
-        if (null != data.getYear() && data.getYear().size() > 0 && !TextUtils.isEmpty(data.getYear().get(0).getTitle())) {
-            stringBuilder.append(data.getYear().get(0).getTitle());
+        if (null != data.getYear()) {
+            stringBuilder.append(data.getYear());
             stringBuilder.append("·");
         }
-        if (!TextUtils.isEmpty(data.getDuration())) {
-            stringBuilder.append(data.getDuration());
+        if (!TextUtils.isEmpty(data.getRuntime())) {
+            stringBuilder.append(data.getRuntime());
             stringBuilder.append("·");
         }
-        if (null != data.getAreas() && data.getAreas().size() > 0 && !TextUtils.isEmpty(data.getAreas().get(0).getTitle())) {
-            stringBuilder.append(data.getAreas().get(0).getTitle());
+        if (null != data.getReleased()) {
+            stringBuilder.append(data.getReleased());
             stringBuilder.append("·");
         }
         if (!TextUtils.isEmpty(data.getScore())) {
@@ -445,42 +446,37 @@ public class VideoInfoActivity extends BaseActivity implements VideoInfoAdapter.
         }
         videoInfoSimple.setText(stringBuilder.toString());
 
-        videoInfoBlurd.setText(data.getDescription());
+        videoInfoBlurd.setText(data.getSynopsis());
 
-        if (null != data.getDirectors() && data.getDirectors().size() > 0) {
-            StringBuilder directors = new StringBuilder();
-            for (SearchVideoInfoBean.PeopleName director : data.getDirectors()) {
-                directors.append(director.getName());
-                directors.append("，");
-            }
-            videoInfoDirectors.setText(directors.toString().substring(0, directors.toString().length() - 1));
+        if (null != data.getDirectors()) {
+//            StringBuilder directors = new StringBuilder();
+//            for (VideoPlayBean.PeopleName director : data.getDirectors()) {
+//                directors.append(director.getName());
+//                directors.append("，");
+//            }
+            videoInfoDirectors.setText(data.getDirectors());
         }
 
-        if (null != data.getActors() && data.getActors().size() > 0) {
-            StringBuilder actors = new StringBuilder();
-            for (SearchVideoInfoBean.PeopleName actor : data.getActors()) {
-                actors.append(actor.getName());
-                actors.append("，");
-            }
-            videoInfoActors.setText(actors.toString().substring(0, actors.toString().length() - 1));
+        if (null != data.getActors()) {
+            videoInfoActors.setText(data.getActors());
         }
         if (null == vlcVideoBean) {
             vlcVideoBean = new VlcVideoBean();
-            vlcVideoBean.setVideoImageUrl(searchVideoInfoBean.getThumbnail());
-            vlcVideoBean.setVideoId(searchVideoInfoBean.getId());
+            vlcVideoBean.setVideoImageUrl(VideoPlayBean.getPoster());
+            vlcVideoBean.setVideoId(VideoPlayBean.getId());
         }
         String playUrl = "";
-        if (searchVideoInfoBean.getBtbo_downlist().size() > 1) {
+        if (VideoPlayBean.getTorrents().getZh().size() > 1) {
             //连续剧、多集
             inPlay = false;
             GlideApp.with(moreResoursImage)
-                    .load(searchVideoInfoBean.getThumbnail())
+                    .load(VideoPlayBean.getPoster())
                     .placeholder(R.mipmap.bg_video_plact_vertical)
                     .into(moreResoursImage);
-            tvListCount = searchVideoInfoBean.getBtbo_downlist().size();
+            tvListCount = VideoPlayBean.getTorrents().getZh().size();
             moreResoursLayout.setVisibility(View.VISIBLE);
             videoInfoResoursRv.setLayoutManager(new LinearLayoutManager(this));
-            mAdapter = new VideoInfoAdapter(searchVideoInfoBean.getBtbo_downlist(), this);
+            mAdapter = new VideoInfoAdapter(VideoPlayBean.getTorrents().getZh(), this);
             videoInfoResoursRv.setAdapter(mAdapter);
 
             videoInfoManyResousLayout.setVisibility(View.VISIBLE);
@@ -491,22 +487,22 @@ public class VideoInfoActivity extends BaseActivity implements VideoInfoAdapter.
             if (!TextUtils.isEmpty(json)) {
                 tvLastPlayAnthology = GsonUtil.toClass(json, new TypeToken<HashMap<String, Integer>>() {
                 }.getType());
-                if (null != tvLastPlayAnthology && tvLastPlayAnthology.get(searchVideoInfoBean.getId()) != null) {
+                if (null != tvLastPlayAnthology && tvLastPlayAnthology.get(VideoPlayBean.getId()) != null) {
                     if (TextUtils.isEmpty(vlcVideoBean.getVideoHttpUrl())) {
-                        playUrl = searchVideoInfoBean.getBtbo_downlist().get(tvLastPlayAnthology.get(searchVideoInfoBean.getId())).getUrl();
+                        playUrl = VideoPlayBean.getTorrents().getZh().get(tvLastPlayAnthology.get(VideoPlayBean.getId())).getUrl();
                     } else {
                         playUrl = vlcVideoBean.getVideoHttpUrl();
                     }
                     getLastPlayRedord(playUrl);
                 } else {
-                    playUrl = searchVideoInfoBean.getBtbo_downlist().get(0).getUrl();
+                    playUrl = VideoPlayBean.getTorrents().getZh().get(0).getUrl();
                 }
             } else {
-                playUrl = searchVideoInfoBean.getBtbo_downlist().get(0).getUrl();
+                playUrl = VideoPlayBean.getTorrents().getZh().get(0).getUrl();
             }
             //获取当前是第几集
-            if (null != searchVideoInfoBean.getBtbo_downlist() && searchVideoInfoBean.getBtbo_downlist().size() > 0) {
-                List<SearchVideoInfoBean.Torrents> tvItems = searchVideoInfoBean.getBtbo_downlist();
+            if (null != VideoPlayBean.getTorrents() && null != VideoPlayBean.getTorrents().getZh() && VideoPlayBean.getTorrents().getZh().size() > 0) {
+                List<VideoPlayBean.Zh> tvItems = VideoPlayBean.getTorrents().getZh();
                 int size = tvItems.size();
                 for (int i = 0; i < size; i++) {
                     if (tvItems.get(i).getUrl().equals(playUrl)) {
@@ -517,7 +513,7 @@ public class VideoInfoActivity extends BaseActivity implements VideoInfoAdapter.
             }
 
         } else {
-            playUrl = searchVideoInfoBean.getBtbo_downlist().get(0).getUrl();
+            playUrl = VideoPlayBean.getTorrents().getZh().get(0).getUrl();
         }
         if (!TextUtils.isEmpty(vlcVideoBean.getVideoPlayUrl())) {
             vlcVideoBean.setVideoHttpUrl(playUrl);
@@ -532,7 +528,7 @@ public class VideoInfoActivity extends BaseActivity implements VideoInfoAdapter.
             StarPlay();
             return;
         }
-        if (searchVideoInfoBean.getBtbo_downlist().size() < 1) {
+        if (VideoPlayBean.getTorrents().getZh().size() < 1) {
             ToastUtil.showToastLong(getStringByResId(R.string.video_detail_play_resour_empty));
             vlcVideoBean.setVideoHttpUrl("");
         } else {
@@ -703,6 +699,7 @@ public class VideoInfoActivity extends BaseActivity implements VideoInfoAdapter.
             }
             String url = vlcVideoBean.getVideoHttpUrl();
 //            url = "https://vo.zhuqc.com//20191225//vQ7nBOLn//index.m3u8";
+//            url = "https://www.8090g.cn/jiexi/?url=https://www.iqiyi.com/v_19rrc1di2c.html#vfrm=19-9-0-1";
             Log.e("MainActivity", "url = " + url);
             getLastPlayRedord(url);
             XGUtil.getPlayUrl(url, new XGUtil.GetVlcVideoBean() {
@@ -779,7 +776,7 @@ public class VideoInfoActivity extends BaseActivity implements VideoInfoAdapter.
     }
 
     @Override
-    public void onTvAnthologyItemClick(SearchVideoInfoBean.Torrents tv, int position) {
+    public void onTvAnthologyItemClick(VideoPlayBean.Zh tv, int position) {
         //电视剧选集点击播放
         if ((position + 1) == tvListCount) {
             //没有下一集
@@ -800,8 +797,8 @@ public class VideoInfoActivity extends BaseActivity implements VideoInfoAdapter.
                 if (vlcBean != null) {
                     try {
                         vlcVideoBean = vlcBean;
-                        vlcVideoBean.setVideoId(searchVideoInfoBean.getId());
-                        vlcVideoBean.setVideoImageUrl(searchVideoInfoBean.getThumbnail());
+                        vlcVideoBean.setVideoId(VideoPlayBean.getId());
+                        vlcVideoBean.setVideoImageUrl(VideoPlayBean.getPoster());
                         vlcVideoBean.setTvPosition(tvPlayPositon);
                         mView.setXuanjiCheckPosition(tvPlayPositon);
                         if (null != mToupingView && mToupingView.getVisibility() == View.VISIBLE) {
@@ -850,15 +847,15 @@ public class VideoInfoActivity extends BaseActivity implements VideoInfoAdapter.
             //电视剧自动播放下一集
             LogUtil.e("ddddddddd", "playNextSour22222");
             tvPlayPositon = nextPosition;
-            SearchVideoInfoBean.Torrents tv = mAdapter.getDatas().get(tvPlayPositon);
+            VideoPlayBean.Zh tv = mAdapter.getDatas().get(tvPlayPositon);
             mView.setmVLCVideoViewBaffleShow(true);
             XGUtil.getPlayUrl(tv.getUrl(), new XGUtil.GetVlcVideoBean() {
                 @Override
                 public void getVlcVideoBean(VlcVideoBean vlcBean) {
                     if (null != vlcBean) {
                         vlcVideoBean = vlcBean;
-                        vlcVideoBean.setVideoId(searchVideoInfoBean.getId());
-                        vlcVideoBean.setVideoImageUrl(searchVideoInfoBean.getThumbnail());
+                        vlcVideoBean.setVideoId(VideoPlayBean.getId());
+                        vlcVideoBean.setVideoImageUrl(VideoPlayBean.getPoster());
                         vlcVideoBean.setTvPosition(tvPlayPositon);
                         LogUtil.e("sssssssss", tvPlayPositon + "下一集====" + vlcVideoBean.toString());
                         XGUtil.getPlayUrl(vlcVideoBean.getVideoHttpUrl(), new XGUtil.GetVlcVideoBean() {

@@ -195,7 +195,7 @@ public abstract class BaseFragment extends RxFragment implements com.water.melon
         if (error.getCode() == HttpURLConnection.HTTP_UNAUTHORIZED && !BaseActivity.goLogin) {
             //goLogin 防止多个请求跳转
             BaseActivity.goLogin = true;
-            ToastUtil.showToastShort(error.getMessage());
+            ToastUtil.showToastShort(error.getErr());
             //Token失效
 //            Bundle bundle = new Bundle();
 //            bundle.putBoolean(LoginActivity.Key_Login_Success_go_back, true);

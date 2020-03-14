@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/size_dp_30"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/my_agent_name"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="60"
+        android:background="#ffe5e5e5"
+        android:gravity="center"
+        android:text="代理人"
+        android:textColor="@color/black_D9"
+        android:textSize="@dimen/size_sp_10" />
+
+    <TextView
+        android:id="@+id/my_agent_phone"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="145"
+        android:background="#fff1f2f5"
+        android:gravity="center"
+        android:text="联系方式"
+        android:textColor="@color/black_D9"
+        android:textSize="@dimen/size_sp_10" />
+
+    <TextView
+        android:id="@+id/my_agent_time"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="60"
+        android:background="#ffe5e5e5"
+        android:gravity="center"
+        android:text="加入时间"
+        android:textColor="@color/black_D9"
+        android:textSize="@dimen/size_sp_10" />
+
+
+    <TextView
+        android:id="@+id/my_agent_handle"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="107"
+        android:background="#ffe5e5e5"
+        android:gravity="center"
+        android:text="操作"
+        android:textColor="#FF0091FF"
+        android:textSize="@dimen/size_sp_10" />
+</LinearLayout>

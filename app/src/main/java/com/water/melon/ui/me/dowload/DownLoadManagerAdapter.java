@@ -21,10 +21,10 @@ public class DownLoadManagerAdapter extends FragmentStatePagerAdapter {
 
     public DownLoadManagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
-        fragments = new Fragment[3];
+        fragments = new Fragment[2];
         fragments[0] = new OffLineDownFragment();//L_S:"资源管理" --> "未完成"
         fragments[1] = new DownloadDoneFragment();//L_S:"资源管理" --> "已完成"
-        fragments[2] = new PlayingRecordFragment();//L_S:"资源管理" --> "播放记录"
+//        fragments[2] = new PlayingRecordFragment();//L_S:"资源管理" --> "播放记录"
     }
 
     public String[] getTitles() {

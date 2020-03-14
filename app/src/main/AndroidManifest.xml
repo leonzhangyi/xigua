@@ -13,6 +13,19 @@
         android:theme="@style/BaseAppTheme"
         android:usesCleartextTraffic="true">
 
+        <!--        <activity-->
+        <!--            android:name=".ui.splash.TestActivity"-->
+        <!--            android:configChanges="orientation|keyboardHidden|screenSize"-->
+        <!--            android:screenOrientation="portrait"-->
+        <!--            android:windowSoftInputMode="adjustResize">-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="android.intent.action.VIEW" />-->
+        <!--                <action android:name="android.intent.action.MAIN" />-->
+
+        <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+        <!--            </intent-filter>-->
+        <!--        </activity>-->
+
         <!--启动页-->
         <activity
             android:name=".ui.splash.SplashActivity"
@@ -47,6 +60,89 @@
         <!--    H5播放视频页面-->
         <activity
             android:name=".ui.home.h5.H5VideoActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".ui.home.h5.WebPlayActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+
+        <!--        搜索界面-->
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+
+
+        <!--        代理专区-->
+        <activity
+            android:name=".ui.me.agent.AgentActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.me.vip.VipActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.me.agent.create.CreateCodeActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.me.agent.myuser.AgentUserActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.me.agent.myagent.MyAgentActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".ui.me.agent.myagent.setagent.SettingAgentActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".ui.me.agent.myagent.setagent.AddAgentActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.me.share.ShareActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.me.ques.MeQueActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.me.feek.FeekActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.me.history.VideoHistroryActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.login.RegistActivity"
             android:configChanges="orientation|screenSize"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop" />

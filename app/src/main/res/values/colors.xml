@@ -47,6 +47,10 @@
     <color name="color_divider">#dfdfdf</color><!-- 分割线颜色 -->
     <color name="color_point_normal">#dedede</color><!-- point被选中之前的背景颜色 -->
 
+    <color name="sc_transparent_background">#00111111</color>
     <!--    app更新-->
     <color name="red_ff66666">#FF6666</color>
+
+    <color name="color_bac_un_sel">#ffe5e5e5</color>
+    <color name="web_road_bac">#FF888888</color>
 </resources>

@@ -10,6 +10,7 @@ import com.water.melon.R;
 import com.water.melon.application.MyApplication;
 import com.water.melon.base.ui.BaseRVListAdapter;
 import com.water.melon.ui.netresource.SearchVideoInfoBean;
+import com.water.melon.ui.netresource.VideoPlayBean;
 import com.water.melon.utils.ClickTooQucik;
 
 import java.util.List;
@@ -19,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class VideoInfoAdapter extends BaseRVListAdapter<SearchVideoInfoBean.Torrents> implements View.OnClickListener {
+public class VideoInfoAdapter extends BaseRVListAdapter<VideoPlayBean.Zh> implements View.OnClickListener {
     private AdapterListen mAdapterListen;
     private int oldCheckPosition = -1;
 
@@ -28,10 +29,10 @@ public class VideoInfoAdapter extends BaseRVListAdapter<SearchVideoInfoBean.Torr
     }
 
     public interface AdapterListen {
-        void itemClick(SearchVideoInfoBean.Torrents item, int position);
+        void itemClick(VideoPlayBean.Zh item, int position);
     }
 
-    public VideoInfoAdapter(List<SearchVideoInfoBean.Torrents> datas, AdapterListen mAdapterListen) {
+    public VideoInfoAdapter(List<VideoPlayBean.Zh> datas, AdapterListen mAdapterListen) {
         super(datas);
         setNoBottomView(true);
         this.mAdapterListen = mAdapterListen;
@@ -80,7 +81,7 @@ public class VideoInfoAdapter extends BaseRVListAdapter<SearchVideoInfoBean.Torr
             return;
         }
 
-        mAdapterListen.itemClick((SearchVideoInfoBean.Torrents) view.getTag(R.id.tag_id1), posiTion);
+        mAdapterListen.itemClick((VideoPlayBean.Zh) view.getTag(R.id.tag_id1), posiTion);
         if (oldCheckPosition > -1) {
             getDatas().get(oldCheckPosition).setCheck(false);
             notifyItemChanged(oldCheckPosition);
@@ -109,7 +110,7 @@ public class VideoInfoAdapter extends BaseRVListAdapter<SearchVideoInfoBean.Torr
             ButterKnife.bind(this, itemView);
         }
 
-        private void setData(SearchVideoInfoBean.Torrents data) {
+        private void setData(VideoPlayBean.Zh data) {
             if (data.isCheck()) {
                 itemVideoInfo.setTextColor(MyApplication.getColorByResId(R.color.colorPrimary));
             } else {

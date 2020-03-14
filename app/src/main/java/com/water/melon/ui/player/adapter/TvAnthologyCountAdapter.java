@@ -10,6 +10,7 @@ import com.water.melon.R;
 import com.water.melon.application.MyApplication;
 import com.water.melon.base.ui.BaseRVListAdapter;
 import com.water.melon.ui.netresource.SearchVideoInfoBean;
+import com.water.melon.ui.netresource.VideoPlayBean;
 import com.water.melon.utils.ClickTooQucik;
 
 import java.util.List;
@@ -55,7 +56,7 @@ public class TvAnthologyCountAdapter extends BaseRVListAdapter<SearchVideoInfoBe
     }
 
     public interface AdapterLsiten {
-        void onTvAnthologyItemClick(SearchVideoInfoBean.Torrents tv, int position);
+        void onTvAnthologyItemClick(VideoPlayBean.Zh tv, int position);
     }
 
     @Override
@@ -99,7 +100,7 @@ public class TvAnthologyCountAdapter extends BaseRVListAdapter<SearchVideoInfoBe
         }
         checkPositon = (int) view.getTag(R.id.tag_id2);
         if (oldCheckPosition != checkPositon) {
-            adapterLsiten.onTvAnthologyItemClick((SearchVideoInfoBean.Torrents) view.getTag(R.id.tag_id1), checkPositon);
+            adapterLsiten.onTvAnthologyItemClick((VideoPlayBean.Zh) view.getTag(R.id.tag_id1), checkPositon);
 //            //刷新Item样式
 //            if (oldCheckPosition >= 0) {
 //                notifyItemChanged(oldCheckPosition);

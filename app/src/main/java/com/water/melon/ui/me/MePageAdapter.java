@@ -4,10 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.water.melon.R;
+import com.water.melon.application.MyApplication;
 import com.water.melon.ui.in.AdapterItemClick;
 
 import java.util.List;
@@ -43,6 +45,7 @@ public class MePageAdapter extends RecyclerView.Adapter<MePageAdapter.ViewHolder
     public void onBindViewHolder(@NonNull MePageAdapter.ViewHolder holder, int position) {
         holder.layout_me_page_right_name.setText(PageBeans.get(position).getName());
         holder.layout_me_page_right_text.setText(PageBeans.get(position).getText());
+        holder.layout_me_page_right_icon.setBackgroundResource(PageBeans.get(position).getBac());
     }
 
     @Override
@@ -57,11 +60,13 @@ public class MePageAdapter extends RecyclerView.Adapter<MePageAdapter.ViewHolder
 
         public TextView layout_me_page_right_name;
         public TextView layout_me_page_right_text;
+        public ImageView layout_me_page_right_icon;
 
         public ViewHolder(View view) {
             super(view);
             layout_me_page_right_name = view.findViewById(R.id.layout_me_page_right_name);
             layout_me_page_right_text = view.findViewById(R.id.layout_me_page_right_text);
+            layout_me_page_right_icon = view.findViewById(R.id.layout_me_page_right_icon);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override

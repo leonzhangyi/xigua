@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="代理信息"
+        android:textColor="@color/black_D9"
+        android:textSize="@dimen/sp_14" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="代理人"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_sp_16" />
+
+        <RelativeLayout
+            android:id="@+id/add_agent_name_rl"
+            android:layout_width="170dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:background="#fff1f2f5">
+
+            <EditText
+                android:id="@+id/add_agent_name_et"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:background="@null"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_sp_16" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_toRightOf="@+id/add_agent_name_rl"
+            android:text="不可修改"
+            android:textColor="@color/black_80"
+            android:textSize="@dimen/sp_14" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="联系方式"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_sp_16" />
+
+        <RelativeLayout
+            android:id="@+id/add_agent_phone_rl"
+            android:layout_width="170dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:background="#fff1f2f5">
+
+            <EditText
+                android:id="@+id/add_agent_phone_et"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:background="@null"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_sp_16" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_toRightOf="@+id/add_agent_phone_rl"
+            android:text="不可修改"
+            android:textColor="@color/black_80"
+            android:textSize="@dimen/sp_14" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="分成比例"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_sp_16" />
+
+        <RelativeLayout
+            android:id="@+id/add_agent_price_rl"
+            android:layout_width="170dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:background="#fff1f2f5">
+
+            <EditText
+                android:id="@+id/add_agent_price_et"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:background="@null"
+                android:maxLength="2"
+                android:maxLines="1"
+                android:text="10"
+                android:numeric="integer"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_sp_16" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_toRightOf="@+id/add_agent_price_rl"
+            android:text="不可修改"
+            android:textColor="@color/black_80"
+            android:textSize="@dimen/sp_14" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/size_dp_30"
+        android:text="分成比说明：;\n 1、设置成为代理后，该代理获取的收益等于名下用户x分成比。 ;\n例如：;\n 代理名下用户充值100.00元，;\n 分成比为60%，;\n 则当日该代理收益为60.00元（100x60%）。;\n 2、分成比设置后不可修改，如需修改请联系客服。"
+        android:textColor="@color/black_80"
+        android:textSize="@dimen/size_sp_12" />
+
+    <TextView
+        android:id="@+id/add_agent_sure_tv"
+        android:layout_width="141dp"
+        android:layout_height="@dimen/size_dp_44"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size_dp_44"
+        android:background="@drawable/layout_agent_pay_back"
+        android:gravity="center"
+        android:text="确定"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_sp_18" />
+</LinearLayout>

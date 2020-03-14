@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff1f2f5"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/include_toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginRight="@dimen/size_dp_16"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/vip_jz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/size_dp_20"
+            android:src="@mipmap/vip_jz" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_dp_20"
+            android:layout_marginTop="@dimen/size_dp_20"
+            android:layout_marginBottom="@dimen/size_dp_20"
+            android:layout_toRightOf="@+id/vip_jz"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/layout_vip_vip_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="会员中心"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_sp_18" />
+
+            <TextView
+                android:id="@+id/layout_vip_vip_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_dp_15"
+                android:text="会议失效"
+                android:textColor="@color/black_40"
+                android:textSize="@dimen/size_sp_14" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginRight="@dimen/size_dp_16"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/layout_vip_jh_vip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="绑定会员激活码"
+            android:textColor="@color/black_D9"
+            android:textSize="@dimen/sp_14" />
+
+        <RelativeLayout
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_vip_jh_vip"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/size_dp_41"
+            android:layout_marginBottom="@dimen/size_dp_30">
+
+            <EditText
+                android:id="@+id/layout_agent_phone_et"
+                android:layout_width="160dp"
+                android:textSize="@dimen/size_sp_15"
+                android:textColor="@color/black_D9"
+                android:layout_height="wrap_content"
+                android:background="@null" />
+
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="@dimen/size_dp_1"
+                android:layout_below="@+id/layout_agent_phone_et"
+                android:background="@color/black_40" />
+
+            <TextView
+                android:id="@+id/layout_agent_vip_sure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/h5_webview_play_bac"
+                android:paddingLeft="@dimen/size_dp_11"
+                android:paddingTop="@dimen/dp_4"
+                android:paddingRight="@dimen/size_dp_11"
+                android:paddingBottom="@dimen/dp_4"
+                android:text="确定绑定" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginRight="@dimen/size_dp_16"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="购买会员"
+            android:textColor="@color/black_D9" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleview_vip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_dp_11"
+            android:layout_marginRight="@dimen/size_dp_11"
+            android:layout_marginBottom="@dimen/dp_10"/>
+    </LinearLayout>
+</LinearLayout>

@@ -20,21 +20,46 @@ public class NetConstant {
     public static final String XG_APP_NETWORK = "/app/network";
     public static final String XG_APP_INIT = "/app/init";
 
-//    首页界面接口
+    //    首页界面接口
     public static final String XG_APP_HOME_BANNEL = "/home/banner";
     public static final String XG_APP_APP_NOTICE = "/app/notice";
     public static final String XG_APP_HOME_VIP = "/home/vip";
+    public static final String XG_APP_HOME_RESOLVER = "/home/resolver";
+
+    //登陆注册
+    public static final String XG_APP_USER_LOGIN = "/user/login";
+    public static final String XG_APP_USER_REGIST = "/user/bind";
 
 
-//    福利模块接口
+    //    福利模块接口
     public static final String XG_APP_WEL_HEADER = "/welfare/header";
     public static final String XG_APP_WEL_PRECINCT = "/welfare/precinct";
     public static final String XG_APP_WEL_CENTER = "/welfare/center";
     public static final String XG_APP_WEL_FOOTER = "/welfare/footer";
 
-//    升级接口
+    //片库接口
+    public static final String XG_APP_NET_ADV = "/video/banner";
+    public static final String XG_APP_NET_CATEGORY = "/video/category";
+    public static final String XG_APP_VIDEO_BANNER = "/video/vod";
+    public static final String XG_APP_VIDEO_WATCH = "/video/watch";
+
+    //    升级接口
     public static final String XG_APP_WEL_UPDATE = "/app/version";
 
+    //    个人中心
+    public static final String XG_APP_USER_NO = "/user/user_info_no";
+    public static final String XG_APP_CASH_INIT = "/cashier/init";
+    public static final String XG_APP_CASH_PAY = "/cashier/payment";
+    public static final String XG_APP_CASH_PROXY = "/cashier/proxy";
+    public static final String XG_APP_PROXY_APPLY = "/proxy/apply";
+    public static final String XG_APP_CREATE_CODE = "/proxy/createdCode";
+    public static final String XG_APP_DATA_USERS = "/data/users";
+    public static final String XG_APP_BD_CODE = "/cashier/exchange";
+    public static final String XG_APP_DATA_PROXYS = "/data/proxys";
+    public static final String XG_APP_PROXY_VIEW = "/proxy/view";
+    public static final String XG_APP_PROXY_OPEN = "/proxy/open";
+    public static final String XG_APP_APP_FEEDBACK = "/app/feedback";
+    public static final String XG_APP_APP_SUBMIT = "/app/submit";
     /**
      * 网络请求参数
      */

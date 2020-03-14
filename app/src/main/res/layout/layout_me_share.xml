@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/share_bac"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_dp_20">
+
+        <ImageView
+            android:id="@+id/me_share_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="@dimen/size_dp_6"
+            android:padding="@dimen/dp_10"
+            android:src="@mipmap/back_left_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="分享"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_sp_18" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/me_share_ewm"
+        android:layout_width="@dimen/size_dp_150"
+        android:layout_height="@dimen/size_dp_150"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size_dp_20"
+        android:text="分享好友下载"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_sp_18" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size_dp_20"
+        android:text="即送VIP特权"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_sp_18" />
+
+    <RelativeLayout
+        android:id="@+id/me_share_save"
+        android:layout_width="201dp"
+        android:layout_height="@dimen/size_dp_44"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size_dp_50"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="保存页面"
+            android:textColor="#FFFA6400"
+            android:textSize="@dimen/size_sp_18"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/me_share_share"
+        android:layout_width="201dp"
+        android:layout_height="@dimen/size_dp_44"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size_dp_20"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="分享链接给好友"
+            android:textColor="#FFFA6400"
+            android:textSize="@dimen/size_sp_18"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginRight="@dimen/size_dp_16">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/size_dp_20"
+            android:text="分享说明：\n 1.将二维码发送给好友下载，安装完成即可获得1天VIP；\n  2.点击“分享给好友”，可将下载链接发送给好友，下载完成即可获得1天VIP；\n  3.邀请人数支持累加，邀请越多，赠送VIP天数越多。"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_sp_13" />
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -251,7 +251,8 @@ public class PlayRecordAdapter extends BaseRVListAdapter<LocalVideoInfo> impleme
                 itemHistoryPlayPosition.setVisibility(View.VISIBLE);
                 itemHistoryPlayPosition.setText("上次播放位置:" + caluteTime(duration));
             } else {
-                itemHistoryPlayPosition.setVisibility(View.GONE);
+//                itemHistoryPlayPosition.setVisibility(View.GONE);
+                itemHistoryPlayPosition.setText("上次播放位置：00:00");
             }
 
             String image = mapData.getVideoImage();

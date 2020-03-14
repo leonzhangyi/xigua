@@ -7,6 +7,7 @@ public class GetVideosRequest extends BaseRequest {
     private String videoId;
     private String bigTabId;
     private String smallTabId;
+    private String smallName;
     private String searchWord;
     private String sort = "created";
 
@@ -48,5 +49,13 @@ public class GetVideosRequest extends BaseRequest {
 
     public void setSmallTabId(String smallTabId) {
         this.smallTabId = smallTabId;
+    }
+
+    public String getSmallName() {
+        return smallName;
+    }
+
+    public void setSmallName(String smallName) {
+        this.smallName = smallName;
     }
 }

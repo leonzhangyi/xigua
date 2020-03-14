@@ -8,6 +8,7 @@ import java.util.List;
 public class TabBean extends BaseResponse {
     private String id;
     private String name;
+    private String pid;
     private List<Sub> sub;
 
     public List<Sub> getSub() {
@@ -32,6 +33,14 @@ public class TabBean extends BaseResponse {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
     }
 
     public static class Sub extends BaseResponse {

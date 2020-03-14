@@ -24,6 +24,7 @@
                 android:src="@drawable/btn_vip" />
 
             <RelativeLayout
+                android:id="@+id/welf_search"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_dp_30"
                 android:layout_marginRight="@dimen/size_dp_16"
@@ -38,7 +39,7 @@
                     android:layout_marginLeft="@dimen/size_dp_10"
                     android:src="@mipmap/icon_search" />
 
-                <EditText
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_toRightOf="@+id/fragment_main_search_icon"

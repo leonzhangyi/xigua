@@ -2,14 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_me_page_rl"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="44dp"
     android:layout_marginLeft="@dimen/size_dp_16"
-    android:paddingTop="@dimen/size_dp_11"
     android:layout_marginRight="@dimen/size_sp_16"
-    android:paddingBottom="@dimen/size_dp_11"
     android:orientation="horizontal">
 
+    <ImageView
+        android:id="@+id/layout_me_page_right_icon"
+        android:layout_width="20dp"
+        android:layout_centerVertical="true"
+        android:layout_height="20dp"/>
+
     <TextView
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_toRightOf="@+id/layout_me_page_right_icon"
         android:id="@+id/layout_me_page_right_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

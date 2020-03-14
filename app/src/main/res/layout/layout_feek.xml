@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="173dp"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginRight="@dimen/size_dp_16"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:background="@drawable/home_search">
+
+        <EditText
+            android:id="@+id/layout_feek_et"
+            android:gravity="top"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dp_10"
+            android:background="@null"
+            android:hint="填写反馈内容（100字以内）"
+            android:textColor="@color/black_D9"
+            android:textColorHint="@color/black_80"
+            android:textSize="@dimen/sp_14" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_feek_sub"
+        android:layout_width="96dp"
+        android:layout_height="@dimen/size_dp_30"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/me_fragment_logout_bac">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="提交"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_sp_16" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/size_dp_30"
+        android:text="其他反馈方式"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_14" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/size_dp_22"
+        android:layout_marginRight="@dimen/size_dp_16">
+
+        <TextView
+            android:id="@+id/layout_feek_weixin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="客服微信："
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/layout_feek_weixin_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/layout_feek_weixin"
+            android:text="123321"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14" />
+
+        <RelativeLayout
+            android:id="@+id/layout_feek_weixin_copy"
+            android:layout_width="82dp"
+            android:layout_height="@dimen/size_dp_25"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/h5_webview_play_bac">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="复制微信"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_sp_16" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="19dp"
+        android:layout_marginRight="@dimen/size_dp_16">
+
+        <TextView
+            android:id="@+id/layout_feek_qq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="客服QQ："
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/layout_feek_qq_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/layout_feek_qq"
+            android:text="123321"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14" />
+
+        <RelativeLayout
+            android:id="@+id/layout_feek_qq_copy"
+            android:layout_width="82dp"
+            android:layout_height="@dimen/size_dp_25"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/h5_webview_play_bac">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="复制QQ"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_sp_16" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

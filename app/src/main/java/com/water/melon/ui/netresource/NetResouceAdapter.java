@@ -1,5 +1,6 @@
 package com.water.melon.ui.netresource;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 
@@ -23,6 +24,7 @@ public class NetResouceAdapter extends FragmentStatePagerAdapter {
     private List<NetResouceItemFragment> fragments;
     private List<TabBean.Sub> smallTabId;
 
+    @SuppressLint("WrongConstant")
     public NetResouceAdapter(@NonNull FragmentManager fm, List<TabBean.Sub> smallTabId) {
         super(fm, FragmentStatePagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT);
         this.smallTabId = smallTabId;
@@ -35,6 +37,7 @@ public class NetResouceAdapter extends FragmentStatePagerAdapter {
             GetVideosRequest request = new GetVideosRequest();
             request.setBigTabId(smallTabId.get(i).getPid());
             request.setSmallTabId(smallTabId.get(i).getId());
+            request.setSmallName(smallTabId.get(i).getName());
             bundle.putSerializable(XGConstant.KEY_DATA, request);
             bundle.putBoolean(XGConstant.KEY_DATA_2, i == 0 && smallTabId.get(i).getPid().equals(NetResouceFragment.First_Big_Tab_Id));
             netResouceItemFragment.setArguments(bundle);

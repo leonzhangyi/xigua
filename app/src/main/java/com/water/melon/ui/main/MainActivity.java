@@ -45,8 +45,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             //闪退后重新初始化
             MyApplication.getp2p().InitP2PServer();
         }
-        new MainPresent(this, this );
-        present.start();
+        new MainPresent(this, this);
+        present.start();//初始化升级
+//        present.getUserInfo();//放到个人中心获取用户信息
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
@@ -77,7 +78,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 break;
         }
         if (ischanged) {
-            present.selectTab(position,bottomGroup);
+            present.selectTab(position, bottomGroup);
         }
     }
 
@@ -117,6 +118,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
 
     private long exitTime;//记录退出的时间
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (HandleBackUtil.handleBackPress(this)) {

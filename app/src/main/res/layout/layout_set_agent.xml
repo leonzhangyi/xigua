@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="@dimen/dp_10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/size_dp_16"
+            android:layout_toLeftOf="@+id/layout_set_agent_search"
+            android:background="@drawable/layout_agent_my_user_time_bac">
+
+
+            <EditText
+                android:id="@+id/set_agent_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/size_dp_5"
+                android:background="@null"
+                android:hint="请输入手机号"
+                android:textColor="@color/black_D9"
+                android:textColorHint="@color/black_40"
+                android:textSize="@dimen/size_sp_12" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_set_agent_search"
+            android:layout_width="@dimen/size_dp_30"
+            android:layout_height="@dimen/size_dp_30"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/size_dp_16"
+            android:background="#fffa6400">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/agent_use_search" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_dp_30"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="60"
+            android:background="#ffe5e5e5"
+            android:gravity="center"
+            android:text="用户名"
+            android:textColor="@color/black_D9"
+            android:textSize="@dimen/size_sp_10" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="145"
+            android:background="#fff1f2f5"
+            android:gravity="center"
+            android:text="联系方式"
+            android:textColor="@color/black_D9"
+            android:textSize="@dimen/size_sp_10" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="60"
+            android:background="#ffe5e5e5"
+            android:gravity="center"
+            android:text="类型"
+            android:textColor="@color/black_D9"
+            android:textSize="@dimen/size_sp_10" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="107"
+            android:background="#fff1f2f5"
+            android:gravity="center"
+            android:text="操作"
+            android:textColor="@color/black_D9"
+            android:textSize="@dimen/size_sp_10" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/my_agent_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

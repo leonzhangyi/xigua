@@ -2,6 +2,7 @@ package com.water.melon.presenter.contract;
 
 import com.water.melon.base.mvp.BasePresenter;
 import com.water.melon.base.mvp.BaseView;
+import com.water.melon.net.bean.AdvBean;
 import com.water.melon.net.bean.TabBean;
 
 import java.util.List;
@@ -12,12 +13,16 @@ public interface NetResourceContract {
         void getBigTab();
 
         void getSmallTab(List<TabBean.Sub> data);
+
+        void getAdv();
     }
 
     interface View extends BaseView<Present> {
         void setBigTab(List<TabBean> data);
 
         void setSmallTab(List<TabBean.Sub> data);
+
+        void setAdv(List<AdvBean> advs);
     }
 
 }
