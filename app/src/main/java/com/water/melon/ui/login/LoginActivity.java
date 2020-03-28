@@ -108,7 +108,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         if (isSuc) {
             // TODO 更新个人资料,跳转到个人中心页面
             ToastUtil.showToastShort("登录成功");
-            setResult(1001);
+//            setResult(1001);
+            setResult(1002);
             this.finish();
         }
     }

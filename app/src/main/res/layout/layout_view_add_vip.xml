@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:layout_marginLeft="@dimen/size_dp_50"
+    android:layout_marginRight="@dimen/size_dp_50"
+    android:background="@drawable/vip_pay_dialog_bac"
+    android:orientation="vertical">
+    <!--    android:background="@drawable/vip_pay_dialog_bac"-->
+    <!--    android:background="@mipmap/about_bac"-->
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size_dp_14"
+        android:text="增加会员"
+        android:textColor="@color/black_D9"
+        android:textSize="@dimen/sp_14" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/size_dp_14"
+        android:layout_marginRight="@dimen/size_dp_16">
+
+        <TextView
+            android:id="@+id/layout_view_add_view_tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="增加会员类型"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_sp_16" />
+
+        <RelativeLayout
+            android:id="@+id/layout_agent_create_code_code_rl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_dp_30"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/size_dp_10"
+            android:layout_toRightOf="@+id/layout_view_add_view_tv1"
+            android:background="@drawable/layout_agent_create_code_bac_1">
+
+            <TextView
+                android:id="@+id/layout_agent_create_code_code_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:text="临时卡"
+                android:textColor="@color/black_D9"
+                android:textSize="@dimen/size_sp_12" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/select_create_code" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginRight="@dimen/size_dp_16">
+
+        <TextView
+            android:id="@+id/layout_view_add_view_tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="生成的激活码"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_sp_16" />
+
+
+        <RelativeLayout
+            android:layout_width="@dimen/size_dp_130"
+            android:layout_height="@dimen/size_dp_30"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/size_dp_10"
+            android:layout_toRightOf="@+id/layout_view_add_view_tv2"
+            android:background="@drawable/layout_agent_my_user_time_bac">
+
+            <EditText
+                android:id="@+id/layout_add_vip_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@null"
+                android:hint="选择类型后自动生成"
+                android:inputType="number"
+                android:textColor="@color/black_D9"
+                android:textColorHint="@color/black_40"
+                android:textSize="@dimen/size_sp_12" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/layout_agent_create_code_sub"
+        android:layout_width="96dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size_dp_20"
+        android:layout_marginBottom="@dimen/size_dp_16"
+        android:background="@drawable/me_fragment_logout_bac"
+        android:gravity="center"
+        android:text="确定"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_sp_16" />
+</LinearLayout>

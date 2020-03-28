@@ -16,6 +16,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.8"
             android:background="#ffe5e5e5"
+            android:layout_marginRight="@dimen/size_dp_2"
             android:gravity="center"
             android:text="激活码"
             android:textColor="@color/black_D9"
@@ -29,6 +30,7 @@
             android:background="#fff1f2f5"
             android:gravity="center"
             android:text="类型"
+            android:layout_marginRight="@dimen/size_dp_2"
             android:textColor="@color/black_D9"
             android:textSize="@dimen/size_sp_10" />
 
@@ -40,6 +42,7 @@
             android:background="#ffe5e5e5"
             android:gravity="center"
             android:text="有效期"
+            android:layout_marginRight="@dimen/size_dp_2"
             android:textColor="@color/black_D9"
             android:textSize="@dimen/size_sp_10" />
 

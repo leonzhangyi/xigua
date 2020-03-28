@@ -9,6 +9,7 @@ import com.water.melon.R;
 import com.water.melon.application.MyApplication;
 import com.water.melon.net.bean.AgentUserBean;
 import com.water.melon.net.bean.CreateCodeBean;
+import com.water.melon.ui.in.AgentUserItemClick;
 import com.water.melon.utils.XGUtil;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,12 @@ import androidx.annotation.NonNull;
 public class AgentUserAdapter extends BaseQuickAdapter<AgentUserBean.UserInfo, BaseViewHolder> {
     public AgentUserAdapter() {
         super(R.layout.layout_agent_user_item, null);
+    }
+
+    private AgentUserItemClick click;
+
+    public void setOnItemClick(AgentUserItemClick click) {
+        this.click = click;
     }
 
     @Override
@@ -39,7 +46,7 @@ public class AgentUserAdapter extends BaseQuickAdapter<AgentUserBean.UserInfo, B
         agent_user_handler.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                XGUtil.copyText(MyApplication.getContext(), item.getCode());
+                click.itemClick(item);
             }
         });
     }

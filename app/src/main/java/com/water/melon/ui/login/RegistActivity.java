@@ -1,5 +1,6 @@
 package com.water.melon.ui.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -7,6 +8,7 @@ import android.widget.EditText;
 
 import com.water.melon.R;
 import com.water.melon.base.ui.BaseActivity;
+import com.water.melon.utils.LogUtil;
 import com.water.melon.utils.ToastUtil;
 import com.water.melon.utils.XGUtil;
 
@@ -42,7 +44,7 @@ public class RegistActivity extends BaseActivity implements RegistContract.View 
     String phone;
     String password;
 
-    @OnClick({R.id.login_back, R.id.login_submit})
+    @OnClick({R.id.login_back, R.id.login_submit, R.id.layout_login_regist})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.login_back:
@@ -74,6 +76,11 @@ public class RegistActivity extends BaseActivity implements RegistContract.View 
                 }
 
                 break;
+            case R.id.layout_login_regist:
+                Intent intent = new Intent(this, LoginActivity.class);
+//                startActivity(intent);
+                redirectActivityForResult(intent, 2);
+                break;
         }
 
     }
@@ -94,8 +101,8 @@ public class RegistActivity extends BaseActivity implements RegistContract.View 
         showLoadingDialog(false);
         if (isSuc) {
             // TODO 更新个人资料,跳转到个人中心页面
-            ToastUtil.showToastShort("注册成功");
-            setResult(1002);
+            ToastUtil.showToastShort("绑定成功");
+            setResult(1001);
             this.finish();
         }
     }
@@ -109,5 +116,16 @@ public class RegistActivity extends BaseActivity implements RegistContract.View 
     @Override
     public void setPresenter(RegistContract.Present presenter) {
         present = (RegistPresent) presenter;
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        LogUtil.e("LoginActivity", "requestCode = " + requestCode + ", resultCode = " + resultCode);
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 2 && resultCode == 1002) {
+            setResult(1001);
+            this.finish();
+        }
     }
 }

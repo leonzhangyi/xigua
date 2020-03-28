@@ -96,4 +96,8 @@
     <string name="up_app_version">版本: </string>
     <string name="up_app_size">更新包体积: </string>
     <string name="up_app_content">更新内容:</string>
+
+
+    <string name="agent_code_user">已使用</string>
+    <string name="agent_code_unuser">未使用</string>
 </resources>

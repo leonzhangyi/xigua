@@ -11,8 +11,12 @@ import android.widget.RelativeLayout;
 import com.sunfusheng.util.Utils;
 import com.water.melon.R;
 import com.water.melon.base.ui.BaseActivity;
+import com.water.melon.net.bean.ShareBean;
+import com.water.melon.net.bean.UserBean;
 import com.water.melon.utils.FileUtil;
+import com.water.melon.utils.GsonUtil;
 import com.water.melon.utils.ScreenUtils;
+import com.water.melon.utils.SharedPreferencesUtil;
 import com.water.melon.utils.ToastUtil;
 import com.water.melon.utils.XGUtil;
 import com.water.melon.utils.ZXingUtils;
@@ -20,7 +24,8 @@ import com.water.melon.utils.ZXingUtils;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class ShareActivity extends BaseActivity {
+public class ShareActivity extends BaseActivity implements ShareContract.View {
+    private SharePresent sharePresent;
 
     @BindView(R.id.me_share_ewm)
     ImageView me_share_ewm;
@@ -35,8 +40,10 @@ public class ShareActivity extends BaseActivity {
     @Override
     public void createdViewByBase(Bundle savedInstanceState) {
         viewShare = getWindow().getDecorView();
+        new SharePresent(this, this);
+        sharePresent.start();
 
-        setEwm("http://www.baidu.com");
+//        setEwm("http://www.baidu.com");
     }
 
     @OnClick({R.id.me_share_back, R.id.me_share_save, R.id.me_share_share})
@@ -49,7 +56,7 @@ public class ShareActivity extends BaseActivity {
                 savePath();
                 break;
             case R.id.me_share_share:
-                XGUtil.sharePic(this, "欢迎进入VIP你妹", "http://www.baidu.com");
+                XGUtil.sharePic(this, content, shareUrl);
                 break;
         }
     }
@@ -85,4 +92,38 @@ public class ShareActivity extends BaseActivity {
             ToastUtil.showToastShort("操作異常，清稍後再試");
         }
     }
+
+    @Override
+    public void initView() {
+        sharePresent.getShareDate();
+    }
+
+    @Override
+    public void setPresenter(ShareContract.Present presenter) {
+        this.sharePresent = (SharePresent) presenter;
+    }
+
+    private String shareUrl = "";
+    private String content = "";
+
+    @Override
+    public void setShareDate(ShareBean shareBean) {
+        if (shareBean != null) {
+            shareUrl = shareBean.getUrl();
+            content = shareBean.getContent();
+        }
+        String baseInfo = SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.KEY_WATER_USER_INFO, "");
+        if (baseInfo != null && !baseInfo.trim().equals("") && !baseInfo.trim().equals("[]")) {
+            UserBean userBean = (UserBean) GsonUtil.toClass(baseInfo, UserBean.class);
+            if (userBean != null) {
+                if (shareUrl.contains("channelCode")) {
+                    shareUrl = shareUrl + "&invitecode=" + userBean.getInvitation_code();
+                } else {
+                    shareUrl = shareUrl + "?invitecode=" + userBean.getInvitation_code();
+                }
+            }
+        }
+        setEwm(shareUrl);
+    }
 }
+

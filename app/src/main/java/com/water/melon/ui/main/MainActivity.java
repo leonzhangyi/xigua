@@ -12,6 +12,7 @@ import com.water.melon.R;
 import com.water.melon.application.MyApplication;
 import com.water.melon.base.ui.BaseActivity;
 import com.water.melon.constant.XGConstant;
+import com.water.melon.net.bean.AdvBean;
 import com.water.melon.presenter.MainPresent;
 import com.water.melon.presenter.contract.MainContract;
 import com.water.melon.utils.HandleBackUtil;
@@ -33,6 +34,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     private int position = 0;
     private MainPresent present;
 
+    public static MainActivity mainActivity;
+
     @Override
     public int getContentViewByBase(Bundle savedInstanceState) {
         return R.layout.activity_main;
@@ -45,6 +48,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             //闪退后重新初始化
             MyApplication.getp2p().InitP2PServer();
         }
+        mainActivity = this;
         new MainPresent(this, this);
         present.start();//初始化升级
 //        present.getUserInfo();//放到个人中心获取用户信息
@@ -80,6 +84,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         if (ischanged) {
             present.selectTab(position, bottomGroup);
         }
+    }
+
+    public void gotoFl() {
+        present.selectTab(2, bottomGroup);
     }
 
     @Override
@@ -134,5 +142,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    public void advClick(AdvBean advBean) {
+        present.doAdvClick(advBean);
     }
 }

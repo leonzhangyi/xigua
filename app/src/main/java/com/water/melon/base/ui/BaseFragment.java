@@ -64,7 +64,7 @@ public abstract class BaseFragment extends RxFragment implements com.water.melon
         }
         if (null != toolbarStatusVew) {
             //状态栏颜色
-            toolbarStatusVew.setBackgroundResource(R.color.black);
+            toolbarStatusVew.setBackgroundResource(R.color.white);
 //            toolbarStatusVew.setBackgroundResource(R.drawable.me_fragment_top_bac);
         }
         onMyCreateView(rootView, savedInstanceState);

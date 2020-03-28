@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10">
+
+        <RelativeLayout
+            android:id="@+id/layout_agent_create_code_code_rl"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_dp_30"
+            android:layout_marginLeft="@dimen/size_dp_16"
+            android:background="@drawable/layout_agent_create_code_bac_1">
+
+            <TextView
+                android:id="@+id/layout_agent_create_code_code_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:text="全部激活码"
+                android:textColor="@color/black_D9"
+                android:textSize="@dimen/size_sp_12" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/layout_agent_create_code_code_tv"
+                android:src="@mipmap/select_create_code" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_agent_create_code_xiao_rl"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_dp_30"
+            android:layout_marginLeft="@dimen/size_dp_10"
+            android:layout_toRightOf="@+id/layout_agent_create_code_code_rl"
+            android:background="@drawable/layout_agent_create_code_bac_1">
+
+            <TextView
+                android:id="@+id/layout_agent_create_code_xiao_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:text="失效/有效"
+                android:textColor="@color/black_D9"
+                android:textSize="@dimen/size_sp_12" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/layout_agent_create_code_xiao_tv"
+                android:src="@mipmap/select_create_code" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_dp_30"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_toLeftOf="@+id/agent_user_one_search_rl"
+            android:layout_toRightOf="@+id/layout_agent_create_code_xiao_rl"
+            android:background="@drawable/layout_agent_my_user_time_bac">
+
+            <EditText
+                android:id="@+id/agent_use_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:background="@null"
+                android:hint="输入激活码"
+                android:inputType="number"
+                android:textColor="@color/black_D9"
+                android:textColorHint="@color/black_40"
+                android:textSize="@dimen/size_sp_12" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/agent_user_one_search_rl"
+            android:layout_width="@dimen/size_dp_30"
+            android:layout_height="@dimen/size_dp_30"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/size_dp_16"
+            android:background="@color/net_resource_item_tv">
+
+            <ImageView
+                android:id="@+id/agent_user_one_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/agent_use_search" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_dp_16"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="激活码列表"
+            android:textColor="@color/black_D9"
+            android:textSize="@dimen/size_sp_16" />
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/size_dp_16"
+            android:layout_marginRight="@dimen/size_dp_6"
+            android:padding="@dimen/dp_10"
+            android:text="批量导出"
+            android:textColor="@color/net_resource_item_tv"
+            android:textSize="@dimen/size_sp_16" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_dp_30"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/size_dp_2"
+            android:layout_weight="10"
+            android:background="#ffe5e5e5"
+            android:gravity="center"
+            android:text="激活码列表"
+            android:textColor="@color/black_D9"
+            android:textSize="@dimen/size_sp_10" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/size_dp_2"
+            android:layout_weight="5"
+            android:background="#fff1f2f5"
+            android:gravity="center"
+            android:text="类型"
+            android:textColor="@color/black_D9"
+            android:textSize="@dimen/size_sp_10" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/size_dp_2"
+            android:layout_weight="8"
+            android:background="#ffe5e5e5"
+            android:gravity="center"
+            android:text="有效"
+            android:textColor="@color/black_D9"
+            android:textSize="@dimen/size_sp_10" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="#fff1f2f5"
+            android:gravity="center"
+            android:text="操作"
+            android:textColor="@color/black_D9"
+            android:textSize="@dimen/size_sp_10" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/agent_code_unuser_rev"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

@@ -1,5 +1,8 @@
 package com.water.melon.ui.me.vip;
 
+import android.content.Intent;
+import android.net.Uri;
+
 import com.google.gson.reflect.TypeToken;
 import com.trello.rxlifecycle3.LifecycleProvider;
 import com.water.melon.base.mvp.BasePresenterParent;
@@ -11,10 +14,14 @@ import com.water.melon.net.ErrorResponse;
 import com.water.melon.net.IApiSubscriberCallBack;
 import com.water.melon.net.bean.CreateCodeBean;
 import com.water.melon.net.bean.TabBean;
+import com.water.melon.net.utils.AESCipherforJiaMi;
 import com.water.melon.utils.GsonUtil;
 import com.water.melon.utils.LogUtil;
 import com.water.melon.utils.SharedPreferencesUtil;
 import com.water.melon.utils.ToastUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -112,7 +119,6 @@ public class VipPresent extends BasePresenterParent implements VipContract.Prese
                 LogUtil.e(TAG, "doPay.getResult() = " + data.getResult());
                 if (data.getErr() == null || data.getErr().trim().equals("")) {
                     ToastUtil.showToastLong(data.getSuc());
-
                     updataUserInfo();
                 }
             }
@@ -120,6 +126,38 @@ public class VipPresent extends BasePresenterParent implements VipContract.Prese
 
     }
 
+    private String url;
+
+    @Override
+    public void doCPay(String orderid, String method) {
+        mView.showLoadingDialog(true);
+        ApiImp.getInstance().getMDoPay(orderid, method, getLifecycleTransformerByStopToActivity(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
+            @Override
+            public void onCompleted() {
+            }
+
+            @Override
+            public void onError(ErrorResponse error) {
+//                mView.showLoadingDialog(false);
+                ToastUtil.showToastShort(error.getErr());
+                mView.showLoadingDialog(false);
+            }
+
+            @Override
+            public void onNext(BaseApiResultData data) {
+                mView.showLoadingDialog(false);
+                LogUtil.e(TAG, "doCPay.getResult() = " + data.getResult());
+                String result = data.getResult();
+                if (result != null && !result.equals("") && !result.equals("[]")) {
+                    mView.doPay(result);
+                } else {
+                    ToastUtil.showToastShort(data.getErr());
+                }
+            }
+        });
+    }
+
+    @Override
     public void updataUserInfo() {
         ApiImp.getInstance().getUserNo(null, getLifecycleTransformerByStopToActivity(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
             @Override

@@ -1,10 +1,13 @@
 package com.water.melon.ui.home.h5;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 import com.water.melon.R;
 import com.water.melon.base.ui.BaseActivity;
 import com.water.melon.net.bean.RoadBean;
+import com.water.melon.ui.home.h5.utils.FragmentKeyDown;
 import com.water.melon.ui.home.h5.utils.PopuwinAdapter;
 import com.water.melon.ui.home.h5.utils.VideoPlayWebFragment;
 import com.water.melon.ui.in.RoadsItemClick;
@@ -32,7 +35,7 @@ public class WebPlayActivity extends BaseActivity {
 
     @Override
     public void createdViewByBase(Bundle savedInstanceState) {
-        setStausColor(R.color.black); //设置导航栏颜色值
+//        setStausColor(R.color.black); //设置导航栏颜色值
         mFragmentManager = this.getSupportFragmentManager();
         openFragment();
 
@@ -75,5 +78,28 @@ public class WebPlayActivity extends BaseActivity {
     @Override
     protected void onClickTitleRight() {
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        VideoPlayWebFragment mVideoPlayWebFragment = this.mVideoPlayWebFragment;
+        if (mVideoPlayWebFragment != null) {
+            FragmentKeyDown mFragmentKeyDown = mVideoPlayWebFragment;
+            if (mFragmentKeyDown.onFragmentKeyDown(keyCode, event)) {
+                return true;
+            } else {
+                return super.onKeyDown(keyCode, event);
+            }
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //一定要保证 mAentWebFragemnt 回调
+//		mAgentWebFragment.onActivityResult(requestCode, resultCode, data);
     }
 }

@@ -6,10 +6,12 @@ import com.google.gson.reflect.TypeToken;
 import com.trello.rxlifecycle3.LifecycleProvider;
 import com.water.melon.base.mvp.BasePresenterParent;
 import com.water.melon.base.mvp.BaseView;
+import com.water.melon.base.net.BaseRequest;
 import com.water.melon.net.ApiImp;
 import com.water.melon.net.BaseApiResultData;
 import com.water.melon.net.ErrorResponse;
 import com.water.melon.net.IApiSubscriberCallBack;
+import com.water.melon.net.bean.AdvBean;
 import com.water.melon.net.bean.GetVideosRequest;
 import com.water.melon.net.bean.TabBean;
 import com.water.melon.presenter.contract.NetResouceItemContract;
@@ -138,6 +140,13 @@ public class NetResouceItemPresenter extends BasePresenterParent implements NetR
                         LogUtil.e("ssss", "setVlue====");
                     }
                     page++;
+                }else {
+                    if (isFirstData) {
+                        mView.getListData(new ArrayList<>(), false, true);
+                    }else{
+                        mView.getListData(new ArrayList<>(), true, false);
+                    }
+
                 }
             }
         });
@@ -183,5 +192,35 @@ public class NetResouceItemPresenter extends BasePresenterParent implements NetR
     @Override
     public void start() {
         mView.initView();
+    }
+
+    @Override
+    public void getAdv() {
+        BaseRequest request = new BaseRequest(1, 10);
+        ApiImp.getInstance().getNetAdv(request, getLifecycleTransformerByStopToFragment(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
+            @Override
+            public void onCompleted() {
+//                mView.showLoadingDialog(false);
+            }
+
+            @Override
+            public void onError(ErrorResponse error) {
+//                if (error.getCode() != 2) {
+//                    ToastUtil.showToastLong(error.getErr());
+//                }
+            }
+
+            @Override
+            public void onNext(BaseApiResultData data) {
+                LogUtil.e(TAG, "getNetAdv.getResult() = " + data.getResult());
+                String result = data.getResult();
+                if (result != null && !result.equals("") && !result.equals("[]")) {
+                    List<AdvBean> advBeans = GsonUtil.toClass(result, new TypeToken<List<AdvBean>>() {
+                    }.getType());
+                    mView.setAdv(advBeans);
+                }
+            }
+        });
+
     }
 }

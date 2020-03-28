@@ -40,6 +40,8 @@ public class MobileUtil {
 //            info.imei = SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.KEY_WATER_TEST_IME,"");
 //            info.imsi = mTm.getSubscriberId() == null ? "" : mTm.getSubscriberId();
 //            info.iccid = mTm.getSimSerialNumber() == null ? "" : mTm.getSimSerialNumber();
+
+//            info.imei = info.imei + "30";
         }
 
         info.net = GetNetworkType(context);

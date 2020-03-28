@@ -1,6 +1,7 @@
 package com.water.melon.utils;
 
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -22,12 +23,22 @@ import com.water.melon.net.ApiImp;
 import com.water.melon.net.BaseApiResultData;
 import com.water.melon.net.ErrorResponse;
 import com.water.melon.net.IApiSubscriberCallBack;
+import com.water.melon.net.bean.AdvBean;
 import com.water.melon.net.bean.RoadBean;
 import com.water.melon.net.bean.UserBean;
+import com.water.melon.ui.home.BannerActivity;
+import com.water.melon.ui.login.RegistActivity;
+import com.water.melon.ui.main.MainActivity;
+import com.water.melon.ui.me.agent.AgentActivity;
+import com.water.melon.ui.me.share.ShareActivity;
+import com.water.melon.ui.me.vip.VipActivity;
+import com.water.melon.ui.netresource.VideoPlayBean;
 import com.water.melon.ui.player.LocalVideoInfo;
 import com.water.melon.ui.player.VlcVideoBean;
 import com.water.melon.ui.videoInfo.VideoInfoActivity;
+import com.water.melon.utils.glide.GlideHelper;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
@@ -651,4 +662,94 @@ public class XGUtil {
         }
         return position;
     }
+
+
+    public static void openAdv(AdvBean advBean, Activity context) {
+        if (context instanceof MainActivity) {
+            ((MainActivity) context).advClick(advBean);
+        }
+        String url = advBean.getTarget();
+        if (advBean != null) {
+            switch (advBean.getHandle()) {
+                case 1: //外部跳转
+                    Uri uri1 = Uri.parse(url);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri1);
+                    context.startActivity(intent);
+                    break;
+                case 2: //内部跳转
+                    Intent intent1 = new Intent(context, BannerActivity.class);
+                    intent1.putExtra(BannerActivity.M_URL, url);
+                    context.startActivity(intent1);
+                    break;
+                case 3: //跳转到影视播放页
+                    UserBean userBean1 = XGUtil.getMyUserInfo();
+                    if (userBean1 == null || userBean1.getGroup_id().trim().equals("0")) { //游客
+                        ToastUtil.showToastShort("请先绑定手机号");
+                        Intent intent10 = new Intent(context, RegistActivity.class);
+                        context.startActivityForResult(intent10, 1);
+                    } else {
+
+                        url = url.substring(2);
+                        Intent intent3 = new Intent(context, VideoInfoActivity.class);
+                        VideoPlayBean videoInfoBean = new VideoPlayBean();
+                        videoInfoBean.setId(url);
+                        intent3.putExtra(XGConstant.KEY_DATA, videoInfoBean);
+                        context.startActivity(intent3);
+                    }
+                    break;
+                case 4: //跳转到福利模块
+//                    Intent intent4 = new Intent(context, ShareActivity.class);
+////                    context.startActivity(intent4);
+                    if (context instanceof MainActivity) {
+                        ((MainActivity) context).gotoFl();
+                    }
+                    break;
+                case 5: //跳转到会员中心
+                    Intent intent5 = new Intent(context, VipActivity.class);
+                    context.startActivity(intent5);
+                    break;
+                case 6: //跳转代理专区申请
+                    UserBean userBean2 = XGUtil.getMyUserInfo();
+                    if (userBean2 == null || userBean2.getGroup_id().trim().equals("0")) { //游客
+                        ToastUtil.showToastShort("请先绑定手机号");
+                        Intent intent10 = new Intent(context, RegistActivity.class);
+                        context.startActivityForResult(intent10, 1);
+                    } else {
+                        Intent intent6 = new Intent(context, AgentActivity.class);
+                        context.startActivity(intent6);
+                    }
+                    break;
+                case 7: //跳转分享页面
+                    Intent intent7 = new Intent(context, ShareActivity.class);
+                    context.startActivity(intent7);
+                    break;
+                case 8: //外链下载
+                    DownloadManager downloadManager = (DownloadManager) context.getSystemService(Context
+                            .DOWNLOAD_SERVICE);
+                    Uri uri = Uri.parse(url);
+                    DownloadManager.Request request = new DownloadManager.Request(uri);
+
+                    String pre = "Android/data/awater/";
+
+                    String downLoadPath = "";
+                    if (context.getExternalCacheDir() != null) {
+                        downLoadPath = context.getExternalCacheDir().getAbsolutePath() + File.separator + pre + advBean.getTitle() + ".apk";
+                    } else {
+                        downLoadPath = context.getCacheDir().getAbsolutePath() + File.separator + pre + advBean.getTitle() + ".apk";
+                    }
+                    LogUtil.e("downloadAPK", "downloadPath  = " + downLoadPath);
+
+                    File file = new File(downLoadPath);
+                    if (file.exists()) {
+                        file.delete();
+                    }
+                    request.setVisibleInDownloadsUi(true);
+                    request.setDestinationUri(Uri.fromFile(file));
+                    long reference = downloadManager.enqueue(request);
+                    break;
+            }
+        }
+    }
+
+
 }

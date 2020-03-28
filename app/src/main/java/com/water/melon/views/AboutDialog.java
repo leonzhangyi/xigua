@@ -3,6 +3,7 @@ package com.water.melon.views;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
 
 import com.water.melon.R;
@@ -37,6 +38,12 @@ public class AboutDialog extends Dialog {
 
         getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
+        findViewById(R.id.me_about_close).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
     }
 
 }

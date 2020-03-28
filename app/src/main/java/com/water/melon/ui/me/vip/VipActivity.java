@@ -1,5 +1,7 @@
 package com.water.melon.ui.me.vip;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -9,20 +11,31 @@ import com.water.melon.R;
 import com.water.melon.base.ui.BaseActivity;
 import com.water.melon.net.bean.CreateCodeBean;
 import com.water.melon.net.bean.UserBean;
+import com.water.melon.ui.in.PayDialogClick;
 import com.water.melon.ui.in.VipPayItemClick;
+import com.water.melon.ui.login.RegistActivity;
 import com.water.melon.utils.GsonUtil;
+import com.water.melon.utils.LogUtil;
 import com.water.melon.utils.SharedPreferencesUtil;
 import com.water.melon.utils.ToastUtil;
+import com.water.melon.utils.XGUtil;
 import com.water.melon.views.PayDialog;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
 public class VipActivity extends BaseActivity implements VipContract.View {
+
+    public static boolean isRefresh = false;
+
     @BindView(R.id.recycleview_vip)
     RecyclerView recyclerView;
 
@@ -37,19 +50,16 @@ public class VipActivity extends BaseActivity implements VipContract.View {
 
     private VipPresent vipPresent;
 
-    private VipPayAdapter vipPayAdapter;
+    private VipPayAdapter1 vipPayAdapter;
 
     @Override
     public int getContentViewByBase(Bundle savedInstanceState) {
-        return R.layout.layout_vip;
+        return R.layout.layout_vip_1;
     }
 
     @Override
     public void createdViewByBase(Bundle savedInstanceState) {
-        setToolBarLeftView(R.mipmap.back_left);
-//        setToolBarRightView("充值记录", R.color.net_resource_item_tv);
-        setTitleName("会员中心");
-        setTitleNameColor(R.color.black);
+
         new VipPresent(this, this);
         vipPresent.start();
     }
@@ -57,9 +67,11 @@ public class VipActivity extends BaseActivity implements VipContract.View {
     @OnClick({R.id.toolbar_left_tv, R.id.layout_agent_vip_sure})
     public void onClick(View view) {
         switch (view.getId()) {
+
             case R.id.toolbar_left_tv:
                 onClickTitleBack();
                 break;
+
             case R.id.layout_agent_vip_sure:
                 String text = layout_agent_phone_et.getText().toString();
                 if (text != null && !text.trim().equals("")) {
@@ -86,15 +98,24 @@ public class VipActivity extends BaseActivity implements VipContract.View {
 
     @Override
     public void initView() {
-        vipPayAdapter = new VipPayAdapter();
+        vipPayAdapter = new VipPayAdapter1();
         vipPayAdapter.setEnableLoadMore(true);//这里的作用是防止下拉刷新的时候还可以上拉加载
         vipPayAdapter.setItemClick(new VipPayItemClick() {
             @Override
             public void onItemClick(VipBean item) {
-                vipPresent.doPay(item);
+                UserBean userBean1 = XGUtil.getMyUserInfo();
+                if (userBean1 == null || userBean1.getGroup_id().trim().equals("0")) { //游客
+                    ToastUtil.showToastShort("请先绑定手机号");
+                    Intent intent = new Intent(VipActivity.this, RegistActivity.class);
+                    redirectActivityForResult(intent, 1);
+                } else {
+                    vipPresent.doPay(item);
+                }
+
+
             }
         });
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(vipPayAdapter);
 
 
@@ -121,6 +142,13 @@ public class VipActivity extends BaseActivity implements VipContract.View {
     public void setPayMethod(VipBean vipBean) {
         if (payDialog == null) {
             payDialog = new PayDialog(this, R.style.dialog);
+            payDialog.setBuyClick(new PayDialogClick() {
+                @Override
+                public void onItemClick(String order, String method) {
+                    vipPresent.doCPay(order, method);
+                }
+            });
+
         }
         payDialog.show();
         payDialog.setData(vipBean);
@@ -136,40 +164,66 @@ public class VipActivity extends BaseActivity implements VipContract.View {
         if (baseInfo != null && !baseInfo.trim().equals("") && !baseInfo.trim().equals("[]")) {
             UserBean userBean = (UserBean) GsonUtil.toClass(baseInfo, UserBean.class);
             if (userBean != null) {
-
                 setDateInfo(userBean);
             }
         }
 
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        vipPresent.updataUserInfo();
+    }
+
+    String url;
+
+    @Override
+    public void doPay(String result) {
+        if (result != null && !result.equals("")) {
+            try {
+                JSONObject obj = new JSONObject(result);
+                if (obj.has("url")) {
+                    url = obj.getString("url");
+                    Uri uri = Uri.parse(url);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intent);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
     private void setDateInfo(UserBean userBean) {
         int vip = Integer.parseInt(userBean.getVip().trim());
+        String time = userBean.getEnd_date().split(" ")[0];
         switch (vip) {
             case 1:
                 layout_vip_vip_name.setText("临时会员");
-                layout_vip_vip_time.setText(userBean.getEnd_date());
+                layout_vip_vip_time.setText(time);
                 break;
             case 2:
                 layout_vip_vip_name.setText("周卡会员");
-                layout_vip_vip_time.setText(userBean.getEnd_date());
+                layout_vip_vip_time.setText(time);
                 break;
             case 3:
                 layout_vip_vip_name.setText("月卡会员");
-                layout_vip_vip_time.setText(userBean.getEnd_date());
+                layout_vip_vip_time.setText(time);
                 break;
             case 4:
                 layout_vip_vip_name.setText("季卡会员");
-                layout_vip_vip_time.setText(userBean.getEnd_date());
+                layout_vip_vip_time.setText(time);
                 break;
             case 5:
                 layout_vip_vip_name.setText("年卡会员");
-                layout_vip_vip_time.setText(userBean.getEnd_date());
+                layout_vip_vip_time.setText(time);
                 break;
             case 6:
                 layout_vip_vip_name.setText("永久卡会员");
-                layout_vip_vip_time.setText(userBean.getEnd_date());
+                layout_vip_vip_time.setText(time);
                 break;
             default:
                 layout_vip_vip_name.setText("游客用户");
@@ -177,5 +231,18 @@ public class VipActivity extends BaseActivity implements VipContract.View {
                 break;
 
         }
+
+
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        LogUtil.e("MeFragment", "requestCode = " + requestCode + ", resultCode = " + resultCode);
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == 1001) {
+            setBaseDate();
+            isRefresh = true;
+        }
+    }
+
 }

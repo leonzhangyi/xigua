@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/item_history_image_layout"
             android:layout_marginLeft="@dimen/size_dp_15"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="@dimen/size_dp_16"
             android:layout_toLeftOf="@id/item_history_delete"
             android:layout_toRightOf="@id/item_history_image_layout"
             android:ellipsize="end"
@@ -92,6 +92,7 @@
             android:layout_alignTop="@id/item_history_play_position"
             android:layout_alignParentRight="true"
             android:text="总时间"
+            android:visibility="gone"
             android:textColor="@color/black_D9"
             android:textSize="@dimen/size_sp_12" />
 

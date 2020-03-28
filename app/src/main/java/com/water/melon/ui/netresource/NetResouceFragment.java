@@ -1,5 +1,6 @@
 package com.water.melon.ui.netresource;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,11 +19,18 @@ import com.water.melon.application.MyApplication;
 import com.water.melon.base.ui.BaseFragment;
 import com.water.melon.net.bean.AdvBean;
 import com.water.melon.net.bean.TabBean;
+import com.water.melon.net.bean.UserBean;
 import com.water.melon.presenter.NetResourcePresent;
 import com.water.melon.presenter.contract.NetResourceContract;
 import com.water.melon.ui.home.MainFragment;
+import com.water.melon.ui.login.RegistActivity;
+import com.water.melon.ui.main.MainActivity;
+import com.water.melon.ui.me.dowload.DownLoadActivity;
+import com.water.melon.ui.me.vip.VipActivity;
 import com.water.melon.ui.search.SearchActivity;
+import com.water.melon.utils.LogUtil;
 import com.water.melon.utils.ToastUtil;
+import com.water.melon.utils.XGUtil;
 import com.water.melon.utils.bannel.NetImageHolderView;
 import com.water.melon.views.tablayou.TabLayout;
 
@@ -36,10 +44,10 @@ import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class NetResouceFragment extends BaseFragment implements NetResourceContract.View, OnItemClickListener, RadioGroup.OnCheckedChangeListener {
+public class NetResouceFragment extends BaseFragment implements NetResourceContract.View, RadioGroup.OnCheckedChangeListener {
     public static final String TAG = "NetResouceFragment";
-    @BindView(R.id.netConvenientBanner) //bannel
-            ConvenientBanner netConvenientBanner;
+//    @BindView(R.id.netConvenientBanner) //bannel
+//            ConvenientBanner netConvenientBanner;
 
     @BindView(R.id.net_resource_tabLayout)
     TabLayout netResourceTabLayout;
@@ -50,7 +58,6 @@ public class NetResouceFragment extends BaseFragment implements NetResourceContr
     @BindView(R.id.net_resource_left_tab)
     RadioGroup netResourceLeftTab;
 
-    private List<String> netImages = new ArrayList<>();
 
     private NetResourcePresent present;
 
@@ -122,7 +129,7 @@ public class NetResouceFragment extends BaseFragment implements NetResourceContr
         });
 
         present.getBigTab();
-        present.getAdv();
+//        present.getAdv();
     }
 
     @Override
@@ -135,12 +142,6 @@ public class NetResouceFragment extends BaseFragment implements NetResourceContr
         return false;
     }
 
-
-
-    @Override
-    public void onItemClick(int position) {
-
-    }
 
     @Override
     public void setBigTab(List<TabBean> data) {
@@ -217,38 +218,6 @@ public class NetResouceFragment extends BaseFragment implements NetResourceContr
 
     }
 
-    @Override
-    public void setAdv(List<AdvBean> advBeans) {
-        if (advBeans != null && advBeans.size() > 0) {
-            netImages.clear();
-            for (int i = 0; i < advBeans.size(); i++) {
-                netImages.add(advBeans.get(i).getUrl());
-            }
-            netConvenientBanner.setPages(new CBViewHolderCreator() {
-                @Override
-                public Holder createHolder(View itemView) {
-                    return new NetImageHolderView(itemView, context);
-                }
-
-                @Override
-                public int getLayoutId() {
-                    return R.layout.bannel_item;
-                }
-            }, netImages)
-                    //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器，不需要圆点指示器可以不设
-                    .setPageIndicator(new int[]{R.mipmap.bannel_spoit, R.mipmap.bannel_spoit_sel})
-                    //设置指示器的方向
-                    .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
-                    //设置指示器是否可见
-                    .setPointViewVisible(true)
-                    //监听单击事件
-                    .setOnItemClickListener(this)
-                    .startTurning(2000)     //设置自动切换（同时设置了切换时间间隔）
-            //监听翻页事件
-//                .setOnPageChangeListener(this)
-            ;
-        }
-    }
 
     static class MyTabLayoutItem {
         //TabLayout的Item
@@ -260,12 +229,32 @@ public class NetResouceFragment extends BaseFragment implements NetResourceContr
     }
 
 
-    @OnClick({R.id.netresource_search})
+    @OnClick({R.id.netresource_search, R.id.netresource_goto_download})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.netresource_search:
-                    redirectActivity(SearchActivity.class);
+                redirectActivity(SearchActivity.class);
+                break;
+            case R.id.netresource_goto_download:
+                UserBean userBean1 = XGUtil.getMyUserInfo();
+                if (userBean1 == null || userBean1.getGroup_id().trim().equals("0")) { //游客
+                    ToastUtil.showToastShort("请先绑定手机号");
+                    Intent intent = new Intent(getContext(), RegistActivity.class);
+                    redirectActivityForResult(intent, 1);
+                } else {
+                    redirectActivity(DownLoadActivity.class);
+                }
                 break;
         }
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        LogUtil.e("MeFragment", "requestCode = " + requestCode + ", resultCode = " + resultCode);
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == 1001) {
+            VipActivity.isRefresh = true;
+        }
+    }
+
 }

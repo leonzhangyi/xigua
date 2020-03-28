@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/size_sp_10">
+
+        <ImageView
+            android:id="@+id/video_download_div_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true" />
+
+
+        <RelativeLayout
+            android:id="@+id/video_download_page_downloadend"
+            android:layout_width="100dp"
+            android:layout_height="@dimen/size_dp_30"
+            android:layout_marginRight="@dimen/size_sp_5"
+            android:layout_toLeftOf="@+id/video_download_div_center"
+            android:background="@drawable/video_download_main_page_back_press">
+
+            <TextView
+                android:id="@+id/video_download_page_downloadend_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="已使用"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_sp_14" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/video_download_page_downloading"
+            android:layout_width="100dp"
+            android:layout_height="@dimen/size_dp_30"
+            android:layout_marginLeft="@dimen/size_sp_5"
+            android:layout_toRightOf="@+id/video_download_div_center"
+            android:background="@drawable/video_download_main_page_back">
+
+            <TextView
+                android:id="@+id/video_download_page_downloading_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="未使用"
+                android:textColor="@color/black_D9"
+                android:textSize="@dimen/size_sp_14" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/video_history_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

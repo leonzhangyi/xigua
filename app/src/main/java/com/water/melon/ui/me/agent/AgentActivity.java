@@ -10,9 +10,12 @@ import com.water.melon.application.MyApplication;
 import com.water.melon.base.ui.BaseActivity;
 import com.water.melon.net.bean.AgentBean;
 import com.water.melon.net.bean.UserBean;
+import com.water.melon.ui.me.agent.applyhistory.AgentApplyHistroyActivity;
 import com.water.melon.ui.me.agent.create.CreateCodeActivity;
 import com.water.melon.ui.me.agent.myagent.MyAgentActivity;
+import com.water.melon.ui.me.agent.mymoney.MyMoneyActivity;
 import com.water.melon.ui.me.agent.myuser.AgentUserActivity;
+import com.water.melon.ui.me.agent.setting.SettingAgentActivity;
 import com.water.melon.utils.GsonUtil;
 import com.water.melon.utils.SharedPreferencesUtil;
 import com.water.melon.utils.ToastUtil;
@@ -24,14 +27,14 @@ import butterknife.OnClick;
 public class AgentActivity extends BaseActivity implements AgentContract.View {
     private AgentPresent mPresent;
 
-    @BindView(R.id.agent_people)
-    TextView agent_people;
+//    @BindView(R.id.agent_people)
+//    TextView agent_people;
 
-    @BindView(R.id.agent_user_people_tv)
-    TextView agent_user_people_tv;
+//    @BindView(R.id.agent_user_people_tv)
+//    TextView agent_user_people_tv;
 
-    @BindView(R.id.agent_more_money_tv)
-    TextView agent_more_money_tv;
+//    @BindView(R.id.agent_more_money_tv)
+//    TextView agent_more_money_tv;
 
     @BindView(R.id.agent_payment)
     TextView agent_payment;
@@ -47,7 +50,7 @@ public class AgentActivity extends BaseActivity implements AgentContract.View {
 
     @Override
     public int getContentViewByBase(Bundle savedInstanceState) {
-        return R.layout.layout_agent;
+        return R.layout.layout_agent_1;
     }
 
     @Override
@@ -58,7 +61,7 @@ public class AgentActivity extends BaseActivity implements AgentContract.View {
 
     private AgentBean agentBean;
 
-    @OnClick({R.id.toolbar_left_tv, R.id.agent_payment, R.id.layout_me_page_rl, R.id.layout_me_agent_rl, R.id.layout_me_user_rl, R.id.layout_me_price_rl})
+    @OnClick({R.id.toolbar_left_tv, R.id.agent_payment, R.id.layout_me_page_rl, R.id.layout_me_agent_rl, R.id.layout_me_user_rl, R.id.layout_me_price_rl, R.id.toolbar_right_tv,R.id.layout_agent_history})
     public void onClick(View view) {
         UserBean userBean = XGUtil.getMyUserInfo();
         switch (view.getId()) {
@@ -86,35 +89,41 @@ public class AgentActivity extends BaseActivity implements AgentContract.View {
                 break;
 
             case R.id.layout_me_page_rl://生成激活码
-                if(userBean.getGroup_id().trim().equals("1")) {
+                if (userBean.getGroup_id().trim().equals("1")) {
                     ToastUtil.showToastShort("成为代理，方可使用此功能");
-                }else{
+                } else {
                     redirectActivity(CreateCodeActivity.class);
                 }
 
                 break;
 
             case R.id.layout_me_agent_rl://我的代理
-                if(userBean.getGroup_id().trim().equals("3")) {
+                if (userBean.getGroup_id().trim().equals("3")) {
                     redirectActivity(MyAgentActivity.class);
-                }else{
+                } else {
                     ToastUtil.showToastShort("成为总代理，方可使用此功能");
                 }
                 break;
             case R.id.layout_me_user_rl://我的用户
-                if(userBean.getGroup_id().trim().equals("1")) {
+                if (userBean.getGroup_id().trim().equals("1")) {
                     ToastUtil.showToastShort("成为代理，方可使用此功能");
-                }else{
+                } else {
                     redirectActivity(AgentUserActivity.class);
                 }
 
                 break;
             case R.id.layout_me_price_rl://我的收益
-                if(userBean.getGroup_id().trim().equals("1")) {
+                if (userBean.getGroup_id().trim().equals("1")) {
                     ToastUtil.showToastShort("成为代理，方可使用此功能");
-                }else{
-//                    redirectActivity(AgentUserActivity.class);
+                } else {
+                    redirectActivity(MyMoneyActivity.class);
                 }
+                break;
+            case R.id.toolbar_right_tv:
+                redirectActivity(SettingAgentActivity.class);
+                break;
+            case R.id.layout_agent_history:
+                redirectActivity(AgentApplyHistroyActivity.class);
                 break;
         }
     }
@@ -134,6 +143,7 @@ public class AgentActivity extends BaseActivity implements AgentContract.View {
         setToolBarLeftView(R.mipmap.back_left);
         setTitleName("代理专区");
         setTitleNameColor(R.color.black);
+        setToolBarRightView("代理设置", R.color.agent_setting_text);
 
         mPresent.getAgentInfo();
     }
@@ -147,9 +157,9 @@ public class AgentActivity extends BaseActivity implements AgentContract.View {
     public void setAgentInfo(AgentBean agentInfo) {
         if (agentInfo != null) {
             agentBean = agentInfo;
-            agent_people.setText("代理" + agentInfo.getProxy_nums() + "人");
-            agent_user_people_tv.setText("累计用户" + agentInfo.getUser_nums() + "人");
-            agent_more_money_tv.setText("当前收益" + agentInfo.getPrice() + "元");
+//            agent_people.setText("代理" + agentInfo.getProxy_nums() + "人");
+//            agent_user_people_tv.setText("累计用户" + agentInfo.getUser_nums() + "人");
+//            agent_more_money_tv.setText("当前收益" + agentInfo.getPrice() + "元");
         }
 
 

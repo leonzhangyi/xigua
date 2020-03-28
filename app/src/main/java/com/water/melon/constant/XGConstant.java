@@ -15,6 +15,8 @@ public class XGConstant {
     public static String KEY_DATA = "KEY_DATA";
     //传单个数据键2
     public static String KEY_DATA_2 = "KEY_DATA_2";
+    //传第一个item
+    public static String KEY_DATA_my_positon = "KEY_DATA_POSITON";
     //传单个数据键3
     public static String KEY_DATA_3 = "KEY_DATA_3";
 

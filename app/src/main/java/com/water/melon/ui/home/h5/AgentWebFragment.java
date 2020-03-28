@@ -46,12 +46,17 @@ import com.just.agentweb.PermissionInterceptor;
 import com.just.agentweb.WebChromeClient;
 import com.just.agentweb.WebListenerManager;
 import com.water.melon.R;
+import com.water.melon.net.ApiImp;
+import com.water.melon.net.BaseApiResultData;
+import com.water.melon.net.ErrorResponse;
+import com.water.melon.net.IApiSubscriberCallBack;
 import com.water.melon.ui.home.h5.utils.CommonWebChromeClient;
 import com.water.melon.ui.home.h5.utils.FragmentKeyDown;
 import com.water.melon.ui.home.h5.utils.MiddlewareChromeClient;
 import com.water.melon.ui.home.h5.utils.MiddlewareWebViewClient;
 import com.water.melon.ui.home.h5.utils.UIController;
 import com.water.melon.utils.LogUtil;
+import com.water.melon.utils.SharedPreferencesUtil;
 import com.water.melon.utils.XGUtil;
 
 import java.util.HashMap;
@@ -68,6 +73,8 @@ import androidx.fragment.app.Fragment;
 
 public class AgentWebFragment extends Fragment implements FragmentKeyDown {
 
+    public static String title = "";
+
     private ImageView mBackImageView;
     //    private View mLineView;
     private ImageView mFinishImageView, mRfreshImageView;
@@ -75,6 +82,7 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
     private TextView mTitleTextView;
     protected AgentWeb mAgentWeb;
     public static final String URL_KEY = "url_key";
+    public static final String URL_POSTER_NAME = "url_poster_name";
     private ImageView mMoreImageView;
     private PopupMenu mPopupMenu;
     /**
@@ -94,6 +102,12 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
 
         return mAgentWebFragment;
 
+    }
+
+    private H5VideoActivity webPlayActivity;
+
+    public void setH5VideoActivity(H5VideoActivity webPlayActivity) {
+        this.webPlayActivity = webPlayActivity;
     }
 
     @Nullable
@@ -127,7 +141,7 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
                 .go(getUrl()); //WebView载入该url地址的页面并显示。
 
 
-        AgentWebConfig.debug();
+//        AgentWebConfig.debug();
 
         initView(view);
 
@@ -233,7 +247,7 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
         String target = "";
 
         if (TextUtils.isEmpty(target = this.getArguments().getString(URL_KEY))) {
-            target = "http://www.jd.com/";
+            target = "http://m.iqiyi.com/vip";
         }
 
 //		return "http://ggzy.sqzwfw.gov.cn/WebBuilderDS/WebbuilderMIS/attach/downloadZtbAttach.jspx?attachGuid=af982055-3d76-4b00-b5ab-36dee1f90b11&appUrlFlag=sqztb&siteGuid=7eb5f7f1-9041-43ad-8e13-8fcb82ea831a";
@@ -249,7 +263,7 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
 
         @Override
         public void onReceivedTitle(WebView view, String title) {
-            LogUtil.e("webview","title = "+title);
+            LogUtil.e("webview", "title = " + title);
             super.onReceivedTitle(view, title);
             if (mTitleTextView != null && !TextUtils.isEmpty(title)) {
                 if (title.length() > 10) {
@@ -418,9 +432,11 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
 ////                        mAgentWeb.getUrlLoader().loadUrl("http://www.unkownwebsiteblog.me");
 //                    }
 
-                    Intent intent = new Intent(getContext(),WebPlayActivity.class);
-                    intent.putExtra(AgentWebFragment.URL_KEY, XGUtil.getCurrentRoad(0)+mAgentWeb.getWebCreator().getWebView().getUrl());
+                    Intent intent = new Intent(getContext(), WebPlayActivity.class);
+                    intent.putExtra(AgentWebFragment.URL_KEY, XGUtil.getCurrentRoad(0) + mAgentWeb.getWebCreator().getWebView().getUrl());
                     startActivity(intent);
+
+                    webPlayActivity.doWrite(title, XGUtil.getCurrentRoad(0) + mAgentWeb.getWebCreator().getWebView().getUrl());
 
                     break;
                 default:

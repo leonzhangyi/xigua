@@ -7,6 +7,7 @@ import com.water.melon.net.ApiImp;
 import com.water.melon.net.BaseApiResultData;
 import com.water.melon.net.ErrorResponse;
 import com.water.melon.net.IApiSubscriberCallBack;
+import com.water.melon.ui.home.HomeBean;
 import com.water.melon.utils.LogUtil;
 import com.water.melon.utils.SharedPreferencesUtil;
 import com.water.melon.utils.ToastUtil;
@@ -41,6 +42,32 @@ public class H5VideoPresent extends BasePresenterParent implements H5VideoConstr
                 if (result != null && !result.trim().equals("") && !result.trim().equals("[]")) {
                     SharedPreferencesUtil.getInstance().putString(SharedPreferencesUtil.KEY_WATER_ALL_ROADS, result);
                 }
+
+            }
+        });
+
+    }
+
+    @Override
+    public void doWrite(HomeBean homeBean) {
+        ApiImp.getInstance().doWrite(homeBean, getLifecycleTransformerByStopToActivity(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
+            @Override
+            public void onCompleted() {
+            }
+
+            @Override
+            public void onError(ErrorResponse error) {
+//                ToastUtil.showToastShort(error.getErr());
+//                mView.subSucc(false);
+            }
+
+            @Override
+            public void onNext(BaseApiResultData data) {
+                LogUtil.e(TAG, "doWrite.getResult() = " + data.getResult());
+//                String result = data.getResult();
+//                if (result != null && !result.trim().equals("") && !result.trim().equals("[]")) {
+//                    SharedPreferencesUtil.getInstance().putString(SharedPreferencesUtil.KEY_WATER_ALL_ROADS, result);
+//                }
 
             }
         });

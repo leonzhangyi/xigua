@@ -7,15 +7,20 @@ import com.trello.rxlifecycle3.LifecycleTransformer;
 import com.water.melon.application.MyApplication;
 import com.water.melon.base.mvp.BaseNetView;
 import com.water.melon.base.net.BaseRequest;
+import com.water.melon.net.bean.AddVipBean;
+import com.water.melon.net.bean.AdvBean;
 import com.water.melon.net.bean.AgentBean;
+import com.water.melon.net.bean.AgentCodeHisBean;
 import com.water.melon.net.bean.AgentUserBean;
 import com.water.melon.net.bean.CreateCodeBean;
 import com.water.melon.net.bean.FeedBean;
 import com.water.melon.net.bean.GetVideosRequest;
 import com.water.melon.net.bean.MyAgentBean;
+import com.water.melon.net.bean.MyMoneyBean;
 import com.water.melon.net.bean.NetResourceRequest;
 import com.water.melon.net.bean.TabBean;
 import com.water.melon.net.utils.AESCipherforJiaMi;
+import com.water.melon.ui.home.HomeBean;
 import com.water.melon.ui.me.vip.VipBean;
 import com.water.melon.ui.netresource.NetResoutVideoInfo;
 import com.water.melon.ui.netresource.SearchVideoInfoBean;
@@ -257,6 +262,7 @@ public class ApiImp {
         params.put(NetConstant.XG_CLIENT, NetConstant.XG_ANDROID);
         params.put(NetConstant.XG_USER_ID, SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_USER_ID, NetConstant.XG_DEF_USER_ID));
         params.put(NetConstant.XG_CHANNEL_ID, "6DNVZ8R0XYIBGS1C");
+//        params.put(NetConstant.XG_CHANNEL_ID, "B14X36VC8DGPZSQK");
         params.put(NetConstant.XG_APP_VERSION, XGUtil.getCurrentAppVersion(MyApplication.getContext()));
         return params;
     }
@@ -333,6 +339,15 @@ public class ApiImp {
         params.put(NetConstant.XG_ROWS, request.getRows() + "");
         params.putAll(getDefMap());
         baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_HOME_BANNEL, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
+    }
+
+    //广告点击
+    public void doClickAdv(AdvBean request, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("adno", request.getAdno() + "");
+        params.put("location_id", request.getLocation_id() + "");
+        params.putAll(getDefMap());
+        baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_CLICK_BANNEL, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
     }
 
     //获取首页通知
@@ -471,6 +486,16 @@ public class ApiImp {
 
     }
 
+    //获取支付订单
+    public void getMDoPay(String orderid, String method, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("order_id", orderid);
+        params.put("method", method);
+        params.putAll(getDefMap());
+        baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_CASH_MPAY, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
+
+    }
+
     //代理中心
     public void getAgentInfo(BaseRequest<VipBean> request, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
         Map<String, Object> params = new HashMap<>();
@@ -488,6 +513,25 @@ public class ApiImp {
         params.put("tel", request.getParameter().getTel());
         params.putAll(getDefMap());
         baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_PROXY_APPLY, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
+
+    }
+
+    //申请代理
+    public void getSubMoney(String mobile,String money,String code, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("mobile", mobile);
+        params.put("money", money);
+        params.put("code", code);
+        params.putAll(getDefMap());
+        baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_PROXY_withdraw, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
+
+    }
+
+    //代理申请记录
+    public void getApplyHistory(BaseRequest<AgentBean> request, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
+        Map<String, Object> params = new HashMap<>();
+        params.putAll(getDefMap());
+        baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_PROXY_HISTORY, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
 
     }
 
@@ -517,6 +561,22 @@ public class ApiImp {
     }
 
 
+    public void getCodeList(AgentCodeHisBean agentCodeHisBean, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("status", agentCodeHisBean.getStatus());
+        params.put("handle", agentCodeHisBean.getHandle());
+        params.put("type", agentCodeHisBean.getType());
+        params.put("keyword", agentCodeHisBean.getKeyword());
+        params.put("page", agentCodeHisBean.getPage());
+        params.put("rows", agentCodeHisBean.getRows());
+
+        params.putAll(getDefMap());
+        LogUtil.e("getCodeList", "params = " + params.toString());
+        baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_PROXY_CDDE, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
+
+    }
+
+
     //获取代理用户
     public void getAgentUser(BaseRequest<AgentUserBean> request, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
         Map<String, Object> params = new HashMap<>();
@@ -531,6 +591,49 @@ public class ApiImp {
         baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_DATA_USERS, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
 
     }
+
+    //获取代理用户
+    public void getTotalUser(BaseRequest<AgentUserBean> request, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("page", request.getPage());
+        params.put("rows", request.getRows());
+        params.put("start_date", request.getParameter().getStart_date());
+        params.put("stop_date", request.getParameter().getEnd_date());
+
+
+        params.putAll(getDefMap());
+        baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_DATA_USERS_DATA, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
+
+    }
+
+    //获取代理用户
+    public void getProfit(BaseRequest<MyMoneyBean> request, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("handle", request.getParameter().getHandle());
+        params.put("type", request.getParameter().getType());
+        params.put("page", request.getPage());
+        params.put("rows", request.getRows());
+        params.put("start_date", request.getParameter().getStart_date());
+        params.put("stop_date", request.getParameter().getStop_date());
+        params.put("keyword", request.getParameter().getKeyword());
+
+        params.putAll(getDefMap());
+        baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_DATA_PROFIT, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
+
+    }
+
+    //提现记录
+    public void getMoneyHistory(MyMoneyBean request, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("page", request.getPage());
+        params.put("rows", request.getRows());
+        params.put("status", request.getType());
+
+        params.putAll(getDefMap());
+        baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_WITHDRAW_HISTORY, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
+
+    }
+
 
     public void getMygent(BaseRequest request, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
         Map<String, Object> params = new HashMap<>();
@@ -561,6 +664,26 @@ public class ApiImp {
         baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_PROXY_OPEN, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
     }
 
+    public void addVip(AddVipBean request, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("handle", request.getHandle());
+        params.put("type", request.getType());
+        params.put("other_id", request.getOther_id());
+        params.put("code", request.getCode());
+        params.putAll(getDefMap());
+        baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_ADD_VIP, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
+    }
+
+    public void doAgentSet(MyAgentBean request, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("handle", request.getHandle());
+        params.put("prices", request.getPrices());
+        params.put("tel", request.getTel());
+        params.put("wx", request.getWx());
+        params.putAll(getDefMap());
+        baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_PROXY_SETUP, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
+    }
+
 
     public void addFeedback(FeedBean request, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
         Map<String, Object> params = new HashMap<>();
@@ -570,12 +693,39 @@ public class ApiImp {
         baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_APP_SUBMIT, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
     }
 
+    public void getFeekLsit(BaseRequest request, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("page", request.getPage());
+        params.put("rows", request.getRows());
+        params.putAll(getDefMap());
+        baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_APP_FEEDBACK, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
+    }
+
     public void getRows(BaseRequest request, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
         Map<String, Object> params = new HashMap<>();
         params.put("page", "1");
         params.put("rows", "100");
         params.putAll(getDefMap());
         baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_HOME_RESOLVER, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
+    }
+
+    public void doWrite(HomeBean homeBean, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("title", homeBean.getTitle());
+        params.put("url", homeBean.getUrl());
+        params.put("provide", homeBean.getName());
+        params.put("poster", "");
+        params.putAll(getDefMap());
+        baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_HOME_WRITE, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
+    }
+
+    public void getHistoryDate(BaseRequest request, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("type", "1");  //类型1vip视频2片库视频
+        params.put("page", request.getPage());
+        params.put("rows", request.getRows());
+        params.putAll(getDefMap());
+        baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_HITSOTY_DATE, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
     }
 
     public void login(String mobile, String password, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
@@ -594,4 +744,11 @@ public class ApiImp {
         params.putAll(getDefMap());
         baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_USER_REGIST, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
     }
+
+    public void getShareDate(LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
+        Map<String, Object> params = new HashMap<>();
+        params.putAll(getDefMap());
+        baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_APP_SHARE, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
+    }
+
 }

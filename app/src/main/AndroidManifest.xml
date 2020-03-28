@@ -69,6 +69,12 @@
             android:configChanges="orientation|screenSize"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.welfare.WelfH5Activity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+
 
         <!--        搜索界面-->
         <activity
@@ -143,6 +149,51 @@
             android:launchMode="singleTop" />
         <activity
             android:name=".ui.login.RegistActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.me.feek.history.FeekHistoryActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.me.feek.history.FeekItemActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.me.agent.setting.SettingAgentActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.me.agent.applyhistory.AgentApplyHistroyActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.me.agent.usercode.AgentCodeActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.me.agent.myuser.total.MyUserTotal"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.me.agent.mymoney.MyMoneyActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.me.agent.mymoney.history.MyMoneyHistory"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.me.agent.mymoney.submit.MyMoneySubmitAcivity"
             android:configChanges="orientation|screenSize"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop" />

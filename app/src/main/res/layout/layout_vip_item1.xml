@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_10"
+    android:layout_marginRight="@dimen/size_dp_11"
+    android:background="@drawable/layout_vip_item_bac"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10">
+
+        <TextView
+            android:id="@+id/layout_vip_item_nanme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:text="临时卡"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_sp_18" />
+
+        <TextView
+            android:id="@+id/layout_vip_item_time"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="有效期1天"
+            android:textColor="@color/black_80"
+            android:textSize="@dimen/sp_14" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10">
+
+        <TextView
+            android:id="@+id/layout_vip_item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:text="¥6.00"
+            android:textColor="#FFFA6400"
+            android:textSize="@dimen/size_sp_18" />
+
+        <RelativeLayout
+            android:id="@+id/layout_vip_item_pay"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_width="51dp"
+            android:layout_height="@dimen/size_dp_25"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/layout_vip_item_bug_bac">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="购买"
+                android:layout_centerInParent="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_sp_12" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</LinearLayout>

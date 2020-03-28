@@ -42,7 +42,7 @@ public class MyAgentPresent extends BasePresenterParent implements MyAgentContra
             request = new BaseRequest();
             request.setRows(20);
         }
-        request.setParameter(page);
+        request.setPage(page);
 
 
         ApiImp.getInstance().getMygent(request, getLifecycleTransformerByStopToActivity(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
@@ -62,8 +62,11 @@ public class MyAgentPresent extends BasePresenterParent implements MyAgentContra
                 String result = data.getResult();
                 List<MyAgentBean> advBeans = new ArrayList<>();
                 if (result != null && !result.equals("") && !result.equals("[]")) {
-                    advBeans = GsonUtil.toClass(result, new TypeToken<List<MyAgentBean>>() {
-                    }.getType());
+                    MyAgentBean.MyAgent myAgent = (MyAgentBean.MyAgent) GsonUtil.toClass(result, MyAgentBean.MyAgent.class);
+                    if (myAgent != null && myAgent.getList() != null) {
+                        advBeans = myAgent.getList();
+                    }
+
                 }
                 mView.setAgentDate(advBeans, false);
             }

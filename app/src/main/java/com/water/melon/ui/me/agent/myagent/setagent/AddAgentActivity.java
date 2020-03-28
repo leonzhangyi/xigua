@@ -13,6 +13,7 @@ import com.water.melon.utils.ToastUtil;
 import com.water.melon.utils.XGUtil;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class AddAgentActivity extends BaseActivity implements AddAgentContract.View {
     @BindView(R.id.add_agent_name_et)
@@ -52,11 +53,10 @@ public class AddAgentActivity extends BaseActivity implements AddAgentContract.V
 
     @Override
     protected void onClickTitleBack() {
-        setToolBarLeftView(R.mipmap.back_left);
-        setTitleName("设置代理");
-        setTitleNameColor(R.color.black);
+
     }
 
+    @OnClick({R.id.toolbar_left_tv,R.id.add_agent_sure_tv})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.toolbar_left_tv:
@@ -96,10 +96,13 @@ public class AddAgentActivity extends BaseActivity implements AddAgentContract.V
 
     @Override
     public void initView() {
+        setToolBarLeftView(R.mipmap.back_left);
+        setTitleName("设置代理");
+        setTitleNameColor(R.color.black);
         if (state == LOOK_AGENT) {
             //TODO拉取用户信息
             add_agent_sure_tv.setTextColor(MyApplication.getColorByResId(R.color.black_D9));
-            add_agent_sure_tv.setBackgroundColor(MyApplication.getColorByResId(R.drawable.layout_agent_pay_back_1));
+            add_agent_sure_tv.setBackgroundColor(R.drawable.layout_agent_pay_back_1);
             add_agent_sure_tv.setClickable(false);
 
             add_agent_name_et.setEnabled(false);

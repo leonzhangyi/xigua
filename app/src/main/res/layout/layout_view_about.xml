@@ -6,14 +6,33 @@
     android:layout_marginLeft="@dimen/size_dp_50"
     android:background="@drawable/vip_pay_dialog_bac"
     android:orientation="vertical">
+<!--    android:background="@drawable/vip_pay_dialog_bac"-->
+<!--    android:background="@mipmap/about_bac"-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="188dp">
+        <ImageView
+            android:src="@mipmap/about_bac"
+            android:scaleType="fitXY"
+            android:layout_width="match_parent"
+            android:layout_height="188dp"/>
+        <ImageView
+            android:id="@+id/me_about_close"
+            android:padding="@dimen/dp_10"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/about_close"/>
+    </RelativeLayout>
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginTop="@dimen/size_dp_14"
         android:text="关于我们"
-        android:textColor="@color/black"
+        android:textColor="@color/black_D9"
         android:textSize="@dimen/sp_14" />
 
     <TextView
@@ -21,8 +40,8 @@
         android:layout_marginRight="@dimen/size_dp_16"
         android:layout_marginLeft="@dimen/size_dp_16"
         android:layout_marginTop="@dimen/dp_10"
-        android:textColor="@color/black"
-        android:textSize="@dimen/sp_14"
+        android:textColor="@color/black_D9"
+        android:textSize="@dimen/size_sp_12"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="VIP你妹为您提供专属影视服务，更多热门影片随时更新，如有建议欢迎反馈，感谢您的支持！"/>

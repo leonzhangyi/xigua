@@ -17,9 +17,10 @@
 
 
     <LinearLayout
+        android:layout_marginLeft="@dimen/size_dp_20"
+        android:layout_toRightOf="@+id/pay_dialog_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:orientation="horizontal">
 
         <com.sunfusheng.GlideImageView

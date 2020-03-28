@@ -12,6 +12,7 @@ import com.water.melon.net.BaseApiResultData;
 import com.water.melon.net.ErrorResponse;
 import com.water.melon.net.IApiSubscriberCallBack;
 import com.water.melon.net.NetConstant;
+import com.water.melon.net.bean.AdvBean;
 import com.water.melon.net.bean.InitResultBean;
 import com.water.melon.net.utils.AESCipherforJiaMi;
 import com.water.melon.presenter.contract.MainContract;
@@ -31,6 +32,8 @@ import com.water.melon.utils.update.MyUpdateNotifier;
 import org.lzh.framework.updatepluginlib.UpdateConfig;
 import org.lzh.framework.updatepluginlib.base.UpdateParser;
 import org.lzh.framework.updatepluginlib.model.Update;
+
+import java.util.List;
 
 import androidx.fragment.app.Fragment;
 
@@ -154,6 +157,35 @@ public class MainPresent extends BasePresenterParent implements MainContract.Pre
 
                   }
 
+            }
+        });
+
+    }
+
+    @Override
+    public void doAdvClick(AdvBean advBean) {
+        ApiImp.getInstance().doClickAdv(advBean, getLifecycleTransformerByStopToActivity(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
+            @Override
+            public void onCompleted() {
+                mView.showLoadingDialog(false);
+            }
+
+            @Override
+            public void onError(ErrorResponse error) {
+//                if (error.getCode() != 2) {
+//                    ToastUtil.showToastLong(error.getErr());
+//                }
+            }
+
+            @Override
+            public void onNext(BaseApiResultData data) {
+                LogUtil.e(TAG, "doClickAdv.getResult() = " + data.getResult());
+//                String result = data.getResult();
+//                if (result != null && !result.equals("") && !result.equals("[]")) {
+//                    List<AdvBean> advBeans = GsonUtil.toClass(result, new TypeToken<List<AdvBean>>() {
+//                    }.getType());
+//                    mView.setHomeAdv(advBeans);
+//                }
             }
         });
 

@@ -142,4 +142,33 @@ public class HomePresent extends BasePresenterParent implements HomeContract.Pre
     }
 
 
+    @Override
+    public void doAdvClick(AdvBean advBean) {
+        ApiImp.getInstance().doClickAdv(advBean, getLifecycleTransformerByStopToFragment(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
+            @Override
+            public void onCompleted() {
+                mView.showLoadingDialog(false);
+            }
+
+            @Override
+            public void onError(ErrorResponse error) {
+//                if (error.getCode() != 2) {
+//                    ToastUtil.showToastLong(error.getErr());
+//                }
+            }
+
+            @Override
+            public void onNext(BaseApiResultData data) {
+                LogUtil.e(TAG, "doClickAdv.getResult() = " + data.getResult());
+//                String result = data.getResult();
+//                if (result != null && !result.equals("") && !result.equals("[]")) {
+//                    List<AdvBean> advBeans = GsonUtil.toClass(result, new TypeToken<List<AdvBean>>() {
+//                    }.getType());
+//                    mView.setHomeAdv(advBeans);
+//                }
+            }
+        });
+
+    }
+
 }

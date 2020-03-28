@@ -15,6 +15,7 @@
     <color name="black_33">#333333</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white_1">#FFFFFF</color>
+    <color name="white_D9">#D9FFFFFF</color>
     <color name="main_black">#111112</color>
 
 
@@ -53,4 +54,8 @@
 
     <color name="color_bac_un_sel">#ffe5e5e5</color>
     <color name="web_road_bac">#FF888888</color>
+
+
+    <color name="agent_setting_text">#FF6D7278</color>
+    <color name="my_money_type">#FFD8D8D7</color>
 </resources>

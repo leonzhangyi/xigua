@@ -7,12 +7,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_dp_30"
+        android:layout_marginTop="@dimen/size_dp_2"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/agent_user_name"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/size_dp_2"
             android:layout_weight="1.36"
             android:background="#ffe5e5e5"
             android:gravity="center"
@@ -24,6 +26,7 @@
             android:id="@+id/agent_user_type"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/size_dp_2"
             android:layout_weight="1"
             android:background="#fff1f2f5"
             android:gravity="center"
@@ -35,6 +38,7 @@
             android:id="@+id/agent_user_start_time"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/size_dp_2"
             android:layout_weight="1"
             android:background="#ffe5e5e5"
             android:gravity="center"
@@ -46,6 +50,7 @@
             android:id="@+id/agent_user_end_time"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/size_dp_2"
             android:layout_weight="1"
             android:background="#fff1f2f5"
             android:gravity="center"
@@ -60,7 +65,7 @@
             android:layout_weight="1"
             android:background="#fff1f2f5"
             android:gravity="center"
-            android:text="操作"
+            android:text="增加会员"
             android:textColor="#FF0091FF"
             android:textSize="@dimen/size_sp_10" />
     </LinearLayout>

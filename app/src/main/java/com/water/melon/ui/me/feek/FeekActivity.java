@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.water.melon.R;
 import com.water.melon.base.ui.BaseActivity;
+import com.water.melon.ui.me.feek.history.FeekHistoryActivity;
 import com.water.melon.utils.SharedPreferencesUtil;
 import com.water.melon.utils.ToastUtil;
 import com.water.melon.utils.XGUtil;
@@ -48,11 +49,11 @@ public class FeekActivity extends BaseActivity implements FeekContract.View {
         setToolBarLeftView(R.mipmap.back_left);
         setTitleName("意见反馈");
         setTitleNameColor(R.color.black);
-//        setToolBarRightView("反馈记录", R.color.net_resource_item_tv);
+        setToolBarRightView("反馈记录", R.color.net_resource_item_tv);
 
     }
 
-    @OnClick({R.id.toolbar_left_tv, R.id.layout_feek_sub, R.id.layout_feek_weixin_copy,R.id.layout_feek_qq_copy})
+    @OnClick({R.id.toolbar_left_tv, R.id.layout_feek_sub, R.id.layout_feek_weixin_copy, R.id.layout_feek_qq_copy, R.id.toolbar_right_tv})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.toolbar_left_tv:
@@ -80,6 +81,10 @@ public class FeekActivity extends BaseActivity implements FeekContract.View {
                 if (qq != null && !qq.trim().equals("")) {
                     XGUtil.copyText(this, qq);
                 }
+                break;
+
+            case R.id.toolbar_right_tv:
+                redirectActivity(FeekHistoryActivity.class);
                 break;
         }
 

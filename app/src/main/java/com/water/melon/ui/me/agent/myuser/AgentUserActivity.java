@@ -1,6 +1,8 @@
 package com.water.melon.ui.me.agent.myuser;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -21,9 +23,16 @@ import com.water.melon.R;
 import com.water.melon.application.MyApplication;
 import com.water.melon.base.net.BaseRequest;
 import com.water.melon.base.ui.BaseActivity;
+import com.water.melon.net.bean.AddVipBean;
 import com.water.melon.net.bean.AgentUserBean;
+import com.water.melon.net.bean.MyAgentBean;
+import com.water.melon.ui.in.AdapterItemClick;
+import com.water.melon.ui.in.AgentUserItemClick;
+import com.water.melon.ui.me.agent.myuser.total.MyUserTotal;
+import com.water.melon.ui.me.vip.VipBean;
 import com.water.melon.utils.ToastUtil;
 import com.water.melon.utils.XGUtil;
+import com.water.melon.views.AddVipDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -81,13 +90,17 @@ public class AgentUserActivity extends BaseActivity implements AgentUserContract
         initTimePicker();
         endTimeTv.setText(getCurrentTime());
         startTimeTv.setText(getCurrentTime());
+
+        AddVipBean vipBean = new AddVipBean();
+        vipBean.setHandle("before");
+        present.addView(vipBean);
     }
 
     private int timeCode = 1;
     private AgentUserBean userBean = new AgentUserBean();
     private BaseRequest<AgentUserBean> baseRequest = new BaseRequest<>();
 
-    @OnClick({R.id.toolbar_left_tv, R.id.agent_user_start_time, R.id.agent_user_end_time, R.id.agent_my_user_all, R.id.agent_user_search,R.id.agent_user_one_search_rl})
+    @OnClick({R.id.toolbar_right_tv, R.id.toolbar_left_tv, R.id.agent_user_start_time, R.id.agent_user_end_time, R.id.agent_my_user_all, R.id.agent_user_search, R.id.agent_user_one_search_rl})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.agent_user_start_time:
@@ -129,7 +142,7 @@ public class AgentUserActivity extends BaseActivity implements AgentUserContract
 
                 if (XGUtil.timeCompare(userBean.getStart_date(), userBean.getEnd_date()) == 1) {
                     ToastUtil.showToastLong("请输入正确的时间进行筛选");
-                }else{
+                } else {
                     present.getAgentUser(baseRequest);
                 }
 
@@ -151,6 +164,9 @@ public class AgentUserActivity extends BaseActivity implements AgentUserContract
                 }
 
                 break;
+            case R.id.toolbar_right_tv:
+                redirectActivity(MyUserTotal.class);
+                break;
         }
     }
 
@@ -166,6 +182,7 @@ public class AgentUserActivity extends BaseActivity implements AgentUserContract
 
     private int page = 1;
     private AgentUserAdapter agentUserAdapter;
+    private AddVipDialog addVipDialog;
 
     @Override
     public void initView() {
@@ -178,6 +195,41 @@ public class AgentUserActivity extends BaseActivity implements AgentUserContract
             }
         });
 
+        agentUserAdapter.setOnItemClick(new AgentUserItemClick() {
+            @Override
+            public void itemClick(AgentUserBean.UserInfo userInfo) {
+                if (addVipDialog == null) {
+                    addVipDialog = new AddVipDialog(AgentUserActivity.this, R.style.dialog);
+                    addVipDialog.setOnChooesClick(new AdapterItemClick() {
+                        @Override
+                        public void onItemClick(int position) {
+                            showSexChooseDialog();
+                        }
+                    });
+
+                    addVipDialog.setOnChooesClick2(new AdapterItemClick() {
+                        @Override
+                        public void onItemClick(int position) {
+                            AddVipBean vipBean = new AddVipBean();
+                            vipBean.setHandle("after");
+                            vipBean.setType(vips.get(chooesPosition).getType());
+                            vipBean.setCode(addVipDialog.layout_add_vip_et.getText().toString());
+                            vipBean.setOther_id(userInfo.getId());
+                            present.addView(vipBean);
+
+                        }
+                    });
+                }
+                addVipDialog.show();
+
+                if (vips != null && vips.size() > 0) {
+                    if (addVipDialog.layout_agent_create_code_code_tv != null) {
+                        addVipDialog.layout_agent_create_code_code_tv.setText(vips.get(0).getTitle());
+                    }
+
+                }
+            }
+        });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(agentUserAdapter);
@@ -301,4 +353,42 @@ public class AgentUserActivity extends BaseActivity implements AgentUserContract
 
 
     }
+
+    List<MyAgentBean.Vips> vips;
+
+    @Override
+    public void setVips(List<MyAgentBean.Vips> vips) {
+        if (vips != null && vips.size() > 0) {
+            this.vips = vips;
+            if (addVipDialog != null) {
+                if (addVipDialog.layout_agent_create_code_code_tv != null) {
+                    addVipDialog.layout_agent_create_code_code_tv.setText(vips.get(0).getTitle());
+                }
+            }
+            sexArry = new String[vips.size()];
+            for (int i = 0; i < vips.size(); i++) {
+                sexArry[i] = vips.get(i).getTitle();
+            }
+        }
+    }
+
+    private String[] sexArry;
+    private int chooesPosition;
+
+    public void showSexChooseDialog() {
+        AlertDialog.Builder builder3 = new AlertDialog.Builder(this);// 自定义对话框
+        builder3.setSingleChoiceItems(sexArry, 0, new DialogInterface.OnClickListener() {// 2默认的选中
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {// which是被选中的位置
+                // showToast(which+"");
+                addVipDialog.layout_agent_create_code_code_tv.setText(sexArry[which]);
+                chooesPosition = which;
+//                changesex_textview.setText(sexArry[which]);
+                dialog.dismiss();// 随便点击一个item消失对话框，不用点击确认取消
+            }
+        });
+        builder3.show();// 让弹出框显示
+    }
+
 }

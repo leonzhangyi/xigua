@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size_dp_20"
+        android:text="提现金额"
+        android:textColor="@color/black_80"
+        android:textSize="@dimen/sp_14" />
+
+
+    <TextView
+        android:id="@+id/sub_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size_dp_20"
+        android:text="¥0.00"
+        android:textColor="@color/black"
+        android:textSize="36sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/size_dp_20"
+        android:text="选择提现方式"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="#FFFA6400"
+        android:paddingLeft="@dimen/size_dp_8"
+        android:paddingTop="@dimen/size_dp_5"
+        android:paddingRight="@dimen/size_dp_8"
+        android:paddingBottom="@dimen/size_dp_5"
+        android:text="提现到支付宝"
+        android:textColor="@color/white" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/size_dp_20"
+        android:text="填写提现信息"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_14" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_dp_30"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/size_dp_20"
+        android:layout_marginRight="@dimen/size_dp_16"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="提现账号"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_sp_16" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:background="@drawable/video_download_main_page_back">
+
+            <EditText
+                android:id="@+id/money_sub_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/size_dp_6"
+                android:background="@null"
+                android:hint="填写支付宝账号"
+                android:textColor="@color/black_D9"
+                android:textColorHint="@color/black_40"
+                android:textSize="@dimen/size_sp_12" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_dp_30"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/size_dp_20"
+        android:layout_marginRight="@dimen/size_dp_16"
+        android:orientation="horizontal">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="账号姓名"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_sp_16" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:background="@drawable/video_download_main_page_back">
+
+            <EditText
+                android:id="@+id/money_sub_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/size_dp_6"
+                android:background="@null"
+                android:hint="填写账号对应的开户姓名"
+                android:textColor="@color/black_D9"
+                android:textColorHint="@color/black_40"
+                android:textSize="@dimen/size_sp_12" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_dp_30"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/size_dp_20"
+        android:layout_marginRight="@dimen/size_dp_16"
+        android:orientation="horizontal">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="手机号码"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_sp_16" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:background="@drawable/video_download_main_page_back">
+
+            <EditText
+                android:id="@+id/money_sub_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/size_dp_6"
+                android:background="@null"
+                android:hint="输入绑定支付宝的手机号"
+                android:inputType="number"
+                android:maxEms="11"
+                android:textColor="@color/black_D9"
+                android:textColorHint="@color/black_40"
+                android:textSize="@dimen/size_sp_12" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_dp_30"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/size_dp_20"
+        android:layout_marginRight="@dimen/size_dp_16"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/layout_my_money_sub_code_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:text="验证码："
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_sp_16" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_toLeftOf="@+id/layout_my_money_sub_code_rl"
+            android:layout_toRightOf="@+id/layout_my_money_sub_code_tv"
+            android:background="@drawable/video_download_main_page_back">
+
+            <EditText
+                android:id="@+id/money_sub_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/size_dp_6"
+                android:background="@null"
+                android:hint="请输入验证码"
+                android:inputType="number"
+                android:textColor="@color/black_D9"
+                android:textColorHint="@color/black_40"
+                android:textSize="@dimen/size_sp_12" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_my_money_sub_code_rl"
+            android:layout_width="82dp"
+            android:layout_height="@dimen/size_dp_25"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/h5_webview_play_bac">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="获取验证码"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_sp_12" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/my_money_sub"
+        android:layout_width="141dp"
+        android:layout_height="@dimen/size_dp_44"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size_dp_30"
+        android:background="@drawable/layout_agent_pay_back">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="确认提现"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_sp_18" />
+
+    </RelativeLayout>
+</LinearLayout>

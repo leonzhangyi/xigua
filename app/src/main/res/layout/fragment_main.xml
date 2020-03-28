@@ -5,11 +5,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include layout="@layout/include_toolbar_null" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/size_dp_16"
-        android:layout_marginTop="@dimen/size_dp_30"
         android:layout_marginRight="@dimen/size_dp_16">
 
         <ImageView
@@ -20,12 +21,21 @@
             android:layout_centerVertical="true"
             android:src="@drawable/btn_vip" />
 
+        <ImageView
+            android:layout_marginRight="@dimen/size_dp_16"
+            android:layout_marginLeft="@dimen/size_dp_16"
+            android:id="@+id/mian_history"
+            android:layout_toLeftOf="@+id/main_vip"
+            android:layout_width="20dp"
+            android:layout_height="@dimen/size_dp_20"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/me_history" />
+
         <RelativeLayout
             android:id="@+id/fragment_main_search"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_dp_30"
-            android:layout_marginRight="@dimen/size_dp_16"
-            android:layout_toLeftOf="@+id/main_vip"
+            android:layout_toLeftOf="@+id/mian_history"
             android:background="@drawable/home_search">
 
             <ImageView
@@ -35,6 +45,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/size_dp_10"
                 android:src="@mipmap/icon_search" />
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -100,18 +111,18 @@
         android:orientation="horizontal">
 
         <TextView
-            android:text="@string/home_vip_tv"
-            android:textSize="@dimen/size_sp_16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black" />
+            android:text="@string/home_vip_tv"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_sp_16" />
 
         <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/size_dp_10"
-            android:src="@mipmap/gray_back_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:src="@mipmap/gray_back_right" />
     </LinearLayout>
 
 
@@ -119,9 +130,10 @@
         android:id="@+id/fragment_main_sf"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_marginLeft="@dimen/size_dp_32"
-        android:layout_marginRight="32dp">
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fragment_main_rv"

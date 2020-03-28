@@ -50,7 +50,7 @@ public class MyAgentActivity extends BaseActivity implements MyAgentContract.Vie
 
     }
 
-    @OnClick(R.id.toolbar_right_tv)
+    @OnClick({R.id.toolbar_right_tv, R.id.toolbar_left_tv})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.toolbar_right_tv:

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/size_dp_2"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_dp_30"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/layout_code_user_code"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/size_dp_2"
+            android:layout_weight="10"
+            android:background="#ffe5e5e5"
+            android:gravity="center"
+            android:text="激活码列表"
+            android:textColor="@color/black_D9"
+            android:textSize="@dimen/size_sp_10" />
+
+        <TextView
+            android:id="@+id/layout_code_user_type"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/size_dp_2"
+            android:layout_weight="5"
+            android:background="#fff1f2f5"
+            android:gravity="center"
+            android:text="类型"
+            android:textColor="@color/black_D9"
+            android:textSize="@dimen/size_sp_10" />
+
+        <TextView
+            android:id="@+id/layout_code_user_time"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/size_dp_2"
+            android:layout_weight="8"
+            android:background="#ffe5e5e5"
+            android:gravity="center"
+            android:text="兑换日期"
+            android:textColor="@color/black_D9"
+            android:textSize="@dimen/size_sp_10" />
+
+        <TextView
+            android:id="@+id/layout_code_user_user"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/size_dp_2"
+            android:layout_weight="9"
+            android:background="#fff1f2f5"
+            android:gravity="center"
+            android:text="使用人"
+            android:textColor="@color/black_D9"
+            android:textSize="@dimen/size_sp_10" />
+
+        <TextView
+            android:id="@+id/layout_code_user_handler"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="#fff1f2f5"
+            android:gravity="center"
+            android:text="复制"
+            android:textColor="#FF0091FF"
+            android:textSize="@dimen/size_sp_10" />
+    </LinearLayout>
+</LinearLayout>

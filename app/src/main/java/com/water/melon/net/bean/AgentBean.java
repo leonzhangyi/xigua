@@ -14,6 +14,9 @@ public class AgentBean extends BaseResponse {
     private String tel;
     private String profit;
     private String status;
+    private String created_time;
+    private String money;
+
 
     public String getId() {
         return id;
@@ -95,6 +98,21 @@ public class AgentBean extends BaseResponse {
         this.status = status;
     }
 
+    public String getCreated_time() {
+        return created_time;
+    }
+
+    public void setCreated_time(String created_time) {
+        this.created_time = created_time;
+    }
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
 
     //        "id": 8,
 //            "title": "代理商",

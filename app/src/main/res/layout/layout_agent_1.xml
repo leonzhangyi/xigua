@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff1f2f5"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/layout_agent_toorbar"
+            layout="@layout/include_toolbar" />
+
+        <ImageView
+            android:id="@+id/layout_agent_bac_iv"
+            android:layout_width="match_parent"
+            android:layout_height="176dp"
+            android:layout_below="@+id/layout_agent_toorbar"
+            android:scaleType="fitXY"
+            android:src="@mipmap/agent_pic" />
+
+
+        <LinearLayout
+            android:id="@+id/agent_become_agent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_agent_bac_iv"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size_dp_16"
+                    android:text="申请成为代理"
+                    android:textColor="@color/black_D9"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:id="@+id/layout_agent_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:paddingLeft="@dimen/size_dp_16"
+                    android:paddingTop="@dimen/dp_10"
+                    android:paddingRight="@dimen/size_dp_16"
+                    android:paddingBottom="@dimen/dp_10"
+                    android:text="申请记录"
+                    android:textColor="@color/net_resource_item_tv"
+                    android:textSize="@dimen/sp_14" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="@dimen/size_dp_41"
+                    android:text="姓        名："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_18" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="@dimen/size_dp_41"
+                    android:background="@drawable/login_phone_bac">
+
+                    <EditText
+                        android:id="@+id/layout_agent_name_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/size_dp_5"
+                        android:layout_marginRight="@dimen/size_dp_5"
+                        android:background="@null"
+                        android:textColor="@color/black_D9"
+                        android:textSize="@dimen/size_sp_15" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="@dimen/size_dp_41"
+                    android:text="联系电话："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_18" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="@dimen/size_dp_20"
+                    android:layout_marginRight="@dimen/size_dp_41"
+                    android:background="@drawable/login_phone_bac">
+
+                    <EditText
+                        android:id="@+id/layout_agent_phone_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/size_dp_5"
+                        android:layout_marginRight="@dimen/size_dp_5"
+                        android:background="@null"
+                        android:inputType="number"
+                        android:textColor="@color/black_D9"
+                        android:textSize="@dimen/size_sp_15" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/agent_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/size_dp_20"
+                android:text="代理费用108.00"
+                android:textColor="@color/black_D9"
+                android:visibility="gone" />
+
+
+            <TextView
+                android:id="@+id/agent_payment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/size_dp_20"
+                android:background="@drawable/layout_agent_pay_back"
+                android:paddingLeft="@dimen/size_dp_16"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingRight="@dimen/size_dp_16"
+                android:paddingBottom="@dimen/dp_10"
+                android:text="支付¥108.00并申请"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_sp_18" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_dp_10"
+                android:layout_marginTop="@dimen/size_dp_20"
+                android:background="#fff1f2f5" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/agent_become_agent"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/size_dp_20"
+            android:paddingBottom="@dimen/size_dp_20">
+
+            <LinearLayout
+                android:id="@+id/layout_me_page_rl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/anget_key" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/size_dp_20"
+                    android:text="生成激活码"
+                    android:textColor="@color/black_D9"
+                    android:textSize="@dimen/sp_14" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_me_agent_rl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/agent_agent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/size_dp_20"
+                    android:text="我的代理"
+                    android:textColor="@color/black_D9"
+                    android:textSize="@dimen/sp_14" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/layout_me_user_rl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/agent_user" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/size_dp_20"
+                    android:text="我的用户"
+                    android:textColor="@color/black_D9"
+                    android:textSize="@dimen/sp_14" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/layout_me_price_rl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/agent_price" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/size_dp_20"
+                    android:text="我的收益"
+                    android:textColor="@color/black_D9"
+                    android:textSize="@dimen/sp_14" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</ScrollView>

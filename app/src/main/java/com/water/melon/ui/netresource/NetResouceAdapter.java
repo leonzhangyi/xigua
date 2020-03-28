@@ -40,6 +40,7 @@ public class NetResouceAdapter extends FragmentStatePagerAdapter {
             request.setSmallName(smallTabId.get(i).getName());
             bundle.putSerializable(XGConstant.KEY_DATA, request);
             bundle.putBoolean(XGConstant.KEY_DATA_2, i == 0 && smallTabId.get(i).getPid().equals(NetResouceFragment.First_Big_Tab_Id));
+            bundle.putInt(XGConstant.KEY_DATA_my_positon,i);
             netResouceItemFragment.setArguments(bundle);
             fragments.add(netResouceItemFragment);
         }

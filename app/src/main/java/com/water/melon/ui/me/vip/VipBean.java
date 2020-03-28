@@ -91,6 +91,7 @@ public class VipBean {
         private String method;
         private String title;
         private String icon;
+        private boolean isSelct;
 
 //         "id": 1,
 //                "method": 0,
@@ -128,6 +129,14 @@ public class VipBean {
 
         public void setIcon(String icon) {
             this.icon = icon;
+        }
+
+        public boolean isSelct() {
+            return isSelct;
+        }
+
+        public void setSelct(boolean selct) {
+            isSelct = selct;
         }
     }
 }

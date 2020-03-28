@@ -13,6 +13,10 @@ public interface VipContract {
         void doPay(VipBean item);
 
         void doBdVip(CreateCodeBean.UserCodeBean userCodeBean);
+
+        void doCPay(String orderid,String method);
+
+        void updataUserInfo();
     }
 
     interface View extends BaseView<Present> {
@@ -21,6 +25,8 @@ public interface VipContract {
         void setPayMethod(VipBean vipBean);
 
         void updata();
+
+        void doPay(String result);
     }
 
 }

@@ -34,7 +34,7 @@ public class WebPlayRoadAdapter extends BaseQuickAdapter<RoadBean, BaseViewHolde
             web_play_road_item_tv.setTextColor(MyApplication.getColorByResId(R.color.white));
             web_play_road_item_rl.setBackground(MyApplication.getDrawableByResId(R.drawable.layout_web_play_item_sel));
         } else {
-            web_play_road_item_tv.setTextColor(MyApplication.getColorByResId(R.color.web_road_bac));
+            web_play_road_item_tv.setTextColor(MyApplication.getColorByResId(R.color.black_D9));
             web_play_road_item_rl.setBackground(MyApplication.getDrawableByResId(R.drawable.layout_web_play_item));
         }
 

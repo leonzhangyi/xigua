@@ -14,6 +14,7 @@ public class UserBean {
     private String wx;
     private String qq;
     private String help;
+    private String invitation_code;
 
     public String getAvatar_url() {
         return avatar_url;
@@ -111,8 +112,15 @@ public class UserBean {
         this.end_date = end_date;
     }
 
+    public String getInvitation_code() {
+        return invitation_code;
+    }
 
-//"user_id": 16001,
+    public void setInvitation_code(String invitation_code) {
+        this.invitation_code = invitation_code;
+    }
+
+    //"user_id": 16001,
 //        "avatar_url": "http:\/\/38.27.103.12\/static\/images\/avatar\/man-1.png",
 //        "vip": 0,
 //        "nickname": "游客用户",

@@ -98,7 +98,7 @@ public class ItemNetResouceItemAdapter extends BaseRVListAdapter<NetResoutVideoI
 //                itemNetResourceTime.setText(data.getTorrents().getZh().get(data.getTorrents().getZh().size() - 1).getTitle());
 //            }
             itemNetResourceTime.setText(GetTail(data.getSynopsis().trim()));
-            LogUtil.e("testjianjie", "data.getSynopsis().trim() = " + data.getSynopsis().trim());
+//            LogUtil.e("testjianjie", "data.getSynopsis().trim() = " + data.getSynopsis().trim());
             GlideApp.with(itemNetResourceImage.getContext())
                     .asBitmap()
                     .load(data.getPoster())

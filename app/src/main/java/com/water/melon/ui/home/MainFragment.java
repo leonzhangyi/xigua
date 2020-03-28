@@ -1,5 +1,6 @@
 package com.water.melon.ui.home;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -12,19 +13,28 @@ import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.water.melon.R;
 import com.water.melon.base.ui.BaseFragment;
 import com.water.melon.net.bean.AdvBean;
+import com.water.melon.net.bean.UserBean;
 import com.water.melon.presenter.HomePresent;
 import com.water.melon.presenter.contract.HomeContract;
 import com.water.melon.ui.home.h5.AgentWebFragment;
 import com.water.melon.ui.home.h5.H5VideoActivity;
+import com.water.melon.ui.home.h5.WebPlayActivity;
 import com.water.melon.ui.in.HomeAdapterItemClick;
+import com.water.melon.ui.login.RegistActivity;
+import com.water.melon.ui.main.MainActivity;
+import com.water.melon.ui.me.history.VideoHistroryActivity;
+import com.water.melon.ui.me.vip.VipActivity;
 import com.water.melon.ui.search.SearchActivity;
 import com.water.melon.utils.LogUtil;
+import com.water.melon.utils.ToastUtil;
+import com.water.melon.utils.XGUtil;
 import com.water.melon.utils.bannel.NetImageHolderView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -90,10 +100,29 @@ public class MainFragment extends BaseFragment implements OnItemClickListener, H
         adapter.setOnItemMusicListener(new HomeAdapterItemClick() {
             @Override
             public void onItemClick(AdvBean position) {
-                Bundle bundle = new Bundle();
-                bundle.putString(AgentWebFragment.URL_KEY, position.getTarget());
-                redirectActivity(H5VideoActivity.class, bundle);
-//                redirectActivity(H5VideoActivity.class);
+                UserBean userBean1 = XGUtil.getMyUserInfo();
+                if (userBean1 == null || userBean1.getGroup_id().trim().equals("0")) { //游客
+                    ToastUtil.showToastShort("请先绑定手机号");
+                    Intent intent = new Intent(getContext(), RegistActivity.class);
+                    redirectActivityForResult(intent, 1);
+                } else {
+                    if (userBean1 == null || userBean1.getVip().trim().equals("0")) {//非会员
+                        redirectActivity(VipActivity.class);
+                    } else {
+                        Bundle bundle = new Bundle();
+                        bundle.putString(AgentWebFragment.URL_KEY, position.getTarget());
+//                bundle.putString(AgentWebFragment.URL_KEY, "https://jiexxx.joja.top/juying/wabi/?url=https://m.iqiyi.com/v_19rvovox5w.html");
+                        bundle.putString(AgentWebFragment.URL_POSTER_NAME, position.getTitle());
+                        redirectActivity(H5VideoActivity.class, bundle);
+
+
+//                Intent intent = new Intent(getContext(), WebPlayActivity.class);
+//                intent.putExtra(AgentWebFragment.URL_KEY, "https://jiexxx.joja.top/juying/wabi/?url=https://m.iqiyi.com/v_19rvovox5w.html");
+//                startActivity(intent);
+                    }
+                }
+
+            present.doAdvClick(position);
             }
         });
 
@@ -114,7 +143,10 @@ public class MainFragment extends BaseFragment implements OnItemClickListener, H
 
     @Override
     public void onItemClick(int position) {
-        LogUtil.e(TAG, "bannel click");
+        if (advBeans != null && advBeans.size() > position) {
+            XGUtil.openAdv(advBeans.get(position), MainActivity.mainActivity);
+        }
+
     }
 
 
@@ -129,8 +161,11 @@ public class MainFragment extends BaseFragment implements OnItemClickListener, H
         adapter.setNewData(advBeans);
     }
 
+    private List<AdvBean> advBeans;
+
     @Override
     public void setHomeAdv(List<AdvBean> advBeans) {
+        this.advBeans = advBeans;
         if (advBeans != null && advBeans.size() > 0) {
             netImages.clear();
             for (int i = 0; i < advBeans.size(); i++) {
@@ -174,12 +209,35 @@ public class MainFragment extends BaseFragment implements OnItemClickListener, H
     }
 
 
-    @OnClick({R.id.fragment_main_search})
+    @OnClick({R.id.fragment_main_search,R.id.mian_history,R.id.main_vip})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.fragment_main_search:
                 redirectActivity(SearchActivity.class);
                 break;
+            case R.id.mian_history:
+//                redirectActivity(SearchActivity.class);
+                UserBean userBean1 = XGUtil.getMyUserInfo();
+                if (userBean1 == null || userBean1.getGroup_id().trim().equals("0")) { //游客
+                    ToastUtil.showToastShort("请先绑定手机号");
+                    Intent intent = new Intent(getContext(), RegistActivity.class);
+                    redirectActivityForResult(intent, 1);
+                } else {
+                    redirectActivity(VideoHistroryActivity.class);
+                }
+                break;
+            case R.id.main_vip:
+                redirectActivity(VipActivity.class);
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        LogUtil.e("MeFragment", "requestCode = " + requestCode + ", resultCode = " + resultCode);
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == 1001) {
+            VipActivity.isRefresh = true;
         }
     }
 }

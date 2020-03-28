@@ -6,6 +6,7 @@ import android.view.KeyEvent;
 
 import com.water.melon.R;
 import com.water.melon.base.ui.BaseActivity;
+import com.water.melon.ui.home.HomeBean;
 import com.water.melon.ui.home.h5.utils.FragmentKeyDown;
 
 import androidx.fragment.app.FragmentManager;
@@ -14,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 public class H5VideoActivity extends BaseActivity implements H5VideoConstract.View {
 
     private H5VideoPresent present;
+    private String name;
 
     @Override
     public int getContentViewByBase(Bundle savedInstanceState) {
@@ -27,6 +29,8 @@ public class H5VideoActivity extends BaseActivity implements H5VideoConstract.Vi
         new H5VideoPresent(this, this);
         present.start();
 
+        name = getIntent().getStringExtra(AgentWebFragment.URL_POSTER_NAME);
+
     }
 
     private AgentWebFragment mAgentWebFragment;
@@ -38,7 +42,11 @@ public class H5VideoActivity extends BaseActivity implements H5VideoConstract.Vi
 //        mBundle.putString(AgentWebFragment.URL_KEY, "https://www.iqiyi.com");
         mBundle.putString(AgentWebFragment.URL_KEY, getIntent().getStringExtra(AgentWebFragment.URL_KEY));
         ft.commit();
+        mAgentWebFragment.setH5VideoActivity(this);
+
+
     }
+
 
     @Override
     protected void onClickTitleBack() {
@@ -50,6 +58,17 @@ public class H5VideoActivity extends BaseActivity implements H5VideoConstract.Vi
 
     }
 
+    HomeBean bean = new HomeBean();
+
+    public void doWrite(String tilte, String url) {
+        if (bean == null) {
+            bean = new HomeBean();
+        }
+        bean.setTitle(tilte);
+        bean.setUrl(url);
+        bean.setName(name);
+        present.doWrite(bean);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -60,7 +79,6 @@ public class H5VideoActivity extends BaseActivity implements H5VideoConstract.Vi
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-
         AgentWebFragment mAgentWebFragment = this.mAgentWebFragment;
         if (mAgentWebFragment != null) {
             FragmentKeyDown mFragmentKeyDown = mAgentWebFragment;

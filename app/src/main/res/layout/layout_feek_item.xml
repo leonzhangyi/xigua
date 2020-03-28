@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="反馈内容"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_sp_16" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="173dp"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginRight="@dimen/size_dp_16"
+        android:background="#ffd8d8d8">
+
+        <EditText
+            android:id="@+id/feek_item_et1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dp_10"
+            android:background="@null"
+            android:gravity="top"
+            android:hint="反馈内容"
+            android:textColor="@color/black_D9"
+            android:textColorHint="@color/black_80"
+            android:textSize="@dimen/sp_14" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="平台回复"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_sp_16" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="173dp"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginRight="@dimen/size_dp_16"
+        android:background="#ffd8d8d8">
+
+        <EditText
+            android:id="@+id/feek_item_et2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dp_10"
+            android:background="@null"
+            android:gravity="top"
+            android:hint="回复内容"
+            android:textColor="@color/black_D9"
+            android:textColorHint="@color/black_80"
+            android:textSize="@dimen/sp_14" />
+    </RelativeLayout>
+</LinearLayout>

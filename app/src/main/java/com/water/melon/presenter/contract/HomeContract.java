@@ -16,6 +16,8 @@ public interface HomeContract {
 
         void getAppNotice();
 
+
+        void doAdvClick(AdvBean advBean);
     }
 
     interface View extends BaseView<Present> {

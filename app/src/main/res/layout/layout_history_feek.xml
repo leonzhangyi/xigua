@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_dp_30"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#ffe5e5e5"
+            android:gravity="center"
+            android:text="日期"
+            android:layout_marginRight="@dimen/size_dp_2"
+            android:textColor="@color/black_D9"
+            android:textSize="@dimen/size_sp_10" />
+
+        <TextView
+            android:layout_marginRight="@dimen/size_dp_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#fff1f2f5"
+            android:gravity="center"
+            android:text="内容"
+            android:textColor="@color/black_D9"
+            android:textSize="@dimen/size_sp_10" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#fff1f2f5"
+            android:gravity="center"
+            android:text="是否回复"
+            android:textColor="@color/black_D9"
+            android:textSize="@dimen/size_sp_10" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/history_feek_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

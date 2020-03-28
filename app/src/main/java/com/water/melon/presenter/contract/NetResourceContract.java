@@ -14,7 +14,6 @@ public interface NetResourceContract {
 
         void getSmallTab(List<TabBean.Sub> data);
 
-        void getAdv();
     }
 
     interface View extends BaseView<Present> {
@@ -22,7 +21,6 @@ public interface NetResourceContract {
 
         void setSmallTab(List<TabBean.Sub> data);
 
-        void setAdv(List<AdvBean> advs);
     }
 
 }
