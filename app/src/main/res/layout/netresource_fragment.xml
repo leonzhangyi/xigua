@@ -4,15 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/net_resource_toolbar"
-        layout="@layout/include_toolbar_null" />
+<!--    <include-->
+<!--        android:id="@+id/net_resource_toolbar"-->
+<!--        layout="@layout/include_toolbar_null" />-->
 
     <RelativeLayout
         android:id="@+id/netresuor_fragment_top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/net_resource_toolbar">
+        android:layout_height="wrap_content">
 
         <RadioGroup
             android:id="@+id/net_resource_left_tab"

@@ -85,11 +85,16 @@ public class ItemNetResouceItemAdapter extends BaseRVListAdapter<NetResoutVideoI
             super(itemView);
             ButterKnife.bind(this, itemView);
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) itemNetResourceImage.getLayoutParams();
-            int width = (int) ((XGConstant.Screen_Width) * 0.495);
+            int width = (int) ((XGConstant.Screen_Width) * 0.490);
             params.width = width;
-//            params.height = (int) (width * 1.5);
-            params.height = (int) (width);
-            itemNetResourceImage.requestLayout();
+////            params.height = (int) (width * 1.5);
+            params.height = (int) (width*0.9);
+
+
+//            int width = (int) ((XGConstant.Screen_Width) * 0.3);
+//            params.width = width;
+//            params.height = (int) (width*1.6);
+//            itemNetResourceImage.requestLayout();
         }
 
         private void setData(NetResoutVideoInfo data) {

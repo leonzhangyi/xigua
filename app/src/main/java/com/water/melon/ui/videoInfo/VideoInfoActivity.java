@@ -25,6 +25,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
+import com.gyf.immersionbar.ImmersionBar;
 import com.sunfusheng.progress.GlideApp;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tencent.liteav.demo.play.SuperPlayerConst;
@@ -132,6 +133,8 @@ public class VideoInfoActivity extends BaseActivity implements VideoInfoAdapter.
     RelativeLayout moreResoursLayout;
     @BindView(R.id.more_resours_play_position)
     TextView moreResoursPlayPosition;
+    @BindView(R.id.status_bar_view)
+     View status_bar_view;
 
     private VideoInfoPresenter mPresenter;
     private VideoPlayBean VideoPlayBean;
@@ -1234,4 +1237,14 @@ public class VideoInfoActivity extends BaseActivity implements VideoInfoAdapter.
             }
         }
     }
+
+
+    @Override
+    public void initImmersionBar() {
+//        super.initImmersionBar();
+        ImmersionBar.with(this)
+                .statusBarView(status_bar_view)
+                .init();
+    }
+
 }

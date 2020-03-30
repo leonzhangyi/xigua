@@ -49,24 +49,24 @@ public abstract class BaseFragment extends RxFragment implements com.water.melon
             rootView = inflater.inflate(getLayoutId(), container, false);
         }
         unbinder = ButterKnife.bind(this, rootView);
-        Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
-        View toolbarStatusVew = rootView.findViewById(R.id.toolbar_status_bg);
-        if (null != toolbar) {
-//            if (this instanceof NewHomeFragment) {
-//                //首页
-//                ((FrameLayout.LayoutParams) toolbar.getLayoutParams()).setMargins(0, (int) (MyApplication.Screen_Height * 0.035),
-//                        0, -50);
-//            } else {
-            //自适应各种屏幕
-            toolbar.setPadding(0, (int) (XGConstant.Screen_Height * 0.05),
-                    0, (int) (XGConstant.Screen_Height * 0.015));
-//            }
-        }
-        if (null != toolbarStatusVew) {
-            //状态栏颜色
-            toolbarStatusVew.setBackgroundResource(R.color.white);
-//            toolbarStatusVew.setBackgroundResource(R.drawable.me_fragment_top_bac);
-        }
+//        Toolbar toolbar = rootView.findViewById(R.id.toolbar);
+//        View toolbarStatusVew = rootView.findViewById(R.id.toolbar_status_bg);
+//        if (null != toolbar) {
+////            if (this instanceof NewHomeFragment) {
+////                //首页
+////                ((FrameLayout.LayoutParams) toolbar.getLayoutParams()).setMargins(0, (int) (MyApplication.Screen_Height * 0.035),
+////                        0, -50);
+////            } else {
+//            //自适应各种屏幕
+//            toolbar.setPadding(0, (int) (XGConstant.Screen_Height * 0.05),
+//                    0, (int) (XGConstant.Screen_Height * 0.015));
+////            }
+//        }
+//        if (null != toolbarStatusVew) {
+//            //状态栏颜色
+//            toolbarStatusVew.setBackgroundResource(R.color.white);
+////            toolbarStatusVew.setBackgroundResource(R.drawable.me_fragment_top_bac);
+//        }
         onMyCreateView(rootView, savedInstanceState);
         return rootView;
     }

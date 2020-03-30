@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.water.melon.R;
 import com.water.melon.application.MyApplication;
 import com.water.melon.base.ui.BaseActivity;
@@ -43,12 +44,15 @@ public class AddAgentActivity extends BaseActivity implements AddAgentContract.V
 
     @Override
     public void createdViewByBase(Bundle savedInstanceState) {
-        new AddAgentPresent(this, this);
-        present.start();
-
         state = getIntent().getStringExtra(XGUtil.AGENT_STATE);
         phone = getIntent().getStringExtra(XGUtil.AGENT_PHONE);
         agentId = getIntent().getStringExtra(XGUtil.AGENT_ID);
+
+
+        new AddAgentPresent(this, this);
+        present.start();
+
+
     }
 
     @Override
@@ -56,7 +60,7 @@ public class AddAgentActivity extends BaseActivity implements AddAgentContract.V
 
     }
 
-    @OnClick({R.id.toolbar_left_tv,R.id.add_agent_sure_tv})
+    @OnClick({R.id.toolbar_left_tv, R.id.add_agent_sure_tv})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.toolbar_left_tv:
@@ -113,8 +117,10 @@ public class AddAgentActivity extends BaseActivity implements AddAgentContract.V
             add_agent_phone_et.setText(phone);
 
             add_agent_sure_tv.setTextColor(MyApplication.getColorByResId(R.color.white));
-            add_agent_sure_tv.setBackgroundColor(MyApplication.getColorByResId(R.drawable.layout_agent_pay_back));
-            add_agent_sure_tv.setClickable(true);
+            add_agent_sure_tv.setBackgroundColor(R.drawable.layout_agent_pay_back);
+            add_agent_name_et.setEnabled(true);
+            add_agent_phone_et.setEnabled(true);
+            add_agent_price_et.setEnabled(true);
         }
 
 
@@ -138,12 +144,23 @@ public class AddAgentActivity extends BaseActivity implements AddAgentContract.V
     public void addSucc() {
         ToastUtil.showToastLong("恭喜您操作成功！");
         add_agent_sure_tv.setTextColor(MyApplication.getColorByResId(R.color.black_D9));
-        add_agent_sure_tv.setBackgroundColor(MyApplication.getColorByResId(R.drawable.layout_agent_pay_back_1));
+        add_agent_sure_tv.setBackgroundColor(R.drawable.layout_agent_pay_back_1);
         add_agent_sure_tv.setClickable(false);
 
         add_agent_name_et.setEnabled(false);
         add_agent_phone_et.setEnabled(false);
         add_agent_price_et.setEnabled(false);
 
+    }
+
+    @Override
+    protected void initImmersionBar() {
+        //设置共同沉浸式样式
+        ImmersionBar.with(this)
+                .fitsSystemWindows(true)
+                .navigationBarColor(R.color.main_botton_bac)
+                .statusBarDarkFont(true)
+                .statusBarColor(R.color.main_botton_bac)
+                .init();
     }
 }

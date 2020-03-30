@@ -16,6 +16,7 @@ import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.gyf.immersionbar.ImmersionBar;
 import com.water.melon.R;
 import com.water.melon.application.MyApplication;
 import com.water.melon.base.net.BaseRequest;
@@ -136,6 +137,8 @@ public class MyMoneyActivity extends BaseActivity implements MyMoneyContract.Vie
         present.getMyMoney(baseRequest);
 
 
+        doFirstDate();
+
     }
 
     private void loadMore() {
@@ -224,11 +227,13 @@ public class MyMoneyActivity extends BaseActivity implements MyMoneyContract.Vie
                 break;
             case R.id.my_money_sub:
                 Bundle bundle = new Bundle();
-                bundle.putString("myCurrentMoeny", my_money_current.getText().toString());
+                bundle.putString("myCurrentMoeny", avail);
                 redirectActivity(MyMoneySubmitAcivity.class, bundle);
                 break;
         }
     }
+
+    private String avail = "0.00";
 
     private void setType() {
         if (type.equals("user")) {
@@ -309,6 +314,7 @@ public class MyMoneyActivity extends BaseActivity implements MyMoneyContract.Vie
         if (beforeBean != null) {
             my_money_last.setText("¥" + beforeBean.getTotal());
             my_money_current.setText("¥" + beforeBean.getCurrent());
+            avail = beforeBean.getAvail();
         }
     }
 
@@ -322,6 +328,7 @@ public class MyMoneyActivity extends BaseActivity implements MyMoneyContract.Vie
             } else {
                 my_money_user_number.setText("用户数：" + beforeBean.getCount());
                 my_money_dollor.setText("用户数：" + beforeBean.getProfit());
+
             }
             List<MyMoneyBean.UserMoney> userInfos = beforeBean.getList();
             if (userInfos == null) {
@@ -343,5 +350,29 @@ public class MyMoneyActivity extends BaseActivity implements MyMoneyContract.Vie
         }
 
 
+    }
+
+    @Override
+    protected void initImmersionBar() {
+        //设置共同沉浸式样式
+        ImmersionBar.with(this)
+                .fitsSystemWindows(true)
+                .navigationBarColor(R.color.main_botton_bac)
+                .statusBarDarkFont(true)
+                .statusBarColor(R.color.main_botton_bac)
+                .init();
+    }
+
+    private void doFirstDate() {
+        bean.setStart_date(startTimeTv.getText().toString());
+        bean.setStop_date(endTimeTv.getText().toString());
+        bean.setHandle("after");
+        bean.setKeyword("");
+        bean.setType(type);
+        baseRequest.setPage(page);
+        baseRequest.setParameter(bean);
+        baseRequest.setRows(20);
+
+        present.getMyMoney(baseRequest);
     }
 }

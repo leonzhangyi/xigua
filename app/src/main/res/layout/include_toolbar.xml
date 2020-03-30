@@ -2,20 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="#fff1f2f5"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#f9f9f9">
 
-    <androidx.appcompat.widget.Toolbar
+    <RelativeLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:contentInsetStart="0dp"
-        app:theme="@style/title_style">
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_10">
 
         <TextView
             android:id="@+id/toolbar_left_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_gravity="left"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:drawablePadding="@dimen/size_dp_5"
@@ -30,6 +31,7 @@
             android:id="@+id/title_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:background="@color/transparent"
             android:ellipsize="end"
@@ -42,16 +44,18 @@
             android:id="@+id/toolbar_right_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="@dimen/size_dp_6"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_gravity="right"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawablePadding="@dimen/size_dp_6"
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
             android:paddingLeft="@dimen/size_dp_15"
             android:paddingRight="@dimen/size_dp_15"
             android:textSize="14sp" />
-    </androidx.appcompat.widget.Toolbar>
+    </RelativeLayout>
     <!--下划线-->
     <include
         android:id="@+id/toolbar_split_line"
@@ -64,5 +68,6 @@
         android:id="@+id/toolbar_status_bg"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_dp_28"
-        android:background="@color/toolbar_status_bg" />
+        android:background="@color/toolbar_status_bg"
+        android:visibility="gone" />
 </RelativeLayout>

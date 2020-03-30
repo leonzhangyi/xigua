@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.water.melon.R;
 import com.water.melon.base.ui.BaseActivity;
 import com.water.melon.ui.me.agent.mymoney.history.MyMoneyHistory;
@@ -49,6 +50,7 @@ public class MyMoneySubmitAcivity extends BaseActivity implements MyMoneySubmitC
 
     }
 
+    String price = "0.00";
 
     @Override
     public void initView() {
@@ -57,7 +59,8 @@ public class MyMoneySubmitAcivity extends BaseActivity implements MyMoneySubmitC
         setTitleNameColor(R.color.black);
         setToolBarRightView("提现记录", R.color.net_resource_item_tv);
 
-        sub_money.setText(getIntent().getStringExtra("myCurrentMoeny"));
+        price = getIntent().getStringExtra("myCurrentMoeny");
+        sub_money.setText("¥" + price);
     }
 
     @OnClick({R.id.toolbar_left_tv, R.id.my_money_sub, R.id.toolbar_right_tv})
@@ -68,7 +71,7 @@ public class MyMoneySubmitAcivity extends BaseActivity implements MyMoneySubmitC
                 break;
 
             case R.id.my_money_sub:
-                if (sub_money.getText().toString().trim().equals("￥0.00")) {
+                if (price.trim().equals("0.00")) {
                     ToastUtil.showToastShort("无可提现金额");
                 } else {
                     String number = money_sub_number.getText().toString();
@@ -79,7 +82,7 @@ public class MyMoneySubmitAcivity extends BaseActivity implements MyMoneySubmitC
                         if (name != null && !name.trim().equals("")) {
                             if (mobile != null && !mobile.trim().equals("")) {
                                 if (code != null && !code.trim().equals("")) {
-                                    present.submit(number, name, code);
+                                    present.submit(number, price, code);
                                 } else {
                                     ToastUtil.showToastShort("请输入验证码");
                                 }
@@ -110,5 +113,16 @@ public class MyMoneySubmitAcivity extends BaseActivity implements MyMoneySubmitC
     @Override
     public void subSuc() {
         sub_money.setText("￥0.00");
+    }
+
+    @Override
+    protected void initImmersionBar() {
+        //设置共同沉浸式样式
+        ImmersionBar.with(this)
+                .fitsSystemWindows(true)
+                .navigationBarColor(R.color.main_botton_bac)
+                .statusBarDarkFont(true)
+                .statusBarColor(R.color.main_botton_bac)
+                .init();
     }
 }

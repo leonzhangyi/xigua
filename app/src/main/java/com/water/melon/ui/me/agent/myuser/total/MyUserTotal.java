@@ -13,6 +13,7 @@ import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.gyf.immersionbar.ImmersionBar;
 import com.water.melon.R;
 import com.water.melon.application.MyApplication;
 import com.water.melon.base.net.BaseRequest;
@@ -263,4 +264,15 @@ public class MyUserTotal extends BaseActivity implements MyUserTotalContract.Vie
 
     }
 
+
+    @Override
+    protected void initImmersionBar() {
+        //设置共同沉浸式样式
+        ImmersionBar.with(this)
+                .fitsSystemWindows(true)
+                .navigationBarColor(R.color.main_botton_bac)
+                .statusBarDarkFont(true)
+                .statusBarColor(R.color.main_botton_bac)
+                .init();
+    }
 }

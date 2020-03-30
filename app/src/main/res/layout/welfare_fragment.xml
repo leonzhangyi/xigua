@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/size_dp_5"
+    android:layout_marginBottom="@dimen/dp_4"
     android:orientation="vertical">
 
     <LinearLayout
@@ -65,7 +67,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/size_dp_10"
-            android:layout_marginBottom="@dimen/dp_10"
             android:orientation="horizontal">
 
             <TextView
@@ -100,7 +101,7 @@
         <com.sunfusheng.GlideImageView
             android:id="@+id/fragment_wef_mid_adv"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_dp_80"
+            android:layout_height="@dimen/size_dp_65"
             android:layout_marginTop="@dimen/size_dp_16"
             android:scaleType="fitXY" />
 

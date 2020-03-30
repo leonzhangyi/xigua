@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.water.melon.R;
 import com.water.melon.application.MyApplication;
 import com.water.melon.base.ui.BaseFragment;
@@ -184,5 +185,18 @@ public class PlayingRecordFragment extends BaseFragment {
                 }
                 break;
         }
+    }
+
+    /**
+     * 初始化沉浸式
+     * Init immersion bar.
+     */
+    protected void initImmersionBar() {
+        //设置共同沉浸式样式
+        ImmersionBar.with(this)
+                .fitsSystemWindows(true)
+                .navigationBarColor(R.color.main_botton_bac)
+                .statusBarDarkFont(true)
+                .init();
     }
 }

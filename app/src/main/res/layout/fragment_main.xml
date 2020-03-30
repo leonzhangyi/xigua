@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/include_toolbar_null" />
+    <!--    <include layout="@layout/include_toolbar_null" />-->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,19 +22,19 @@
             android:src="@drawable/btn_vip" />
 
         <ImageView
-            android:layout_marginRight="@dimen/size_dp_16"
-            android:layout_marginLeft="@dimen/size_dp_16"
             android:id="@+id/mian_history"
-            android:layout_toLeftOf="@+id/main_vip"
-            android:layout_width="20dp"
-            android:layout_height="@dimen/size_dp_20"
+            android:layout_width="40dp"
+            android:layout_height="@dimen/size_dp_40"
             android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/main_vip"
+            android:padding="@dimen/dp_10"
             android:src="@mipmap/me_history" />
 
         <RelativeLayout
             android:id="@+id/fragment_main_search"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_dp_30"
+            android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/mian_history"
             android:background="@drawable/home_search">
 
@@ -63,75 +63,12 @@
 
     </RelativeLayout>
 
-    <com.bigkoo.convenientbanner.ConvenientBanner
-        android:id="@+id/netConvenientBanner"
-        android:layout_width="match_parent"
-        android:layout_height="175dp"
-        android:layout_marginLeft="@dimen/size_dp_16"
-        android:layout_marginTop="@dimen/size_dp_10"
-        android:layout_marginRight="@dimen/size_dp_16"
-        app:canLoop="true" />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/size_dp_16"
-        android:layout_marginTop="@dimen/size_dp_10"
-        android:layout_marginRight="@dimen/size_dp_16"
-        android:layout_marginBottom="@dimen/size_dp_10"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="@dimen/size_dp_20"
-            android:layout_height="@dimen/size_dp_20"
-            android:layout_gravity="center_vertical"
-            android:src="@mipmap/main_fragment_laba" />
-
-        <TextView
-            android:id="@+id/fragment_gg_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/size_dp_11"
-            android:ellipsize="marquee"
-            android:focusable="true"
-            android:marqueeRepeatLimit="-1"
-            android:singleLine="true"
-            android:text="@string/home_gg"
-            android:textColor="@color/black_80"
-            android:textSize="@dimen/size_sp_16" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/size_dp_16"
-        android:layout_marginTop="@dimen/size_dp_10"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/home_vip_tv"
-            android:textColor="@color/black"
-            android:textSize="@dimen/size_sp_16" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/size_dp_10"
-            android:src="@mipmap/gray_back_right" />
-    </LinearLayout>
-
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/fragment_main_sf"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/size_dp_32"
-        android:layout_marginRight="32dp"
+        android:layout_marginLeft="@dimen/size_dp_10"
+        android:layout_marginRight="@dimen/size_dp_10"
         android:layout_marginBottom="@dimen/dp_10"
         android:orientation="vertical">
 

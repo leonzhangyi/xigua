@@ -337,7 +337,7 @@ public class MeFragment extends BaseFragment implements MeContract.View, Adapter
 
         PageBean bean2 = new PageBean();
         bean2.setName("视频下载");
-        bean2.setText("视频云缓存，播放更流畅");
+        bean2.setText("云缓存，更流畅");
         bean2.setBac(R.mipmap.me_download);
         pageBeans.add(bean2);
 

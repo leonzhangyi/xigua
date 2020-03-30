@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.water.melon.R;
 import com.water.melon.base.ui.BaseActivity;
 import com.water.melon.net.bean.CreateCodeBean;
@@ -46,6 +47,9 @@ public class VipActivity extends BaseActivity implements VipContract.View {
     TextView layout_vip_vip_name;
     @BindView(R.id.layout_vip_vip_time)
     TextView layout_vip_vip_time;
+
+    @BindView(R.id.status_bar_view)
+    View status_bar_view;
 
 
     private VipPresent vipPresent;
@@ -245,4 +249,11 @@ public class VipActivity extends BaseActivity implements VipContract.View {
         }
     }
 
+    @Override
+    public void initImmersionBar() {
+//        super.initImmersionBar();
+        ImmersionBar.with(this)
+                .statusBarView(status_bar_view)
+                .init();
+    }
 }

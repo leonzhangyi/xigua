@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 import com.water.melon.R;
 import com.water.melon.application.MyApplication;
@@ -68,9 +69,11 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseAc
             window.setStatusBarColor(MyApplication.getColorByResId(R.color.transparent));
 
         }
-        setStausColor(R.color.white_1); //设置导航栏颜色值
+//        setStausColor(R.color.white_1); //设置导航栏颜色值
 
 //        BarTextColorUtils.StatusBarLightMode(this);
+
+        initImmersionBar();
 
         //监听网络全局
         monitorNetStatus();
@@ -79,29 +82,43 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseAc
         ButterKnife.bind(this);
 
         createdViewByBase(savedInstanceState);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+//        Toolbar toolbar = findViewById(R.id.toolbar);
         View toolbarStatusVew = findViewById(R.id.toolbar_status_bg);
-        if (null != toolbar) {
-            int padding = (int) (XGConstant.Screen_Height * 0.015);
-            toolbar.setPadding(0, XGConstant.Screen_Status_Height + padding,
-                    0, padding);
-//            toolbar.setBackground(MyApplication.getDrawableByResId(R.drawable.me_fragment_top_bac));
-            toolbar.setBackground(MyApplication.getDrawableByResId(R.color.video_download_top_bac));
-        }
-        if (null != toolbarStatusVew) {
-            //自适应各种屏幕
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            //状态栏字体设置为黑色
-//                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-//            } else {
-            //状态栏颜色
-//            toolbarStatusVew.setBackgroundResource(R.color.black);
-//            toolbarStatusVew.setBackgroundResource(R.drawable.me_fragment_top_bac);
-//            }
-            //设置高度
-            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) toolbarStatusVew.getLayoutParams();
-            params.height = XGConstant.Screen_Status_Height;
-        }
+//        if (null != toolbar) {
+////            int padding = (int) (XGConstant.Screen_Height * 0.015);
+////            toolbar.setPadding(0, XGConstant.Screen_Status_Height + padding,
+////                    0, padding);
+////            toolbar.setBackground(MyApplication.getDrawableByResId(R.drawable.me_fragment_top_bac));
+////            toolbar.setBackground(MyApplication.getDrawableByResId(R.color.video_download_top_bac));
+//        }
+//        if (null != toolbarStatusVew) {
+//            //自适应各种屏幕
+////            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            //状态栏字体设置为黑色
+////                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+////            } else {
+//            //状态栏颜色
+////            toolbarStatusVew.setBackgroundResource(R.color.black);
+////            toolbarStatusVew.setBackgroundResource(R.drawable.me_fragment_top_bac);
+////            }
+//            //设置高度
+//            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) toolbarStatusVew.getLayoutParams();
+//            params.height = XGConstant.Screen_Status_Height;
+//        }
+    }
+
+    /**
+     * 初始化沉浸式
+     * Init immersion bar.
+     */
+    protected void initImmersionBar() {
+        //设置共同沉浸式样式
+        ImmersionBar.with(this)
+                .fitsSystemWindows(true)
+                .navigationBarColor(R.color.white)
+                .statusBarDarkFont(true)
+//                .statusBarColor(R.color.black)
+                .init();
     }
 
     private void monitorNetStatus() {
@@ -449,6 +466,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseAc
     protected void onDestroy() {
         super.onDestroy();
         ApiImp.getInstance().stopRequst();
+//        ImmersionBar.with(this).destroy();
     }
 
     //============初始化ToolBar==========================

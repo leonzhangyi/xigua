@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.water.melon.R;
 import com.water.melon.application.MyApplication;
@@ -35,7 +36,7 @@ public class SplashActivity extends BaseActivity implements WelcomeContract.View
 
     @Override
     public int getContentViewByBase(Bundle savedInstanceState) {
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         return R.layout.activity_splash;
     }
 
@@ -168,5 +169,10 @@ public class SplashActivity extends BaseActivity implements WelcomeContract.View
 
     private void doMyFinish() {
         this.finish();
+    }
+
+    protected void initImmersionBar() {
+        //设置共同沉浸式样式
+//        ImmersionBar.with(this).navigationBarColor(R.color.colorAccent).init();
     }
 }

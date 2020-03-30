@@ -72,6 +72,15 @@ public class MyMoneyBean {
     public static class BeforeBean {
         private String current;
         private String total;
+        private String avail;
+
+        public String getAvail() {
+            return avail;
+        }
+
+        public void setAvail(String avail) {
+            this.avail = avail;
+        }
 
         public String getCurrent() {
             return current;
@@ -152,6 +161,7 @@ public class MyMoneyBean {
         private List<UserMoney> list;
 //       "profit": 85,
 //               "count": 4
+
 
 
         public String getProfit() {

@@ -6,6 +6,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.water.melon.R;
 import com.water.melon.base.ui.BaseActivity;
 import com.water.melon.ui.me.feek.history.FeekHistoryActivity;
@@ -120,5 +121,15 @@ public class FeekActivity extends BaseActivity implements FeekContract.View {
         }
 
         layout_feek_et.setText("");
+    }
+    @Override
+    protected void initImmersionBar() {
+        //设置共同沉浸式样式
+        ImmersionBar.with(this)
+                .fitsSystemWindows(true)
+                .navigationBarColor(R.color.main_botton_bac)
+                .statusBarDarkFont(true)
+                .statusBarColor(R.color.main_botton_bac)
+                .init();
     }
 }

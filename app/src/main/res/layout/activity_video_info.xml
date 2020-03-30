@@ -6,6 +6,12 @@
     android:background="@color/main_black"
     android:orientation="vertical">
 
+    <View
+        android:id="@+id/status_bar_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/black" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -98,8 +104,8 @@
             android:id="@+id/more_resours_layout"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:clickable="true"
             android:background="@drawable/player_top_shadow"
+            android:clickable="true"
             android:visibility="gone">
 
             <ImageView

@@ -2,19 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_10"
     android:foreground="?attr/selectableItemBackground">
 
     <ImageView
         android:id="@+id/item_net_resource_image"
         android:layout_width="match_parent"
-        android:layout_height="155dp"
+        android:layout_height="145dp"
         android:scaleType="fitXY" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_alignBottom="@id/item_net_resource_image"
-        android:background="@drawable/dangban_up" />
+        android:background="@drawable/dangban_up"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/item_net_resource_time"
@@ -26,7 +28,8 @@
         android:maxLines="1"
         android:paddingBottom="@dimen/size_dp_5"
         android:textColor="@color/gray_FD"
-        android:textSize="@dimen/size_sp_12" />
+        android:textSize="@dimen/size_sp_12"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/item_net_resource_name"
@@ -34,9 +37,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/item_net_resource_image"
         android:layout_marginTop="@dimen/size_dp_5"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:text="电影名称"
         android:textColor="@color/black_80"
-        android:textSize="@dimen/size_sp_13"
-        android:textStyle="bold" />
-<!--    android:layout_centerHorizontal="true"-->
+        android:textSize="@dimen/size_sp_13" />
+    <!--    android:layout_centerHorizontal="true"-->
 </RelativeLayout>

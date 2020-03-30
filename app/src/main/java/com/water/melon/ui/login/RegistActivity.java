@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 
+import com.gyf.immersionbar.BarHide;
+import com.gyf.immersionbar.ImmersionBar;
 import com.water.melon.R;
 import com.water.melon.base.ui.BaseActivity;
 import com.water.melon.utils.LogUtil;
@@ -127,5 +129,17 @@ public class RegistActivity extends BaseActivity implements RegistContract.View 
             setResult(1001);
             this.finish();
         }
+    }
+
+    @Override
+    protected void initImmersionBar() {
+        //设置共同沉浸式样式
+        ImmersionBar.with(this)
+//                .fitsSystemWindows(true)
+//                .navigationBarColor(R.color.main_botton_bac)
+//                .statusBarDarkFont(true)
+//                .statusBarColor(R.color.main_botton_bac)
+                .hideBar(BarHide.FLAG_HIDE_NAVIGATION_BAR)
+                .init();
     }
 }

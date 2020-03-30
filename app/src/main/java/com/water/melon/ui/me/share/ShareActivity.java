@@ -2,12 +2,16 @@ package com.water.melon.ui.me.share;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.gyf.immersionbar.BarHide;
+import com.gyf.immersionbar.ImmersionBar;
 import com.sunfusheng.util.Utils;
 import com.water.melon.R;
 import com.water.melon.base.ui.BaseActivity;
@@ -33,12 +37,22 @@ public class ShareActivity extends BaseActivity implements ShareContract.View {
 
     @Override
     public int getContentViewByBase(Bundle savedInstanceState) {
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        // 去掉窗口标题
+        // 隐藏顶部的状态栏
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         return R.layout.layout_me_share;
     }
 
     @Override
     public void createdViewByBase(Bundle savedInstanceState) {
+//        if (Build.VERSION.SDK_INT >= 28) {
+//            WindowManager.LayoutParams lp = getWindow().getAttributes();
+//            lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+//            getWindow().setAttributes(lp);
+//        }
+
         viewShare = getWindow().getDecorView();
         new SharePresent(this, this);
         sharePresent.start();
@@ -124,6 +138,18 @@ public class ShareActivity extends BaseActivity implements ShareContract.View {
             }
         }
         setEwm(shareUrl);
+    }
+
+    @Override
+    protected void initImmersionBar() {
+        //设置共同沉浸式样式
+        ImmersionBar.with(this)
+//                .fitsSystemWindows(true)
+//                .navigationBarColor(R.color.main_botton_bac)
+//                .statusBarDarkFont(true)
+//                .statusBarColor(R.color.main_botton_bac)
+                .hideBar(BarHide.FLAG_HIDE_NAVIGATION_BAR)
+                .init();
     }
 }
 

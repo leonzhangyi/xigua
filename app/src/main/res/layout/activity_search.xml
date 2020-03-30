@@ -5,10 +5,10 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:layout_marginTop="@dimen/size_dp_5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/size_dp_16"
-        android:layout_marginTop="@dimen/size_dp_30">
+        android:layout_marginLeft="@dimen/size_dp_16">
 
         <TextView
 

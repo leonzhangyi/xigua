@@ -3,6 +3,7 @@ package com.water.melon.ui.home;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -43,10 +44,10 @@ import butterknife.OnClick;
 
 public class MainFragment extends BaseFragment implements OnItemClickListener, HomeContract.View {
     public static final String TAG = "MainFragment";
-    @BindView(R.id.netConvenientBanner)
-    ConvenientBanner netConvenientBanner;
-    @BindView(R.id.fragment_gg_tv)
-    TextView tvGg;
+//    @BindView(R.id.netConvenientBanner)
+//    ConvenientBanner netConvenientBanner;
+//    @BindView(R.id.fragment_gg_tv)
+//    TextView tvGg;
     @BindView(R.id.fragment_main_sf)
     SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.fragment_main_rv)
@@ -72,10 +73,20 @@ public class MainFragment extends BaseFragment implements OnItemClickListener, H
     }
 
 
+    TextView tvGg;
+    ConvenientBanner netConvenientBanner;
+
     @Override
     public void initView() {
+
+
+        View header = LayoutInflater.from(context).inflate(R.layout.fragment_main_header, null);
+        netConvenientBanner = header.findViewById(R.id.netConvenientBanner);
+        tvGg= header.findViewById(R.id.fragment_gg_tv);
         tvGg.setSelected(true);
+
         adapter = new MainHomeAdapter();
+        adapter.addHeaderView(header);
         adapter.setEnableLoadMore(true);//这里的作用是防止下拉刷新的时候还可以上拉加载
         swipeRefreshLayout.setRefreshing(false);
         swipeRefreshLayout.setEnabled(false);  //禁止下拉刷新

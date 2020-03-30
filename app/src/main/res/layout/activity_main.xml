@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/main_botton_bac"
+        android:paddingBottom="@dimen/dp_4"
         android:orientation="horizontal">
 
         <RadioButton

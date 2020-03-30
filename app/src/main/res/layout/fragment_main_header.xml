@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.bigkoo.convenientbanner.ConvenientBanner
+        android:id="@+id/netConvenientBanner"
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/size_dp_8"
+        android:layout_marginRight="@dimen/size_dp_16"
+        app:canLoop="true" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_marginTop="@dimen/size_dp_10"
+        android:layout_marginRight="@dimen/size_dp_16"
+        android:layout_marginBottom="@dimen/size_dp_10"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/size_dp_20"
+            android:layout_height="@dimen/size_dp_20"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/main_fragment_laba" />
+
+        <TextView
+            android:id="@+id/fragment_gg_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/size_dp_11"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:marqueeRepeatLimit="-1"
+            android:singleLine="true"
+            android:text="@string/home_gg"
+            android:textColor="@color/black_D9"
+            android:textSize="@dimen/size_sp_16" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/size_dp_5"
+            android:src="@mipmap/frog_huo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_vip_tv"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_sp_16" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/size_dp_5"
+            android:src="@mipmap/frog_huo" />
+    </LinearLayout>
+</LinearLayout>

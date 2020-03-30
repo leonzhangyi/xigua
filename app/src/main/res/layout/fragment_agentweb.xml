@@ -9,6 +9,6 @@
 
 
 <!--    <include android:id="@+id/toolbar" layout="@layout/toorbar_main"></include>-->
-    <include android:id="@+id/toolbar" layout="@layout/h5_toorbar_main"></include>
+    <include android:id="@+id/toolbar" layout="@layout/h5_toorbar_main"/>
 
 </LinearLayout>
