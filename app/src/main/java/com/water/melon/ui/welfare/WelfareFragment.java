@@ -52,6 +52,8 @@ public class WelfareFragment extends BaseFragment implements WelfContract.View, 
 
     @BindView(R.id.fragment_wef_botton_rv)
     RecyclerView btnRv;
+    @BindView(R.id.main_vip)
+    ImageView main_vip;
 
 
     private WelPresent present;
@@ -68,6 +70,7 @@ public class WelfareFragment extends BaseFragment implements WelfContract.View, 
         present.start();
     }
 
+
     @Override
     protected int getLayoutId() {
         return R.layout.welf_fragment_main;
@@ -77,21 +80,11 @@ public class WelfareFragment extends BaseFragment implements WelfContract.View, 
     RecyclerView recyclerView;
     GlideImageView fragment_wef_mid_adv;
 
-    private RelativeLayout welf_search;
-
-    private ImageView main_vip;
 
     @Override
     public void initView() {
         View header = LayoutInflater.from(context).inflate(R.layout.welfare_fragment, null);
 
-        main_vip = header.findViewById(R.id.main_vip);
-        main_vip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                redirectActivity(VipActivity.class);
-            }
-        });
 
         welfBanner = header.findViewById(R.id.welfare_banner);
         recyclerView = header.findViewById(R.id.fragment_wef_rv);
@@ -105,13 +98,7 @@ public class WelfareFragment extends BaseFragment implements WelfContract.View, 
 
             }
         });
-        welf_search = header.findViewById(R.id.welf_search);
-        welf_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                redirectActivity(SearchActivity.class);
-            }
-        });
+
 
         adapter = new MainHomeAdapter();
         adapter.setEnableLoadMore(true);//这里的作用是防止下拉刷新的时候还可以上拉加载
@@ -141,7 +128,7 @@ public class WelfareFragment extends BaseFragment implements WelfContract.View, 
                 String name = position.getTitle();
 //                ToastUtil.showToastShort("正在下载" + name, Gravity.BOTTOM);
 
-                Toast.makeText(MyApplication.getContext(),"正在下载" + name,1).show();
+                Toast.makeText(MyApplication.getContext(), "正在下载" + name, 1).show();
 //                present.downloadAPK("http://gdown.baidu.com/data/wisegame/cfdb6ba461b2c8ad/baidu_97519360.apk", context, name);
                 present.downloadAPK(position.getTarget(), context, name);
             }
@@ -165,7 +152,18 @@ public class WelfareFragment extends BaseFragment implements WelfContract.View, 
         present.getBtnBeans(btnPage);
     }
 
+    @OnClick({R.id.welf_search, R.id.main_vip})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.main_vip:
+                redirectActivity(VipActivity.class);
+                break;
+            case R.id.welf_search:
+                redirectActivity(SearchActivity.class);
+                break;
+        }
 
+    }
 
     @Override
     public void setPresenter(WelfContract.present presenter) {

@@ -12,49 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/main_vip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/btn_vip" />
-
-            <RelativeLayout
-                android:id="@+id/welf_search"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_dp_30"
-                android:layout_marginRight="@dimen/size_dp_16"
-                android:layout_toLeftOf="@+id/main_vip"
-                android:background="@drawable/home_search">
-
-                <ImageView
-                    android:id="@+id/fragment_main_search_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/size_dp_10"
-                    android:src="@mipmap/icon_search" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_toRightOf="@+id/fragment_main_search_icon"
-                    android:background="@null"
-                    android:hint="清输入影片名"
-                    android:maxLines="1"
-                    android:padding="@dimen/size_dp_6"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/main_search_hint"
-                    android:textCursorDrawable="@null"
-                    android:textSize="@dimen/size_sp_13" />
-            </RelativeLayout>
-
-        </RelativeLayout>
 
         <com.bigkoo.convenientbanner.ConvenientBanner
             android:id="@+id/welfare_banner"
