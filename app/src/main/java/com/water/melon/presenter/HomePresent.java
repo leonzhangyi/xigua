@@ -42,6 +42,7 @@ public class HomePresent extends BasePresenterParent implements HomeContract.Pre
     public void getHomeBean() {
 //        setHomeBeans();
 //        mView.setHomeBean(homeBeans);
+        mView.showLoadingDialog(true);
         BaseRequest request = new BaseRequest(1, 30);
         ApiImp.getInstance().getHomeVIP(request, getLifecycleTransformerByStopToFragment(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
             @Override
@@ -52,7 +53,7 @@ public class HomePresent extends BasePresenterParent implements HomeContract.Pre
             @Override
             public void onError(ErrorResponse error) {
 //                if (error.getCode() != 2) {
-//                    ToastUtil.showToastLong(error.getErr());
+                ToastUtil.showToastLong(error.getErr());
 //                }
             }
 

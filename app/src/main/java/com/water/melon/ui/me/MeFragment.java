@@ -1,6 +1,5 @@
 package com.water.melon.ui.me;
 
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,9 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.water.melon.R;
-import com.water.melon.application.MyApplication;
 import com.water.melon.base.ui.BaseFragment;
 import com.water.melon.net.bean.UserBean;
 import com.water.melon.presenter.MePresenter;

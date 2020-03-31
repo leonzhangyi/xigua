@@ -2,14 +2,17 @@ package com.water.melon.ui.netresource;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.water.melon.R;
 import com.water.melon.base.ui.BaseFragment;
 import com.water.melon.base.ui.BaseRVListAdapter;
@@ -44,7 +47,7 @@ import butterknife.OnClick;
  */
 public class NetResouceItemFragment extends BaseFragment implements NetResouceItemContract.View
         , ItemNetResouceItemAdapter.AdapterListen, OnItemClickListener {
-    @BindView(R.id.netConvenientBanner)
+    //    @BindView(R.id.netConvenientBanner)
     ConvenientBanner netConvenientBanner;
     @BindView(R.id.net_resource_item_rv)
     RecyclerView netResourceItemRv;
@@ -52,7 +55,7 @@ public class NetResouceItemFragment extends BaseFragment implements NetResouceIt
     LinearLayout loadingLay;
 
     private NetResouceItemPresenter mPresenter;
-    private ItemNetResouceItemAdapter netResouceItemAdapter;
+    private ItemNetResouceItemAdapter1 netResouceItemAdapter;
     private GridLayoutManager gridLayoutManager;
     private GetVideosRequest request;
     private boolean isRefreshing = false;//是否在加载
@@ -84,29 +87,26 @@ public class NetResouceItemFragment extends BaseFragment implements NetResouceIt
         if (null == datas) {
             datas = new ArrayList<>();
         }
-        if (null == netResouceItemAdapter) {
-            netResouceItemAdapter = new ItemNetResouceItemAdapter(datas, this);
-            netResouceItemAdapter.setPageSize(mPresenter.limit);
-            if (serviceError) {
-                netResouceItemAdapter.setEmptyClickListen(new BaseRVListAdapter.BaseRVListAdapterEmptyClickListen() {
-                    @Override
-                    public void emptyClickListen() {
-                        showLoadingDialog(true);
-                        mPresenter.getListData(request);
-                    }
-                });
-                netResouceItemAdapter.setEmptyMsg("点击重新获取");
-            }
-            netResourceItemRv.setAdapter(netResouceItemAdapter);
+        if (serviceError) {
+            netResouceItemAdapter.loadMoreFail();
+        }
+        if (newData) {
             loadingLay.setVisibility(View.GONE);
+            showLoadingDialog(false);
+            netResouceItemAdapter.setNewData(datas);
+
         } else {
-            if (newData) {
-                netResouceItemAdapter.setDatas(datas);
+            if (datas.size() > 0) {
+                netResouceItemAdapter.addData(datas);
+                netResouceItemAdapter.loadMoreComplete();
             } else {
-                netResouceItemAdapter.addDatas(datas);
+                netResouceItemAdapter.loadMoreEnd();
             }
+
         }
         isRefreshing = false;
+
+
     }
 
     @Override
@@ -119,34 +119,59 @@ public class NetResouceItemFragment extends BaseFragment implements NetResouceIt
             netResourceItemRv.setLayoutManager(gridLayoutManager);
 //            netResourceItemRv.setHasFixedSize(true);
 //            netResourceItemRv.setNestedScrollingEnabled(false);
-            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                @Override
-                public int getSpanSize(int position) {
-                    if (netResouceItemAdapter != null && position == netResouceItemAdapter.getDatas().size()) {
-                        return 2;
-                    }
-                    return 1;
-                }
-            });
-            netResourceItemRv.addItemDecoration(new GridSpacingItemDecoration(3, 10, false));
-            netResourceItemRv.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                @Override
-                public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                    super.onScrollStateChanged(recyclerView, newState);
-                    //加载更多
-                    if ((recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset()
-                            >= recyclerView.computeVerticalScrollRange()) && !isRefreshing && netResouceItemAdapter != null
-                            && !netResouceItemAdapter.isNoMoreData()) {
-                        //滑动到底部
-                        isRefreshing = true;
-                        mPresenter.getListData(request);
-                    }
-                }
-            });
+//            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+//                @Override
+//                public int getSpanSize(int position) {
+//                    if (netResouceItemAdapter != null && position == netResouceItemAdapter.getDatas().size()) {
+//                        return 2;
+//                    }
+//                    return 1;
+//                }
+//            });
+//            netResourceItemRv.addItemDecoration(new GridSpacingItemDecoration(3, 10, false));
+//            netResourceItemRv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//                @Override
+//                public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+//                    super.onScrollStateChanged(recyclerView, newState);
+//                    //加载更多
+//                    if ((recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset()
+//                            >= recyclerView.computeVerticalScrollRange()) && !isRefreshing && netResouceItemAdapter != null
+//                            && !netResouceItemAdapter.isNoMoreData()) {
+//                        //滑动到底部
+//                        isRefreshing = true;
+//                        mPresenter.getListData(request);
+//                    }
+//                }
+//            });
             lazyLoad();
         }
 
+        View header = LayoutInflater.from(context).inflate(R.layout.netresource_fragment_header, null);
+        netConvenientBanner = header.findViewById(R.id.netConvenientBanner);
+
+        View emptView = LayoutInflater.from(context).inflate(R.layout.netresource_fragment_empty, null);
+        TextView no_data_tv = emptView.findViewById(R.id.no_data_tv);
+        no_data_tv.setText("没有该类视频，看看其他分类吧！");
+        netResouceItemAdapter = new ItemNetResouceItemAdapter1();
+        netResouceItemAdapter.addHeaderView(header);
+        netResouceItemAdapter.setEmptyView(emptView);
+        netResouceItemAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                loadMore();
+            }
+        });
+        netResouceItemAdapter.setAdapterListen(this);
+        netResourceItemRv.setAdapter(netResouceItemAdapter);
+
+
         mPresenter.getAdv();
+        mPresenter.getListData(request);
+
+    }
+
+    private void loadMore() {
+        mPresenter.getListData(request);
     }
 
     @Override
@@ -167,12 +192,6 @@ public class NetResouceItemFragment extends BaseFragment implements NetResouceIt
     @Override
     protected void lazyLoad() {
         super.lazyLoad();
-        if (isVisible && null != mPresenter) {
-            if (netResouceItemAdapter == null) {
-                //获取数据
-                mPresenter.getListData(request);
-            }
-        }
     }
 
 
@@ -183,10 +202,10 @@ public class NetResouceItemFragment extends BaseFragment implements NetResouceIt
             ToastUtil.showToastShort("请先绑定手机号");
             Intent intent = new Intent(getContext(), RegistActivity.class);
             redirectActivityForResult(intent, 1);
-        }else{
+        } else {
             //列表单个电影点击
             Bundle bundle = new Bundle();
-            SearchVideoInfoBean videoInfoBean = new SearchVideoInfoBean();
+            VideoPlayBean videoInfoBean = new VideoPlayBean();
             videoInfoBean.setId(item.get_id());
             bundle.putSerializable(XGConstant.KEY_DATA, videoInfoBean);
             redirectActivity(VideoInfoActivity.class, bundle);

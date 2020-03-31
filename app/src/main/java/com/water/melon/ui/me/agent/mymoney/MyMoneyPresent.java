@@ -61,12 +61,37 @@ public class MyMoneyPresent extends BasePresenterParent implements MyMoneyContra
                         mView.setMoneyDate(beforeBean);
                     } else {
                         myUserMoney = (MyMoneyBean.MyUserMoney) GsonUtil.toClass(result, MyMoneyBean.MyUserMoney.class);
-
                     }
                 }
                 if (baseRequest.getParameter().getHandle().equals("after")) {
                     mView.setUserDate(myUserMoney, false);
                     mView.showLoadingDialog(false);
+                }
+            }
+        });
+
+    }
+
+
+    @Override
+    public void getMyMoneyBefor(BaseRequest<MyMoneyBean> baseRequest) {
+        ApiImp.getInstance().getProfit(baseRequest, getLifecycleTransformerByStopToActivity(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
+            @Override
+            public void onCompleted() {
+            }
+
+            @Override
+            public void onError(ErrorResponse error) {
+                ToastUtil.showToastShort(error.getErr());
+            }
+
+            @Override
+            public void onNext(BaseApiResultData data) {
+                LogUtil.e(TAG, "getProfit.getResult() = " + data.getResult());
+                String result = data.getResult();
+                if (result != null && !result.equals("") && !result.equals("[]")) {
+                    MyMoneyBean.BeforeBean beforeBean = (MyMoneyBean.BeforeBean) GsonUtil.toClass(result, MyMoneyBean.BeforeBean.class);
+                    mView.setMoneyDate(beforeBean);
                 }
             }
         });

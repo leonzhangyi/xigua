@@ -11,8 +11,5 @@
         android:layout_width="match_parent"
         android:layout_height="175dp"
         android:layout_below="@+id/top_view"
-        android:layout_marginLeft="@dimen/size_dp_16"
-        android:layout_marginTop="@dimen/size_dp_12"
-        android:layout_marginRight="@dimen/size_dp_16"
         android:layout_marginBottom="@dimen/size_dp_5" />
 </LinearLayout>

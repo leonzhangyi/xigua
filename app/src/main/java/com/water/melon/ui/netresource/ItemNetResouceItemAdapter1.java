@@ -36,26 +36,37 @@ public class ItemNetResouceItemAdapter1 extends BaseQuickAdapter<NetResoutVideoI
     @Override
     protected void convert(@NonNull BaseViewHolder helper, NetResoutVideoInfo item) {
         ImageView itemNetResourceImage = helper.getView(R.id.item_net_resource_image);
+        ImageView itemNetResourceImage1 = helper.getView(R.id.item_net_resource_image_1);
         TextView itemNetResourceTime = helper.getView(R.id.item_net_resource_time);
         TextView itemNetResourceName = helper.getView(R.id.item_net_resource_name);
+        TextView item_net_resource_sub = helper.getView(R.id.item_net_resource_sub);
 
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) itemNetResourceImage.getLayoutParams();
         int width = (int) ((XGConstant.Screen_Width) * 0.495);
         params.width = width;
-//            params.height = (int) (width * 1.5);
-        params.height = (int) (width);
+        params.height = (int) (width * 0.9);
+
         itemNetResourceImage.requestLayout();
+        RelativeLayout.LayoutParams params1 = (RelativeLayout.LayoutParams) itemNetResourceImage1.getLayoutParams();
+        int width1 = (int) ((XGConstant.Screen_Width) * 0.495);
+        params1.width = width1;
+        params1.height = (int) (width1 * 0.9);
+//        itemNetResourceImage1.requestLayout();
 
         itemNetResourceName.setText(item.getTitle().trim());
 //            if (null != data.getTorrents().getZh() && data.getTorrents().getZh().size() > 0) {
 //                itemNetResourceTime.setText(data.getTorrents().getZh().get(data.getTorrents().getZh().size() - 1).getTitle());
 //            }
+        String syn = item.getSynopsis().trim();
+//        syn = syn.replace(" ", "");
+        syn = trim1(syn);
         itemNetResourceTime.setText(GetTail(item.getSynopsis().trim()));
+        item_net_resource_sub.setText(syn);
 //            LogUtil.e("testjianjie", "data.getSynopsis().trim() = " + data.getSynopsis().trim());
         GlideApp.with(itemNetResourceImage.getContext())
                 .asBitmap()
                 .load(item.getPoster())
-                .placeholder(R.mipmap.bg_video_plact_vertical)
+                .placeholder(R.mipmap.video_def)
                 .override(200, 300)
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .into(itemNetResourceImage);
@@ -65,6 +76,13 @@ public class ItemNetResouceItemAdapter1 extends BaseQuickAdapter<NetResoutVideoI
         helper.itemView.setOnClickListener(this);
     }
 
+    public static String trim1(String s) {
+        String result = "";
+        if (null != s && !"".equals(s)) {
+            result = s.replaceAll("^[　*| *|&nbsp;*|//s*]*", "").replaceAll("[　*| *|&nbsp;*|//s*]*$", "");
+        }
+        return result;
+    }
 
     String GetTail(String str) {
         int i;

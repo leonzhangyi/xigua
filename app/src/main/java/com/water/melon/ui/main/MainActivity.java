@@ -1,12 +1,5 @@
 package com.water.melon.ui.main;
 
-import android.app.DownloadManager;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
@@ -26,10 +19,6 @@ import com.water.melon.utils.HandleBackUtil;
 import com.water.melon.utils.ToastUtil;
 import com.water.melon.utils.update.CheckAppVersionUtil;
 
-import java.io.File;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import butterknife.BindView;
@@ -62,7 +51,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         mainActivity = this;
         new MainPresent(this, this);
         present.start();//初始化升级
-//        present.getUserInfo();//放到个人中心获取用户信息
+        present.getUserInfo();//放到个人中心获取用户信息
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 

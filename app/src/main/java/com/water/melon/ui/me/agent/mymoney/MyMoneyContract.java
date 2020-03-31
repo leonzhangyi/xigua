@@ -9,6 +9,7 @@ import com.water.melon.net.bean.MyMoneyBean;
 public interface MyMoneyContract {
     interface Present extends BasePresenter {
         void getMyMoney(BaseRequest<MyMoneyBean> baseRequest);
+        void getMyMoneyBefor(BaseRequest<MyMoneyBean> baseRequest);
     }
 
     interface View extends BaseView<Present> {

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.gyf.immersionbar.ImmersionBar;
 import com.water.melon.R;
 import com.water.melon.base.ui.BaseActivity;
+import com.water.melon.constant.XGConstant;
 import com.water.melon.net.bean.CreateCodeBean;
 import com.water.melon.ui.me.agent.usercode.AgentCodeActivity;
 import com.water.melon.utils.ToastUtil;
@@ -54,7 +55,7 @@ public class CreateCodeActivity extends BaseActivity implements AgentCodeContrac
 
     CreateCodeBean codeBean = new CreateCodeBean();
 
-    @OnClick({R.id.layout_agent_create_code_code_rl, R.id.layout_agent_create_code_sub, R.id.toolbar_left_tv, R.id.toolbar_right_tv})
+    @OnClick({R.id.layout_agent_create_code_code_rl, R.id.layout_agent_create_code_sub, R.id.toolbar_left_tv, R.id.toolbar_right_tv, R.id.agent_create_code_save})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.layout_agent_create_code_code_rl:
@@ -83,6 +84,9 @@ public class CreateCodeActivity extends BaseActivity implements AgentCodeContrac
                 break;
             case R.id.toolbar_right_tv:
                 redirectActivity(AgentCodeActivity.class);
+                break;
+            case R.id.agent_create_code_save:
+//                XGUtil.writeExcel(this, createCodeAdapter.getData());
                 break;
         }
     }

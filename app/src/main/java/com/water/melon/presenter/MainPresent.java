@@ -76,8 +76,8 @@ public class MainPresent extends BasePresenterParent implements MainContract.Pre
                                 return update;
                             }
                             // 此apk包的下载地址
-//                            update.setUpdateUrl(info.getDownload());
-                            update.setUpdateUrl("http://gdown.baidu.com/data/wisegame/cfdb6ba461b2c8ad/baidu_97519360.apk");
+                            update.setUpdateUrl(info.getDownload());
+//                            update.setUpdateUrl("http://gdown.baidu.com/data/wisegame/cfdb6ba461b2c8ad/baidu_97519360.apk");
                             // 此apk包的版本号
                             update.setVersionCode(Integer.parseInt(info.getVersionCode().trim()));
                             // 此apk包的版本名称

@@ -230,7 +230,7 @@ public class WelfareFragment extends BaseFragment implements WelfContract.View, 
     public void setMidAdv(List<AdvBean> advs) {
         this.advs = advs;
         if (advs != null && advs.size() > 0) {
-            GlideHelper.showImage(fragment_wef_mid_adv, advs.get(0).getUrl(), R.mipmap.bannel_def);
+            GlideHelper.showImage(fragment_wef_mid_adv, advs.get(0).getUrl(), R.mipmap.fuli_adv1_def);
         }
     }
 

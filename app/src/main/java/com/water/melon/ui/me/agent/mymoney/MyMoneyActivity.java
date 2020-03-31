@@ -78,7 +78,7 @@ public class MyMoneyActivity extends BaseActivity implements MyMoneyContract.Vie
 
 
     private MyMoneyPresent present;
-    private MyMoneyBean bean;
+
 
     @Override
     public int getContentViewByBase(Bundle savedInstanceState) {
@@ -129,18 +129,16 @@ public class MyMoneyActivity extends BaseActivity implements MyMoneyContract.Vie
         recyclerView.setAdapter(myUserTotalAdapter);
 
 
-        if (bean == null) {
-            bean = new MyMoneyBean();
-        }
+        MyMoneyBean bean = new MyMoneyBean();
         bean.setHandle("before");
         baseRequest.setParameter(bean);
-        present.getMyMoney(baseRequest);
+        present.getMyMoneyBefor(baseRequest);
 
 
         doFirstDate();
 
     }
-
+    MyMoneyBean bean = new MyMoneyBean();
     private void loadMore() {
         page++;
         baseRequest.setPage(page);
@@ -172,6 +170,7 @@ public class MyMoneyActivity extends BaseActivity implements MyMoneyContract.Vie
 
             case R.id.agent_user_search:
                 page = 1;
+
                 bean.setStart_date(startTimeTv.getText().toString());
                 bean.setStop_date(endTimeTv.getText().toString());
                 bean.setHandle("after");

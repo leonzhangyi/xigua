@@ -2,7 +2,9 @@ package com.water.melon.ui.me.history;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.water.melon.R;
@@ -49,6 +51,11 @@ public class VipHistoryFragment extends BaseFragment implements VIpHistoryContra
                 loadMore();
             }
         });
+        View emptyView = LayoutInflater.from(context).inflate(R.layout.netresource_fragment_empty, null);
+        TextView no_data_tv = emptyView.findViewById(R.id.no_data_tv);
+        no_data_tv.setText("没有播放记录");
+
+        adapter.setEmptyView(emptyView);
 
         adapter.setOnItemClick(new VideoHistoryItemClick() {
             @Override

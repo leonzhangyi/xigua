@@ -10,25 +10,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.bigkoo.convenientbanner.ConvenientBanner
-            android:id="@+id/netConvenientBanner"
-            android:layout_width="match_parent"
-            android:layout_height="175dp"
-            android:layout_marginLeft="@dimen/size_dp_16"
-            android:layout_marginTop="@dimen/size_dp_10"
-            android:layout_marginRight="@dimen/size_dp_16" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/net_resource_item_rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/netConvenientBanner"
-            android:layout_marginLeft="@dimen/size_dp_16"
+            android:layout_marginLeft="@dimen/size_dp_11"
             android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginRight="@dimen/size_dp_16"
+            android:layout_marginRight="@dimen/size_dp_11"
             android:visibility="visible" />
 
         <include
+            android:visibility="gone"
             android:id="@+id/loading_lay"
             layout="@layout/include_loading_layout"
             android:layout_width="wrap_content"

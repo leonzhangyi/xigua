@@ -9,11 +9,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
+import com.just.agentweb.LogUtils;
 import com.trello.rxlifecycle3.LifecycleTransformer;
 import com.water.melon.R;
 import com.water.melon.application.MyApplication;
@@ -24,6 +27,7 @@ import com.water.melon.net.BaseApiResultData;
 import com.water.melon.net.ErrorResponse;
 import com.water.melon.net.IApiSubscriberCallBack;
 import com.water.melon.net.bean.AdvBean;
+import com.water.melon.net.bean.CreateCodeBean;
 import com.water.melon.net.bean.RoadBean;
 import com.water.melon.net.bean.UserBean;
 import com.water.melon.ui.home.BannerActivity;
@@ -39,6 +43,7 @@ import com.water.melon.ui.videoInfo.VideoInfoActivity;
 import com.water.melon.utils.glide.GlideHelper;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
@@ -749,7 +754,96 @@ public class XGUtil {
                     break;
             }
         }
+
+
+    }
+
+    /**
+     * 将数据写入excel表格
+     */
+    public static void writeExcel(Context context, List<CreateCodeBean.UserCodeBean> datas) {
+        if (getExternalStoragePath(context) == null) return;
+        String excelFilePath = getExternalStoragePath(context) + "/mine.xls";
+
+        File file = new File(excelFilePath);
+        LogUtil.e("XGutil", "writeExcel path = " + excelFilePath);
+//        if (checkFile(excelFilePath)) {
+//            deleteByPath(excelFilePath);//如果文件存在则先删除原有的文件
+//        }
+//        File file = new File(getExternalStoragePath(context) + "/ExportExcel");
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        createFile(file);
+//        ExcelUtils.initExcel(excelFilePath, "中文版", colNames);//需要写入权限
+//        ExcelUtils.writeObjListToExcel(datas, excelFilePath, context);
+        ExcelUtils.writeToExcel(context,file,datas);
+    }
+
+    public static String createFile(File file){
+        try{
+            if(file.getParentFile().exists()){
+                file.createNewFile();
+            }
+            else {
+                //创建目录之后再创建文件
+                createDir(file.getParentFile().getAbsolutePath());
+                file.createNewFile();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public static String createDir(String dirPath){
+        //因为文件夹可能有多层，比如:  a/b/c/ff.txt  需要先创建a文件夹，然后b文件夹然后...
+        try{
+            File file=new File(dirPath);
+            if(file.getParentFile().exists()){
+                file.mkdir();
+                return file.getAbsolutePath();
+            }
+            else {
+                createDir(file.getParentFile().getAbsolutePath());
+                file.mkdir();
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return dirPath;
+    }
+
+    /**
+     * 根据路径生成文件夹
+     *
+     * @param filePath
+     */
+    public static void makeDir(File filePath) {
+        if (!filePath.getParentFile().exists()) {
+            makeDir(filePath.getParentFile());
+        }
+        filePath.mkdir();
     }
 
 
+    /**
+     * 获取外部存储路径
+     *
+     * @return
+     */
+    public static String getExternalStoragePath(Context mContext) {
+        File sdDir = null;
+        boolean sdCardExist = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+        if (sdCardExist) {
+            sdDir = Environment.getExternalStorageDirectory();
+            return sdDir.toString();
+        } else {
+            Toast.makeText(mContext, "找不到外部存储路径，读写手机存储权限被禁止，请在权限管理中心手动打开权限", Toast.LENGTH_LONG).show();
+            return null;
+        }
+    }
 }

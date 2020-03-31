@@ -30,6 +30,7 @@ import com.water.melon.utils.LogUtil;
 import com.water.melon.utils.ToastUtil;
 import com.water.melon.utils.XGUtil;
 import com.water.melon.utils.bannel.NetImageHolderView;
+import com.water.melon.views.HomeDialog;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,7 +45,7 @@ import butterknife.OnClick;
 
 public class MainFragment extends BaseFragment implements OnItemClickListener, HomeContract.View {
     public static final String TAG = "MainFragment";
-//    @BindView(R.id.netConvenientBanner)
+    //    @BindView(R.id.netConvenientBanner)
 //    ConvenientBanner netConvenientBanner;
 //    @BindView(R.id.fragment_gg_tv)
 //    TextView tvGg;
@@ -82,7 +83,7 @@ public class MainFragment extends BaseFragment implements OnItemClickListener, H
 
         View header = LayoutInflater.from(context).inflate(R.layout.fragment_main_header, null);
         netConvenientBanner = header.findViewById(R.id.netConvenientBanner);
-        tvGg= header.findViewById(R.id.fragment_gg_tv);
+        tvGg = header.findViewById(R.id.fragment_gg_tv);
         tvGg.setSelected(true);
 
         adapter = new MainHomeAdapter();
@@ -133,7 +134,7 @@ public class MainFragment extends BaseFragment implements OnItemClickListener, H
                     }
                 }
 
-            present.doAdvClick(position);
+                present.doAdvClick(position);
             }
         });
 
@@ -212,7 +213,7 @@ public class MainFragment extends BaseFragment implements OnItemClickListener, H
                 if (bean.getType() == 1) { //走马灯
                     tvGg.setText(bean.getMessage());
                 } else if (bean.getType() == 2) {//弹框
-
+                    setHomeDialog(bean);
 
                 }
             }
@@ -220,7 +221,7 @@ public class MainFragment extends BaseFragment implements OnItemClickListener, H
     }
 
 
-    @OnClick({R.id.fragment_main_search,R.id.mian_history,R.id.main_vip})
+    @OnClick({R.id.fragment_main_search, R.id.mian_history, R.id.main_vip})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.fragment_main_search:
@@ -250,5 +251,15 @@ public class MainFragment extends BaseFragment implements OnItemClickListener, H
         if (requestCode == 1 && resultCode == 1001) {
             VipActivity.isRefresh = true;
         }
+    }
+
+    private HomeDialog homeDialog;
+
+    public void setHomeDialog(AdvBean bean) {
+        if (homeDialog == null) {
+            homeDialog = new HomeDialog(context, R.style.dialog);
+        }
+        homeDialog.show();
+        homeDialog.setDate(bean);
     }
 }

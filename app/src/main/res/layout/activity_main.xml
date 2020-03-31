@@ -10,22 +10,20 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/main_botton_bac"
-        android:paddingBottom="@dimen/dp_4"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/dp_4">
 
         <RadioButton
             android:id="@+id/bottom_radio_1"
             style="@style/navigation_bottom_radio"
             android:drawableTop="@drawable/btn_main_menu1"
-            android:text="@string/home_tv"
-             />
+            android:text="@string/home_tv" />
 
         <RadioButton
             android:id="@+id/bottom_radio_2"
             style="@style/navigation_bottom_radio"
             android:drawableTop="@drawable/btn_main_menu2"
-            android:text="@string/source_tv"
-         />
+            android:text="@string/source_tv" />
 
         <RadioButton
             android:id="@+id/bottom_radio_3"
@@ -37,7 +35,7 @@
             android:id="@+id/bottom_radio_4"
             style="@style/navigation_bottom_radio"
             android:drawableTop="@drawable/btn_main_menu4"
-            android:text="@string/me_tv"/>
+            android:text="@string/me_tv" />
     </RadioGroup>
 
 

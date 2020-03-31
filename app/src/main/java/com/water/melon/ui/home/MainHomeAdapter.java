@@ -32,11 +32,11 @@ public class MainHomeAdapter extends BaseQuickAdapter<AdvBean, BaseViewHolder> {
         TextView home_fragment_item_tv = helper.getView(R.id.home_fragment_item_tv);
         RelativeLayout layout_home_item_line = helper.getView(R.id.layout_home_item_line);
         home_fragment_item_tv.setText(item.getTitle());
-        GlideHelper.showRoundImageNoStroke(home_fragment_item_iv, item.getUrl(), R.mipmap.ic_launcher_round);
+        GlideHelper.showRoundImageNoStroke(home_fragment_item_iv, item.getUrl(), R.mipmap.home_def);
 
         if (getData().indexOf(item) % 4 == 3) {
             layout_home_item_line.setVisibility(View.GONE);
-        }else{
+        } else {
             layout_home_item_line.setVisibility(View.VISIBLE);
         }
 
