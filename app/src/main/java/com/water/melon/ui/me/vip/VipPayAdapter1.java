@@ -1,6 +1,7 @@
 package com.water.melon.ui.me.vip;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -27,13 +28,15 @@ public class VipPayAdapter1 extends BaseQuickAdapter<VipBean, BaseViewHolder> {
         TextView name = helper.getView(R.id.layout_vip_item_nanme);
         TextView time = helper.getView(R.id.layout_vip_item_time);
         TextView price = helper.getView(R.id.layout_vip_item_price);
+        ImageView pay_dialog_check = helper.getView(R.id.pay_dialog_check);
+
         RelativeLayout pay = helper.getView(R.id.layout_vip_item_pay);
         name.setText(item.getTitle());
         time.setText("有效期" + item.getExpiry() + "天");
         price.setText("¥" + item.getPrice());
+        pay_dialog_check.setSelected(item.isSelect());
 
-
-        pay.setOnClickListener(new View.OnClickListener() {
+        helper.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 itemClick.onItemClick(item);

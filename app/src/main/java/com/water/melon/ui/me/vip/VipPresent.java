@@ -42,14 +42,16 @@ public class VipPresent extends BasePresenterParent implements VipContract.Prese
 
     @Override
     public void getVipDate() {
+        mView.showLoadingDialog(true);
         ApiImp.getInstance().getVIP(null, getLifecycleTransformerByStopToActivity(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
             @Override
             public void onCompleted() {
+                 mView.showLoadingDialog(false);
             }
 
             @Override
             public void onError(ErrorResponse error) {
-                mView.showLoadingDialog(false);
+//                mView.showLoadingDialog(false);
                 ToastUtil.showToastShort(error.getErr());
             }
 

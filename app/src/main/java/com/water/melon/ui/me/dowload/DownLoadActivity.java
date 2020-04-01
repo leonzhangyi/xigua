@@ -192,14 +192,14 @@ public class DownLoadActivity extends BaseActivity {
     private void doPageSelect(int position) {
         switch (position) {
             case 0:
-                dwonloadEnd.setBackground(MyApplication.getDrawableByResId(R.drawable.video_download_main_page_back_press));
-                dwonloading.setBackground(MyApplication.getDrawableByResId(R.drawable.video_download_main_page_back));
+                dwonloadEnd.setBackground(MyApplication.getDrawableByResId(R.drawable.video_download_main_page_back_press_1));
+                dwonloading.setBackground(MyApplication.getDrawableByResId(R.drawable.video_download_main_page_back_1));
                 dwonloadEndTv.setTextColor(MyApplication.getColorByResId(R.color.white));
                 dwonloadingTv.setTextColor(MyApplication.getColorByResId(R.color.black_D9));
                 break;
             case 1:
-                dwonloadEnd.setBackground(MyApplication.getDrawableByResId(R.drawable.video_download_main_page_back));
-                dwonloading.setBackground(MyApplication.getDrawableByResId(R.drawable.video_download_main_page_back_press));
+                dwonloadEnd.setBackground(MyApplication.getDrawableByResId(R.drawable.video_download_main_page_back_1));
+                dwonloading.setBackground(MyApplication.getDrawableByResId(R.drawable.video_download_main_page_back_press_1));
                 dwonloadEndTv.setTextColor(MyApplication.getColorByResId(R.color.black_D9));
                 dwonloadingTv.setTextColor(MyApplication.getColorByResId(R.color.white));
                 break;

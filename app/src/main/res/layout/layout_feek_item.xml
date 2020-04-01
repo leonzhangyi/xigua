@@ -21,7 +21,7 @@
         android:layout_marginLeft="@dimen/size_dp_16"
         android:layout_marginTop="@dimen/dp_10"
         android:layout_marginRight="@dimen/size_dp_16"
-        android:background="#ffd8d8d8">
+        android:background="#f1f2f5">
 
         <EditText
             android:id="@+id/feek_item_et1"
@@ -51,7 +51,7 @@
         android:layout_marginLeft="@dimen/size_dp_16"
         android:layout_marginTop="@dimen/dp_10"
         android:layout_marginRight="@dimen/size_dp_16"
-        android:background="#ffd8d8d8">
+        android:background="#f1f2f5">
 
         <EditText
             android:id="@+id/feek_item_et2"

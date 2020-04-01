@@ -471,7 +471,11 @@ public class OffLineDownAdapter extends BaseRVListAdapter<LocalVideoInfo> implem
         }
 
         private void setData(LocalVideoInfo mapData, int position) {
-            itemOfflineName.setText(mapData.getTitle());
+            String name = mapData.getTitle();
+            if (name.contains(".")) {
+                name = name.substring(0, name.lastIndexOf("."));
+            }
+            itemOfflineName.setText(name);
             itemOfflineFree.setText(mapData.getInfo());
             itemOfflineProgress.setProgress(Integer.valueOf(mapData.getPercent()));
 

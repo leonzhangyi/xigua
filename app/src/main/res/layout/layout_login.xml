@@ -131,6 +131,7 @@
                     android:background="@null"
                     android:hint="请输入密码"
                     android:inputType="numberPassword"
+                    android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:paddingLeft="@dimen/dp_10"
                     android:paddingTop="@dimen/dp_4"
                     android:paddingRight="@dimen/dp_10"

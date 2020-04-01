@@ -26,7 +26,7 @@
             android:layout_height="@dimen/size_dp_30"
             android:layout_marginRight="@dimen/size_sp_5"
             android:layout_toLeftOf="@+id/video_download_div_center"
-            android:background="@drawable/video_download_main_page_back_press">
+            android:background="@drawable/video_download_main_page_back_press_1">
 
             <TextView
                 android:id="@+id/video_download_page_downloadend_tv"
@@ -46,7 +46,7 @@
             android:layout_height="@dimen/size_dp_30"
             android:layout_marginLeft="@dimen/size_sp_5"
             android:layout_toRightOf="@+id/video_download_div_center"
-            android:background="@drawable/video_download_main_page_back">
+            android:background="@drawable/video_download_main_page_back_1">
 
             <TextView
                 android:id="@+id/video_download_page_downloading_tv"

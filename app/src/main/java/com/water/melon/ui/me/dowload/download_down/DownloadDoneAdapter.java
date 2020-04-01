@@ -240,7 +240,11 @@ public class DownloadDoneAdapter extends BaseRVListAdapter<LocalVideoInfo> imple
                 mapData.setInfo("");
             }
             itemDownloadDoneFree.setText(mapData.getInfo());
-            itemDownloadDoneName.setText(mapData.getTitle());
+            String name = mapData.getTitle();
+            if (name.contains(".")) {
+                name = name.substring(0, name.lastIndexOf("."));
+            }
+            itemDownloadDoneName.setText(name);
 
             String image = mapData.getVideoImage();
             GlideRequest glideRequest;

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
 import com.water.melon.R;
 import com.water.melon.base.ui.BaseActivity;
@@ -14,6 +15,7 @@ import com.water.melon.net.bean.CreateCodeBean;
 import com.water.melon.net.bean.UserBean;
 import com.water.melon.ui.in.PayDialogClick;
 import com.water.melon.ui.in.VipPayItemClick;
+import com.water.melon.ui.in.VipPayItemClick2;
 import com.water.melon.ui.login.RegistActivity;
 import com.water.melon.utils.GsonUtil;
 import com.water.melon.utils.LogUtil;
@@ -25,10 +27,12 @@ import com.water.melon.views.PayDialog;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -39,6 +43,9 @@ public class VipActivity extends BaseActivity implements VipContract.View {
 
     @BindView(R.id.recycleview_vip)
     RecyclerView recyclerView;
+
+    @BindView(R.id.layout_pay_recy)
+    RecyclerView layout_pay_recy;
 
     @BindView(R.id.layout_agent_phone_et)
     EditText layout_agent_phone_et;
@@ -100,6 +107,9 @@ public class VipActivity extends BaseActivity implements VipContract.View {
 
     }
 
+    private PayDialogAdapter1 payDialogAdapter;
+    private String order;
+
     @Override
     public void initView() {
         vipPayAdapter = new VipPayAdapter1();
@@ -107,20 +117,47 @@ public class VipActivity extends BaseActivity implements VipContract.View {
         vipPayAdapter.setItemClick(new VipPayItemClick() {
             @Override
             public void onItemClick(VipBean item) {
-                UserBean userBean1 = XGUtil.getMyUserInfo();
-                if (userBean1 == null || userBean1.getGroup_id().trim().equals("0")) { //游客
-                    ToastUtil.showToastShort("请先绑定手机号");
-                    Intent intent = new Intent(VipActivity.this, RegistActivity.class);
-                    redirectActivityForResult(intent, 1);
-                } else {
-                    vipPresent.doPay(item);
+//                UserBean userBean1 = XGUtil.getMyUserInfo();
+//                if (userBean1 == null || userBean1.getGroup_id().trim().equals("0")) { //游客
+//                    ToastUtil.showToastShort("请先绑定手机号");
+//                    Intent intent = new Intent(VipActivity.this, RegistActivity.class);
+//                    redirectActivityForResult(intent, 1);
+//                } else {
+                for (int i = 0; i < vipBeans.size(); i++) {
+                    if (vipBeans.get(i).getId().equals(item.getId())) {
+                        vipBeans.get(i).setSelect(true);
+                    } else {
+                        vipBeans.get(i).setSelect(false);
+                    }
                 }
+                vipPayAdapter.setNewData(vipBeans);
+                vipPresent.doPay(item);
+//                }
 
 
             }
         });
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(vipPayAdapter);
+
+        payDialogAdapter = new PayDialogAdapter1();
+        payDialogAdapter.setOnItemClick(new VipPayItemClick2() {
+            @Override
+            public void onItemClick(VipBean.PayMethod item) {
+                UserBean userBean1 = XGUtil.getMyUserInfo();
+                if (userBean1 == null || userBean1.getGroup_id().trim().equals("0")) { //游客
+                    ToastUtil.showToastShort("请先绑定手机号");
+                    Intent intent = new Intent(VipActivity.this, RegistActivity.class);
+                    redirectActivityForResult(intent, 1);
+                } else {
+                    vipPresent.doCPay(order, item.getMethod());
+                }
+
+            }
+        });
+
+        layout_pay_recy.setLayoutManager(new LinearLayoutManager(this));
+        layout_pay_recy.setAdapter(payDialogAdapter);
 
 
         setBaseDate();
@@ -133,10 +170,17 @@ public class VipActivity extends BaseActivity implements VipContract.View {
         this.vipPresent = (VipPresent) presenter;
     }
 
+    List<VipBean> vipBeans = new ArrayList<>();
+
     @Override
     public void setVipDate(List<VipBean> vipBeans) {
+        this.vipBeans.clear();
         if (vipBeans != null && vipBeans.size() > 0) {
-            vipPayAdapter.addData(vipBeans);
+            vipBeans.get(0).setSelect(true);
+            this.vipBeans = vipBeans;
+            vipPayAdapter.setNewData(vipBeans);
+//            vipPayAdapter.addData(vipBeans);
+            vipPresent.doPay(vipBeans.get(0));
         }
     }
 
@@ -144,18 +188,24 @@ public class VipActivity extends BaseActivity implements VipContract.View {
 
     @Override
     public void setPayMethod(VipBean vipBean) {
-        if (payDialog == null) {
-            payDialog = new PayDialog(this, R.style.dialog);
-            payDialog.setBuyClick(new PayDialogClick() {
-                @Override
-                public void onItemClick(String order, String method) {
-                    vipPresent.doCPay(order, method);
-                }
-            });
-
+        if (vipBean != null) {
+            order = vipBean.getOrder_id();
+            payDialogAdapter.setNewData(vipBean.getMethod());
         }
-        payDialog.show();
-        payDialog.setData(vipBean);
+
+
+//        if (payDialog == null) {
+//            payDialog = new PayDialog(this, R.style.dialog);
+//            payDialog.setBuyClick(new PayDialogClick() {
+//                @Override
+//                public void onItemClick(String order, String method) {
+//                    vipPresent.doCPay(order, method);
+//                }
+//            });
+//
+//        }
+//        payDialog.show();
+//        payDialog.setData(vipBean);
     }
 
     @Override
@@ -255,5 +305,8 @@ public class VipActivity extends BaseActivity implements VipContract.View {
         ImmersionBar.with(this)
                 .statusBarView(status_bar_view)
                 .init();
+//        ImmersionBar.with(this)
+//                .hideBar(BarHide.FLAG_HIDE_BAR)
+//                .init();
     }
 }

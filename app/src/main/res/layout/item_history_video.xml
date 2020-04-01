@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_history_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="horizontal"
+    android:paddingLeft="5dp">
+
+    <CheckBox
+        android:id="@+id/item_history_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/size_dp_15"
+        android:button="@drawable/check_select"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_15"
+        android:orientation="vertical">
+
+        <!--            app:cardCornerRadius="@dimen/size_dp_15"-->
+
+        <com.sunfusheng.GlideImageView
+            android:id="@+id/item_history_image"
+            android:layout_width="@dimen/size_dp_44"
+            android:layout_height="@dimen/size_dp_44"
+            android:scaleType="fitXY" />
+
+
+        <ImageView
+            android:id="@+id/item_history_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="@dimen/size_dp_5"
+            android:paddingRight="@dimen/size_dp_5"
+            android:paddingBottom="@dimen/size_dp_5"
+            android:src="@mipmap/icon_delete"
+            android:visibility="gone" />
+
+
+        <TextView
+            android:id="@+id/item_history_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/item_history_image"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="-271dp"
+            android:layout_toLeftOf="@id/item_history_delete"
+            android:layout_toRightOf="@id/item_history_image"
+            android:ellipsize="end"
+            android:maxEms="12"
+            android:maxLines="1"
+            android:text="战狼BD1280国语高清中字.rmvb"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/item_history_play_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_history_name"
+            android:layout_alignLeft="@id/item_history_name"
+            android:layout_marginTop="@dimen/size_dp_2"
+            android:text="播放位置"
+            android:textColor="@color/black_D9"
+            android:textSize="@dimen/size_sp_12" />
+
+        <TextView
+            android:id="@+id/item_history_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/item_history_play_position"
+            android:layout_alignParentRight="true"
+            android:text="总时间"
+            android:textColor="@color/black_D9"
+            android:textSize="@dimen/size_sp_12"
+            android:visibility="gone" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/item_history_image"
+            android:layout_marginTop="@dimen/size_dp_8"
+            android:background="@color/black_1A" />
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -9,7 +9,6 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.water.melon.R;
 import com.water.melon.application.MyApplication;
 import com.water.melon.base.ui.BaseActivity;
-import com.water.melon.ui.me.history.VideoHistoryManagerAdapter;
 
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
@@ -123,14 +122,14 @@ public class AgentCodeActivity extends BaseActivity implements AgentCodeContract
     private void doPageSelect(int position) {
         switch (position) {
             case 0:
-                dwonloadEnd.setBackground(MyApplication.getDrawableByResId(R.drawable.video_download_main_page_back_press));
-                dwonloading.setBackground(MyApplication.getDrawableByResId(R.drawable.video_download_main_page_back));
+                dwonloadEnd.setBackground(MyApplication.getDrawableByResId(R.drawable.video_download_main_page_back_press_1));
+                dwonloading.setBackground(MyApplication.getDrawableByResId(R.drawable.video_download_main_page_back_1));
                 dwonloadEndTv.setTextColor(MyApplication.getColorByResId(R.color.white));
                 dwonloadingTv.setTextColor(MyApplication.getColorByResId(R.color.black_D9));
                 break;
             case 1:
-                dwonloadEnd.setBackground(MyApplication.getDrawableByResId(R.drawable.video_download_main_page_back));
-                dwonloading.setBackground(MyApplication.getDrawableByResId(R.drawable.video_download_main_page_back_press));
+                dwonloadEnd.setBackground(MyApplication.getDrawableByResId(R.drawable.video_download_main_page_back_1));
+                dwonloading.setBackground(MyApplication.getDrawableByResId(R.drawable.video_download_main_page_back_press_1));
                 dwonloadEndTv.setTextColor(MyApplication.getColorByResId(R.color.black_D9));
                 dwonloadingTv.setTextColor(MyApplication.getColorByResId(R.color.white));
                 break;

@@ -11,6 +11,9 @@ public class VipBean {
     private String expiry;
     private List<PayMethod> method;
     private String order_id;
+    private boolean isSelect;
+
+
 //    [{
 //        "id": 5,
 //                "title": "体验卡",
@@ -29,6 +32,14 @@ public class VipBean {
 //    }], "order_id": "P10EIXPF3QGZVIDLNM4X"
 //}
 
+
+    public boolean isSelect() {
+        return isSelect;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
+    }
 
     public String getId() {
         return id;

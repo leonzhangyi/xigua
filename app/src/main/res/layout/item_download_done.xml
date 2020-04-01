@@ -5,121 +5,137 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:foreground="?android:attr/selectableItemBackground"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:paddingLeft="5dp"
     android:paddingTop="10dp"
     android:paddingRight="10dp"
     android:paddingBottom="10dp">
 
-    <CheckBox
-        android:id="@+id/item_download_done_check"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="@dimen/size_dp_15"
-        android:button="@drawable/check_select"
-        android:visibility="gone" />
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/size_dp_15"
-        android:orientation="vertical">
+        android:foreground="?android:attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/item_download_done_image_layout"
+        <CheckBox
+            android:id="@+id/item_download_done_check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:foreground="?android:attr/selectableItemBackground">
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/size_dp_15"
+            android:button="@drawable/check_select"
+            android:visibility="gone" />
 
-            <ImageView
-                android:id="@+id/item_download_done_image"
-                android:layout_width="@dimen/size_dp_90"
-                android:layout_height="@dimen/size_dp_70"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/bg_video_plact_horizontal" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_dp_15"
+            android:orientation="vertical">
 
-            <ImageView
+            <androidx.cardview.widget.CardView
+                android:id="@+id/item_download_done_image_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@mipmap/icon_play_offline"
-                android:visibility="gone" />
-        </androidx.cardview.widget.CardView>
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <ImageView
+                    android:id="@+id/item_download_done_image"
+                    android:layout_width="@dimen/size_dp_90"
+                    android:layout_height="@dimen/size_dp_70"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/bg_video_plact_horizontal" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/icon_play_offline"
+                    android:visibility="gone" />
+            </androidx.cardview.widget.CardView>
 
 
-        <TextView
-            android:id="@+id/item_download_done_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/item_download_done_image_layout"
-            android:layout_marginLeft="@dimen/size_dp_15"
-            android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@id/item_download_done_delete"
-            android:layout_toRightOf="@id/item_download_done_image_layout"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="战狼BD1280国语高清中字.rmvb"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/item_download_done_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/item_download_done_image_layout"
+                android:layout_marginLeft="@dimen/size_dp_15"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@id/item_download_done_delete"
+                android:layout_toRightOf="@id/item_download_done_image_layout"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="战狼BD1280国语高清中字.rmvb"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
 
-        <ProgressBar
-            android:id="@+id/item_offline_progress"
-            style="?android:attr/progressBarStyleHorizontal"
+            <ProgressBar
+                android:id="@+id/item_offline_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_dp_6"
+                android:layout_below="@id/item_download_done_name"
+                android:layout_alignLeft="@id/item_download_done_name"
+                android:layout_marginTop="@dimen/size_dp_13"
+                android:layout_toLeftOf="@+id/item_offline_pause"
+                android:max="1000"
+                android:progress="1000"
+                android:progressDrawable="@drawable/progressbar_drawable" />
+
+            <TextView
+                android:id="@+id/item_offline_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_offline_progress"
+                android:layout_alignLeft="@id/item_offline_progress"
+                android:layout_marginTop="@dimen/size_dp_8"
+                android:text="已完成"
+                android:textColor="@color/download_text_color"
+                android:textSize="@dimen/size_sp_12" />
+
+
+            <TextView
+                android:id="@+id/item_download_done_free"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/item_offline_speed"
+                android:layout_alignRight="@id/item_offline_progress"
+                android:text="@string/str_avail"
+                android:textColor="@color/download_text_color"
+                android:textSize="@dimen/size_sp_12" />
+
+
+            <ImageView
+
+                android:id="@+id/item_download_done_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/item_download_done_name"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/size_dp_5"
+                android:src="@drawable/download_del" />
+
+            <ImageView
+                android:id="@+id/item_offline_pause"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/item_download_done_name"
+                android:layout_marginLeft="@dimen/size_dp_30"
+                android:layout_marginRight="@dimen/size_dp_5"
+                android:layout_toLeftOf="@+id/item_download_done_delete"
+                android:padding="@dimen/size_dp_5"
+                android:src="@drawable/download_pause" />
+
+        </RelativeLayout>
+
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_dp_6"
-            android:layout_below="@id/item_download_done_name"
-            android:layout_alignLeft="@id/item_download_done_name"
-            android:layout_marginTop="@dimen/size_dp_13"
-            android:layout_toLeftOf="@+id/item_offline_pause"
-            android:max="1000"
-            android:progress="1000"
-            android:progressDrawable="@drawable/progressbar_drawable" />
-
-        <TextView
-            android:id="@+id/item_offline_speed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/item_offline_progress"
-            android:layout_alignLeft="@id/item_offline_progress"
-            android:layout_marginTop="@dimen/size_dp_8"
-            android:text="已完成"
-            android:textColor="@color/download_text_color"
-            android:textSize="@dimen/size_sp_12" />
-
-
-        <TextView
-            android:id="@+id/item_download_done_free"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/item_offline_speed"
-            android:layout_alignRight="@id/item_offline_progress"
-            android:text="@string/str_avail"
-            android:textColor="@color/download_text_color"
-            android:textSize="@dimen/size_sp_12" />
-
-
-        <ImageView
-
-            android:padding="@dimen/size_dp_5"
-            android:id="@+id/item_download_done_delete"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/item_download_done_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/download_del"/>
-
-        <ImageView
-            android:layout_marginLeft="@dimen/size_dp_30"
-            android:layout_marginRight="@dimen/size_dp_5"
-            android:padding="@dimen/size_dp_5"
-            android:id="@+id/item_offline_pause"
-            android:layout_toLeftOf="@+id/item_download_done_delete"
-            android:layout_below="@id/item_download_done_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/download_pause"/>
-
-    </RelativeLayout>
+            android:layout_height="0.5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/size_dp_15"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/black_1A" />
+    </LinearLayout>
 </LinearLayout>

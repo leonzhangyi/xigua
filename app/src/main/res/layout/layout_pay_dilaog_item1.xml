@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_pay_dialog_item"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/size_dp_50"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.sunfusheng.GlideImageView
+        android:id="@+id/pay_dialog_icon"
+        android:layout_width="@dimen/size_dp_20"
+        android:layout_height="@dimen/size_dp_20"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/size_dp_16" />
+
+
+    <TextView
+        android:id="@+id/pay_dialog_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/size_dp_11"
+        android:layout_toRightOf="@+id/pay_dialog_icon"
+        android:textColor="#FF4A4A4A"
+        android:textSize="@dimen/size_sp_15" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/size_dp_16"
+        android:src="@mipmap/gray_back_right" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/black_1A"
+        android:layout_marginLeft="@dimen/size_dp_16"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

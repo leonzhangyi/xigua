@@ -112,12 +112,12 @@
                     android:layout_marginRight="@dimen/size_dp_41">
 
                     <EditText
-                        android:textSize="@dimen/size_sp_15"
-                        android:textColor="@color/black_D9"
-                        android:background="@null"
                         android:id="@+id/layout_agent_name_et"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:textColor="@color/black_D9"
+                        android:textSize="@dimen/size_sp_15" />
 
                     <ImageView
 
@@ -144,18 +144,18 @@
                     android:textSize="@dimen/size_sp_18" />
 
                 <RelativeLayout
-                    android:layout_marginTop="@dimen/size_dp_20"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_dp_20"
                     android:layout_marginRight="@dimen/size_dp_41">
 
                     <EditText
-                        android:textSize="@dimen/size_sp_15"
-                        android:textColor="@color/black_D9"
-                        android:background="@null"
                         android:id="@+id/layout_agent_phone_et"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:textColor="@color/black_D9"
+                        android:textSize="@dimen/size_sp_15" />
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -189,7 +189,7 @@
                 android:paddingTop="@dimen/dp_10"
                 android:paddingRight="@dimen/size_dp_16"
                 android:paddingBottom="@dimen/dp_10"
-                android:text="支付¥108.00并申请"
+                android:text="支付¥0.00并申请"
                 android:textColor="@color/white"
                 android:textSize="@dimen/size_sp_18" />
 
@@ -358,10 +358,10 @@
 
             <RelativeLayout
                 android:id="@+id/layout_me_price_rl"
-                android:layout_marginBottom="@dimen/dp_40"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/size_sp_16"
+                android:layout_marginBottom="@dimen/dp_40"
                 android:orientation="horizontal"
                 android:paddingTop="@dimen/size_dp_11"
                 android:paddingBottom="@dimen/size_dp_11">

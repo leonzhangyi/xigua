@@ -244,7 +244,11 @@ public class PlayRecordAdapter extends BaseRVListAdapter<LocalVideoInfo> impleme
         private void setData(LocalVideoInfo mapData) {
             address = mapData.getUrl();
             itemHistorySize.setText(mapData.getInfo());
-            itemHistoryName.setText(mapData.getTitle());
+            String name = mapData.getTitle();
+            if (name.contains(".")) {
+                name = name.substring(0, name.lastIndexOf("."));
+            }
+            itemHistoryName.setText(name);
             String dur = TextUtils.isEmpty(mapData.getDuration()) ? "0" : mapData.getDuration();
             int duration = Integer.parseInt(dur);
             if (duration > 0) {
