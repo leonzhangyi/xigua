@@ -1,6 +1,9 @@
 package com.water.melon.ui.me.agent.myagent.setagent;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -10,6 +13,7 @@ import com.water.melon.R;
 import com.water.melon.application.MyApplication;
 import com.water.melon.base.ui.BaseActivity;
 import com.water.melon.net.bean.MyAgentBean;
+import com.water.melon.utils.MoneyTextWatcher;
 import com.water.melon.utils.ToastUtil;
 import com.water.melon.utils.XGUtil;
 
@@ -48,6 +52,11 @@ public class AddAgentActivity extends BaseActivity implements AddAgentContract.V
         phone = getIntent().getStringExtra(XGUtil.AGENT_PHONE);
         agentId = getIntent().getStringExtra(XGUtil.AGENT_ID);
 
+//        add_agent_price_et.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+//        add_agent_price_et.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+//        add_agent_price_et.addTextChangedListener(new MoneyTextWatcher(add_agent_price_et));
+////手动设置其他位数，例如3
+//        add_agent_price_et.addTextChangedListener(new MoneyTextWatcher(add_agent_price_et).setDigits(2));
 
         new AddAgentPresent(this, this);
         present.start();
@@ -83,6 +92,13 @@ public class AddAgentActivity extends BaseActivity implements AddAgentContract.V
                     ToastUtil.showToastLong("请设置代理分成比例");
                     break;
                 }
+
+                if (Double.parseDouble(price.trim()) > 1) {
+                    ToastUtil.showToastLong("分成比列不能大于1");
+                    break;
+                }
+
+//                price = Integer.parseInt(price.trim()) / 100 + "";
                 MyAgentBean request = new MyAgentBean();
                 request.setId(agentId);
                 request.setBuckle_u(price);
@@ -103,7 +119,7 @@ public class AddAgentActivity extends BaseActivity implements AddAgentContract.V
         setToolBarLeftView(R.mipmap.back_left);
         setTitleName("设置代理");
         setTitleNameColor(R.color.black);
-        if (state == LOOK_AGENT) {
+        if (state.equals(LOOK_AGENT)) {
             //TODO拉取用户信息
             add_agent_sure_tv.setTextColor(MyApplication.getColorByResId(R.color.black_D9));
             add_agent_sure_tv.setBackgroundColor(R.drawable.layout_agent_pay_back_1);

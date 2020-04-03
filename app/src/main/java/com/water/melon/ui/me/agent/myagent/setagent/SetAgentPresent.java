@@ -26,9 +26,12 @@ public class SetAgentPresent extends BasePresenterParent implements SetAgentCont
 
     @Override
     public void getAgentData(BaseRequest<AgentUserBean> baseRequest) {
+        mView.showLoadingDialog(true);
+
         ApiImp.getInstance().getAgentUser(baseRequest, getLifecycleTransformerByStopToActivity(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
             @Override
             public void onCompleted() {
+                mView.showLoadingDialog(false);
             }
 
             @Override

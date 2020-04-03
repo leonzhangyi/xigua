@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -31,6 +32,7 @@ import com.water.melon.ui.in.AdapterItemClick;
 import com.water.melon.ui.in.AgentUserItemClick;
 import com.water.melon.ui.me.agent.myuser.total.MyUserTotal;
 import com.water.melon.ui.me.vip.VipBean;
+import com.water.melon.utils.LoadingUtil;
 import com.water.melon.utils.ToastUtil;
 import com.water.melon.utils.XGUtil;
 import com.water.melon.views.AddVipDialog;
@@ -187,7 +189,13 @@ public class AgentUserActivity extends BaseActivity implements AgentUserContract
 
     @Override
     public void initView() {
+
+        View view = LayoutInflater.from(this).inflate(R.layout.netresource_fragment_empty, null);
+        TextView no_data_tv = view.findViewById(R.id.no_data_tv);
+        no_data_tv.setText("无用户数据");
         agentUserAdapter = new AgentUserAdapter();
+        agentUserAdapter.setEmptyView(view);
+
 //        agentUserAdapter.setEnableLoadMore(true);//这里的作用是防止下拉刷新的时候还可以上拉加载
         agentUserAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
@@ -238,6 +246,16 @@ public class AgentUserActivity extends BaseActivity implements AgentUserContract
 
         agent_my_user_all.setSelected(true);
         setAllBtn();
+
+        LoadingUtil.init(this);
+
+        userBean.setStart_date(startTimeTv.getText().toString());
+        userBean.setEnd_date(endTimeTv.getText().toString());
+        userBean.setKeyword("");
+        baseRequest.setPage(page);
+        baseRequest.setParameter(userBean);
+        baseRequest.setRows(20);
+        present.getAgentUser(baseRequest);
     }
 
 

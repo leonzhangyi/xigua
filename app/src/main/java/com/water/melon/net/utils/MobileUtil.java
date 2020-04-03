@@ -41,7 +41,7 @@ public class MobileUtil {
 //            info.imsi = mTm.getSubscriberId() == null ? "" : mTm.getSubscriberId();
 //            info.iccid = mTm.getSimSerialNumber() == null ? "" : mTm.getSimSerialNumber();
 
-//            info.imei = info.imei + "35";
+//            info.imei = info.imei + "40";
         }
 
         info.net = GetNetworkType(context);

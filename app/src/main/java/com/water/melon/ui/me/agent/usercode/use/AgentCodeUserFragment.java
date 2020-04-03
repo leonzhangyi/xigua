@@ -3,6 +3,7 @@ package com.water.melon.ui.me.agent.usercode.use;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -11,6 +12,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.water.melon.R;
 import com.water.melon.base.ui.BaseFragment;
 import com.water.melon.net.bean.AgentCodeHisBean;
+import com.water.melon.utils.LoadingUtil;
 import com.water.melon.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -104,7 +106,12 @@ public class AgentCodeUserFragment extends BaseFragment implements AgentCodeUser
 
     @Override
     public void initView() {
+        View view = LayoutInflater.from(context).inflate(R.layout.netresource_fragment_empty, null);
+        TextView no_data_tv = view.findViewById(R.id.no_data_tv);
+        no_data_tv.setText("没有使用记录");
         adapter = new CodeUserAdapter();
+        adapter.setEmptyView(view);
+
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
@@ -114,7 +121,7 @@ public class AgentCodeUserFragment extends BaseFragment implements AgentCodeUser
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(adapter);
 
-        AgentCodeHisBean  agentCodeHisBean1 = new AgentCodeHisBean();
+        AgentCodeHisBean agentCodeHisBean1 = new AgentCodeHisBean();
         //拉取卡信息
         agentCodeHisBean1.setHandle("before");
         agentCodeHisBean1.setStatus("1");
@@ -123,6 +130,7 @@ public class AgentCodeUserFragment extends BaseFragment implements AgentCodeUser
         agentCodeHisBean1.setType("");
         present.getCodeList(agentCodeHisBean1);
 
+        LoadingUtil.init(context);
 
         if (agentCodeHisBean == null) {
             agentCodeHisBean = new AgentCodeHisBean();
@@ -174,7 +182,7 @@ public class AgentCodeUserFragment extends BaseFragment implements AgentCodeUser
     }
 
     @Override
-    public void setDate(List<AgentCodeHisBean.CodeBean> date,boolean err) {
+    public void setDate(List<AgentCodeHisBean.CodeBean> date, boolean err) {
 //        showLoadingDialog(false);
         if (err) {
             adapter.loadMoreFail();

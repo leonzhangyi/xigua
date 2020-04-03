@@ -37,10 +37,11 @@ public class AgentUserPresent extends BasePresenterParent implements AgentUserCo
 
     @Override
     public void getAgentUser(BaseRequest<AgentUserBean> baseRequest) {
-
+        mView.showLoadingDialog(true);
         ApiImp.getInstance().getAgentUser(baseRequest, getLifecycleTransformerByStopToActivity(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
             @Override
             public void onCompleted() {
+                mView.showLoadingDialog(false);
             }
 
             @Override

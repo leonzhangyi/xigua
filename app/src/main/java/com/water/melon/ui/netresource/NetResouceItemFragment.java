@@ -93,6 +93,8 @@ public class NetResouceItemFragment extends BaseFragment implements NetResouceIt
         if (newData) {
             loadingLay.setVisibility(View.GONE);
             showLoadingDialog(false);
+//            List<NetResoutVideoInfo> mdatas = new ArrayList<NetResoutVideoInfo>();
+//            mdatas.add(datas.get(0));
             netResouceItemAdapter.setNewData(datas);
 
         } else {

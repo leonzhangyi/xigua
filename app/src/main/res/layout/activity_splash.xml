@@ -5,18 +5,19 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:scaleType="fitXY"
+        android:id="@+id/activity_splash_iv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scaleType="fitXY"
         android:src="@mipmap/bg_welcome" />
 
     <RelativeLayout
-        android:visibility="gone"
         android:id="@+id/help_rl"
         android:layout_width="210dip"
         android:layout_height="120dip"
         android:layout_centerInParent="true"
-        android:background="@drawable/wel_load_bac" >
+        android:background="@drawable/wel_load_bac"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/help_iv"
@@ -36,4 +37,33 @@
             android:textColor="@color/white"
             android:textSize="13sp" />
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/adv_activity_ext_bac"
+        android:layout_width="40dip"
+        android:layout_height="40dip"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="20dip"
+        android:background="@drawable/qd_adv_press"
+        android:paddingLeft="20dip"
+        android:paddingTop="6dip"
+        android:paddingRight="20dip"
+        android:paddingBottom="6dip"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/adv_activity_time_bac"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="20dip"
+        android:background="@drawable/acitivity_ijk_gg_js"
+        android:paddingLeft="20dip"
+        android:paddingTop="6dip"
+        android:paddingRight="20dip"
+        android:paddingBottom="6dip"
+        android:text="5s"
+        android:textColor="@color/white" />
 </RelativeLayout>

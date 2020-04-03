@@ -103,7 +103,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_toRightOf="@+id/agent_user_search"
-            android:text="总用户：100"
+            android:text="总用户：0"
             android:textColor="@color/black_D9"
             android:textSize="@dimen/size_sp_10" />
     </RelativeLayout>

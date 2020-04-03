@@ -14,9 +14,14 @@ public interface VideoInfoContract {
         void downLoadVideo(VlcVideoBean vlcVideoBean);
 
         void updateHistory(int time, VlcVideoBean vlcVideoBean);
+
+        void getPlayAdv();
     }
 
     interface View extends BaseView<Presenter> {
         void getVideoInfo(VideoPlayBean videoInfo);
+
+        void setPlayAdv(boolean hasAdv);
+
     }
 }

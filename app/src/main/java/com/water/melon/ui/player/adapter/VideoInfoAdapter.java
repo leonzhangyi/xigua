@@ -112,9 +112,9 @@ public class VideoInfoAdapter extends BaseRVListAdapter<VideoPlayBean.Zh> implem
 
         private void setData(VideoPlayBean.Zh data) {
             if (data.isCheck()) {
-                itemVideoInfo.setTextColor(MyApplication.getColorByResId(R.color.colorPrimary));
+                itemVideoInfo.setTextColor(MyApplication.getColorByResId(R.color.net_resource_item_tv));
             } else {
-                itemVideoInfo.setTextColor(MyApplication.getColorByResId(R.color.gray_F0));
+                itemVideoInfo.setTextColor(MyApplication.getColorByResId(R.color.main_item_tv));
             }
             itemVideoInfo.setText(data.getTitle());
         }

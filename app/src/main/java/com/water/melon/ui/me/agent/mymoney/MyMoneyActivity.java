@@ -3,6 +3,7 @@ package com.water.melon.ui.me.agent.mymoney;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -24,6 +25,7 @@ import com.water.melon.base.ui.BaseActivity;
 import com.water.melon.net.bean.MyMoneyBean;
 import com.water.melon.ui.me.agent.mymoney.history.MyMoneyHistory;
 import com.water.melon.ui.me.agent.mymoney.submit.MyMoneySubmitAcivity;
+import com.water.melon.utils.LoadingUtil;
 import com.water.melon.utils.ToastUtil;
 import com.water.melon.utils.XGUtil;
 
@@ -114,8 +116,11 @@ public class MyMoneyActivity extends BaseActivity implements MyMoneyContract.Vie
         endTimeTv.setText(getCurrentTime());
         startTimeTv.setText(getCurrentTime());
 
-
+        View view = LayoutInflater.from(this).inflate(R.layout.netresource_fragment_empty, null);
+        TextView no_data_tv = view.findViewById(R.id.no_data_tv);
+        no_data_tv.setText("无收益记录");
         myUserTotalAdapter = new MyMoneyAdapter();
+        myUserTotalAdapter.setEmptyView(view);
 //        agentUserAdapter.setEnableLoadMore(true);//这里的作用是防止下拉刷新的时候还可以上拉加载
         myUserTotalAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
@@ -134,11 +139,13 @@ public class MyMoneyActivity extends BaseActivity implements MyMoneyContract.Vie
         baseRequest.setParameter(bean);
         present.getMyMoneyBefor(baseRequest);
 
-
+        LoadingUtil.init(this);
         doFirstDate();
 
     }
+
     MyMoneyBean bean = new MyMoneyBean();
+
     private void loadMore() {
         page++;
         baseRequest.setPage(page);
@@ -312,7 +319,9 @@ public class MyMoneyActivity extends BaseActivity implements MyMoneyContract.Vie
     public void setMoneyDate(MyMoneyBean.BeforeBean beforeBean) {
         if (beforeBean != null) {
             my_money_last.setText("¥" + beforeBean.getTotal());
-            my_money_current.setText("¥" + beforeBean.getCurrent());
+
+            Double current = Double.parseDouble(beforeBean.getCurrent().trim()) + Double.parseDouble(beforeBean.getAvail().trim());
+            my_money_current.setText("¥" + current);
             avail = beforeBean.getAvail();
         }
     }
@@ -326,7 +335,7 @@ public class MyMoneyActivity extends BaseActivity implements MyMoneyContract.Vie
                 beforeBean = new MyMoneyBean.MyUserMoney();
             } else {
                 my_money_user_number.setText("用户数：" + beforeBean.getCount());
-                my_money_dollor.setText("用户数：" + beforeBean.getProfit());
+                my_money_dollor.setText("收益金额：" + beforeBean.getProfit());
 
             }
             List<MyMoneyBean.UserMoney> userInfos = beforeBean.getList();

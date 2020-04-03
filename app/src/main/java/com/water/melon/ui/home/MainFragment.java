@@ -26,6 +26,7 @@ import com.water.melon.ui.main.MainActivity;
 import com.water.melon.ui.me.history.VideoHistroryActivity;
 import com.water.melon.ui.me.vip.VipActivity;
 import com.water.melon.ui.search.SearchActivity;
+import com.water.melon.utils.LoadingUtil;
 import com.water.melon.utils.LogUtil;
 import com.water.melon.utils.ToastUtil;
 import com.water.melon.utils.XGUtil;
@@ -141,6 +142,9 @@ public class MainFragment extends BaseFragment implements OnItemClickListener, H
 
         recyclerView.setAdapter(adapter);
 
+
+        isVisible = true;
+        LoadingUtil.init(context);
 //        netRes();
         present.getHomeBean();
         present.getHomeAdv();

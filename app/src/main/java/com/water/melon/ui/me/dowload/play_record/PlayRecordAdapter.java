@@ -108,16 +108,19 @@ public class PlayRecordAdapter extends BaseRVListAdapter<LocalVideoInfo> impleme
         mViewHolder.itemHistoryDelete.setTag(R.id.tag_id2, position);
         mViewHolder.itemHistoryDelete.setOnClickListener(this);
         //播放按钮
-        mViewHolder.itemHistoryImageLayout.setTag(R.id.tag_id1, getDatas().get(position));
-        mViewHolder.itemHistoryImageLayout.setOnClickListener(this);
+        mViewHolder.itemHistoryLayout.setTag(R.id.tag_id1, getDatas().get(position));
+        mViewHolder.itemHistoryLayout.setOnClickListener(this);
+
+//        mViewHolder.itemHistoryLayout.setTag(R.id.tag_id1, getDatas().get(position));
+//        mViewHolder.itemHistoryLayout.setOnClickListener(this);
         if (isEditMoudle) {
             //编辑模式
             mViewHolder.itemHistoryDelete.setVisibility(View.INVISIBLE);
             mViewHolder.itemHistoryCheck.setTag(position + "");
             mViewHolder.itemHistoryCheck.setOnCheckedChangeListener(this);
             mViewHolder.itemHistoryCheck.setVisibility(View.VISIBLE);
-            mViewHolder.itemHistoryLayout.setTag(mViewHolder.itemHistoryCheck);
-            mViewHolder.itemHistoryLayout.setOnClickListener(this);
+//            mViewHolder.itemHistoryLayout.setTag(mViewHolder.itemHistoryCheck);
+//            mViewHolder.itemHistoryLayout.setOnClickListener(this);
             if (checkPosition.contains(position + "")) {
                 mViewHolder.itemHistoryCheck.setChecked(true);
             } else {
@@ -126,7 +129,7 @@ public class PlayRecordAdapter extends BaseRVListAdapter<LocalVideoInfo> impleme
         } else {
             mViewHolder.itemHistoryDelete.setVisibility(View.VISIBLE);
             mViewHolder.itemHistoryCheck.setVisibility(View.GONE);
-            mViewHolder.itemHistoryLayout.setOnClickListener(null);
+//            mViewHolder.itemHistoryLayout.setOnClickListener(null);
         }
     }
 
@@ -155,12 +158,12 @@ public class PlayRecordAdapter extends BaseRVListAdapter<LocalVideoInfo> impleme
         if (ClickTooQucik.isFastClick()) {
             return;
         }
-        if (isEditMoudle) {
-            if (view.getId() == R.id.item_history_layout) {
-                ((CheckBox) view.getTag()).performClick();
-            }
-            return;
-        }
+//        if (isEditMoudle) {
+//            if (view.getId() == R.id.item_history_layout) {
+//                ((CheckBox) view.getTag()).performClick();
+//            }
+//            return;
+//        }
         switch (view.getId()) {
             case R.id.item_history_delete:
                 //删除
@@ -168,7 +171,7 @@ public class PlayRecordAdapter extends BaseRVListAdapter<LocalVideoInfo> impleme
                 int position = (int) view.getTag(R.id.tag_id2);
                 deleteVideo(name, position, view.getContext());
                 break;
-            case R.id.item_history_image_layout:
+            case R.id.item_history_layout:
                 //播放
                 if (!isEditMoudle) {
                     playVideo((LocalVideoInfo) view.getTag(R.id.tag_id1), view.getContext());
@@ -219,8 +222,8 @@ public class PlayRecordAdapter extends BaseRVListAdapter<LocalVideoInfo> impleme
         CheckBox itemHistoryCheck;
         @BindView(R.id.item_history_image)
         ImageView itemHistoryImage;
-        @BindView(R.id.item_history_image_layout)
-        CardView itemHistoryImageLayout;
+//        @BindView(R.id.item_history_image_layout)
+//        CardView itemHistoryImageLayout;
         @BindView(R.id.item_history_delete)
         ImageView itemHistoryDelete;
         @BindView(R.id.item_history_name)
@@ -245,6 +248,9 @@ public class PlayRecordAdapter extends BaseRVListAdapter<LocalVideoInfo> impleme
             address = mapData.getUrl();
             itemHistorySize.setText(mapData.getInfo());
             String name = mapData.getTitle();
+            if (name == null) {
+                return;
+            }
             if (name.contains(".")) {
                 name = name.substring(0, name.lastIndexOf("."));
             }

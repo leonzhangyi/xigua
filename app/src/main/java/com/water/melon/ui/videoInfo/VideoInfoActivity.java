@@ -40,6 +40,7 @@ import com.water.melon.constant.XGConstant;
 import com.water.melon.evenbus.EvenBusEven;
 import com.water.melon.presenter.VideoInfoPresenter;
 import com.water.melon.presenter.contract.VideoInfoContract;
+import com.water.melon.ui.netresource.ItemNetResouceItemAdapter1;
 import com.water.melon.ui.netresource.VideoPlayBean;
 import com.water.melon.ui.netresource.VideoPlayBean;
 import com.water.melon.ui.player.MyOrientationEventListener;
@@ -111,6 +112,13 @@ public class VideoInfoActivity extends BaseActivity implements VideoInfoAdapter.
     RecyclerView videoInfoResoursRv;
     @BindView(R.id.video_info_about_tab)
     TextView videoInfoAboutTab;
+
+    @BindView(R.id.video_info_about_tab_lin)
+    ImageView video_info_about_tab_lin;
+    @BindView(R.id.video_info_resours_tab_lin)
+    ImageView video_info_resours_tab_lin;
+
+
     @BindView(R.id.video_info_resours_tab)
     TextView videoInfoResoursTab;
     @BindView(R.id.video_view)
@@ -134,7 +142,7 @@ public class VideoInfoActivity extends BaseActivity implements VideoInfoAdapter.
     @BindView(R.id.more_resours_play_position)
     TextView moreResoursPlayPosition;
     @BindView(R.id.status_bar_view)
-     View status_bar_view;
+    View status_bar_view;
 
     private VideoInfoPresenter mPresenter;
     private VideoPlayBean VideoPlayBean;
@@ -298,15 +306,19 @@ public class VideoInfoActivity extends BaseActivity implements VideoInfoAdapter.
 //                        getStringByResId(R.string.video_detail_Pc_download), true, null).show();
                 break;
             case R.id.video_info_about_tab:
-                videoInfoAboutTab.setTextColor(MyApplication.getColorByResId(R.color.colorPrimaryDark));
-                videoInfoResoursTab.setTextColor(MyApplication.getColorByResId(R.color.gray_F0));
+                videoInfoAboutTab.setTextColor(MyApplication.getColorByResId(R.color.net_resource_item_tv));
+                videoInfoResoursTab.setTextColor(MyApplication.getColorByResId(R.color.black_D9));
                 cardLay.setVisibility(View.VISIBLE);
+                video_info_about_tab_lin.setVisibility(View.VISIBLE);
+                video_info_resours_tab_lin.setVisibility(View.GONE);
                 videoInfoResoursRv.setVisibility(View.GONE);
                 break;
             case R.id.video_info_resours_tab:
-                videoInfoAboutTab.setTextColor(MyApplication.getColorByResId(R.color.gray_F0));
-                videoInfoResoursTab.setTextColor(MyApplication.getColorByResId(R.color.colorPrimaryDark));
+                videoInfoAboutTab.setTextColor(MyApplication.getColorByResId(R.color.black_D9));
+                videoInfoResoursTab.setTextColor(MyApplication.getColorByResId(R.color.net_resource_item_tv));
                 cardLay.setVisibility(View.GONE);
+                video_info_about_tab_lin.setVisibility(View.GONE);
+                video_info_resours_tab_lin.setVisibility(View.VISIBLE);
                 videoInfoResoursRv.setVisibility(View.VISIBLE);
                 break;
             case R.id.more_resours_play:
@@ -449,7 +461,8 @@ public class VideoInfoActivity extends BaseActivity implements VideoInfoAdapter.
         }
         videoInfoSimple.setText(stringBuilder.toString());
 
-        videoInfoBlurd.setText(data.getSynopsis());
+
+        videoInfoBlurd.setText(ItemNetResouceItemAdapter1.trim1(data.getSynopsis()));
 
         if (null != data.getDirectors()) {
 //            StringBuilder directors = new StringBuilder();
@@ -528,6 +541,7 @@ public class VideoInfoActivity extends BaseActivity implements VideoInfoAdapter.
             if (vlcVideoBean.getTvPosition() >= 0 && mAdapter != null && vlcVideoBean.getTvPosition() < mAdapter.getDatas().size()) {
                 mAdapter.changeItemColor(vlcVideoBean.getTvPosition());
             }
+//            TODO 播放地址
             StarPlay();
             return;
         }
@@ -572,6 +586,11 @@ public class VideoInfoActivity extends BaseActivity implements VideoInfoAdapter.
 
                     }
                 });
+    }
+
+    @Override
+    public void setPlayAdv(boolean hasAdv) {
+        playVideo();
     }
 
     @Override

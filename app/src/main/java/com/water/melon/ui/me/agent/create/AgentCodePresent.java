@@ -57,11 +57,13 @@ public class AgentCodePresent extends BasePresenterParent implements AgentCodeCo
 
     @Override
     public void createCode(CreateCodeBean codeBean) {
+        mView.showLoadingDialog(true);
         BaseRequest request = new BaseRequest();
         request.setParameter(codeBean);
         ApiImp.getInstance().getCreateCode(request, getLifecycleTransformerByStopToActivity(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
             @Override
             public void onCompleted() {
+                mView.showLoadingDialog(false);
             }
 
             @Override

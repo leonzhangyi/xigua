@@ -74,9 +74,11 @@ public class AgentCodeUserPresent extends BasePresenterParent implements AgentCo
 
     @Override
     public void getCodeList1(AgentCodeHisBean agentCodeHisBean) {
+        mView.showLoadingDialog(true);
         ApiImp.getInstance().getCodeList(agentCodeHisBean, getLifecycleTransformerByStopToFragment(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
             @Override
             public void onCompleted() {
+                mView.showLoadingDialog(false);
             }
 
             @Override

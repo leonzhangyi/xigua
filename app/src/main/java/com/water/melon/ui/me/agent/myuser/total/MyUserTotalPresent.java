@@ -35,9 +35,11 @@ public class MyUserTotalPresent extends BasePresenterParent implements MyUserTot
 
     @Override
     public void getTotalUser(BaseRequest<AgentUserBean> baseRequest) {
+        mView.showLoadingDialog(true);
         ApiImp.getInstance().getTotalUser(baseRequest, getLifecycleTransformerByStopToActivity(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
             @Override
             public void onCompleted() {
+                mView.showLoadingDialog(false);
             }
 
             @Override

@@ -1,7 +1,9 @@
 package com.water.melon.ui.me.agent.myagent;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gyf.immersionbar.ImmersionBar;
@@ -12,6 +14,7 @@ import com.water.melon.net.bean.MyAgentBean;
 import com.water.melon.ui.in.AgentItemClick;
 import com.water.melon.ui.me.agent.myagent.setagent.AddAgentActivity;
 import com.water.melon.ui.me.agent.myagent.setagent.SettingAgentActivity;
+import com.water.melon.utils.LoadingUtil;
 import com.water.melon.utils.XGUtil;
 
 import java.util.ArrayList;
@@ -74,7 +77,11 @@ public class MyAgentActivity extends BaseActivity implements MyAgentContract.Vie
         setToolBarRightView("设置代理", R.color.net_resource_item_tv);
 
 
+        View view = LayoutInflater.from(this).inflate(R.layout.netresource_fragment_empty, null);
+        TextView no_data_tv = view.findViewById(R.id.no_data_tv);
+        no_data_tv.setText("没有代理信息");
         myAgentDialog = new MyAgentDialog();
+        myAgentDialog.setEmptyView(view);
         myAgentDialog.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
@@ -95,7 +102,7 @@ public class MyAgentActivity extends BaseActivity implements MyAgentContract.Vie
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(myAgentDialog);
 
-
+        LoadingUtil.init(this);
         present.getAgentData(page);
     }
 

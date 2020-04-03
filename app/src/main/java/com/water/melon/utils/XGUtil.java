@@ -676,7 +676,10 @@ public class XGUtil {
         String url = advBean.getTarget();
         if (advBean != null) {
             switch (advBean.getHandle()) {
-                case 1: //外部跳转
+                case 1: //外部跳转】
+                    if (!url.contains("http")) {
+                        url = "http://" + url;
+                    }
                     Uri uri1 = Uri.parse(url);
                     Intent intent = new Intent(Intent.ACTION_VIEW, uri1);
                     context.startActivity(intent);
@@ -779,39 +782,37 @@ public class XGUtil {
 //        createFile(file);
 //        ExcelUtils.initExcel(excelFilePath, "中文版", colNames);//需要写入权限
 //        ExcelUtils.writeObjListToExcel(datas, excelFilePath, context);
-        ExcelUtils.writeToExcel(context,file,datas);
+        ExcelUtils.writeToExcel(context, file, datas);
     }
 
-    public static String createFile(File file){
-        try{
-            if(file.getParentFile().exists()){
+    public static String createFile(File file) {
+        try {
+            if (file.getParentFile().exists()) {
                 file.createNewFile();
-            }
-            else {
+            } else {
                 //创建目录之后再创建文件
                 createDir(file.getParentFile().getAbsolutePath());
                 file.createNewFile();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "";
     }
 
-    public static String createDir(String dirPath){
+    public static String createDir(String dirPath) {
         //因为文件夹可能有多层，比如:  a/b/c/ff.txt  需要先创建a文件夹，然后b文件夹然后...
-        try{
-            File file=new File(dirPath);
-            if(file.getParentFile().exists()){
+        try {
+            File file = new File(dirPath);
+            if (file.getParentFile().exists()) {
                 file.mkdir();
                 return file.getAbsolutePath();
-            }
-            else {
+            } else {
                 createDir(file.getParentFile().getAbsolutePath());
                 file.mkdir();
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return dirPath;

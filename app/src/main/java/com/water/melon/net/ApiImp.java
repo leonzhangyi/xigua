@@ -263,6 +263,7 @@ public class ApiImp {
         params.put(NetConstant.XG_USER_ID, SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_USER_ID, NetConstant.XG_DEF_USER_ID));
         params.put(NetConstant.XG_CHANNEL_ID, "6DNVZ8R0XYIBGS1C");
 //        params.put(NetConstant.XG_CHANNEL_ID, "B14X36VC8DGPZSQK");
+//        params.put(NetConstant.XG_CHANNEL_ID, "26985KC17XHBITJU");
         params.put(NetConstant.XG_APP_VERSION, XGUtil.getCurrentAppVersion(MyApplication.getContext()));
         return params;
     }
@@ -440,6 +441,15 @@ public class ApiImp {
         baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_WEL_HEADER, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
     }
 
+    //获取福利顶部广告
+    public void getOpenAdv(BaseRequest request, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
+        Map<String, Object> params = new HashMap<>();
+        params.put(NetConstant.XG_PAGE, "1");
+        params.put(NetConstant.XG_ROWS, "20");
+        params.putAll(getDefMap());
+        baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_APP_STARTUP, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
+    }
+
     //福利第一模块数据
     public void getWelPre(BaseRequest request, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
         Map<String, Object> params = new HashMap<>();
@@ -517,7 +527,7 @@ public class ApiImp {
     }
 
     //申请代理
-    public void getSubMoney(String mobile,String money,String code, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
+    public void getSubMoney(String mobile, String money, String code, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
         Map<String, Object> params = new HashMap<>();
         params.put("mobile", mobile);
         params.put("money", money);

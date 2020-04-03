@@ -44,10 +44,12 @@ public class MyAgentPresent extends BasePresenterParent implements MyAgentContra
         }
         request.setPage(page);
 
+        mView.showLoadingDialog(true);
 
         ApiImp.getInstance().getMygent(request, getLifecycleTransformerByStopToActivity(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
             @Override
             public void onCompleted() {
+                mView.showLoadingDialog(false);
             }
 
             @Override

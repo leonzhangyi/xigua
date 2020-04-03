@@ -236,7 +236,8 @@ public class AgentActivity extends BaseActivity implements AgentContract.View {
                 agent_price.setText("代理费用" + agentInfo.getPrice());
                 layout_agent_phone_et.setText(agentInfo.getTel());
                 layout_agent_name_et.setText(agentInfo.getContacts());
-
+                layout_agent_phone_et.setEnabled(false);
+                layout_agent_name_et.setEnabled(false);
                 break;
             case 3:
                 agent_payment_iv.setVisibility(View.VISIBLE);
@@ -248,6 +249,8 @@ public class AgentActivity extends BaseActivity implements AgentContract.View {
                 agent_price.setText("代理费用" + agentInfo.getPrice());
                 layout_agent_phone_et.setText(agentInfo.getTel());
                 layout_agent_name_et.setText(agentInfo.getContacts());
+                layout_agent_phone_et.setEnabled(false);
+                layout_agent_name_et.setEnabled(false);
                 break;
         }
     }

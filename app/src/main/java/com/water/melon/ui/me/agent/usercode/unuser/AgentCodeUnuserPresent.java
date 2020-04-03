@@ -32,9 +32,11 @@ public class AgentCodeUnuserPresent extends BasePresenterParent implements Agent
 
     @Override
     public void getDate(AgentCodeHisBean agentCodeHisBean) {
+        mView.showLoadingDialog(true);
         ApiImp.getInstance().getCodeList(agentCodeHisBean, getLifecycleTransformerByStopToFragment(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
             @Override
             public void onCompleted() {
+                mView.showLoadingDialog(false);
             }
 
             @Override

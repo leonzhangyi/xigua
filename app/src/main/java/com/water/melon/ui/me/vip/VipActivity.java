@@ -58,6 +58,9 @@ public class VipActivity extends BaseActivity implements VipContract.View {
     @BindView(R.id.status_bar_view)
     View status_bar_view;
 
+    @BindView(R.id.layout_agent_vip_sure)
+    View layout_agent_vip_sure;
+
 
     private VipPresent vipPresent;
 
@@ -253,6 +256,12 @@ public class VipActivity extends BaseActivity implements VipContract.View {
 
     private void setDateInfo(UserBean userBean) {
         int vip = Integer.parseInt(userBean.getVip().trim());
+        String invite = userBean.getInvitation_code();
+        if (invite != null && !invite.trim().equals("")) {
+            layout_agent_phone_et.setText(invite);
+            layout_agent_phone_et.setEnabled(false);
+            layout_agent_vip_sure.setEnabled(false);
+        }
         String time = userBean.getEnd_date().split(" ")[0];
         switch (vip) {
             case 1:

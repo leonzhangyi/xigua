@@ -43,15 +43,15 @@ public class ItemNetResouceItemAdapter1 extends BaseQuickAdapter<NetResoutVideoI
 
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) itemNetResourceImage.getLayoutParams();
         int width = (int) ((XGConstant.Screen_Width) * 0.495);
-        params.width = width;
+//        params.width = width;
         params.height = (int) (width * 0.9);
-
+//
         itemNetResourceImage.requestLayout();
         RelativeLayout.LayoutParams params1 = (RelativeLayout.LayoutParams) itemNetResourceImage1.getLayoutParams();
         int width1 = (int) ((XGConstant.Screen_Width) * 0.495);
-        params1.width = width1;
+//        params1.width = width1;
         params1.height = (int) (width1 * 0.9);
-//        itemNetResourceImage1.requestLayout();
+        itemNetResourceImage1.requestLayout();
 
         itemNetResourceName.setText(item.getTitle().trim());
 //            if (null != data.getTorrents().getZh() && data.getTorrents().getZh().size() > 0) {

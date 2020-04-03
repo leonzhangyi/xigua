@@ -2,6 +2,7 @@ package com.water.melon.presenter;
 
 import android.content.Context;
 
+import com.google.gson.reflect.TypeToken;
 import com.trello.rxlifecycle3.LifecycleProvider;
 import com.water.melon.base.mvp.BasePresenterParent;
 import com.water.melon.base.mvp.BaseView;
@@ -10,6 +11,7 @@ import com.water.melon.net.BaseApiResultData;
 import com.water.melon.net.ErrorResponse;
 import com.water.melon.net.IApiSubscriberCallBack;
 import com.water.melon.net.NetConstant;
+import com.water.melon.net.bean.AdvBean;
 import com.water.melon.net.bean.InitResultBean;
 import com.water.melon.net.bean.TabBean;
 import com.water.melon.net.utils.AESCipherforJiaMi;
@@ -79,6 +81,39 @@ public class WelcomPresenter extends BasePresenterParent implements WelcomeContr
 
             }
         }, ym);
+    }
+
+    @Override
+    public void getOpenAdv() {
+        ApiImp.getInstance().getOpenAdv(null, getLifecycleTransformerByStopToActivity(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
+            @Override
+            public void onCompleted() {
+            }
+
+            @Override
+            public void onError(ErrorResponse error) {
+                mView.init1(false, null);
+            }
+
+            @Override
+            public void onNext(BaseApiResultData data) {
+                LogUtil.e(TAG, "getOpenAdv.getResult() = " + data.getResult());
+                String result = data.getResult();
+                if (result != null && !result.equals("") && !result.equals("[]")) {
+                    AdvBean advBeans = (AdvBean) GsonUtil.toClass(result, AdvBean.class);
+                    if (advBeans == null) {
+                        mView.init1(false, null);
+                    } else {
+                        mView.init1(true, advBeans);
+                    }
+
+                } else {
+                    mView.init1(false, null);
+                }
+            }
+        });
+
+
     }
 
     String[] allUrl = null;

@@ -1,8 +1,10 @@
 package com.water.melon.ui.me.agent.myagent.setagent;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gyf.immersionbar.ImmersionBar;
@@ -11,6 +13,7 @@ import com.water.melon.base.net.BaseRequest;
 import com.water.melon.base.ui.BaseActivity;
 import com.water.melon.net.bean.AgentUserBean;
 import com.water.melon.ui.in.AgentUserItemClick;
+import com.water.melon.utils.LoadingUtil;
 import com.water.melon.utils.ToastUtil;
 import com.water.melon.utils.XGUtil;
 
@@ -84,8 +87,13 @@ public class SettingAgentActivity extends BaseActivity implements SetAgentContra
         setTitleName("添加代理");
         setTitleNameColor(R.color.black);
 
+        View view = LayoutInflater.from(this).inflate(R.layout.netresource_fragment_empty, null);
+        TextView no_data_tv = view.findViewById(R.id.no_data_tv);
+        no_data_tv.setText("未搜索到改用用户");
 
         setAgentAdapter = new SetAgentAdapter();
+        setAgentAdapter.setEmptyView(view);
+
         setAgentAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
@@ -100,10 +108,10 @@ public class SettingAgentActivity extends BaseActivity implements SetAgentContra
                 //设置为代理
 //                present.setAgent(userInfo);
                 Bundle bundle = new Bundle();
-                bundle.putString(XGUtil.AGENT_STATE,AddAgentActivity.ADD_AGENT);
-                bundle.putString(XGUtil.AGENT_PHONE,userInfo.getMobile());
-                bundle.putString(XGUtil.AGENT_ID,userInfo.getId());
-                redirectActivity(AddAgentActivity.class,bundle);
+                bundle.putString(XGUtil.AGENT_STATE, AddAgentActivity.ADD_AGENT);
+                bundle.putString(XGUtil.AGENT_PHONE, userInfo.getMobile());
+                bundle.putString(XGUtil.AGENT_ID, userInfo.getId());
+                redirectActivity(AddAgentActivity.class, bundle);
             }
         });
 
@@ -111,6 +119,7 @@ public class SettingAgentActivity extends BaseActivity implements SetAgentContra
         recyclerView.setAdapter(setAgentAdapter);
 
 
+        LoadingUtil.init(this);
     }
 
     BaseRequest<AgentUserBean> baseRequest = new BaseRequest<>();

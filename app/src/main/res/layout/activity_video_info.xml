@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_black"
+
     android:orientation="vertical">
 
     <View
@@ -13,6 +13,7 @@
         android:background="@color/black" />
 
     <RelativeLayout
+        android:background="@color/main_black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -142,12 +143,16 @@
                 android:padding="@dimen/size_dp_15"
                 android:src="@mipmap/icon_back" />
         </RelativeLayout>
+
+
+
     </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/info_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -160,36 +165,66 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:layout_marginTop="@dimen/size_dp_20"
                 android:orientation="horizontal"
                 android:visibility="gone">
 
-                <TextView
-                    android:id="@+id/video_info_about_tab"
+                <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/size_dp_15"
-                    android:padding="@dimen/size_dp_15"
-                    android:text="关于"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/size_sp_16" />
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/video_info_resours_tab"
+                    <TextView
+                        android:id="@+id/video_info_about_tab"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size_dp_1"
+                        android:padding="@dimen/size_dp_15"
+                        android:text="关于"
+                        android:textColor="#FFFA6400"
+                        android:textSize="@dimen/size_sp_18"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/video_info_about_tab_lin"
+                        android:layout_width="@dimen/dp_10"
+                        android:layout_height="@dimen/size_dp_2"
+                        android:layout_below="@+id/video_info_about_tab"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="-15dp"
+                        android:background="#FFFA6400" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/size_dp_15"
-                    android:padding="@dimen/size_dp_15"
-                    android:text="资源"
-                    android:textColor="@color/gray_F0"
-                    android:textSize="@dimen/size_sp_16" />
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/video_info_resours_tab"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/size_dp_15"
+                        android:text="资源"
+                        android:textColor="@color/black_D9"
+                        android:textSize="@dimen/size_sp_18"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/video_info_resours_tab_lin"
+                        android:layout_width="@dimen/dp_10"
+                        android:layout_height="@dimen/size_dp_2"
+                        android:layout_below="@+id/video_info_resours_tab"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="-15dp"
+                        android:background="#FFFA6400"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/card_lay"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/size_dp_30"
                 android:orientation="vertical"
                 android:paddingLeft="@dimen/size_dp_15"
                 android:paddingRight="@dimen/size_dp_15">
@@ -199,8 +234,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="电影名称"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/size_sp_20" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_18" />
 
                 <TextView
                     android:id="@+id/video_info_simple"
@@ -209,7 +244,8 @@
                     android:layout_marginTop="@dimen/size_dp_5"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textColor="@color/gray_99" />
+                    android:textColor="@color/black_80"
+                    android:textSize="@dimen/sp_14" />
 
                 <TextView
                     android:id="@+id/video_info_blurd"
@@ -218,45 +254,49 @@
                     android:layout_marginTop="@dimen/size_dp_5"
                     android:ellipsize="end"
                     android:maxLines="6"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/black_D9"
+                    android:textSize="@dimen/sp_14" />
 
                 <TextView
                     android:id="@+id/video_info_check_more_inof"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_dp_10"
+                    android:layout_marginTop="@dimen/size_dp_5"
                     android:text="阅读详情"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="#FFFF9300"
+                    android:textSize="@dimen/sp_14" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size_dp_10"
                     android:text="导演:"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/size_sp_18" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_14" />
 
                 <TextView
                     android:id="@+id/video_info_directors"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size_dp_5"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/black_80"
+                    android:textSize="@dimen/sp_14" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_dp_10"
+                    android:layout_marginTop="10dp"
                     android:text="演员:"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/size_sp_18" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_14" />
 
                 <TextView
                     android:id="@+id/video_info_actors"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size_dp_5"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/black_80"
+                    android:textSize="@dimen/sp_14" />
 
                 <TextView
                     android:id="@+id/video_info_download"

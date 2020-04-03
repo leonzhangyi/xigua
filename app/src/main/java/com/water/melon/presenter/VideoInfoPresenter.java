@@ -216,7 +216,17 @@ public class VideoInfoPresenter extends BasePresenterParent implements VideoInfo
             }
             mData.add(0, mapData);
         }
+        for (int i = 0; i < mData.size(); i++) {
+            if(mData.get(i).getTitle()==null) {
+                mData.remove(i);
+            }
+        }
         XGUtil.saveHistoryList(mData);
-        LogUtil.e("VlcPlayActivity", "更新播放记录=======" + time + "=======" + videoUrl + "=====" + mData.get(0).getUrl());
+//        LogUtil.e("VlcPlayActivity", "更新播放记录=======" + time + "=======" + videoUrl + "=====" + mData.get(0).getUrl());
+    }
+
+    @Override
+    public void getPlayAdv() {
+
     }
 }

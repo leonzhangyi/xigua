@@ -31,6 +31,7 @@ import com.water.melon.ui.in.HomeAdapterItemClick;
 import com.water.melon.ui.main.MainActivity;
 import com.water.melon.ui.me.vip.VipActivity;
 import com.water.melon.ui.search.SearchActivity;
+import com.water.melon.utils.LoadingUtil;
 import com.water.melon.utils.LogUtil;
 import com.water.melon.utils.ToastUtil;
 import com.water.melon.utils.XGUtil;
@@ -144,7 +145,8 @@ public class WelfareFragment extends BaseFragment implements WelfContract.View, 
         btnAdapter.addHeaderView(header);
         btnRv.setAdapter(btnAdapter);
 
-
+        isVisible = true;
+        LoadingUtil.init(context);
 //        netRes();
         present.getWelfBeans();
         present.getWelTopAdv();

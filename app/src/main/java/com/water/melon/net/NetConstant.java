@@ -38,6 +38,9 @@ public class NetConstant {
     public static final String XG_APP_WEL_CENTER = "/welfare/center";
     public static final String XG_APP_WEL_FOOTER = "/welfare/footer";
 
+    //开屏广告
+    public static final String XG_APP_APP_STARTUP = "/app/startup";
+
     //片库接口
     public static final String XG_APP_NET_ADV = "/video/banner";
     public static final String XG_APP_NET_CATEGORY = "/video/category";

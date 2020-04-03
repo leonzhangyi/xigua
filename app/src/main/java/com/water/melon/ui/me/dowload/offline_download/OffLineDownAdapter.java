@@ -140,10 +140,10 @@ public class OffLineDownAdapter extends BaseRVListAdapter<LocalVideoInfo> implem
         mHolder.itemOfflineDelete.setOnClickListener(this);
 
         //点击按钮 ：播放
-        mHolder.itemOfflineImageLayout.setTag(R.id.tag_id1, getDatas().get(position));
-        mHolder.itemOfflineImageLayout.setTag(R.id.tag_id2, position);
-        mHolder.itemOfflineImageLayout.setTag(R.id.tag_id3, mHolder.itemOfflineSpeed);
-        mHolder.itemOfflineImageLayout.setOnClickListener(this);
+        mHolder.itemOfflineLayout.setTag(R.id.tag_id1, getDatas().get(position));
+        mHolder.itemOfflineLayout.setTag(R.id.tag_id2, position);
+        mHolder.itemOfflineLayout.setTag(R.id.tag_id3, mHolder.itemOfflineSpeed);
+        mHolder.itemOfflineLayout.setOnClickListener(this);
         if (isEditMoudle) {
             //编辑模式
             mHolder.itemOfflineDelete.setVisibility(View.INVISIBLE);
@@ -447,8 +447,8 @@ public class OffLineDownAdapter extends BaseRVListAdapter<LocalVideoInfo> implem
         CheckBox itemOfflineCheck;
         @BindView(R.id.item_offline_image)
         ImageView itemOfflineImage;
-        @BindView(R.id.item_offline_image_layout)
-        CardView itemOfflineImageLayout;
+//        @BindView(R.id.item_offline_image_layout)
+//        CardView itemOfflineImageLayout;
         @BindView(R.id.item_offline_name)
         TextView itemOfflineName;
         @BindView(R.id.item_offline_progress)

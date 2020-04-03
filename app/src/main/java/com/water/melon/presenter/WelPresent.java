@@ -64,6 +64,7 @@ public class WelPresent extends BasePresenterParent implements WelfContract.pres
     @Override
     public void getWelfBeans() {
 //        setHomeBeans();
+        mView.showLoadingDialog(true);
         BaseRequest request = new BaseRequest(1, 20);
         ApiImp.getInstance().getWelPre(request, getLifecycleTransformerByStopToFragment(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
             @Override

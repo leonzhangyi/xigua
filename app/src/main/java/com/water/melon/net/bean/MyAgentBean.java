@@ -15,6 +15,7 @@ public class MyAgentBean extends BaseResponse {
     private String tel;//联系方式
     private String created_time;//开通日期
     private String count;// 代理个数
+    private  String users;
 
     private String id;//代理id
     private String buckle_u;//用户分成
@@ -62,6 +63,14 @@ public class MyAgentBean extends BaseResponse {
 
     public String getCount() {
         return count;
+    }
+
+    public String getUsers() {
+        return users;
+    }
+
+    public void setUsers(String users) {
+        this.users = users;
     }
 
     public void setCount(String count) {

@@ -12,6 +12,7 @@ import com.water.melon.base.ui.BaseActivity;
 import com.water.melon.net.bean.MyAgentBean;
 import com.water.melon.ui.in.AdapterItemClick;
 import com.water.melon.ui.me.agent.create.CreateCodeAdapter;
+import com.water.melon.utils.LoadingUtil;
 import com.water.melon.utils.LogUtil;
 import com.water.melon.views.PayDialog;
 import com.water.melon.views.SaveAgentDialog;
@@ -75,13 +76,6 @@ public class SettingAgentActivity extends BaseActivity implements SettingAgentCo
         setTitleName("代理设置");
         setTitleNameColor(R.color.black);
 
-        if (request == null) {
-            request = new MyAgentBean();
-        }
-        request.setHandle("before");
-        present.setDate(request);
-
-
         adapter = new SettingAgentAdapter();
         adapter.setEnableLoadMore(true);//这里的作用是防止下拉刷新的时候还可以上拉加载
         adapter.setListener(new SettingAgentAdapter.SaveEditListener() {
@@ -114,6 +108,14 @@ public class SettingAgentActivity extends BaseActivity implements SettingAgentCo
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+
+
+        LoadingUtil.init(this);
+        if (request == null) {
+            request = new MyAgentBean();
+        }
+        request.setHandle("before");
+        present.setDate(request);
     }
 
 

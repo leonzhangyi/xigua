@@ -34,9 +34,11 @@ public class AgentApplyHistoryPresent extends BasePresenterParent implements Age
 
     @Override
     public void getApplyList() {
+        mView.showLoadingDialog(true);
         ApiImp.getInstance().getApplyHistory(null, getLifecycleTransformerByStopToActivity(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
             @Override
             public void onCompleted() {
+                mView.showLoadingDialog(false);
             }
 
             @Override

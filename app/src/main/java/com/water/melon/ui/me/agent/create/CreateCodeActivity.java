@@ -17,6 +17,7 @@ import com.water.melon.base.ui.BaseActivity;
 import com.water.melon.constant.XGConstant;
 import com.water.melon.net.bean.CreateCodeBean;
 import com.water.melon.ui.me.agent.usercode.AgentCodeActivity;
+import com.water.melon.utils.LoadingUtil;
 import com.water.melon.utils.ToastUtil;
 import com.water.melon.utils.XGUtil;
 
@@ -136,6 +137,7 @@ public class CreateCodeActivity extends BaseActivity implements AgentCodeContrac
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(createCodeAdapter);
 
+        LoadingUtil.init(this);
         present.getAgentInfo();
     }
 

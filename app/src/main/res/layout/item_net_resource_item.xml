@@ -8,14 +8,15 @@
     <RelativeLayout
         android:id="@+id/item_net_resource_image_2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="150dp">
         <ImageView
             android:id="@+id/item_net_resource_image"
             android:layout_width="match_parent"
-            android:layout_height="145dp"
+            android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/size_dp_3"
             android:layout_marginRight="@dimen/size_dp_3"
-            android:scaleType="fitXY" />
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"/>
 
         <ImageView
             android:id="@+id/item_net_resource_image_1"
@@ -23,6 +24,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/size_dp_3"
             android:layout_marginRight="@dimen/size_dp_3"
+            android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:src="@mipmap/video_blank_back" />
 

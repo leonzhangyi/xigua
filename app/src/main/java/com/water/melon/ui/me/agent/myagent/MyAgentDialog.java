@@ -36,7 +36,7 @@ public class MyAgentDialog extends BaseQuickAdapter<MyAgentBean, BaseViewHolder>
         my_agent_name.setText(item.getProxy_name());
         my_agent_phone.setText(item.getTel());
         my_agent_time.setText(item.getCreated_time().split(" ")[1]);
-        my_agent_num.setText(item.getCount());
+        my_agent_num.setText(item.getUsers());
 
 
         my_agent_handle.setOnClickListener(new View.OnClickListener() {

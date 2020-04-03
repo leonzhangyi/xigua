@@ -30,18 +30,17 @@ public class SettingAgentPresent extends BasePresenterParent implements SettingA
 
     @Override
     public void setDate(MyAgentBean request) {
-        if (request.getHandle().equals("afeter")) {
-            mView.showLoadingDialog(true);
-        }
+        mView.showLoadingDialog(true);
         ApiImp.getInstance().doAgentSet(request, getLifecycleTransformerByStopToActivity(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
             @Override
             public void onCompleted() {
+                mView.showLoadingDialog(false);
             }
 
             @Override
             public void onError(ErrorResponse error) {
                 ToastUtil.showToastShort(error.getErr());
-                mView.showLoadingDialog(false);
+
             }
 
             @Override
@@ -52,7 +51,6 @@ public class SettingAgentPresent extends BasePresenterParent implements SettingA
 
                 if (request.getHandle().equals("afeter")) {
                     ToastUtil.showToastShort("操作成功");
-                    mView.showLoadingDialog(false);
                     mView.setSucDate(request.isDef());
                 } else {
                     if (result != null && !result.equals("[]")) {
