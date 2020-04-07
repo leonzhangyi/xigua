@@ -2,6 +2,7 @@ package com.water.melon.ui.netresource;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -67,7 +68,7 @@ public class NetResouceItemFragment extends BaseFragment implements NetResouceIt
         if (null != args) {
             request = (GetVideosRequest) args.getSerializable(XGConstant.KEY_DATA);
             isFirstFragment = args.getBoolean(XGConstant.KEY_DATA_2);
-            LogUtil.e("ssss", isFirstFragment + "====");
+            LogUtil.e("ssss", "isFirstFragment ====" + isFirstFragment);
         }
     }
 
@@ -82,6 +83,9 @@ public class NetResouceItemFragment extends BaseFragment implements NetResouceIt
         return R.layout.fragment_net_resource_item;
     }
 
+    Handler handler = new Handler();
+
+
     @Override
     public void getListData(List<NetResoutVideoInfo> datas, boolean serviceError, boolean newData) {
         if (null == datas) {
@@ -95,14 +99,34 @@ public class NetResouceItemFragment extends BaseFragment implements NetResouceIt
             showLoadingDialog(false);
 //            List<NetResoutVideoInfo> mdatas = new ArrayList<NetResoutVideoInfo>();
 //            mdatas.add(datas.get(0));
-            netResouceItemAdapter.setNewData(datas);
+            LogUtil.e("首推", "");
+            List<NetResoutVideoInfo> finalDatas = datas;
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    netResouceItemAdapter.setNewData(finalDatas);
+                }
+            });
 
         } else {
             if (datas.size() > 0) {
-                netResouceItemAdapter.addData(datas);
-                netResouceItemAdapter.loadMoreComplete();
+                List<NetResoutVideoInfo> finalDatas1 = datas;
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        netResouceItemAdapter.addData(finalDatas1);
+                        netResouceItemAdapter.loadMoreComplete();
+                    }
+                });
+
             } else {
-                netResouceItemAdapter.loadMoreEnd();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        netResouceItemAdapter.loadMoreEnd();
+                    }
+                });
+
             }
 
         }
@@ -168,11 +192,17 @@ public class NetResouceItemFragment extends BaseFragment implements NetResouceIt
 
 
         mPresenter.getAdv();
+
+        request.setPage(page);
         mPresenter.getListData(request);
 
     }
 
+    private int page = 1;
+
     private void loadMore() {
+        page++;
+        request.setPage(page);
         mPresenter.getListData(request);
     }
 

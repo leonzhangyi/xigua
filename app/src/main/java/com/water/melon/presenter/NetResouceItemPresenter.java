@@ -28,8 +28,8 @@ public class NetResouceItemPresenter extends BasePresenterParent implements NetR
     public static final String TAG = "NetResouceItemPresenter";
     private NetResouceItemContract.View mView;
     private boolean isFirstData;
-    private int page = 1;
-    public int limit = 15;
+//    private int page = 1;
+    public int limit = 12;
 
     public NetResouceItemPresenter(BaseView mBaseView, LifecycleProvider lifecycleProvider, boolean isFirstData) {
         super(mBaseView, lifecycleProvider);
@@ -98,7 +98,7 @@ public class NetResouceItemPresenter extends BasePresenterParent implements NetR
                 mView.getListData(items, false, false);
             }
         }
-        request.setPage(page);
+//        request.setPage(page);
         request.setLimit(limit);
 //        request.setSearchWord("半个喜剧");
 //        request.setBigTabId("");
@@ -123,6 +123,7 @@ public class NetResouceItemPresenter extends BasePresenterParent implements NetR
                     List<NetResoutVideoInfo> tabBeans = GsonUtil.toClass(data, new TypeToken<List<NetResoutVideoInfo>>() {
                     }.getType());
                     if (isFirstData && null != tabBeans && tabBeans.size() > 0) {
+                        LogUtil.e("ssss", "isFirstData====");
                         isFirstData = false;
                         String localData = SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.KEY_Small_Tab_List, "");
                         if (TextUtils.isEmpty(localData)) {
@@ -139,7 +140,7 @@ public class NetResouceItemPresenter extends BasePresenterParent implements NetR
                         mView.getListData(tabBeans, false, false);
                         LogUtil.e("ssss", "setVlue====");
                     }
-                    page++;
+//                    page++;
                 }else {
                     if (isFirstData) {
                         mView.getListData(new ArrayList<>(), false, true);
