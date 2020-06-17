@@ -44,5 +44,5 @@
         android:textSize="@dimen/size_sp_12"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="VIP你妹为您提供专属影视服务，更多热门影片随时更新，如有建议欢迎反馈，感谢您的支持！"/>
+        android:text="VIP影视为您提供专属影视服务，更多热门影片随时更新，如有建议欢迎反馈，感谢您的支持！"/>
 </LinearLayout>

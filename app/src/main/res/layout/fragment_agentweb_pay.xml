@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <!--    <include android:id="@+id/toolbar" layout="@layout/toorbar_main"></include>-->
+    <!--    <include android:id="@+id/toolbar" layout="@layout/h5_toorbar_main"/>-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/view_toorbar_bac"
+        android:paddingTop="@dimen/dp_10">
+
+        <ImageView
+            android:id="@+id/pay_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="@dimen/dp_10"
+            android:src="@mipmap/play_game_back" />
+
+        <TextView
+            android:id="@+id/pay_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="充值"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+
+        <ImageView
+            android:id="@+id/pay_fresh"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="6dp"
+            android:padding="@dimen/dp_10"
+            android:src="@mipmap/play_game_refresh" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>

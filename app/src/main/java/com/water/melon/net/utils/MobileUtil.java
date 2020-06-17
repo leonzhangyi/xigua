@@ -15,8 +15,11 @@ import android.telephony.gsm.GsmCellLocation;
 
 import com.water.melon.R;
 import com.water.melon.net.bean.SystemInfo;
+import com.water.melon.utils.FileUtil;
 import com.water.melon.utils.LogUtil;
 import com.water.melon.utils.SharedPreferencesUtil;
+
+import java.util.UUID;
 
 
 public class MobileUtil {
@@ -29,19 +32,24 @@ public class MobileUtil {
         final TelephonyManager mTm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         if (mTm != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                info.imei = getAndroidId(context);
+//                info.imei = getAndroidId(context);
                 info.imsi = getAndroidId(context);
                 info.iccid = getAndroidId(context);
             } else {
-                info.imei = mTm.getDeviceId() == null ? getAndroidId(context) : mTm.getDeviceId();
+//                info.imei = mTm.getDeviceId() == null ? getAndroidId(context) : mTm.getDeviceId();
                 info.imsi = mTm.getSubscriberId() == null ? "" : mTm.getSubscriberId();
             }
 
+            if (getUUID() == null || getUUID().trim().equals("")) {
+                info.imei = getAndroidId(context);
+            } else {
+                info.imei = getUUID();
+            }
 //            info.imei = SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.KEY_WATER_TEST_IME,"");
 //            info.imsi = mTm.getSubscriberId() == null ? "" : mTm.getSubscriberId();
 //            info.iccid = mTm.getSimSerialNumber() == null ? "" : mTm.getSimSerialNumber();
 
-//            info.imei = info.imei + "40";
+//            info.imei = info.f + "499";
         }
 
         info.net = GetNetworkType(context);
@@ -214,6 +222,21 @@ public class MobileUtil {
     public static String getAndroidId(Context context) {
         String ANDROID_ID = Settings.System.getString(context.getContentResolver(), Settings.System.ANDROID_ID);
         return ANDROID_ID;
+    }
+
+    private static String getUUID() {
+        String uuid = "";
+        if (FileUtil.isImeiExist()) {
+            uuid = FileUtil.ReadIMEIFile();
+            LogUtil.e("getuuid", "save uuid = " + uuid);
+        } else {
+            uuid = UUID.randomUUID().toString();
+            if (uuid != null && !uuid.trim().equals("")) {
+                FileUtil.saveImei(uuid);
+            }
+            LogUtil.e("getuuid", "first uuid = " + uuid);
+        }
+        return uuid;
     }
 
 }

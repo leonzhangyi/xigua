@@ -56,7 +56,7 @@ public class NetResouceItemFragment extends BaseFragment implements NetResouceIt
     LinearLayout loadingLay;
 
     private NetResouceItemPresenter mPresenter;
-    private ItemNetResouceItemAdapter1 netResouceItemAdapter;
+    private ItemNetResouceItemAdapter netResouceItemAdapter;
     private GridLayoutManager gridLayoutManager;
     private GetVideosRequest request;
     private boolean isRefreshing = false;//是否在加载
@@ -68,7 +68,7 @@ public class NetResouceItemFragment extends BaseFragment implements NetResouceIt
         if (null != args) {
             request = (GetVideosRequest) args.getSerializable(XGConstant.KEY_DATA);
             isFirstFragment = args.getBoolean(XGConstant.KEY_DATA_2);
-            LogUtil.e("ssss", "isFirstFragment ====" + isFirstFragment);
+            LogUtil.e("ssss", isFirstFragment + "====");
         }
     }
 
@@ -83,56 +83,38 @@ public class NetResouceItemFragment extends BaseFragment implements NetResouceIt
         return R.layout.fragment_net_resource_item;
     }
 
-    Handler handler = new Handler();
-
-
     @Override
     public void getListData(List<NetResoutVideoInfo> datas, boolean serviceError, boolean newData) {
         if (null == datas) {
             datas = new ArrayList<>();
         }
-        if (serviceError) {
-            netResouceItemAdapter.loadMoreFail();
-        }
-        if (newData) {
-            loadingLay.setVisibility(View.GONE);
-            showLoadingDialog(false);
-//            List<NetResoutVideoInfo> mdatas = new ArrayList<NetResoutVideoInfo>();
-//            mdatas.add(datas.get(0));
-            LogUtil.e("首推", "");
-            List<NetResoutVideoInfo> finalDatas = datas;
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    netResouceItemAdapter.setNewData(finalDatas);
-                }
-            });
-
-        } else {
-            if (datas.size() > 0) {
-                List<NetResoutVideoInfo> finalDatas1 = datas;
-                handler.post(new Runnable() {
+        if (null == netResouceItemAdapter) {
+            View header = LayoutInflater.from(context).inflate(R.layout.netresource_fragment_header, null);
+            netConvenientBanner = header.findViewById(R.id.netConvenientBanner);
+            netResouceItemAdapter = new ItemNetResouceItemAdapter(datas, this);
+            netResouceItemAdapter.addHeader(header);
+            netResouceItemAdapter.setPageSize(mPresenter.limit);
+            if (serviceError) {
+                netResouceItemAdapter.setEmptyClickListen(new BaseRVListAdapter.BaseRVListAdapterEmptyClickListen() {
                     @Override
-                    public void run() {
-                        netResouceItemAdapter.addData(finalDatas1);
-                        netResouceItemAdapter.loadMoreComplete();
+                    public void emptyClickListen() {
+                        showLoadingDialog(true);
+                        mPresenter.getListData(request);
                     }
                 });
-
-            } else {
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        netResouceItemAdapter.loadMoreEnd();
-                    }
-                });
-
+                netResouceItemAdapter.setEmptyMsg("点击重新获取");
             }
-
+            netResourceItemRv.setAdapter(netResouceItemAdapter);
+            loadingLay.setVisibility(View.GONE);
+            mPresenter.getAdv();
+        } else {
+            if (newData) {
+                netResouceItemAdapter.setDatas(datas);
+            } else {
+                netResouceItemAdapter.addDatas(datas);
+            }
         }
         isRefreshing = false;
-
-
     }
 
     @Override
@@ -142,68 +124,40 @@ public class NetResouceItemFragment extends BaseFragment implements NetResouceIt
         }
         if (null == gridLayoutManager) {
             gridLayoutManager = new GridLayoutManager(context, 3);
+
+//            netResourceItemRv.setLayoutManager(gridLayoutManager);
+
+            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    if (position == 0) {
+                        return 3;
+                    } else if (netResouceItemAdapter != null && position == netResouceItemAdapter.getDatas().size()) {
+                        return 3;
+                    } else {
+                        return 1;
+                    }
+                }
+            });
             netResourceItemRv.setLayoutManager(gridLayoutManager);
-//            netResourceItemRv.setHasFixedSize(true);
-//            netResourceItemRv.setNestedScrollingEnabled(false);
-//            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-//                @Override
-//                public int getSpanSize(int position) {
-//                    if (netResouceItemAdapter != null && position == netResouceItemAdapter.getDatas().size()) {
-//                        return 2;
-//                    }
-//                    return 1;
-//                }
-//            });
-//            netResourceItemRv.addItemDecoration(new GridSpacingItemDecoration(3, 10, false));
-//            netResourceItemRv.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//                @Override
-//                public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-//                    super.onScrollStateChanged(recyclerView, newState);
-//                    //加载更多
-//                    if ((recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset()
-//                            >= recyclerView.computeVerticalScrollRange()) && !isRefreshing && netResouceItemAdapter != null
-//                            && !netResouceItemAdapter.isNoMoreData()) {
-//                        //滑动到底部
-//                        isRefreshing = true;
-//                        mPresenter.getListData(request);
-//                    }
-//                }
-//            });
+
+            netResourceItemRv.addItemDecoration(new GridSpacingItemDecoration(3, 10, false));
+            netResourceItemRv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                    super.onScrollStateChanged(recyclerView, newState);
+                    //加载更多
+                    if ((recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset()
+                            >= recyclerView.computeVerticalScrollRange()) && !isRefreshing && netResouceItemAdapter != null
+                            && !netResouceItemAdapter.isNoMoreData()) {
+                        //滑动到底部
+                        isRefreshing = true;
+                        mPresenter.getListData(request);
+                    }
+                }
+            });
             lazyLoad();
         }
-
-        View header = LayoutInflater.from(context).inflate(R.layout.netresource_fragment_header, null);
-        netConvenientBanner = header.findViewById(R.id.netConvenientBanner);
-
-        View emptView = LayoutInflater.from(context).inflate(R.layout.netresource_fragment_empty, null);
-        TextView no_data_tv = emptView.findViewById(R.id.no_data_tv);
-        no_data_tv.setText("没有该类视频，看看其他分类吧！");
-        netResouceItemAdapter = new ItemNetResouceItemAdapter1();
-        netResouceItemAdapter.addHeaderView(header);
-        netResouceItemAdapter.setEmptyView(emptView);
-        netResouceItemAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
-            @Override
-            public void onLoadMoreRequested() {
-                loadMore();
-            }
-        });
-        netResouceItemAdapter.setAdapterListen(this);
-        netResourceItemRv.setAdapter(netResouceItemAdapter);
-
-
-        mPresenter.getAdv();
-
-        request.setPage(page);
-        mPresenter.getListData(request);
-
-    }
-
-    private int page = 1;
-
-    private void loadMore() {
-        page++;
-        request.setPage(page);
-        mPresenter.getListData(request);
     }
 
     @Override
@@ -224,6 +178,12 @@ public class NetResouceItemFragment extends BaseFragment implements NetResouceIt
     @Override
     protected void lazyLoad() {
         super.lazyLoad();
+        if (isVisible && null != mPresenter) {
+            if (netResouceItemAdapter == null) {
+                //获取数据
+                mPresenter.getListData(request);
+            }
+        }
     }
 
 

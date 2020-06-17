@@ -8,6 +8,8 @@ import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 
+import com.gyf.immersionbar.ImmersionBar;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.water.melon.R;
 import com.water.melon.application.MyApplication;
 import com.water.melon.base.ui.BaseActivity;
@@ -43,6 +45,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     @Override
     public void createdViewByBase(Bundle savedInstanceState) {
+//        CrashReport.testJavaCrash(); //bugly测试
+
+
         if (!XGConstant.hasInitP2p) {  //TODO  p2p初始化
             XGConstant.hasInitP2p = true;
             //闪退后重新初始化
@@ -66,7 +71,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     }
 
-    @OnCheckedChanged({R.id.bottom_radio_1, R.id.bottom_radio_2, R.id.bottom_radio_3, R.id.bottom_radio_4})
+    @OnCheckedChanged({R.id.bottom_radio_1, R.id.bottom_radio_2, R.id.bottom_radio_3, R.id.bottom_radio_4, R.id.bottom_radio_5})
     public void onRadioCheckChage(CompoundButton view, boolean ischanged) {
         switch (view.getId()) {
             case R.id.bottom_radio_1:
@@ -80,6 +85,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 break;
             case R.id.bottom_radio_4:
                 position = 3;
+                break;
+            case R.id.bottom_radio_5:
+                position = 4;
                 break;
         }
         if (ischanged) {
@@ -148,4 +156,22 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     public void advClick(AdvBean advBean) {
         present.doAdvClick(advBean);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        wakeUpAdapter = null;
+    }
+
+//    @Override
+//    protected void initImmersionBar() {
+//        //设置共同沉浸式样式
+//        ImmersionBar.with(this)
+//                .fitsSystemWindows(true)
+//                .navigationBarColor(MyApplication.getColorByResId(R.drawable.view_toorbar_bac))
+//                .statusBarDarkFont(true)
+//                .statusBarColor(MyApplication.getColorByResId(R.drawable.view_toorbar_bac))
+//                .init();
+//
+//    }
 }

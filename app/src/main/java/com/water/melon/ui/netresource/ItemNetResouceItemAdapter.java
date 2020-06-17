@@ -16,6 +16,8 @@ import com.water.melon.ui.netresource.NetResoutVideoInfo;
 import com.water.melon.utils.ClickTooQucik;
 import com.water.melon.utils.LogUtil;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -49,6 +51,8 @@ public class ItemNetResouceItemAdapter extends BaseRVListAdapter<NetResoutVideoI
 
     @Override
     public void onMyBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+//        LogUtil.e("itemresoure","data = "+getItemCount());
+
         MyItemHolder myItemHolder = (MyItemHolder) holder;
         myItemHolder.setData(getDatas().get(position));
         myItemHolder.itemView.setTag(R.id.tag_id1, getDatas().get(position));
@@ -68,6 +72,10 @@ public class ItemNetResouceItemAdapter extends BaseRVListAdapter<NetResoutVideoI
         return 0;
     }
 
+    public void addHeader(View header) {
+        this.mHeaderView = header;
+    }
+
     @Override
     public int onAddBottomItemCount() {
         return 0;
@@ -80,6 +88,8 @@ public class ItemNetResouceItemAdapter extends BaseRVListAdapter<NetResoutVideoI
         TextView itemNetResourceTime;
         @BindView(R.id.item_net_resource_name)
         TextView itemNetResourceName;
+        @BindView(R.id.item_net_resource_sub)
+        TextView item_net_resource_sub;
 
         public MyItemHolder(@NonNull View itemView) {
             super(itemView);
@@ -88,7 +98,7 @@ public class ItemNetResouceItemAdapter extends BaseRVListAdapter<NetResoutVideoI
             int width = (int) ((XGConstant.Screen_Width) * 0.490);
             params.width = width;
 ////            params.height = (int) (width * 1.5);
-            params.height = (int) (width*0.9);
+            params.height = (int) (width * 0.9);
 
 
 //            int width = (int) ((XGConstant.Screen_Width) * 0.3);
@@ -104,6 +114,12 @@ public class ItemNetResouceItemAdapter extends BaseRVListAdapter<NetResoutVideoI
 //            }
             itemNetResourceTime.setText(GetTail(data.getSynopsis().trim()));
 //            LogUtil.e("testjianjie", "data.getSynopsis().trim() = " + data.getSynopsis().trim());
+            String syn = data.getSynopsis().trim();
+//        syn = syn.replace(" ", "");
+            syn = ItemNetResouceItemAdapter1.trim1(syn);
+            itemNetResourceTime.setText(GetTail(data.getSynopsis().trim()));
+            item_net_resource_sub.setText(syn);
+
             GlideApp.with(itemNetResourceImage.getContext())
                     .asBitmap()
                     .load(data.getPoster())

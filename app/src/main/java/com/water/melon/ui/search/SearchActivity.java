@@ -78,7 +78,7 @@ public class SearchActivity extends BaseActivity implements SearchContract.View,
                 @Override
                 public int getSpanSize(int position) {
                     if (netResouceItemAdapter != null && position == netResouceItemAdapter.getDatas().size()) {
-                        return 2;
+                        return 3;
                     }
                     return 1;
                 }

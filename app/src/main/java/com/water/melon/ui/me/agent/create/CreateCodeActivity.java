@@ -87,7 +87,7 @@ public class CreateCodeActivity extends BaseActivity implements AgentCodeContrac
                 redirectActivity(AgentCodeActivity.class);
                 break;
             case R.id.agent_create_code_save:
-//                XGUtil.writeExcel(this, createCodeAdapter.getData());
+                XGUtil.writeExcel(this, createCodeAdapter.getData());
                 break;
         }
     }

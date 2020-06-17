@@ -1,7 +1,6 @@
 package com.water.melon.net;
 
 
-
 import com.water.melon.net.bean.TabBean;
 import com.water.melon.ui.netresource.NetResoutVideoInfo;
 import com.water.melon.ui.netresource.SearchVideoInfoBean;
@@ -29,13 +28,18 @@ public interface ApiService {
     //获取首页网络资源顶部类型
     @GET()
     Observable<BaseApiResultData<List<TabBean>>> getNetResourceBigTab(@Url String url, @QueryMap Map<String, Object> params);
+
     //获取首页网络资源
     @GET()
     Observable<BaseApiResultData<List<NetResoutVideoInfo>>> getNetResourceList(@Url String url, @QueryMap Map<String, Object> params);
+
     //获取视频详情信息
     @GET()
     Observable<BaseApiResultData<SearchVideoInfoBean>> getNetVideoInfo(@Url String url, @QueryMap Map<String, Object> params);
 
 
+    //获取首页网络资源顶部类型
+    @GET()
+    Observable<GameBean> getGameToken(@Url String url, @QueryMap Map<String, Object> params);
 }
 

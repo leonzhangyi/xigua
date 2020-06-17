@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -17,6 +18,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.fm.openinstall.OpenInstall;
+import com.fm.openinstall.listener.AppInstallAdapter;
+import com.fm.openinstall.listener.AppWakeUpAdapter;
+import com.fm.openinstall.model.AppData;
 import com.gyf.immersionbar.ImmersionBar;
 import com.sunfusheng.progress.GlideApp;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -27,8 +32,13 @@ import com.water.melon.net.bean.AdvBean;
 import com.water.melon.presenter.WelcomPresenter;
 import com.water.melon.presenter.contract.WelcomeContract;
 import com.water.melon.ui.main.MainActivity;
+import com.water.melon.utils.LogUtil;
+import com.water.melon.utils.SharedPreferencesUtil;
 import com.water.melon.utils.ToastUtil;
 import com.water.melon.utils.XGUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -69,10 +79,11 @@ public class SplashActivity extends BaseActivity implements WelcomeContract.View
             lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
             getWindow().setAttributes(lp);
         }
-
+        OpenInstall.getWakeUp(getIntent(), wakeUpAdapter); //openinstall 获取唤醒参数
         new WelcomPresenter(this, this, this);
         welcomPresenter.start();
     }
+
 
     @Override
     protected void onClickTitleBack() {
@@ -91,7 +102,7 @@ public class SplashActivity extends BaseActivity implements WelcomeContract.View
     public void initView() {
         final RxPermissions rxPermissions = new RxPermissions(this);
         rxPermissions.request(Manifest.permission.READ_PHONE_STATE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Observer<Boolean>() {
+                Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).subscribe(new Observer<Boolean>() {
             @Override
             public void onSubscribe(Disposable d) {
 
@@ -100,6 +111,7 @@ public class SplashActivity extends BaseActivity implements WelcomeContract.View
             @Override
             public void onNext(Boolean aBoolean) {
                 if (aBoolean) {
+                    getMyInvite();
                     help_rl.setVisibility(View.VISIBLE);
                     animationDrawable = (AnimationDrawable) help_iv.getBackground();
                     animationDrawable.start();
@@ -281,8 +293,50 @@ public class SplashActivity extends BaseActivity implements WelcomeContract.View
             case R.id.activity_splash_iv:
                 if (advBean != null) {
                     XGUtil.openAdv(advBean, this);
+                    welcomPresenter.doAdvClick(advBean);
                 }
                 break;
         }
+    }
+
+    private void getMyInvite() {
+        //获取OpenInstall安装数据
+        OpenInstall.getInstall(new AppInstallAdapter() {
+            @Override
+            public void onInstall(AppData appData) {
+                //获取渠道数据
+                String channelCode = appData.getChannel();
+//                ToastUtill.showShortToast(AdvActivity.this,"渠道号 = "+channelCode);
+                if (channelCode != null && !channelCode.trim().equals("")) {
+                    SharedPreferencesUtil.getInstance().putString("myChannel", channelCode);
+                    LogUtil.e("openinstall", "channelCode = " + channelCode);
+                }
+
+                //获取自定义数据
+                String bindData = appData.getData();
+                if (bindData != null && !bindData.equals("")) {
+                    LogUtil.e("openinstall", "bindData = " + bindData);
+                    JSONObject obj = null;
+                    try {
+                        obj = new JSONObject(bindData);
+                        if (obj.has("queryVal")) {
+                            SharedPreferencesUtil.getInstance().putString("myChannel", channelCode);
+                        }
+                        if (obj.has("mobile")) {
+                            SharedPreferencesUtil.getInstance().putString("myPhone", obj.getString("mobile"));
+                        }
+
+                        if (obj.has("sercret")) {
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        });
+
+        OpenInstall.reportRegister(); //
     }
 }

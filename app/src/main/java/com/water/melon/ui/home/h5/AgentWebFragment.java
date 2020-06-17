@@ -249,7 +249,7 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
         if (TextUtils.isEmpty(target = this.getArguments().getString(URL_KEY))) {
             target = "http://m.iqiyi.com/vip";
         }
-
+//        target = "https://mobiletal.cgdemotest.com";
 //		return "http://ggzy.sqzwfw.gov.cn/WebBuilderDS/WebbuilderMIS/attach/downloadZtbAttach.jspx?attachGuid=af982055-3d76-4b00-b5ab-36dee1f90b11&appUrlFlag=sqztb&siteGuid=7eb5f7f1-9041-43ad-8e13-8fcb82ea831a";
         return target;
     }

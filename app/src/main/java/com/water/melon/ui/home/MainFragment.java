@@ -114,26 +114,20 @@ public class MainFragment extends BaseFragment implements OnItemClickListener, H
             @Override
             public void onItemClick(AdvBean position) {
                 UserBean userBean1 = XGUtil.getMyUserInfo();
-                if (userBean1 == null || userBean1.getGroup_id().trim().equals("0")) { //游客
-                    ToastUtil.showToastShort("请先绑定手机号");
-                    Intent intent = new Intent(getContext(), RegistActivity.class);
-                    redirectActivityForResult(intent, 1);
-                } else {
-                    if (userBean1 == null || userBean1.getVip().trim().equals("0")) {//非会员
-                        redirectActivity(VipActivity.class);
-                    } else {
-                        Bundle bundle = new Bundle();
-                        bundle.putString(AgentWebFragment.URL_KEY, position.getTarget());
-//                bundle.putString(AgentWebFragment.URL_KEY, "https://jiexxx.joja.top/juying/wabi/?url=https://m.iqiyi.com/v_19rvovox5w.html");
-                        bundle.putString(AgentWebFragment.URL_POSTER_NAME, position.getTitle());
-                        redirectActivity(H5VideoActivity.class, bundle);
-
-
-//                Intent intent = new Intent(getContext(), WebPlayActivity.class);
-//                intent.putExtra(AgentWebFragment.URL_KEY, "https://jiexxx.joja.top/juying/wabi/?url=https://m.iqiyi.com/v_19rvovox5w.html");
-//                startActivity(intent);
-                    }
-                }
+//                if (userBean1 == null || userBean1.getGroup_id().trim().equals("0")) { //游客
+//                    ToastUtil.showToastShort("请先绑定手机号");
+//                    Intent intent = new Intent(getContext(), RegistActivity.class);
+//                    redirectActivityForResult(intent, 1);
+//                } else {
+//                    if (userBean1 == null || userBean1.getVip().trim().equals("0")) {//非会员
+//                        redirectActivity(VipActivity.class);
+//                    } else {
+                Bundle bundle = new Bundle();
+                bundle.putString(AgentWebFragment.URL_KEY, position.getTarget());
+                bundle.putString(AgentWebFragment.URL_POSTER_NAME, position.getTitle());
+                redirectActivity(H5VideoActivity.class, bundle);
+//                    }
+//                }
 
                 present.doAdvClick(position);
             }
@@ -218,7 +212,6 @@ public class MainFragment extends BaseFragment implements OnItemClickListener, H
                     tvGg.setText(bean.getMessage());
                 } else if (bean.getType() == 2) {//弹框
                     setHomeDialog(bean);
-
                 }
             }
         }
@@ -260,10 +253,14 @@ public class MainFragment extends BaseFragment implements OnItemClickListener, H
     private HomeDialog homeDialog;
 
     public void setHomeDialog(AdvBean bean) {
-        if (homeDialog == null) {
-            homeDialog = new HomeDialog(context, R.style.dialog);
+        if (bean != null) {
+
+            if (homeDialog == null) {
+                homeDialog = new HomeDialog(context, R.style.dialog);
+            }
+            homeDialog.show();
+            homeDialog.setDate(bean);
+
         }
-        homeDialog.show();
-        homeDialog.setDate(bean);
     }
 }

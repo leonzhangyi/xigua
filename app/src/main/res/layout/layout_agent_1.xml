@@ -72,22 +72,22 @@
                     android:textSize="@dimen/size_sp_18" />
 
                 <RelativeLayout
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_marginRight="@dimen/size_dp_41"
-                    android:background="@drawable/login_phone_bac">
+                    android:background="@drawable/login_phone_bac"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true">
 
                     <EditText
                         android:id="@+id/layout_agent_name_et"
-                        android:gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/size_dp_5"
                         android:layout_marginRight="@dimen/size_dp_5"
                         android:background="@null"
+                        android:gravity="center"
                         android:textColor="@color/black_D9"
                         android:textSize="@dimen/size_sp_15" />
 
@@ -110,18 +110,19 @@
                     android:textSize="@dimen/size_sp_18" />
 
                 <RelativeLayout
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_marginTop="@dimen/size_dp_20"
                     android:layout_marginRight="@dimen/size_dp_41"
-                    android:background="@drawable/login_phone_bac">
+                    android:background="@drawable/login_phone_bac"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true">
 
                     <EditText
                         android:id="@+id/layout_agent_phone_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/size_dp_5"
                         android:layout_marginRight="@dimen/size_dp_5"
                         android:background="@null"
@@ -148,27 +149,27 @@
 
             <RelativeLayout
                 android:id="@+id/agent_payment_rl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/size_dp_20"
-                android:layout_width="wrap_content"
-                android:paddingLeft="@dimen/dp_10"
                 android:background="@drawable/layout_agent_pay_back"
-                android:layout_height="wrap_content">
+                android:paddingLeft="@dimen/dp_10">
 
                 <ImageView
-                    android:visibility="gone"
                     android:id="@+id/agent_payment_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:src="@mipmap/alr_download"/>
+                    android:src="@mipmap/alr_download"
+                    android:visibility="gone" />
 
                 <TextView
-                    android:layout_toRightOf="@+id/agent_payment_iv"
-                    android:layout_marginLeft="@dimen/dp_10"
                     android:id="@+id/agent_payment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_toRightOf="@+id/agent_payment_iv"
                     android:paddingTop="@dimen/dp_10"
                     android:paddingRight="@dimen/size_dp_16"
                     android:paddingBottom="@dimen/dp_10"

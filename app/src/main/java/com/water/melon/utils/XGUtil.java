@@ -6,6 +6,8 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -697,7 +699,7 @@ public class XGUtil {
                         context.startActivityForResult(intent10, 1);
                     } else {
 
-                        url = url.substring(2);
+                        url = url.substring(3);
                         Intent intent3 = new Intent(context, VideoInfoActivity.class);
                         VideoPlayBean videoInfoBean = new VideoPlayBean();
                         videoInfoBean.setId(url);
@@ -846,5 +848,30 @@ public class XGUtil {
             Toast.makeText(mContext, "找不到外部存储路径，读写手机存储权限被禁止，请在权限管理中心手动打开权限", Toast.LENGTH_LONG).show();
             return null;
         }
+    }
+
+    /**
+     * 獲取application中指定的meta-data
+     *
+     * @return如果沒有獲取成功，則返回值為空
+     */
+    public static String getAppMetaData(String key) {
+        String resultData = null;
+        try {
+            PackageManager packageManager = MyApplication.getContext().getPackageManager();
+            if (packageManager != null) {
+                ApplicationInfo applicationInfo = packageManager.getApplicationInfo(MyApplication.getContext().getPackageName(), PackageManager.GET_META_DATA);
+                if (applicationInfo != null) {
+                    if (applicationInfo.metaData != null) {
+                        resultData = applicationInfo.metaData.getString(key);
+                    }
+                }
+
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return SharedPreferencesUtil.getInstance().getString("myChannel", resultData);
+
     }
 }

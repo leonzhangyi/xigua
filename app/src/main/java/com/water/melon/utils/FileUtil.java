@@ -16,6 +16,7 @@ import android.view.View;
 import com.water.melon.application.MyApplication;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,6 +24,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.RandomAccessFile;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
@@ -257,5 +260,159 @@ public class FileUtil {
 
     public static String getAppDir1() {
         return Environment.getExternalStorageDirectory().getAbsolutePath() + "/DCIM";
+    }
+
+
+    private static final String IMEI_ID = "/imei.txt";
+
+    private static final long MIN_STORAGE = 1022 * 1024;//50*1024*1024最低50m 52428800
+
+    public static final String LOCAL_ADRESS = "/Android/data/awater";//保存路徑
+
+    //保存IMEI
+    public static void saveImei(String text) {
+        String filePath = getCachePath();
+
+        writeTxtToFile(text, filePath, IMEI_ID);
+    }
+
+    public static boolean isImeiExist() {
+        boolean fileExist = false;
+        String filePath = getCachePath();
+        File file = null;
+        try {
+            file = new File(filePath + IMEI_ID);
+            if (file.exists()) {
+                fileExist = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return fileExist;
+    }
+
+    public static String ReadIMEIFile() {
+        String strFilePath = getCachePath() + IMEI_ID;
+        String imei = "";
+        File file = new File(strFilePath);
+        if (file.isDirectory()) {
+        } else {
+            try {
+                InputStream instream = new FileInputStream(file);
+                if (instream != null) {
+                    InputStreamReader inputreader = new InputStreamReader(instream);
+                    BufferedReader buffreader = new BufferedReader(inputreader);
+                    String line;
+                    //分行读取
+                    while ((line = buffreader.readLine()) != null) {
+                        imei += line;
+                    }
+                    instream.close();
+                }
+            } catch (java.io.FileNotFoundException e) {
+            } catch (IOException e) {
+            }
+        }
+        return imei;
+    }
+
+    public static void writeTxtToFile(String strcontent, String filePath, String fileName) {
+        makeFilePath(filePath, fileName);
+
+        String strFilePath = filePath + fileName;
+        try {
+            File file = new File(strFilePath);
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            }
+            RandomAccessFile raf = new RandomAccessFile(file, "rwd");
+            raf.seek(file.length());
+            raf.write(strcontent.getBytes());
+            raf.close();
+        } catch (Exception e) {
+        }
+    }
+
+    public static File makeFilePath(String filePath, String fileName) {
+        File file = null;
+        makeRootDirectory(filePath);
+        try {
+            file = new File(filePath + fileName);
+            if (file.exists()) {
+                file.delete();
+            }
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return file;
+    }
+
+    public static void makeRootDirectory(String filePath) {
+        File file = null;
+        try {
+            file = new File(filePath);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    public static String getCachePath() {
+        String path = getSavePath(MIN_STORAGE);
+        if (TextUtils.isEmpty(path)) {
+            return null;
+        }
+//		path = path + FOLDER_NAME;
+        path = path + LOCAL_ADRESS;
+        return path;
+    }
+
+    private static String getSavePath(long saveSize) {
+        String savePath = null;
+        if (StorageUtil.getExternaltStorageAvailableSpace() > saveSize) {
+            savePath = StorageUtil.getExternalStorageDirectory();
+            File saveFile = new File(savePath);
+            if (!saveFile.exists()) {
+                saveFile.mkdirs();
+            } else if (!saveFile.isDirectory()) {
+                saveFile.delete();
+                saveFile.mkdirs();
+            }
+        } else if (StorageUtil.getSdcard2StorageAvailableSpace() > saveSize) {
+            savePath = StorageUtil.getSdcard2StorageDirectory();
+            File saveFile = new File(savePath);
+            if (!saveFile.exists()) {
+                saveFile.mkdirs();
+            } else if (!saveFile.isDirectory()) {
+                saveFile.delete();
+                saveFile.mkdirs();
+            }
+        } else if (StorageUtil.getEmmcStorageAvailableSpace() > saveSize) {
+            savePath = StorageUtil.getEmmcStorageDirectory();
+            File saveFile = new File(savePath);
+            if (!saveFile.exists()) {
+                saveFile.mkdirs();
+            } else if (!saveFile.isDirectory()) {
+                saveFile.delete();
+                saveFile.mkdirs();
+            }
+        } else if (StorageUtil.getOtherExternaltStorageAvailableSpace() > saveSize) {
+            savePath = StorageUtil.getOtherExternalStorageDirectory();
+            File saveFile = new File(savePath);
+            if (!saveFile.exists()) {
+                saveFile.mkdirs();
+            } else if (!saveFile.isDirectory()) {
+                saveFile.delete();
+                saveFile.mkdirs();
+            }
+        } else if (StorageUtil.getInternalStorageAvailableSpace() > saveSize) {
+            savePath = StorageUtil.getInternalStorageDirectory() + File.separator;
+        }
+        return savePath;
     }
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">VIP你妹</string>
+    <string name="app_name">VIP影视</string>
 
     <string name="button_cancel">取消</string>
     <string name="button_ok">确定</string>
@@ -31,9 +31,12 @@
     <!--    首页fragment-->
     <string name="home_tv">首页</string>
     <string name="source_tv">片库</string>
-    <string name="welf_tv">福利</string>
-    <string name="me_tv">我的</string>
-    <string name="home_gg">【VIP你妹公告】保存最新官网地址www.xinxi</string>
+<!--    <string name="welf_tv">福利</string>-->
+    <string name="welf_tv">游戏</string>
+<!--    <string name="me_tv">我的</string>-->
+    <string name="me_tv">充值</string>
+    <string name="me_tv_1">我的</string>
+    <string name="home_gg">【VIP影视公告】保存最新官网地址www.xinxi</string>
     <string name="home_vip_tv">VIP视频专区</string>
 
     <!--    福利-->

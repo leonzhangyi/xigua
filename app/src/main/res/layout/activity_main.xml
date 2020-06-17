@@ -36,6 +36,11 @@
             style="@style/navigation_bottom_radio"
             android:drawableTop="@drawable/btn_main_menu4"
             android:text="@string/me_tv" />
+        <RadioButton
+            android:id="@+id/bottom_radio_5"
+            style="@style/navigation_bottom_radio"
+            android:drawableTop="@drawable/btn_main_menu5"
+            android:text="@string/me_tv_1" />
     </RadioGroup>
 
 

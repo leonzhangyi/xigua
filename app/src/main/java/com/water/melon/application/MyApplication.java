@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
+import com.fm.openinstall.OpenInstall;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.water.melon.constant.XGConstant;
 import com.water.melon.net.bean.SystemInfo;
 import com.water.melon.net.utils.MobileUtil;
@@ -35,7 +37,10 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         context = this;
-
+        CrashReport.initCrashReport(getApplicationContext(), "8259b58347", false); //初始化bugly
+        if (isMainProcess()) { //初始化 openinstall
+            OpenInstall.init(getApplicationContext());
+        }
         //获取手机屏幕大小
         XGConstant.Screen_Width = ScreenUtils.getScreenWidth(context);
         XGConstant.Screen_Height = ScreenUtils.getScreenHeight(context);
@@ -90,5 +95,15 @@ public class MyApplication extends Application {
 
     public static Drawable getDrawableByResId(int drawableId) {
         return ContextCompat.getDrawable(MyApplication.getContext(), drawableId);
+    }
+    public boolean isMainProcess() {
+        int pid = android.os.Process.myPid();
+        android.app.ActivityManager activityManager = (android.app.ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (android.app.ActivityManager.RunningAppProcessInfo appProcess : activityManager.getRunningAppProcesses()) {
+            if (appProcess.pid == pid) {
+                return getApplicationInfo().packageName.equals(appProcess.processName);
+            }
+        }
+        return false;
     }
 }

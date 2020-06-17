@@ -42,6 +42,14 @@ public class SharedPreferencesUtil {
      * 用户ID
      */
     public static final String XG_USER_ID = "xg_user_id";
+
+
+    public static final String XG_USER_NAME = "xg_user_name";
+    public static final String XG_GAME_URL = "xg_game_url";
+
+    public static final String XG_GAME_TOKEN = "xg_game_token";
+
+
     /**
      * 手机号
      */

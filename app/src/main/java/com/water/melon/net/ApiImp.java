@@ -17,13 +17,9 @@ import com.water.melon.net.bean.FeedBean;
 import com.water.melon.net.bean.GetVideosRequest;
 import com.water.melon.net.bean.MyAgentBean;
 import com.water.melon.net.bean.MyMoneyBean;
-import com.water.melon.net.bean.NetResourceRequest;
-import com.water.melon.net.bean.TabBean;
 import com.water.melon.net.utils.AESCipherforJiaMi;
 import com.water.melon.ui.home.HomeBean;
 import com.water.melon.ui.me.vip.VipBean;
-import com.water.melon.ui.netresource.NetResoutVideoInfo;
-import com.water.melon.ui.netresource.SearchVideoInfoBean;
 import com.water.melon.utils.FileUtil;
 import com.water.melon.utils.LogUtil;
 import com.water.melon.utils.NetworkUtils;
@@ -70,19 +66,6 @@ public class ApiImp {
     // 是否为线上环境
     public final static boolean IS_PRODUCTION_ENVIRONMENT = true;
 
-    public static String APPBASEURL;//接口地址
-    public static String Up_App;//更新版本
-
-    static {
-        if (IS_PRODUCTION_ENVIRONMENT) {
-            //线上地址
-            APPBASEURL = "http://api.rinhome.com";
-        } else {
-            //测试地址
-            APPBASEURL = "http://api.rinhome.com";
-        }
-        Up_App = APPBASEURL + "/api/index";//更新版本
-    }
 
     private static volatile ApiImp apiImp = null;
     private OkHttpClient okHttpClient;
@@ -108,6 +91,17 @@ public class ApiImp {
         });
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         mBuilder.addInterceptor(loggingInterceptor);
+//        mBuilder.addInterceptor(new Interceptor() {
+//            @Override
+//            public Response intercept(Chain chain) throws IOException {
+//                Request original = chain.request();
+//                Request.Builder requestBuilder = original.newBuilder()
+//                        .header("JPAUTH", AuthCode.authcodeEncode("jgnb", "UhnRS5ebz4a8rfhIllEk").trim())
+//                        .header("user-agent", "jianpian-android/" + PackageUtils.getVersionCode());
+//                Request request = requestBuilder.build();
+//                return chain.proceed(request);
+//            }
+//        });
         //打印日志 End
         noSSLKey(mBuilder);
         //缓存
@@ -127,7 +121,7 @@ public class ApiImp {
                 .addConverterFactory(GsonConverterFactory.create())  //TODO 解密操作再次进行  Retrofit 之加密和解密
 //                .addConverterFactory(ConverterFactory.create(new Gson()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl(APPBASEURL)
+                .baseUrl(NetConstant.XG_RUL + "/")
                 .build();
         //服务器请求接口
         apiService = retrofit2.create(ApiService.class);
@@ -261,7 +255,8 @@ public class ApiImp {
         Map<String, String> params = new HashMap<>();
         params.put(NetConstant.XG_CLIENT, NetConstant.XG_ANDROID);
         params.put(NetConstant.XG_USER_ID, SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_USER_ID, NetConstant.XG_DEF_USER_ID));
-        params.put(NetConstant.XG_CHANNEL_ID, "6DNVZ8R0XYIBGS1C");
+        params.put(NetConstant.XG_CHANNEL_ID, XGUtil.getAppMetaData("CHANNEL_ID"));
+        //        params.put(NetConstant.XG_CHANNEL_ID, "6DNVZ8R0XYIBGS1C");//主渠道
 //        params.put(NetConstant.XG_CHANNEL_ID, "B14X36VC8DGPZSQK");
 //        params.put(NetConstant.XG_CHANNEL_ID, "26985KC17XHBITJU");
         params.put(NetConstant.XG_APP_VERSION, XGUtil.getCurrentAppVersion(MyApplication.getContext()));
@@ -321,9 +316,23 @@ public class ApiImp {
         Map<String, Object> params = new HashMap<>();
         params.putAll(getDefMap());
         params.putAll(MyApplication.getSystemInfo().getMapInfo());
+        params.put("mobile", SharedPreferencesUtil.getInstance().getString("myPhone", ""));
+//        params.put(" ", "17513132050");
         LogUtil.e(TAG, "getInit.params() = " + params.toString());
         baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_INIT, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
     }
+
+    public void loginPlayGame(GameBean.GameReques request, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<GameBean> callBack) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("userName", request.getUserName());
+        params.put("loginDevice", request.getLoginDevice());
+        params.put("timestamp", request.getTimestamp());
+        params.put("signature", request.getSignature());
+        params.put("invitationCode", XGUtil.getAppMetaData("CHANNEL_ID"));
+
+        baseObservableSetting(apiService.getGameToken(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_GAME_URL, NetConstant.XG_GAME_URL) + NetConstant.XG_API_TAL, params), lifecycleTransformer, baseNetView, callBack);
+    }
+
 
     //获取用户信息
     public void getUserNo(BaseRequest request, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {
@@ -406,31 +415,6 @@ public class ApiImp {
         baseObservableSetting(apiService.getDefResult(SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.XG_DOMAIN, NetConstant.XG_RUL) + NetConstant.XG_APP_VIDEO_WATCH, setEcond(params)), lifecycleTransformer, baseNetView, callBack);
     }
 
-    //获取首页网络资源顶部类型
-    public void getNetResourceBigTab(NetResourceRequest request, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData<List<TabBean>>> callBack) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("page", request.getPage());
-        params.put("limit", request.getLimit());
-        baseObservableSetting(apiService.getNetResourceBigTab(APPBASEURL + "/api/term/fenlei", params), lifecycleTransformer, baseNetView, callBack);
-    }
-
-    //网络资源：获取视频列表
-    public void getNetResourceList(GetVideosRequest request, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData<List<NetResoutVideoInfo>>> callBack) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("page", request.getPage());
-        params.put("limit", request.getLimit());
-        params.put("category_id", request.getSmallTabId());
-//        params.put("sort", request.getSort());
-        baseObservableSetting(apiService.getNetResourceList(APPBASEURL + "/api/bt/list?genere_id&order&lang&keywords&sort", params), lifecycleTransformer, baseNetView, callBack);
-    }
-
-
-    //获取视频详情信息
-    public void getNetVideoInfo(GetVideosRequest request, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData<SearchVideoInfoBean>> callBack) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("id", request.getVideoId());
-        baseObservableSetting(apiService.getNetVideoInfo(APPBASEURL + "/api/node/detail", params), lifecycleTransformer, baseNetView, callBack);
-    }
 
     //获取福利顶部广告
     public void getWelAdv(BaseRequest request, LifecycleTransformer lifecycleTransformer, BaseNetView baseNetView, IApiSubscriberCallBack<BaseApiResultData> callBack) {

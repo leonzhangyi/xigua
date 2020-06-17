@@ -2,10 +2,16 @@ package com.water.melon.net;
 
 public class NetConstant {
 
-    public static final String XG_RUL = "http://38.27.103.12/v1";
-    public final static String MY_YM_URL = "38.27.103.12,38.27.103.12";
+    //  美国服务器
+//    public static final String XG_RUL = "http://api.mff23.com/v1";
+//    public final static String MY_YM_URL = "api.mff23.com,a_api.77pu2.com,a_api.09tuy.com";
+    //北那边服务器
+    public static final String XG_RUL = "https://api.vipttg05.com/v1";
+    public final static String MY_YM_URL = "api.vipttg05.com,api.vipttg06.com,api.vipttg07.com,api.vipttg08.com";
 
-    public static final String XG_HTTPS = "http://";
+    public static final String XG_GAME_URL = "https://kedougame.com/";
+
+    public static final String XG_HTTPS = "https://";
     public static final String XG_VERSION_V = "/v1";
 
 
@@ -19,6 +25,8 @@ public class NetConstant {
     public static final String XG_APP_DOMAIN = "/app/domain";
     public static final String XG_APP_NETWORK = "/app/network";
     public static final String XG_APP_INIT = "/app/init";
+
+    public static final String XG_API_TAL = "/api/tal/authV3";
 
     public static final String XG_APP_CLICK_BANNEL = "/data/click";
     //    首页界面接口

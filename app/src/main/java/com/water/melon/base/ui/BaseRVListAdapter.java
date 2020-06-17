@@ -7,8 +7,10 @@ import android.view.ViewGroup;
 
 import com.water.melon.R;
 import com.water.melon.application.MyApplication;
+import com.water.melon.utils.LogUtil;
 import com.water.melon.utils.ui.recyler_view_item.ListBottomViewHolder;
 import com.water.melon.utils.ui.recyler_view_item.ListEmptyViewHolder;
+import com.water.melon.utils.ui.recyler_view_item.ListHeaderHoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,8 @@ public abstract class BaseRVListAdapter<T> extends RecyclerView.Adapter {
     private final int type_no_data = 10086;
     //加载更多布局
     private final int type_load_more = 10010;
+    //添加头部
+    private final int type_load_header = 10000;
     //每次请求的数据量
     private int pageSize = 60;
     private boolean noMoreData;//是否已经加载完所有数据
@@ -49,6 +53,10 @@ public abstract class BaseRVListAdapter<T> extends RecyclerView.Adapter {
     private BaseRVListAdapterBottomViewClickListen bottomViewClickListen;
 
     private List<T> datas;
+
+    private boolean firstAdd = false;
+
+    public View mHeaderView;
 
     public BaseRVListAdapter(List<T> datas) {
         if (null == this.datas) {
@@ -320,7 +328,11 @@ public abstract class BaseRVListAdapter<T> extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
+        if (mHeaderView != null && position == 0) {
+            return type_load_header;
+        }
         if (null == datas || datas.size() == 0) {
+
             if (onAddTopItemCount() > 0 && position < onAddTopItemCount()) {
                 //自定义数据
                 return getMyItemViewType(position);
@@ -340,7 +352,9 @@ public abstract class BaseRVListAdapter<T> extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
-        if (viewType == type_load_more) {
+        if (mHeaderView != null && viewType == type_load_header) {
+            return new ListHeaderHoder(mHeaderView);
+        } else if (viewType == type_load_more) {
             //提示加载更多或已经加载完所有数据
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_bottom_view, parent, false);
             return new ListBottomViewHolder(view);
@@ -358,6 +372,7 @@ public abstract class BaseRVListAdapter<T> extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (getItemViewType(position) == type_load_header) return;
         if (holder instanceof ListEmptyViewHolder) {
             //空数据布局
             if (!noEmptyView) {
@@ -389,6 +404,7 @@ public abstract class BaseRVListAdapter<T> extends RecyclerView.Adapter {
             if (noMoreData) {
                 if (TextUtils.isEmpty(noMoreMsg)) {
                     listBottomViewHolder.setMsg(MyApplication.getStringByResId(R.string.list_no_more_data));
+                    listBottomViewHolder.setNoMoreData();
                 } else {
                     listBottomViewHolder.setMsg(noMoreMsg);
                 }
@@ -419,7 +435,12 @@ public abstract class BaseRVListAdapter<T> extends RecyclerView.Adapter {
             }
         } else {
             //自定义绑定数据 (- onAddTopItemCount())是因为列表前面可能有布局
+//            if (mHeaderView != null) {
+//                onMyBindViewHolder(holder, position - onAddTopItemCount() - 1);
+//            } else {
             onMyBindViewHolder(holder, position - onAddTopItemCount());
+//            }
+
         }
     }
 
@@ -444,6 +465,10 @@ public abstract class BaseRVListAdapter<T> extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         int itemCount = onAddTopItemCount() + onAddBottomItemCount();
+//        if (mHeaderView != null) {
+//            firstAdd = true;
+//            itemCount = itemCount + 1;
+//        }
         if (!noBottomView) {
             //是否要底部提示语句
             itemCount = itemCount + 1;
@@ -455,6 +480,7 @@ public abstract class BaseRVListAdapter<T> extends RecyclerView.Adapter {
             //添加空数据布局
             itemCount = 1;
         }
+        LogUtil.e("itemresoure", "getItemCount = " + itemCount);
         return itemCount;
     }
 

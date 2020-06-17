@@ -46,7 +46,7 @@ public class VipPresent extends BasePresenterParent implements VipContract.Prese
         ApiImp.getInstance().getVIP(null, getLifecycleTransformerByStopToActivity(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
             @Override
             public void onCompleted() {
-                 mView.showLoadingDialog(false);
+                mView.showLoadingDialog(false);
             }
 
             @Override
@@ -102,12 +102,14 @@ public class VipPresent extends BasePresenterParent implements VipContract.Prese
 
     @Override
     public void doBdVip(CreateCodeBean.UserCodeBean userCodeBean) {
+        mView.showLoadingDialog(true);
         BaseRequest<CreateCodeBean.UserCodeBean> vipBeanBaseRequest = new BaseRequest<>();
         vipBeanBaseRequest.setParameter(userCodeBean);
 
         ApiImp.getInstance().getBdCode(vipBeanBaseRequest, getLifecycleTransformerByStopToActivity(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
             @Override
             public void onCompleted() {
+                mView.showLoadingDialog(false);
             }
 
             @Override

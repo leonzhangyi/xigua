@@ -16,6 +16,9 @@ import com.water.melon.net.bean.AdvBean;
 import com.water.melon.net.bean.InitResultBean;
 import com.water.melon.net.utils.AESCipherforJiaMi;
 import com.water.melon.presenter.contract.MainContract;
+import com.water.melon.ui.game.AgentWebFragment;
+import com.water.melon.ui.game.ZbMyInfoFragment;
+import com.water.melon.ui.game.ZbPayFragment;
 import com.water.melon.ui.home.MainFragment;
 import com.water.melon.ui.main.MainActivity;
 import com.water.melon.ui.me.MeFragment;
@@ -118,12 +121,18 @@ public class MainPresent extends BasePresenterParent implements MainContract.Pre
                 break;
             case 2:
                 if (fragments.get(position) == null) {
-                    fragments.put(position, new WelfareFragment());
+//                    fragments.put(position, new WelfareFragment());
+                    fragments.put(position, new AgentWebFragment());
                 }
                 break;
             case 3:
                 if (fragments.get(position) == null) {
-                    fragments.put(position, new MeFragment());
+//                    fragments.put(position, new MeFragment());
+                    fragments.put(position, new ZbPayFragment());
+                }
+            case 4:
+                if (fragments.get(position) == null) {
+                    fragments.put(position, new ZbMyInfoFragment());
                 }
                 break;
         }
@@ -155,7 +164,7 @@ public class MainPresent extends BasePresenterParent implements MainContract.Pre
                     SharedPreferencesUtil.getInstance().putString(SharedPreferencesUtil.KEY_WATER_USER_INFO, result);
 
 
-                  }
+                }
 
             }
         });

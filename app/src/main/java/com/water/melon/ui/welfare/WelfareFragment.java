@@ -129,7 +129,7 @@ public class WelfareFragment extends BaseFragment implements WelfContract.View, 
                 String name = position.getTitle();
 //                ToastUtil.showToastShort("正在下载" + name, Gravity.BOTTOM);
 
-                Toast.makeText(MyApplication.getContext(), "正在下载" + name, 1).show();
+                Toast.makeText(MyApplication.getContext(), "正在下载" + name, Toast.LENGTH_SHORT).show();
 //                present.downloadAPK("http://gdown.baidu.com/data/wisegame/cfdb6ba461b2c8ad/baidu_97519360.apk", context, name);
                 present.downloadAPK(position.getTarget(), context, name);
             }
@@ -197,6 +197,7 @@ public class WelfareFragment extends BaseFragment implements WelfContract.View, 
 //        loadNetTestDatas();
         if (advBeans != null && advBeans.size() > 0) {
             netImages.clear();
+            this.advBeans = advBeans;
             for (int i = 0; i < advBeans.size(); i++) {
                 netImages.add(advBeans.get(i).getUrl());
             }
@@ -240,7 +241,6 @@ public class WelfareFragment extends BaseFragment implements WelfContract.View, 
 
     @Override
     public void setBtnBeans(List<AdvBean> advs, int type) {
-        this.advBeans = advs;
         LogUtil.e("setBtnBeans", "TYPE = " + type);
         switch (type) {
             case 0:

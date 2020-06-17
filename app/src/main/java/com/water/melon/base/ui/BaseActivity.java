@@ -9,6 +9,7 @@ import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +19,9 @@ import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.fm.openinstall.OpenInstall;
+import com.fm.openinstall.listener.AppWakeUpAdapter;
+import com.fm.openinstall.model.AppData;
 import com.gyf.immersionbar.ImmersionBar;
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 import com.water.melon.R;
@@ -538,7 +542,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseAc
     /**
      * 改变toolBar自定义的右边按钮图标
      */
-    public void setToolBarRightView(String text,int colorId) {
+    public void setToolBarRightView(String text, int colorId) {
         TextView toolbarRight = findByID(R.id.toolbar_right_tv);
         toolbarRight.setText(text);
         toolbarRight.setTextColor(MyApplication.getColorByResId(colorId));
@@ -716,4 +720,23 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseAc
         res.updateConfiguration(config, res.getDisplayMetrics());
         return res;
     }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        // 此处要调用，否则App在后台运行时，会无法获取
+        OpenInstall.getWakeUp(intent, wakeUpAdapter);
+    }
+
+    public AppWakeUpAdapter wakeUpAdapter = new AppWakeUpAdapter() {
+        @Override
+        public void onWakeUp(AppData appData) {
+            // 打印数据便于调试
+            Log.d("OpenInstall", "getWakeUp : wakeupData = " + appData.toString());
+            // 获取渠道数据
+            String channelCode = appData.getChannel();
+            // 获取绑定数据
+            String bindData = appData.getData();
+        }
+    };
 }

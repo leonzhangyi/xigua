@@ -364,7 +364,7 @@ public class MeFragment extends BaseFragment implements MeContract.View, Adapter
 
         PageBean bean7 = new PageBean();
         bean7.setName("关于我们");
-        bean7.setText("VIP你妹");
+        bean7.setText("VIP影视");
         bean7.setBac(R.mipmap.me_info);
         pageBeans.add(bean7);
     }

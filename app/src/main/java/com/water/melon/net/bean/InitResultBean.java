@@ -10,6 +10,9 @@ public class InitResultBean  {
     private String mobile;
     private String imei;
 
+    private String username;
+    private String game_url;
+
 
     public String getUser_id() {
         return user_id;
@@ -33,5 +36,21 @@ public class InitResultBean  {
 
     public void setImei(String imei) {
         this.imei = imei;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getGame_url() {
+        return game_url;
+    }
+
+    public void setGame_url(String game_url) {
+        this.game_url = game_url;
     }
 }

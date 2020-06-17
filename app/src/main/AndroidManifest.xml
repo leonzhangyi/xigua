@@ -38,6 +38,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="q1czem" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.main.MainActivity"
@@ -198,6 +206,11 @@
             android:hardwareAccelerated="true"
             android:launchMode="singleTop" />
 
+        <activity
+            android:name=".ui.game.GameActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask"
+            />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -208,16 +221,23 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-<!--        <provider-->
-<!--            android:name="androidx.core.content.FileProvider"-->
-<!--            android:authorities="com.water.melon.fileprovider"-->
-<!--            android:exported="false"-->
-<!--            android:grantUriPermissions="true"-->
-<!--            >-->
-<!--            <meta-data-->
-<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
-<!--                android:resource="@xml/file_paths" />-->
-<!--        </provider>-->
+        <!--        <provider-->
+        <!--            android:name="androidx.core.content.FileProvider"-->
+        <!--            android:authorities="com.water.melon.fileprovider"-->
+        <!--            android:exported="false"-->
+        <!--            android:grantUriPermissions="true"-->
+        <!--            >-->
+        <!--            <meta-data-->
+        <!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
+        <!--                android:resource="@xml/file_paths" />-->
+        <!--        </provider>-->
+        <meta-data
+            android:name="com.openinstall.APP_KEY"
+            android:value="q1czem" />
+
+        <meta-data
+            android:name="CHANNEL_ID"
+            android:value="${CHANNEL_ID_VALUE}" />
     </application>
 
 
@@ -232,8 +252,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-<!--    安装apk-->
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+    <!--    安装apk-->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
 
 </manifest>

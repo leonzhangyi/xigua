@@ -11,6 +11,8 @@ public interface WelcomeContract {
         void getMyYm();
 
         void getOpenAdv();
+
+        void doAdvClick(AdvBean advBean);
     }
 
     interface View extends BaseView<Presenter> {
@@ -19,6 +21,8 @@ public interface WelcomeContract {
         void doErrCode(int code);
 
         void init1(Boolean haveAdv, AdvBean advBeans);
+
+
     }
 
 }

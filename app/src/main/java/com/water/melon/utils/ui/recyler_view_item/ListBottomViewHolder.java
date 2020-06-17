@@ -2,6 +2,7 @@ package com.water.melon.utils.ui.recyler_view_item;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.water.melon.R;
@@ -18,15 +19,22 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ListBottomViewHolder extends RecyclerView.ViewHolder {
     private TextView msgTv;
     private ImageView loadingPB;
+    private ProgressBar item_list_no_more_progress_bar_1;
 
     public ListBottomViewHolder(View itemView) {
         super(itemView);
         msgTv = (TextView) itemView.findViewById(R.id.item_list_no_more_tv);
         loadingPB = (ImageView) itemView.findViewById(R.id.item_list_no_more_progress_bar);
+        item_list_no_more_progress_bar_1 = itemView.findViewById(R.id.item_list_no_more_progress_bar_1);
     }
 
     public void setMsg(String msg) {
         msgTv.setText(msg);
+    }
+
+
+    public void setNoMoreData() {
+        item_list_no_more_progress_bar_1.setVisibility(View.GONE);
     }
 
     public void setMsgBg(int resId) {

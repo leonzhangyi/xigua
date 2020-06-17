@@ -28,7 +28,7 @@ public class NetResouceItemPresenter extends BasePresenterParent implements NetR
     public static final String TAG = "NetResouceItemPresenter";
     private NetResouceItemContract.View mView;
     private boolean isFirstData;
-//    private int page = 1;
+    private int page = 1;
     public int limit = 12;
 
     public NetResouceItemPresenter(BaseView mBaseView, LifecycleProvider lifecycleProvider, boolean isFirstData) {
@@ -98,8 +98,13 @@ public class NetResouceItemPresenter extends BasePresenterParent implements NetR
                 mView.getListData(items, false, false);
             }
         }
-//        request.setPage(page);
-        request.setLimit(limit);
+        request.setPage(page);
+        if (page == 1) {
+            request.setLimit(13);
+        } else {
+            request.setLimit(limit);
+        }
+
 //        request.setSearchWord("半个喜剧");
 //        request.setBigTabId("");
 //        request.setSmallName("");
@@ -140,11 +145,11 @@ public class NetResouceItemPresenter extends BasePresenterParent implements NetR
                         mView.getListData(tabBeans, false, false);
                         LogUtil.e("ssss", "setVlue====");
                     }
-//                    page++;
-                }else {
+                    page++;
+                } else {
                     if (isFirstData) {
                         mView.getListData(new ArrayList<>(), false, true);
-                    }else{
+                    } else {
                         mView.getListData(new ArrayList<>(), true, false);
                     }
 

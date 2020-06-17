@@ -5,7 +5,7 @@ import android.util.Log;
 
 
 public class LogUtil {
-    private static boolean SHOW_LOG = true;
+    private static boolean SHOW_LOG = false;
 //    private static boolean SHOW_LOG = true;
 
     public static void e(String tag, String msg) {

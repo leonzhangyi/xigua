@@ -1,9 +1,11 @@
 package com.water.melon.presenter;
 
 import android.content.Context;
+import android.util.Base64;
 
 import com.google.gson.reflect.TypeToken;
 import com.trello.rxlifecycle3.LifecycleProvider;
+import com.water.melon.application.MyApplication;
 import com.water.melon.base.mvp.BasePresenterParent;
 import com.water.melon.base.mvp.BaseView;
 import com.water.melon.net.ApiImp;
@@ -16,12 +18,28 @@ import com.water.melon.net.bean.InitResultBean;
 import com.water.melon.net.bean.TabBean;
 import com.water.melon.net.utils.AESCipherforJiaMi;
 import com.water.melon.presenter.contract.WelcomeContract;
+import com.water.melon.ui.game.HttpHelper;
+import com.water.melon.ui.game.utils.GameBean;
+import com.water.melon.ui.game.utils.GamePlayCallBack;
 import com.water.melon.ui.sqlites.SqDao;
 import com.water.melon.utils.GsonUtil;
 import com.water.melon.utils.LogUtil;
+import com.water.melon.utils.RSAUtils;
 import com.water.melon.utils.SharedPreferencesUtil;
+import com.water.melon.utils.XGUtil;
 
+import org.json.JSONObject;
+
+import java.security.InvalidKeyException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+
+import okhttp3.Call;
 
 public class WelcomPresenter extends BasePresenterParent implements WelcomeContract.Presenter {
     public static final String TAG = "WelcomPresenter";
@@ -200,9 +218,19 @@ public class WelcomPresenter extends BasePresenterParent implements WelcomeContr
                     }
                     if (bean.getUser_id() != null) {
                         SharedPreferencesUtil.getInstance().putString(SharedPreferencesUtil.XG_USER_ID, bean.getUser_id());
-                        mView.doFinishInit();
+//                        mView.doFinishInit();
                     } else {
                         mView.doErrCode(2);
+                    }
+
+                    if (bean.getUsername() != null) {
+                        SharedPreferencesUtil.getInstance().putString(SharedPreferencesUtil.XG_USER_NAME, bean.getUsername());
+
+                    }
+
+                    if (bean.getGame_url() != null) {
+                        SharedPreferencesUtil.getInstance().putString(SharedPreferencesUtil.XG_GAME_URL, bean.getGame_url());
+                        doPlayGame();
                     }
 
                 } else {
@@ -211,6 +239,31 @@ public class WelcomPresenter extends BasePresenterParent implements WelcomeContr
             }
         });
     }
+
+
+    private void doPlayGame() {
+        HttpHelper.loginPlayGame(new GamePlayCallBack() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+            }
+
+            @Override
+            public void onResponse(GameBean response, int id) {
+                LogUtil.e("loginPlayGame", "response = " + response.getResult().toString());
+                if (response != null && response.getResult() != null) {
+                    String gameToke = response.getResult().getAccessToken();
+                    LogUtil.e("loginPlayGame", "gameToke = " + gameToke);
+                    if (gameToke != null) {
+                        SharedPreferencesUtil.getInstance().putString(SharedPreferencesUtil.XG_GAME_TOKEN, gameToke);
+
+                    }
+
+                }
+                mView.doFinishInit();
+            }
+        });
+    }
+
 
     private String getTextYm(int page, String url) {
         String ym = "";
@@ -256,4 +309,26 @@ public class WelcomPresenter extends BasePresenterParent implements WelcomeContr
         }
         return NetConstant.XG_HTTPS + ym + NetConstant.XG_VERSION_V;
     }
+
+    @Override
+    public void doAdvClick(AdvBean advBean) {
+        ApiImp.getInstance().doClickAdv(advBean, getLifecycleTransformerByStopToActivity(), mView, new IApiSubscriberCallBack<BaseApiResultData>() {
+            @Override
+            public void onCompleted() {
+                mView.showLoadingDialog(false);
+            }
+
+            @Override
+            public void onError(ErrorResponse error) {
+            }
+
+            @Override
+            public void onNext(BaseApiResultData data) {
+                LogUtil.e(TAG, "doClickAdv.getResult() = " + data.getResult());
+            }
+        });
+
+    }
+
+
 }

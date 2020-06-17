@@ -8,8 +8,9 @@ android {
         minSdkVersion 19
         targetSdkVersion 29
         multiDexEnabled true
-        versionCode 6
-        versionName "1.0.6"
+        flavorDimensions "default"
+        versionCode 1
+        versionName "1.0.1"
 
         ndk {
             //支持的abi
@@ -42,6 +43,87 @@ android {
         checkReleaseBuilds false
         abortOnError false
     }
+
+    productFlavors {
+        //默认渠道
+        moren {
+
+            manifestPlaceholders = [
+//                    CHANNEL_ID_VALUE: "I6PW0T2JXMGN8AQK", //渠道號
+                    CHANNEL_ID_VALUE: "F23RA5", //渠道號
+            ]
+        }
+
+        //gfqd0001
+        c0001 {
+
+            manifestPlaceholders = [
+                    CHANNEL_ID_VALUE: "F23RA5", //渠道號
+            ]
+        }
+        //gfqd0002
+        c0002 {
+            manifestPlaceholders = [
+                    CHANNEL_ID_VALUE: "S43NT5", //渠道號
+            ]
+        }
+        //gfqd0003
+        c0003 {
+            manifestPlaceholders = [
+                    CHANNEL_ID_VALUE: "B54XW6", //渠道號
+            ]
+        }
+        //gfqd0004
+        c0004 {
+            manifestPlaceholders = [
+                    CHANNEL_ID_VALUE: "W95CB4", //渠道號
+            ]
+        }
+        //gfqd0005
+        c0005 {
+            manifestPlaceholders = [
+                    CHANNEL_ID_VALUE: "L93KC2", //渠道號
+            ]
+        }
+        //gfqd0006
+        c0006 {
+            manifestPlaceholders = [
+                    CHANNEL_ID_VALUE: "B75FA3", //渠道號
+            ]
+        }
+        //gfqd0007
+        c0007 {
+            manifestPlaceholders = [
+                    CHANNEL_ID_VALUE: "L24YB5", //渠道號
+            ]
+        }
+        //gfqd0008
+        c0008 {
+            manifestPlaceholders = [
+                    CHANNEL_ID_VALUE: "L34XS2", //渠道號
+            ]
+        }
+        //gfqd0009
+        c0009 {
+            manifestPlaceholders = [
+                    CHANNEL_ID_VALUE: "Y65ZG4", //渠道號
+            ]
+        }
+
+        //gfqd0010
+        c0010 {
+            manifestPlaceholders = [
+                    CHANNEL_ID_VALUE: "E54GH6", //渠道號
+            ]
+        }
+
+//        moren {
+//
+//            manifestPlaceholders = [
+//                    CHANNEL_ID_VALUE: "6DNVZ8R0XYIBGS1C", //渠道號
+//            ]
+//        }
+    }
 }
 
 dependencies {
@@ -53,6 +135,7 @@ dependencies {
     implementation project(path: ':ijkplayer-java')
     implementation project(':pickerview')
     implementation project(':wheelview')
+    implementation project(':okhttputils')
     implementation 'com.android.support:multidex:1.0.3'
     //图片框架
     implementation project(':glideimageview')
@@ -89,4 +172,10 @@ dependencies {
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
     //excle导出文件
     implementation 'com.hynnet:jxl:2.6.12.1'
+
+    //bugly
+    implementation 'com.tencent.bugly:crashreport:latest.release' //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
+    implementation 'com.tencent.bugly:nativecrashreport:latest.release' //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
+    //openinstall
+    implementation files('libs/OpenInstall_v2.3.0.jar')
 }
