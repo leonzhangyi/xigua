@@ -46,6 +46,8 @@ public class MobileUtil {
                 info.imei = getUUID();
             }
 //            info.imei = SharedPreferencesUtil.getInstance().getString(SharedPreferencesUtil.KEY_WATER_TEST_IME,"");
+
+
 //            info.imsi = mTm.getSubscriberId() == null ? "" : mTm.getSubscriberId();
 //            info.iccid = mTm.getSimSerialNumber() == null ? "" : mTm.getSimSerialNumber();
 
